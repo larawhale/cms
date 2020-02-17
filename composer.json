@@ -1,0 +1,25 @@
+{
+    "name": "larawhale/cms",
+    "description": "A Laravel cms package",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Thomas van der Veen",
+            "email": "t.v.d.veen@outlook.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "laravel/framework": "^6.15",
+        "laravelcollective/html": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "orchestra/testbench": "^4.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaraWhale\\Cms\\": "src/app/"
+        }
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 
-use Orchestra\Testbench\TestCase;
+use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Fields\DefaultField;
 
 class DefaultFieldTest extends TestCase
@@ -125,5 +125,13 @@ class DefaultFieldTest extends TestCase
         }
 
         $this->assertTrue(false, 'Exception was not thrown.');
+    }
+
+    /** @test */
+    public function render(): void
+    {
+        $field = new DefaultField($this->config);
+
+        $this->assertMatchesHtmlSnapshot($field->render());
     }
 }

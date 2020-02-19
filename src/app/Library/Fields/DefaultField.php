@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Library\Fields;
 
+use Collective\Html\FormFacade;
 use LaraWhale\Cms\Library\Fields\Contracts\Field;
 use LaraWhale\Cms\Exceptions\RequriedFieldConfigKeyNotFoundException;
 
@@ -89,5 +90,18 @@ class DefaultField implements Field
     public function label(): string
     {
         return $this->config('label', fn() => $this->key());
+    }
+
+    /**
+     * Returns a rendered input.
+     * 
+     * @return string
+     */
+    public function render(): string
+    {
+        return FormFacade::input(
+            $this->type(),
+            $this->key(),
+        )->toHtml();
     }
 }

@@ -16,6 +16,7 @@ class DefaultFieldTest extends TestCase
         'label' => 'test_label',
     ];
 
+    // TODO: Make a separate test for HasConfig trait and remove these tests.
     /** @test */
     public function config(): void
     {

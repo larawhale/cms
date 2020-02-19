@@ -5,6 +5,7 @@ namespace LaraWhale\Cms\Library\Fields;
 use LaraWhale\Cms\Library\Fields\Contracts\Field;
 use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
 
+// TODO: write tests for this class.
 class Factory
 {
     /**
@@ -13,9 +14,7 @@ class Factory
      * 
      * @var array
      */
-    public static array $fields = [
-        'default' => DefaultField::class,
-    ];
+    public static array $fields = [];
 
     /**
      * Makes an instance of field according to the given config.

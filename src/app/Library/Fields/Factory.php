@@ -10,7 +10,6 @@ class Factory
 {
     /**
      * The type and field map.
-     * TODO: Has to come from configuration.
      * 
      * @var array
      */

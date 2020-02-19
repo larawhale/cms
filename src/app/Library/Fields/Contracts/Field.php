@@ -41,4 +41,11 @@ interface Field
      * @return string|array
      */
     public function rules();
+
+    /**
+     * Returns the label of the field.
+     * 
+     * @return string
+     */
+    public function label(): string;
 }

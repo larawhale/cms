@@ -2,7 +2,6 @@
 
 use Orchestra\Testbench\TestCase;
 use LaraWhale\Cms\Library\Fields\DefaultField;
-use LaraWhale\Cms\Exceptions\RequriedFieldConfigKeyNotFoundException;
 
 class DefaultFieldTest extends TestCase
 {
@@ -13,6 +12,7 @@ class DefaultFieldTest extends TestCase
         'key' => 'test_key',
         'type' => 'test_type',
         'rules' => 'test_rules',
+        'label' => 'test_label',
     ];
 
     /** @test */
@@ -52,9 +52,15 @@ class DefaultFieldTest extends TestCase
     {
         $field = new DefaultField([]);
 
-        $this->expectException(RequriedFieldConfigKeyNotFoundException::class);
+        try {
+            $field->key();
+        } catch (Exception $e) {
+            $this->assertEquals('key', $e->getKey());
 
-        $field->key();
+            return;
+        }
+
+        $this->assertTrue(false, 'Exception was not thrown.');
     }
 
     /** @test */
@@ -70,9 +76,15 @@ class DefaultFieldTest extends TestCase
     {
         $field = new DefaultField([]);
 
-        $this->expectException(RequriedFieldConfigKeyNotFoundException::class);
+        try {
+            $field->type();
+        } catch (Exception $e) {
+            $this->assertEquals('type', $e->getKey());
 
-        $field->type();
+            return;
+        }
+
+        $this->assertTrue(false, 'Exception was not thrown.');
     }
 
     /** @test */
@@ -81,5 +93,37 @@ class DefaultFieldTest extends TestCase
         $field = new DefaultField($this->config);
 
         $this->assertEquals($this->config['rules'], $field->rules());
+    }
+
+    /** @test */
+    public function label(): void
+    {
+        $field = new DefaultField($this->config);
+
+        $this->assertEquals($this->config['label'], $field->label());
+    }
+
+    /** @test */
+    public function label_uses_key(): void
+    {
+        $field = new DefaultField(['key' => $this->config['key']]);
+
+        $this->assertEquals($this->config['key'], $field->label());
+    }
+
+    /** @test */
+    public function label_throws_required_config_exception(): void
+    {
+        $field = new DefaultField([]);
+
+        try {
+            $field->label();
+        } catch (Exception $e) {
+            $this->assertEquals('key', $e->getKey());
+
+            return;
+        }
+
+        $this->assertTrue(false, 'Exception was not thrown.');
     }
 }

@@ -45,6 +45,7 @@ class DefaultField implements Field
      * Returns the key of the field.
      * 
      * @return string
+     * @throws \LaraWhale\Cms\Exceptions\RequriedFieldConfigKeyNotFoundException
      */
     public function key(): string
     {
@@ -59,6 +60,7 @@ class DefaultField implements Field
      * Returns the type of the field.
      * 
      * @return string
+     * @throws \LaraWhale\Cms\Exceptions\RequriedFieldConfigKeyNotFoundException
      */
     public function type(): string
     {
@@ -77,5 +79,15 @@ class DefaultField implements Field
     public function rules()
     {
         return $this->config('rules', []);
+    }
+
+    /**
+     * Returns the label of the field.
+     * 
+     * @return string
+     */
+    public function label(): string
+    {
+        return $this->config('label', fn() => $this->key());
     }
 }

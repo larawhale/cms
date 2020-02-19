@@ -134,4 +134,12 @@ class DefaultFieldTest extends TestCase
 
         $this->assertMatchesHtmlSnapshot($field->render());
     }
+
+    /** @test */
+    public function render_form_group(): void
+    {
+        $field = new DefaultField($this->config);
+
+        $this->assertMatchesHtmlSnapshot($field->renderFormGroup());
+    }
 }

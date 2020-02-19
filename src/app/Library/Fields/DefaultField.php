@@ -102,6 +102,22 @@ class DefaultField implements Field
         return FormFacade::input(
             $this->type(),
             $this->key(),
+            null,
+            ['class' => 'form-control'],
         )->toHtml();
+    }
+
+    /**
+     * Returns a rendered form group.
+     * 
+     * @return string
+     */
+    public function renderFormGroup(): string
+    {
+        return view('cms::components.form.group', [
+            'input' => $this->render(),
+            'label' => $this->label(),
+            'name' => $this->key(),
+        ])->render();
     }
 }

@@ -2,6 +2,7 @@
 
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Fields\DefaultField;
+use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
 
 class DefaultFieldTest extends TestCase
 {
@@ -54,7 +55,7 @@ class DefaultFieldTest extends TestCase
 
         try {
             $field->key();
-        } catch (Exception $e) {
+        } catch (RequriedConfigKeyNotFoundException $e) {
             $this->assertEquals('key', $e->getKey());
 
             return;
@@ -78,7 +79,7 @@ class DefaultFieldTest extends TestCase
 
         try {
             $field->type();
-        } catch (Exception $e) {
+        } catch (RequriedConfigKeyNotFoundException $e) {
             $this->assertEquals('type', $e->getKey());
 
             return;
@@ -118,7 +119,7 @@ class DefaultFieldTest extends TestCase
 
         try {
             $field->label();
-        } catch (Exception $e) {
+        } catch (RequriedConfigKeyNotFoundException $e) {
             $this->assertEquals('key', $e->getKey());
 
             return;

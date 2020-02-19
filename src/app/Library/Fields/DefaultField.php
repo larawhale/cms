@@ -3,17 +3,12 @@
 namespace LaraWhale\Cms\Library\Fields;
 
 use Collective\Html\FormFacade;
+use LaraWhale\Cms\Library\Concerns\HasConfig;
 use LaraWhale\Cms\Library\Fields\Contracts\Field;
-use LaraWhale\Cms\Exceptions\RequriedFieldConfigKeyNotFoundException;
 
 class DefaultField implements Field
 {
-    /**
-     * The config of the field.
-     * 
-     * @var array
-     */
-    protected array $config;
+    use HasConfig;
 
     /**
      * The field constructor.
@@ -26,50 +21,23 @@ class DefaultField implements Field
     }
 
     /**
-     * Returns the config of the field or the configured value for the
-     * specified key.
-     * 
-     * @param  string|null  $key
-     * @param  mixed  $default
-     * @return mixed
-     */
-    public function config($key = null, $default = null)
-    {
-        if (is_null($key)) {
-            return $this->config;
-        }
-
-        return data_get($this->config, $key, $default);
-    }
-
-    /**
      * Returns the key of the field.
      * 
      * @return string
-     * @throws \LaraWhale\Cms\Exceptions\RequriedFieldConfigKeyNotFoundException
      */
     public function key(): string
     {
-        if (! array_key_exists('key', $this->config)) {
-            throw new RequriedFieldConfigKeyNotFoundException($this, 'key');
-        }
-
-        return $this->config['key'];
+        return $this->config('key', null, true);
     }
 
     /**
      * Returns the type of the field.
      * 
      * @return string
-     * @throws \LaraWhale\Cms\Exceptions\RequriedFieldConfigKeyNotFoundException
      */
     public function type(): string
     {
-        if (! array_key_exists('type', $this->config)) {
-            throw new RequriedFieldConfigKeyNotFoundException($this, 'type');
-        }
-
-        return $this->config['type'];
+        return $this->config('type', null, true);
     }
 
     /**

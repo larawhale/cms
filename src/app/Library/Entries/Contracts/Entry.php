@@ -1,18 +1,18 @@
 <?php
 
-namespace LaraWhale\Cms\Library\Fields\Contracts;
+namespace LaraWhale\Cms\Library\Entries\Contracts;
 
-interface Field
+interface Entry
 {
     /**
-     * The field constructor.
+     * The Entry constructor.
      * 
      * @param  array  $config
      */
     public function __construct(array $config);
 
     /**
-     * Returns the config of the field or the configured value for the
+     * Returns the config of the entry or the configured value for the
      * specified key.
      * 
      * @param  string  $key
@@ -24,30 +24,23 @@ interface Field
     public function config(string $key = null, $default = null, bool $throw = false);
 
     /**
-     * Returns the key of the field.
+     * Returns the key of the entry.
      * 
      * @return string
      */
     public function key(): string;
 
     /**
-     * Returns the type of the field.
+     * Returns the name of the entry.
      * 
      * @return string
      */
-    public function type(): string;
+    public function name(): string;
 
     /**
-     * Returns the rules of the field.
+     * Returns the fields of the entry.
      * 
-     * @return string|array
+     * @return array
      */
-    public function rules();
-
-    /**
-     * Returns the label of the field.
-     * 
-     * @return string
-     */
-    public function label(): string;
+    public function fields(): array;
 }

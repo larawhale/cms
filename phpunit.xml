@@ -30,5 +30,6 @@
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
+        <server name="DB_CONNECTION" value="testing"/>
     </php>
 </phpunit>

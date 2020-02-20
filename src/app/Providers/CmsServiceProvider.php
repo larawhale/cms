@@ -14,9 +14,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../../config/cms.php', 'cms'
-        );
+        $this->mergeConfigFrom(__DIR__ . '/../../config/cms.php', 'cms');
     }
 
     /**
@@ -26,6 +24,8 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'cms');
 
         Factory::$fields = config('cms.fields');

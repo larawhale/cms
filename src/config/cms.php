@@ -16,4 +16,10 @@ return [
         'default' => \LaraWhale\Cms\Library\Fields\DefaultField::class,
     ],
 
+    /**
+     * A prefix that is used to create table names for tables that are created
+     * for this package.
+     */
+    'table_prefix' => 'cms_',
+
 ];

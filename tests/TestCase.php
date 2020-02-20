@@ -12,6 +12,18 @@ class TestCase extends BaseTestCase
     use MatchesSnapshots;
 
     /**
+     * Setup the test environment.
+     * 
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('migrate:fresh')->run();
+    }
+
+    /**
      * Returns the package providers.
      * 
      * @return array

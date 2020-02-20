@@ -64,4 +64,27 @@ class Entry implements EntryInterface
             'entry' => $this,
         ])->render();
     }
+
+    // TODO: Add to interface
+    /**
+     * This is just semi pseudo code, this does not work.
+     * 
+     * Will be called like Entry::save(new EntryModel, $request->validated())
+     */
+    public static function save(EntryModel $entryModel, array $data): EntryModel
+    {
+        $entryModel->fill($data)->save();
+
+        $entry = Factory::make($entryModel->type);
+
+        $fieldValues = data_get($data, 'fields', []);
+
+        foreach ($entry->fields as $field) {
+            if (! array_key_exists($field->key(), $fieldValues)) {
+                continue;
+            }
+
+            $field->save($entryModel, $fieldValue);
+        }
+    }
 }

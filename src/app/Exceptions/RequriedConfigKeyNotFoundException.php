@@ -27,9 +27,11 @@ class RequriedConfigKeyNotFoundException extends Exception
      */
     public function __construct($class, string $key)
     {
+        $type = gettype($class);
+
         parent::__construct(sprintf(
             'A required config key was not found for "%s" using "%s"',
-            get_class($class),
+            $type === 'object' ? get_class($class) : $type,
             $key,
         ));
 

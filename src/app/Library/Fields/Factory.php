@@ -5,7 +5,6 @@ namespace LaraWhale\Cms\Library\Fields;
 use LaraWhale\Cms\Library\Fields\Contracts\Field;
 use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
 
-// TODO: write tests for this class.
 class Factory
 {
     /**

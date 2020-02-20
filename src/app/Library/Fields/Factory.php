@@ -54,7 +54,7 @@ class Factory
      */
     public static function getType(array $config): string
     {
-        $type = data_get($config, 'key');
+        $type = data_get($config, 'type');
 
         if (! is_null($type)) {
             return $type;

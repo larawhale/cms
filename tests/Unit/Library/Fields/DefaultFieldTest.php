@@ -16,31 +16,6 @@ class DefaultFieldTest extends TestCase
         'label' => 'test_label',
     ];
 
-    // TODO: Make a separate test for HasConfig trait and remove these tests.
-    /** @test */
-    public function config(): void
-    {
-        $field = new DefaultField($this->config);
-
-        $this->assertEquals($this->config, $field->config());
-    }
-
-    /** @test */
-    public function config_with_key(): void
-    {
-        $field = new DefaultField($this->config);
-
-        $this->assertEquals($this->config['key'], $field->config('key'));
-    }
-
-    /** @test */
-    public function config_with_key_and_default(): void
-    {
-        $field = new DefaultField([]);
-
-        $this->assertEquals('default', $field->config('key', 'default'));
-    }
-
     /** @test */
     public function key(): void
     {

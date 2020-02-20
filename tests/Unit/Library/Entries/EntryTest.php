@@ -11,7 +11,7 @@ class EntryTest extends TestCase
      * An entry config.
      */
     private array $config = [
-        'key' => 'test_key',
+        'type' => 'test_key',
         'name' => 'test_name',
         'fields' => [
             [
@@ -24,11 +24,11 @@ class EntryTest extends TestCase
     ];
 
     /** @test */
-    public function key(): void
+    public function type(): void
     {
         $entry = new Entry($this->config);
 
-        $this->assertEquals($this->config['key'], $entry->key());
+        $this->assertEquals($this->config['type'], $entry->type());
     }
 
     /** @test */
@@ -37,9 +37,9 @@ class EntryTest extends TestCase
         $entry = new Entry([]);
 
         try {
-            $entry->key();
+            $entry->type();
         } catch (RequriedConfigKeyNotFoundException $e) {
-            $this->assertEquals('key', $e->getKey());
+            $this->assertEquals('type', $e->getKey());
 
             return;
         }
@@ -56,11 +56,11 @@ class EntryTest extends TestCase
     }
 
     /** @test */
-    public function name_uses_key(): void
+    public function name_uses_type(): void
     {
-        $entry = new Entry(['key' => $this->config['key']]);
+        $entry = new Entry(['type' => $this->config['type']]);
 
-        $this->assertEquals($this->config['key'], $entry->name());
+        $this->assertEquals($this->config['type'], $entry->name());
     }
 
     /** @test */
@@ -71,7 +71,7 @@ class EntryTest extends TestCase
         try {
             $entry->name();
         } catch (RequriedConfigKeyNotFoundException $e) {
-            $this->assertEquals('key', $e->getKey());
+            $this->assertEquals('type', $e->getKey());
 
             return;
         }

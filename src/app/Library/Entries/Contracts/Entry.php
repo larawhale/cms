@@ -24,11 +24,11 @@ interface Entry
     public function config(string $key = null, $default = null, bool $throw = false);
 
     /**
-     * Returns the key of the entry.
+     * Returns the type of the entry.
      * 
      * @return string
      */
-    public function key(): string;
+    public function type(): string;
 
     /**
      * Returns the name of the entry.

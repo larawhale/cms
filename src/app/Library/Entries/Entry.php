@@ -21,13 +21,13 @@ class Entry implements EntryInterface
     }
 
     /**
-     * Returns the key of the entry.
+     * Returns the type of the entry.
      * 
      * @return string
      */
-    public function key(): string
+    public function type(): string
     {
-        return $this->config('key', null, true);
+        return $this->config('type', null, true);
     }
 
     /**
@@ -37,7 +37,7 @@ class Entry implements EntryInterface
      */
     public function name(): string
     {
-        return $this->config('name', fn() => $this->key());
+        return $this->config('name', fn() => $this->type());
     }
 
     /**

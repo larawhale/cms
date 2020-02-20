@@ -65,7 +65,7 @@ class DefaultField implements Field
      * 
      * @return string
      */
-    public function render(): string
+    public function renderInput(): string
     {
         return FormFacade::input(
             $this->type(),
@@ -83,7 +83,7 @@ class DefaultField implements Field
     public function renderFormGroup(): string
     {
         return view('cms::components.form.group', [
-            'input' => $this->render(),
+            'input' => $this->renderInput(),
             'label' => $this->label(),
             'name' => $this->key(),
         ])->render();

@@ -50,4 +50,18 @@ interface Field
      * @return string
      */
     public function label(): string;
+
+    /**
+     * Returns a rendered input.
+     * 
+     * @return string
+     */
+    public function renderInput(): string;
+
+    /**
+     * Returns a rendered form group.
+     * 
+     * @return string
+     */
+    public function renderFormGroup(): string;
 }

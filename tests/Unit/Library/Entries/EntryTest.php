@@ -89,4 +89,21 @@ class EntryTest extends TestCase
             $entry->fields(),
         );
     }
+
+    /** @test */
+    public function render_form(): void
+    {
+        $config = $this->config;
+
+        $config['fields'][] = [
+            'key' => 'another_test_key',
+            'type' => 'another_test_type',
+            'rules' => 'another_test_rules',
+            'label' => 'another_test_label',
+        ];
+
+        $entry = new Entry($config);
+
+        $this->assertMatchesHtmlSnapshot($entry->renderForm());
+    }
 }

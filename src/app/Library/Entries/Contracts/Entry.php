@@ -43,4 +43,11 @@ interface Entry
      * @return array
      */
     public function fields(): array;
+
+    /**
+     * Returns a rendered form.
+     * 
+     * @return string
+     */
+    public function renderForm(): string;
 }

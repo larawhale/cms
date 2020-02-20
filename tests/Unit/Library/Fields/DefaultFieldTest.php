@@ -105,11 +105,11 @@ class DefaultFieldTest extends TestCase
     }
 
     /** @test */
-    public function render(): void
+    public function render_input(): void
     {
         $field = new DefaultField($this->config);
 
-        $this->assertMatchesHtmlSnapshot($field->render());
+        $this->assertMatchesHtmlSnapshot($field->renderInput());
     }
 
     /** @test */

@@ -52,4 +52,16 @@ class Entry implements EntryInterface
             $this->config('fields', []),
         );
     }
+
+    /**
+     * Returns a rendered form.
+     * 
+     * @return string
+     */
+    public function renderForm(): string
+    {
+        return view('cms::entries.form', [
+            'entry' => $this,
+        ])->render();
+    }
 }

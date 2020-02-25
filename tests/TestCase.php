@@ -62,4 +62,17 @@ class TestCase extends BaseTestCase
     {
         return parent::assertDatabaseHas(cms_table_name($table), $data);
     }
+
+    /**
+     * Assert that a given where condition does not exist in the database.
+     *
+     * @param  string  $table
+     * @param  array  $data
+     * @param  string|null  $connection
+     * @return $this
+     */
+    protected function assertDatabaseMissing($table, array $data, $connection = null): BaseTestCase
+    {
+        return parent::assertDatabaseMissing(cms_table_name($table), $data);
+    }
 }

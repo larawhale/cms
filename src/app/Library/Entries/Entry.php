@@ -66,7 +66,6 @@ class Entry implements EntryInterface
         ])->render();
     }
 
-    // TODO: write test for existing
     /**
      * Saves an entry and its fields to the database.
      * 
@@ -82,15 +81,27 @@ class Entry implements EntryInterface
 
         $fieldValues = data_get($data, 'fields', []);
 
+        $fieldModels = collect();
+
         foreach ($entry->fields() as $field) {
+            // Only save the value of the field when it is given in the field
+            // values array.
             if (! array_key_exists($field->key(), $fieldValues)) {
                 continue;
             }
 
-            $field->save($entryModel, $fieldValues[$field->key()]);
+            $fieldModels->push(
+                $field->save($entryModel, $fieldValues[$field->key()]),
+            );
         }
 
-        // TODO: Cleanup fields that still exist in db but not in entry config.
+        // Remove the fields that are not in the entry configuration anymore.
+        $entryModel->fields()
+            ->whereNotIn(
+                cms_table_name('fields.id'),
+                $fieldModels->pluck('id'),
+            )
+            ->delete();
 
         return $entryModel;
     }

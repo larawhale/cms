@@ -107,7 +107,6 @@ class DefaultField implements Field
         ], compact('value'));
     }
 
-    // TODO: Write test
     /**
      * Returns a representation of how the value should be stored in the
      * database.

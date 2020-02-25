@@ -5,6 +5,7 @@ use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Entries\Entry;
 use LaraWhale\Cms\Library\Entries\Factory;
 use LaraWhale\Cms\Models\Entry as EntryModel;
+use LaraWhale\Cms\Models\Field as FieldModel;
 use LaraWhale\Cms\Library\Fields\DefaultField;
 use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
 
@@ -111,7 +112,7 @@ class EntryTest extends TestCase
     }
 
     /** @test */
-    public function save(): void
+    public function save_create(): void
     {
         $data = [
             'type' => $this->config['type'],
@@ -137,5 +138,41 @@ class EntryTest extends TestCase
                 'value' => $value,
             ]);
         }
+    }
+
+    /** @test */
+    public function save_update(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'value' => 'old_value',
+        ]);
+
+        $entryModel = $fieldModel->entry;
+
+        // Create another field that is not in the current config of the entry
+        // and thus should be deleted.
+        $shouldDelete = factory(FieldModel::class)->create([
+            'entry_id' => $entryModel->id,
+            'key' => 'remove_me',
+        ]);
+
+        $data = [
+            'fields' => [
+                $fieldModel->key => 'new_value',
+            ],
+        ];
+
+        Entry::save($entryModel, $data);
+
+        $this->assertDatabaseHas('fields', [
+            'id' => $fieldModel->id,
+            'entry_id' => $entryModel->id,
+            'key' => $fieldModel->key,
+            'value' => 'new_value',
+        ]);
+
+        $this->assertDatabaseMissing('fields', [
+            'id' => $shouldDelete->id,
+        ]);
     }
 }

@@ -91,5 +91,7 @@ class Entry implements EntryInterface
         }
 
         // TODO: Cleanup fields that still exist in db but not in entry config.
+
+        return $entryModel;
     }
 }

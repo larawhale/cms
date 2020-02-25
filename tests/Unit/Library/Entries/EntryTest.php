@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Arr;
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Entries\Entry;
 use LaraWhale\Cms\Library\Entries\Factory;
@@ -127,7 +128,7 @@ class EntryTest extends TestCase
 
         $entryModel = Entry::save(new EntryModel, $data);
 
-        $this->assertDatabaseHas('entries', $data);
+        $this->assertDatabaseHas('entries', Arr::except($data, ['fields']));
 
         foreach ($data['fields'] as $key => $value) {
             $this->assertDatabaseHas('fields', [

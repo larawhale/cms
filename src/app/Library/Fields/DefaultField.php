@@ -91,7 +91,6 @@ class DefaultField implements Field
         ])->render();
     }
 
-    // TODO: Write test updating
     /**
      * Saves the field to the database.
      * 

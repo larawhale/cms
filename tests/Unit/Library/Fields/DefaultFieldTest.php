@@ -157,4 +157,15 @@ class DefaultFieldTest extends TestCase
             'value' => 'new_value',
         ]);
     }
+
+    /** @test */
+    public function database_value(): void
+    {
+        $field = new DefaultField($this->config);
+
+        $this->assertSame(
+            '123',
+            $field->databaseValue(123),
+        );
+    }
 }

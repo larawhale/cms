@@ -2,6 +2,7 @@
 
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Entries\Entry;
+use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Library\Fields\DefaultField;
 use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
 
@@ -105,5 +106,17 @@ class EntryTest extends TestCase
         $entry = new Entry($config);
 
         $this->assertMatchesHtmlSnapshot($entry->renderForm());
+    }
+
+    /** @test */
+    public function save(): void
+    {
+        $data = [
+            'type' => $this->config['type'],
+        ];
+
+        Entry::save(new EntryModel, $data);
+
+        $this->assertDatabaseHas('entries', $data);
     }
 }

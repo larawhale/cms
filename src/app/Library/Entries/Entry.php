@@ -4,6 +4,7 @@ namespace LaraWhale\Cms\Library\Entries;
 
 use LaraWhale\Cms\Library\Fields\Factory;
 use LaraWhale\Cms\Library\Concerns\HasConfig;
+use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
 
 class Entry implements EntryInterface
@@ -75,7 +76,9 @@ class Entry implements EntryInterface
     {
         $entryModel->fill($data)->save();
 
-        $entry = Factory::make($entryModel->type);
+        return $entryModel;
+
+        $entry = $entryModel->toEntryClass(); // Factory::make($entryModel->type);
 
         $fieldValues = data_get($data, 'fields', []);
 

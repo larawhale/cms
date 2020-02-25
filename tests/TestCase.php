@@ -35,4 +35,17 @@ class TestCase extends BaseTestCase
             HtmlServiceProvider::class,
         ];
     }
+
+    /**
+     * Assert that a given where condition exists in the database.
+     *
+     * @param  string  $table
+     * @param  array  $data
+     * @param  string|null  $connection
+     * @return $this
+     */
+    protected function assertDatabaseHas($table, array $data, $connection = null): BaseTestCase
+    {
+        return parent::assertDatabaseHas(cms_table_name($table), $data);
+    }
 }

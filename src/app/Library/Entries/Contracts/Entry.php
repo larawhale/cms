@@ -2,6 +2,8 @@
 
 namespace LaraWhale\Cms\Library\Entries\Contracts;
 
+use LaraWhale\Cms\Models\Entry as EntryModel;
+
 interface Entry
 {
     /**
@@ -50,4 +52,13 @@ interface Entry
      * @return string
      */
     public function renderForm(): string;
+
+    /**
+     * Saves an entry and its fields to the database.
+     * 
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @param  array  $data
+     * @return \LaraWhale\Cms\Models\Entry
+     */
+    public static function save(EntryModel $entryModel, array $data): EntryModel;
 }

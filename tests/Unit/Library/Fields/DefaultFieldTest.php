@@ -1,6 +1,8 @@
 <?php
 
 use LaraWhale\Cms\Tests\TestCase;
+use LaraWhale\Cms\Models\Entry as EntryModel;
+use LaraWhale\Cms\Models\Field as FieldModel;
 use LaraWhale\Cms\Library\Fields\DefaultField;
 use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
 
@@ -118,5 +120,21 @@ class DefaultFieldTest extends TestCase
         $field = new DefaultField($this->config);
 
         $this->assertMatchesHtmlSnapshot($field->renderFormGroup());
+    }
+
+    /** @test */
+    public function save(): void
+    {
+        $entryModel = factory(EntryModel::class)->create();
+
+        $field = new DefaultField($this->config);
+
+        $field->save($entryModel, 'test_value');
+
+        $this->assertDatabaseHas('fields', [
+            'entry_id' => $entryModel->id,
+            'key' => $field->key(),
+            'value' => 'test_value',
+        ]);
     }
 }

@@ -91,7 +91,7 @@ class DefaultField implements Field
         ])->render();
     }
 
-    // TODO: Update docs and add to interface.
+    // TODO: Write test updating
     /**
      * Saves the field to the database.
      * 
@@ -108,7 +108,7 @@ class DefaultField implements Field
         ], compact('value'));
     }
 
-    // TODO: Update docs and add to interface.
+    // TODO: Write test
     /**
      * Returns a representation of how the value should be stored in the
      * database.

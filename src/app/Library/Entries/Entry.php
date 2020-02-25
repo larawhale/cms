@@ -66,9 +66,9 @@ class Entry implements EntryInterface
         ])->render();
     }
 
-    // TODO: Update docs and add to interface.
+    // TODO: write test for existing
     /**
-     * This is just semi pseudo code, this does not work.
+     * Saves an entry and its fields to the database.
      * 
      * @param  \LaraWhale\Cms\Models\Entry  $entryModel
      * @param  array  $data

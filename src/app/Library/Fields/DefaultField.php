@@ -3,6 +3,8 @@
 namespace LaraWhale\Cms\Library\Fields;
 
 use Collective\Html\FormFacade;
+use LaraWhale\Cms\Models\Entry as EntryModel;
+use LaraWhale\Cms\Models\Field as FieldModel;
 use LaraWhale\Cms\Library\Concerns\HasConfig;
 use LaraWhale\Cms\Library\Fields\Contracts\Field;
 
@@ -87,5 +89,35 @@ class DefaultField implements Field
             'label' => $this->label(),
             'name' => $this->key(),
         ])->render();
+    }
+
+    // TODO: Update docs and add to interface.
+    /**
+     * Saves the field to the database.
+     * 
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @param  mixed  $value
+     * @return \LaraWhale\Cms\Models\Field
+     */
+    public function save(EntryModel $entryModel, $value): FieldModel
+    {
+        $value = $this->databaseValue($value);
+
+        return $entryModel->fields()->updateOrCreate([
+            'key' => $this->key(),
+        ], compact('value'));
+    }
+
+    // TODO: Update docs and add to interface.
+    /**
+     * Returns a representation of how the value should be stored in the
+     * database.
+     * 
+     * @param  mixed  $value
+     * @return string
+     */
+    public function databaseValue($value): string
+    {
+        return (string) $value;
     }
 }

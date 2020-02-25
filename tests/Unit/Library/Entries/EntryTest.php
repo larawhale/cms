@@ -125,8 +125,16 @@ class EntryTest extends TestCase
             $this->config['type'] => $this->config,
         ];
 
-        Entry::save(new EntryModel, $data);
+        $entryModel = Entry::save(new EntryModel, $data);
 
         $this->assertDatabaseHas('entries', $data);
+
+        foreach ($data['fields'] as $key => $value) {
+            $this->assertDatabaseHas('fields', [
+                'entry_id' => $entryModel->id,
+                'key' => $key,
+                'value' => $value,
+            ]);
+        }
     }
 }

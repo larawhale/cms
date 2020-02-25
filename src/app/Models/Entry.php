@@ -3,6 +3,7 @@
 namespace LaraWhale\Cms\Models;
 
 use LaraWhale\Cms\Library\Entries\Factory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
 
 class Entry extends Model
@@ -15,6 +16,16 @@ class Entry extends Model
     protected $fillable = [
         'type',
     ];
+
+    /**
+     * The fields relationship.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function fields(): HasMany
+    {
+        return $this->hasMany(Field::class);
+    }
 
     /**
      * Get the instance as an Entry class.

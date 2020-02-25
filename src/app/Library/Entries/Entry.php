@@ -66,11 +66,13 @@ class Entry implements EntryInterface
         ])->render();
     }
 
-    // TODO: Add to interface
+    // TODO: Update docs and add to interface.
     /**
      * This is just semi pseudo code, this does not work.
      * 
-     * Will be called like Entry::save(new EntryModel, $request->validated())
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @param  array  $data
+     * @return \LaraWhale\Cms\Models\Entry
      */
     public static function save(EntryModel $entryModel, array $data): EntryModel
     {
@@ -80,12 +82,14 @@ class Entry implements EntryInterface
 
         $fieldValues = data_get($data, 'fields', []);
 
-        foreach ($entry->fields as $field) {
+        foreach ($entry->fields() as $field) {
             if (! array_key_exists($field->key(), $fieldValues)) {
                 continue;
             }
 
-            $field->save($entryModel, $fieldValue);
+            $field->save($entryModel, $fieldValues[$field->key()]);
         }
+
+        // TODO: Cleanup fields that still exist in db but not in entry config.
     }
 }

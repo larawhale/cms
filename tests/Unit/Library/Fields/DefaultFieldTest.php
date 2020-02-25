@@ -123,7 +123,7 @@ class DefaultFieldTest extends TestCase
     }
 
     /** @test */
-    public function save(): void
+    public function save_create(): void
     {
         $entryModel = factory(EntryModel::class)->create();
 
@@ -135,6 +135,26 @@ class DefaultFieldTest extends TestCase
             'entry_id' => $entryModel->id,
             'key' => $field->key(),
             'value' => 'test_value',
+        ]);
+    }
+
+    /** @test */
+    public function save_update(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['key'],
+            'value' => 'old_value',
+        ]);
+
+        $field = new DefaultField($this->config);
+
+        $field->save($fieldModel->entry, 'new_value');
+
+        $this->assertDatabaseHas('fields', [
+            'id' => $fieldModel->id,
+            'entry_id' => $fieldModel->entry->id,
+            'key' => $field->key(),
+            'value' => 'new_value',
         ]);
     }
 }

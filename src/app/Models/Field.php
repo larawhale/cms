@@ -22,6 +22,6 @@ class Field extends Model
      */
     public function entry(): BelongsTo
     {
-        return $this->hasMany(Entry::class);
+        return $this->belongsTo(Entry::class);
     }
 }

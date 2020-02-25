@@ -17,7 +17,7 @@ class CreateCmsFieldsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('entry_id')->unsigned();
             $table->string('key');
-            $table->text('value');
+            $table->text('value')->nullable();
             $table->timestamps();
 
             $table->foreign('entry_id')->references('id')->on('entries')->onDelete('cascade');

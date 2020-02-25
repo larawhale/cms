@@ -76,9 +76,7 @@ class Entry implements EntryInterface
     {
         $entryModel->fill($data)->save();
 
-        return $entryModel;
-
-        $entry = $entryModel->toEntryClass(); // Factory::make($entryModel->type);
+        $entry = $entryModel->toEntryClass();
 
         $fieldValues = data_get($data, 'fields', []);
 

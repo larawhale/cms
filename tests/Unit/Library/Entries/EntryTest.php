@@ -2,6 +2,7 @@
 
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Entries\Entry;
+use LaraWhale\Cms\Library\Entries\Factory;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Library\Fields\DefaultField;
 use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
@@ -12,7 +13,7 @@ class EntryTest extends TestCase
      * An entry config.
      */
     private array $config = [
-        'type' => 'test_key',
+        'type' => 'test_type',
         'name' => 'test_name',
         'fields' => [
             [
@@ -113,6 +114,15 @@ class EntryTest extends TestCase
     {
         $data = [
             'type' => $this->config['type'],
+            'fields' => collect($this->config['fields'])
+                ->mapWithKeys(
+                    fn($field) => [$field['key'] => $field['key'] . '_value'],
+                )
+                ->all(),
+        ];
+
+        Factory::$entries = [
+            $this->config['type'] => $this->config,
         ];
 
         Entry::save(new EntryModel, $data);

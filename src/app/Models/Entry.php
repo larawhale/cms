@@ -2,6 +2,9 @@
 
 namespace LaraWhale\Cms\Models;
 
+use LaraWhale\Cms\Library\Entries\Factory;
+use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
+
 class Entry extends Model
 {
     /**
@@ -12,4 +15,14 @@ class Entry extends Model
     protected $fillable = [
         'type',
     ];
+
+    /**
+     * Get the instance as an Entry class.
+     *
+     * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
+     */
+    public function toEntryClass(): EntryInterface
+    {
+        return Factory::make($this->type);
+    }
 }

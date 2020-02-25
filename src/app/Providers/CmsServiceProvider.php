@@ -3,7 +3,8 @@
 namespace LaraWhale\Cms\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use LaraWhale\Cms\Library\Fields\Factory;
+use LaraWhale\Cms\Library\Fields\Factory as FieldFactory;
+use LaraWhale\Cms\Library\Entries\Factory as EntryFactory;
 
 class CmsServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,8 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'cms');
 
-        Factory::$fields = config('cms.fields');
+        FieldFactory::$fields = config('cms.fields');
+
+        EntryFactory::loadEntries();
     }
 }

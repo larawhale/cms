@@ -3,6 +3,11 @@
 return [
 
     /**
+     * The path to the configurations of the entries.
+     */
+    'entries_path' => resource_path('entries'),
+
+    /**
      * The type and field map.
      * 
      * Types that are in this array can be used in the fields entry

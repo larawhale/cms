@@ -16,3 +16,17 @@ if (! function_exists('cms_table_name')) {
         );
     }
 }
+
+if (! function_exists('cms_entries_path')) {
+    /**
+     * Returns string with the cms table prefix.
+     * 
+     * @param  string  $type
+     * @return bool
+     */
+    function cms_entries_path(string $type = ''): string
+    {
+        return config('cms.entries_path')
+            . ($type ? DIRECTORY_SEPARATOR . "$type.php" : $type);
+    }
+}

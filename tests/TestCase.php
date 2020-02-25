@@ -24,6 +24,20 @@ class TestCase extends BaseTestCase
     }
 
     /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     * @return void
+     */
+    protected function getEnvironmentSetUp($app): void
+    {
+        $app['config']->set(
+            'cms.entries_path',
+            __DIR__ . '/Support/',
+        );
+    }
+
+    /**
      * Returns the package providers.
      * 
      * @return array

@@ -1,7 +1,5 @@
 <?php
 
-// Add namespace to prevent "Cannot declare class" fatal error because of
-// ..\Fields\FactoryTest.
 namespace LaraWhale\Cms\Tests\Unit\Library\Entries;
 
 use Mockery\Mock;

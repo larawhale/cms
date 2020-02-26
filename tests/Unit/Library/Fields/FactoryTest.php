@@ -1,7 +1,5 @@
 <?php
 
-// Add namespace to prevent "Cannot declare class" fatal error because of
-// ..\Entries\FactoryTest.
 namespace LaraWhale\Cms\Tests\Unit\Library\Fields;
 
 use LaraWhale\Cms\Tests\TestCase;

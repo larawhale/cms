@@ -1,5 +1,7 @@
 <?php
 
+namespace LaraWhale\Cms\Tests\Library\Entries;
+
 use Illuminate\Support\Arr;
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Entries\Entry;

@@ -3,7 +3,8 @@
 namespace LaraWhale\Cms\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use LaraWhale\Cms\Library\Fields\Factory;
+use LaraWhale\Cms\Library\Fields\Factory as FieldFactory;
+use LaraWhale\Cms\Library\Entries\Factory as EntryFactory;
 
 class CmsServiceProvider extends ServiceProvider
 {
@@ -14,9 +15,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../../config/cms.php', 'cms'
-        );
+        $this->mergeConfigFrom(__DIR__ . '/../../config/cms.php', 'cms');
     }
 
     /**
@@ -26,8 +25,14 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+
+        $this->loadFactoriesFrom(__DIR__ . '/../../database/factories');
+
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'cms');
 
-        Factory::$fields = config('cms.fields');
+        FieldFactory::$fields = config('cms.fields');
+
+        EntryFactory::loadEntries();
     }
 }

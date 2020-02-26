@@ -2,7 +2,7 @@
 @inject('Form', 'Collective\Html\FormFacade')
 
 {!! $Form::open() !!}
-    {!! $Form::input('hidden', 'entry_key', $entry->key()) !!}
+    {!! $Form::input('hidden', 'entry_type', $entry->type()) !!}
 
     @foreach ($entry->fields() as $field)
         {!! $field->renderFormGroup() !!}

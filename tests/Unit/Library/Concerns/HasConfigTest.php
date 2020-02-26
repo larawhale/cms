@@ -2,7 +2,7 @@
 
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Concerns\HasConfig;
-use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
+use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
 
 class HasConfigClass
@@ -62,7 +62,7 @@ class HasConfigTest extends TestCase
 
         try {
             $class->config('key', null, true);
-        } catch (RequriedConfigKeyNotFoundException $e) {
+        } catch (RequiredConfigKeyNotFoundException $e) {
             $this->assertEquals('key', $e->getKey());
 
             return;

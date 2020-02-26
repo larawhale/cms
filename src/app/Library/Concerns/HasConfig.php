@@ -2,7 +2,7 @@
 
 namespace LaraWhale\Cms\Library\Concerns;
 
-use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
+use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
 trait HasConfig
 {
@@ -21,7 +21,7 @@ trait HasConfig
      * @param  mixed  $default
      * @param  bool  $throw
      * @return mixed
-     * @throws \LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException
+     * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
      */
     public function config(string $key = null, $default = null, bool $throw = false)
     {
@@ -30,7 +30,7 @@ trait HasConfig
         }
 
         if ($throw && ! array_key_exists($key, $this->config)) {
-            throw new RequriedConfigKeyNotFoundException($this, $key);
+            throw new RequiredConfigKeyNotFoundException($this, $key);
         }
 
         return data_get($this->config, $key, $default);

@@ -3,7 +3,7 @@
 namespace LaraWhale\Cms\Library\Fields;
 
 use LaraWhale\Cms\Library\Fields\Contracts\Field;
-use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
+use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
 class Factory
 {
@@ -49,7 +49,7 @@ class Factory
      * 
      * @param  array  $config
      * @return string
-     * @throws \LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException
+     * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
      */
     public static function getType(array $config): string
     {
@@ -59,7 +59,7 @@ class Factory
             return $type;
         }
 
-        throw new RequriedConfigKeyNotFoundException($config, 'type');
+        throw new RequiredConfigKeyNotFoundException($config, 'type');
     }
 
     /**

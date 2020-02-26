@@ -3,7 +3,8 @@
 namespace LaraWhale\Cms\Exceptions;
 
 use Exception;
-class RequriedConfigKeyNotFoundException extends Exception
+
+class RequiredConfigKeyNotFoundException extends Exception
 {
     /**
      * The class where the key was not found.
@@ -13,14 +14,14 @@ class RequriedConfigKeyNotFoundException extends Exception
     protected $class;
 
     /**
-     * The key was not found.
+     * The key that was not found.
      * 
      * @var string
      */
     protected string $key;
 
     /**
-     * The RequriedConfigKeyNotFoundException constructor.
+     * The RequiredConfigKeyNotFoundException constructor.
      * 
      * @param  mixed  $class
      * @param  string  $key

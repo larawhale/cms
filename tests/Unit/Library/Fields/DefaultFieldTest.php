@@ -1,8 +1,10 @@
 <?php
 
 use LaraWhale\Cms\Tests\TestCase;
+use LaraWhale\Cms\Models\Entry as EntryModel;
+use LaraWhale\Cms\Models\Field as FieldModel;
 use LaraWhale\Cms\Library\Fields\DefaultField;
-use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
+use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
 class DefaultFieldTest extends TestCase
 {
@@ -31,7 +33,7 @@ class DefaultFieldTest extends TestCase
 
         try {
             $field->key();
-        } catch (RequriedConfigKeyNotFoundException $e) {
+        } catch (RequiredConfigKeyNotFoundException $e) {
             $this->assertEquals('key', $e->getKey());
 
             return;
@@ -55,7 +57,7 @@ class DefaultFieldTest extends TestCase
 
         try {
             $field->type();
-        } catch (RequriedConfigKeyNotFoundException $e) {
+        } catch (RequiredConfigKeyNotFoundException $e) {
             $this->assertEquals('type', $e->getKey());
 
             return;
@@ -95,7 +97,7 @@ class DefaultFieldTest extends TestCase
 
         try {
             $field->label();
-        } catch (RequriedConfigKeyNotFoundException $e) {
+        } catch (RequiredConfigKeyNotFoundException $e) {
             $this->assertEquals('key', $e->getKey());
 
             return;
@@ -118,5 +120,52 @@ class DefaultFieldTest extends TestCase
         $field = new DefaultField($this->config);
 
         $this->assertMatchesHtmlSnapshot($field->renderFormGroup());
+    }
+
+    /** @test */
+    public function save_create(): void
+    {
+        $entryModel = factory(EntryModel::class)->create();
+
+        $field = new DefaultField($this->config);
+
+        $field->save($entryModel, 'test_value');
+
+        $this->assertDatabaseHas('fields', [
+            'entry_id' => $entryModel->id,
+            'key' => $field->key(),
+            'value' => 'test_value',
+        ]);
+    }
+
+    /** @test */
+    public function save_update(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['key'],
+            'value' => 'old_value',
+        ]);
+
+        $field = new DefaultField($this->config);
+
+        $field->save($fieldModel->entry, 'new_value');
+
+        $this->assertDatabaseHas('fields', [
+            'id' => $fieldModel->id,
+            'entry_id' => $fieldModel->entry->id,
+            'key' => $field->key(),
+            'value' => 'new_value',
+        ]);
+    }
+
+    /** @test */
+    public function database_value(): void
+    {
+        $field = new DefaultField($this->config);
+
+        $this->assertSame(
+            '123',
+            $field->databaseValue(123),
+        );
     }
 }

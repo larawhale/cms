@@ -19,6 +19,9 @@
         "spatie/phpunit-snapshot-assertions": "^4.0"
     },
     "autoload": {
+        "files": [
+            "src/app/Library/helpers.php"
+        ],
         "psr-4": {
             "LaraWhale\\Cms\\": "src/app/"
         }

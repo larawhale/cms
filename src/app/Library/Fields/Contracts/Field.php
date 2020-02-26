@@ -2,6 +2,9 @@
 
 namespace LaraWhale\Cms\Library\Fields\Contracts;
 
+use LaraWhale\Cms\Models\Entry as EntryModel;
+use LaraWhale\Cms\Models\Field as FieldModel;
+
 interface Field
 {
     /**
@@ -19,7 +22,7 @@ interface Field
      * @param  mixed  $default
      * @param  bool  $throw
      * @return mixed
-     * @throws \LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException
+     * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
      */
     public function config(string $key = null, $default = null, bool $throw = false);
 
@@ -64,4 +67,22 @@ interface Field
      * @return string
      */
     public function renderFormGroup(): string;
+
+    /**
+     * Saves the field to the database.
+     * 
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @param  mixed  $value
+     * @return \LaraWhale\Cms\Models\Field
+     */
+    public function save(EntryModel $entryModel, $value): FieldModel;
+
+    /**
+     * Returns a representation of how the value should be stored in the
+     * database.
+     * 
+     * @param  mixed  $value
+     * @return string
+     */
+    public function databaseValue($value): string;
 }

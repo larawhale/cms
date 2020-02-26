@@ -2,6 +2,8 @@
 
 namespace LaraWhale\Cms\Library\Entries\Contracts;
 
+use LaraWhale\Cms\Models\Entry as EntryModel;
+
 interface Entry
 {
     /**
@@ -19,16 +21,16 @@ interface Entry
      * @param  mixed  $default
      * @param  bool  $throw
      * @return mixed
-     * @throws \LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException
+     * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
      */
     public function config(string $key = null, $default = null, bool $throw = false);
 
     /**
-     * Returns the key of the entry.
+     * Returns the type of the entry.
      * 
      * @return string
      */
-    public function key(): string;
+    public function type(): string;
 
     /**
      * Returns the name of the entry.
@@ -50,4 +52,13 @@ interface Entry
      * @return string
      */
     public function renderForm(): string;
+
+    /**
+     * Saves an entry and its fields to the database.
+     * 
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @param  array  $data
+     * @return \LaraWhale\Cms\Models\Entry
+     */
+    public static function save(EntryModel $entryModel, array $data): EntryModel;
 }

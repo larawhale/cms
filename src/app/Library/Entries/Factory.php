@@ -5,7 +5,7 @@ namespace LaraWhale\Cms\Library\Entries;
 use Illuminate\Support\Facades\File;
 use LaraWhale\Cms\Library\Entries\Entry;
 use LaraWhale\Cms\Exceptions\EntryConfigNotFoundException;
-use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
+use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
 
 class Factory
@@ -52,11 +52,11 @@ class Factory
      * Retreives all the entry configurations.
      * 
      * @return void
-     * @throws \LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException
+     * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
      */
     public static function loadEntries(): void
     {
-        $files = File::allFiles(cms_entries_path());
+        $files = File::allFiles(cms_entries_path());;
 
         foreach ($files as $file) {
             $config = require $file->getPathname();
@@ -64,7 +64,7 @@ class Factory
             $type = data_get($config, 'type');
 
             if (is_null($type)) {
-                throw new RequriedConfigKeyNotFoundException($config, 'type');
+                throw new RequiredConfigKeyNotFoundException($config, 'type');
             }
 
             static::$entries[$type] = $config;

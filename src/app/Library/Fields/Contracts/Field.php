@@ -22,7 +22,7 @@ interface Field
      * @param  mixed  $default
      * @param  bool  $throw
      * @return mixed
-     * @throws \LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException
+     * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
      */
     public function config(string $key = null, $default = null, bool $throw = false);
 

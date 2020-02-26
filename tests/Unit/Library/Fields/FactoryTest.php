@@ -7,7 +7,7 @@ namespace LaraWhale\Cms\Tests\Unit\Library\Fields;
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Fields\Factory;
 use LaraWhale\Cms\Library\Fields\DefaultField;
-use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
+use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
 class TestField extends DefaultField
 {
@@ -57,7 +57,7 @@ class FactoryTest extends TestCase
     {
         try {
             Factory::getType([]);
-        } catch (RequriedConfigKeyNotFoundException $e) {
+        } catch (RequiredConfigKeyNotFoundException $e) {
             $this->assertEquals('type', $e->getKey());
 
             return;

@@ -33,7 +33,7 @@ class TestCase extends BaseTestCase
     {
         $app['config']->set(
             'cms.entries_path',
-            __DIR__ . '/Support/',
+            __DIR__ . '/Support/Entries/',
         );
     }
 

@@ -8,7 +8,6 @@ use LaraWhale\Cms\Exceptions\EntryConfigNotFoundException;
 use LaraWhale\Cms\Exceptions\RequriedConfigKeyNotFoundException;
 use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
 
-// TODO: Write test.
 class Factory
 {
     /**

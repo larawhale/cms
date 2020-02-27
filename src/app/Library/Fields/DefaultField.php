@@ -13,13 +13,30 @@ class DefaultField implements Field
     use HasConfig;
 
     /**
+     * The Field model instance.
+     * 
+     * @var \LaraWhale\Cms\Models\Field
+     */
+    protected $fieldModel;
+
+    /**
+     * The field value.
+     * 
+     * @var array
+     */
+    protected $value = null;
+
+    /**
      * The field constructor.
      * 
      * @param  array  $config
+     * @param  \LaraWhale\Cms\Models\Field
      */
-    public function __construct(array $config)
+    public function __construct(array $config, FieldModel $fieldModel = null)
     {
         $this->config = $config;
+
+        $this->setFieldModel($fieldModel);
     }
 
     /**
@@ -63,6 +80,53 @@ class DefaultField implements Field
     }
 
     /**
+     * Returns the field model instance.
+     * 
+     * @return \LaraWhale\Cms\Models\Field|null
+     */
+    public function fieldModel()
+    {
+        return $this->fieldModel;
+    }
+
+    /**
+     * Sets the Field model instance.
+     * 
+     * @param  \LaraWhale\Cms\Models\Field  $fieldModel
+     * @return \LaraWhale\Cms\Library\Fields\Contracts\Field
+     */
+    public function setFieldModel(FieldModel $fieldModel = null): Field
+    {
+        $this->fieldModel = $fieldModel;
+
+        $this->value = data_get($fieldModel, 'value');
+
+        return $this;
+    }
+
+    /**
+     * Returns the value of the field.
+     * 
+     * @return mixed
+     */
+    public function value()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Returns a representation of how the value should be stored in the
+     * database.
+     * 
+     * @param  mixed  $value
+     * @return string
+     */
+    public function databaseValue($value): string
+    {
+        return (string) $value;
+    }
+
+    /**
      * Returns a rendered input.
      * 
      * @return string
@@ -102,20 +166,12 @@ class DefaultField implements Field
     {
         $value = $this->databaseValue($value);
 
-        return $entryModel->fields()->updateOrCreate([
+        $fieldModel = $entryModel->fields()->updateOrCreate([
             'key' => $this->key(),
         ], compact('value'));
-    }
 
-    /**
-     * Returns a representation of how the value should be stored in the
-     * database.
-     * 
-     * @param  mixed  $value
-     * @return string
-     */
-    public function databaseValue($value): string
-    {
-        return (string) $value;
+        $this->setFieldModel($fieldModel);
+
+        return $fieldModel;
     }
 }

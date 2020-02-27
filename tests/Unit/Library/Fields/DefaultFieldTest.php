@@ -107,6 +107,49 @@ class DefaultFieldTest extends TestCase
     }
 
     /** @test */
+    public function field_model(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create();
+
+        $field = new DefaultField($this->config, $fieldModel);
+
+        $this->assertEquals(
+            $fieldModel,
+            $field->fieldModel(),
+        );
+    }
+
+    /** @test */
+    public function set_field_model_sets_value(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create();
+
+        $field = new DefaultField($this->config);
+
+        $field->setFieldModel($fieldModel);
+
+        $this->assertEquals(
+            $fieldModel->value,
+            $field->value(),
+        );
+    }
+
+    /** @test */
+    public function set_field_model_sets_null(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create();
+
+        $field = new DefaultField($this->config);
+
+        $field->setFieldModel(null);
+
+        $this->assertEquals(
+            null,
+            $field->value(),
+        );
+    }
+
+    /** @test */
     public function render_input(): void
     {
         $field = new DefaultField($this->config);
@@ -129,7 +172,12 @@ class DefaultFieldTest extends TestCase
 
         $field = new DefaultField($this->config);
 
-        $field->save($entryModel, 'test_value');
+        $fieldModel = $field->save($entryModel, 'test_value');
+
+        $this->assertEquals(
+            $fieldModel,
+            $field->fieldModel(),
+        );
 
         $this->assertDatabaseHas('fields', [
             'entry_id' => $entryModel->id,

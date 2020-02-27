@@ -55,6 +55,37 @@ interface Field
     public function label(): string;
 
     /**
+     * Returns the field model instance.
+     * 
+     * @return \LaraWhale\Cms\Models\Field|null
+     */
+    public function fieldModel();
+
+    /**
+     * Sets the Field model instance.
+     * 
+     * @param  \LaraWhale\Cms\Models\Field  $fieldModel
+     * @return \LaraWhale\Cms\Library\Fields\Contracts\Field
+     */
+    public function setFieldModel(FieldModel $fieldModel = null): Field;
+
+    /**
+     * Returns the value of the field.
+     * 
+     * @return mixed
+     */
+    public function value();
+
+    /**
+     * Returns a representation of how the value should be stored in the
+     * database.
+     * 
+     * @param  mixed  $value
+     * @return string
+     */
+    public function databaseValue($value): string;
+
+    /**
      * Returns a rendered input.
      * 
      * @return string
@@ -76,13 +107,4 @@ interface Field
      * @return \LaraWhale\Cms\Models\Field
      */
     public function save(EntryModel $entryModel, $value): FieldModel;
-
-    /**
-     * Returns a representation of how the value should be stored in the
-     * database.
-     * 
-     * @param  mixed  $value
-     * @return string
-     */
-    public function databaseValue($value): string;
 }

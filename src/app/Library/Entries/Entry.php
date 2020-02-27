@@ -5,6 +5,8 @@ namespace LaraWhale\Cms\Library\Entries;
 use LaraWhale\Cms\Library\Fields\Factory;
 use LaraWhale\Cms\Library\Concerns\HasConfig;
 use LaraWhale\Cms\Models\Entry as EntryModel;
+use LaraWhale\Cms\Models\Field as FieldModel;
+use LaraWhale\Cms\Library\Fields\Contracts\Field as FieldInterface;
 use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
 
 class Entry implements EntryInterface
@@ -12,13 +14,30 @@ class Entry implements EntryInterface
     use HasConfig;
 
     /**
+     * The Entry model instance.
+     * 
+     * @var \LaraWhale\Cms\Models\Entry
+     */
+    protected $entryModel;
+
+    /**
+     * An array of field values.
+     * 
+     * @var array
+     */
+    protected $values = [];
+
+    /**
      * The Entry constructor.
      * 
      * @param  array  $config
+     * @param  \LaraWhale\Cms\Models\Entry
      */
-    public function __construct(array $config)
+    public function __construct(array $config, EntryModel $entryModel = null)
     {
         $this->config = $config;
+
+        $this->setEntryModel($entryModel);
     }
 
     /**
@@ -48,10 +67,85 @@ class Entry implements EntryInterface
      */
     public function fields(): array
     {
+        $fieldModels = data_get(
+            $this->entryModel,
+            'fields',
+            fn() => collect(),
+        );
+
         return array_map(
-            fn(array $config) => Factory::make($config),
+            function(array $config) use ($fieldModels) {
+                $field = Factory::make($config);
+
+                $fieldModel = $fieldModels
+                    ->firstWhere('key', $field->key());
+
+                $field->setFieldModel($fieldModel);
+
+                return $field;
+            },
             $this->config('fields', []),
         );
+    }
+
+    /**
+     * Returns the entry model instance.
+     * 
+     * @return \LaraWhale\Cms\Models\Entry|null
+     */
+    public function entryModel()
+    {
+        return $this->entryModel;
+    }
+
+    /**
+     * Set the Entry model instance.
+     * 
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
+     */
+    public function setEntryModel(EntryModel $entryModel = null): EntryInterface
+    {
+        $this->entryModel = $entryModel;
+
+        $this->fill($this->entryModel);
+
+        return $this;
+    }
+
+    /**
+     * Returns field the values.
+     * 
+     * @return array
+     */
+    public function values(): array
+    {
+        return $this->values;
+    }
+
+    /**
+     * Fills the values array according to the specified Entry model.
+     * 
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
+     */
+    public function fill(EntryModel $entryModel = null): EntryInterface
+    {
+        $this->values = [];
+
+        $fieldModels = data_get(
+            $entryModel,
+            'fields',
+            fn() => collect(),
+        );
+
+        foreach ($this->fields() as $field) {
+            $fieldModel = $fieldModels->firstWhere('key', $field->key());
+
+            $this->values[$field->key()] = data_get($fieldModel, 'value');
+        }
+
+        return $this;
     }
 
     /**

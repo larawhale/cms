@@ -88,11 +88,78 @@ class EntryTest extends TestCase
     /** @test */
     public function fields(): void
     {
-        $entry = new Entry($this->config);
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['fields'][0]['key'],
+        ]);
+
+        $entry = new Entry($this->config, $fieldModel->entry);
+
+        $fieldModel = $fieldModel->fresh();
 
         $this->assertEquals(
-            [new DefaultField($this->config['fields'][0])],
+            [new DefaultField($this->config['fields'][0], $fieldModel)],
             $entry->fields(),
+        );
+    }
+
+    /** @test */
+    public function set_entry_model(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['fields'][0]['key'],
+        ]);
+
+        $entry = new Entry($this->config);
+
+        $entry->setEntryModel($fieldModel->entry);
+
+        $this->assertEquals(
+            $fieldModel->entry,
+            $entry->entryModel(),
+        );
+
+        $this->assertEquals(
+            [$fieldModel->key => $fieldModel->value],
+            $entry->values(),
+        );
+    }
+
+    /** @test */
+    public function fill(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['fields'][0]['key'],
+        ]);
+
+        $entry = new Entry($this->config);
+
+        $entry->fill($fieldModel->entry);
+
+        $this->assertEquals(
+            [$fieldModel->key => $fieldModel->value],
+            $entry->values(),
+        );
+    }
+
+    /** @test */
+    public function fill_resets(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['fields'][0]['key'],
+        ]);
+
+        $entry = new Entry($this->config, $fieldModel->entry);
+
+        $this->assertEquals(
+            [$fieldModel->key => $fieldModel->value],
+            $entry->values(),
+        );
+
+        $entry->fill(null);
+
+        $this->assertEquals(
+            [$this->config['fields'][0]['key'] => null],
+            $entry->values(),
         );
     }
 

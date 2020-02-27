@@ -107,19 +107,6 @@ class DefaultFieldTest extends TestCase
     }
 
     /** @test */
-    public function field_model(): void
-    {
-        $fieldModel = factory(FieldModel::class)->create();
-
-        $field = new DefaultField($this->config, $fieldModel);
-
-        $this->assertEquals(
-            $fieldModel,
-            $field->fieldModel(),
-        );
-    }
-
-    /** @test */
     public function set_field_model_sets_value(): void
     {
         $fieldModel = factory(FieldModel::class)->create();

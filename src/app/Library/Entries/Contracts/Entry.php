@@ -47,6 +47,36 @@ interface Entry
     public function fields(): array;
 
     /**
+     * Returns the entry model instance.
+     * 
+     * @return \LaraWhale\Cms\Models\Entry|null
+     */
+    public function entryModel();
+
+    /**
+     * Set the Entry model instance.
+     * 
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
+     */
+    public function setEntryModel(EntryModel $entryModel = null): Entry;
+
+    /**
+     * Returns field the values.
+     * 
+     * @return array
+     */
+    public function values(): array;
+
+    /**
+     * Fills the values array according to the specified Entry model.
+     * 
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
+     */
+    public function fill(EntryModel $entryModel = null): Entry;
+
+    /**
      * Returns a rendered form.
      * 
      * @return string

@@ -69,6 +69,23 @@ interface Entry
     public function values(): array;
 
     /**
+     * Returns a value.
+     * 
+     * @param  string  $key
+     * @return mixed
+     */
+    public function getValue(string $key);
+
+    /**
+     * Sets a value.
+     * 
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return void
+     */
+    public function setValue(string $key, $value): void;
+
+    /**
      * Fills the values array according to the specified Entry model.
      * 
      * @param  \LaraWhale\Cms\Models\Entry  $entryModel

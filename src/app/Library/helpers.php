@@ -5,7 +5,7 @@ if (! function_exists('cms_table_name')) {
      * Returns string with the cms table prefix.
      * 
      * @param  string  $tableName
-     * @return bool
+     * @return string
      */
     function cms_table_name(string $tableName): string
     {
@@ -19,10 +19,11 @@ if (! function_exists('cms_table_name')) {
 
 if (! function_exists('cms_entries_path')) {
     /**
-     * Returns string with the cms table prefix.
+     * Returns the path where the entries or the specified entry configuration
+     * is located.
      * 
      * @param  string  $type
-     * @return bool
+     * @return string
      */
     function cms_entries_path(string $type = ''): string
     {

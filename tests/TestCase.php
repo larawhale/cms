@@ -20,7 +20,8 @@ class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->artisan('migrate:fresh')->run();
+        $this->withoutMockingConsoleOutput()
+            ->artisan('migrate:fresh');
     }
 
     /**

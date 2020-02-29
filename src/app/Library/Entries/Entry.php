@@ -124,6 +124,29 @@ class Entry implements EntryInterface
     }
 
     /**
+     * Returns a value.
+     * 
+     * @param  string  $key
+     * @return mixed
+     */
+    public function getValue(string $key)
+    {
+        return data_get($this->values, $key);
+    }
+
+    /**
+     * Sets a value.
+     * 
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return void
+     */
+    public function setValue(string $key, $value): void
+    {
+        data_set($this->values, $key, $value);
+    }
+
+    /**
      * Fills the values array according to the specified Entry model.
      * 
      * @param  \LaraWhale\Cms\Models\Entry  $entryModel
@@ -158,6 +181,51 @@ class Entry implements EntryInterface
         return view('cms::entries.form', [
             'entry' => $this,
         ])->render();
+    }
+
+    /**
+     * Dynamically retrieve values of the entry.
+     *
+     * @param  string  $key
+     * @return mixed
+     */
+    public function __get(string $key)
+    {
+        return $this->getValue($key);
+    }
+
+    /**
+     * Dynamically set values of the entry.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return void
+     */
+    public function __set(string $key, $value): void
+    {
+        $this->setValue($key, $value);
+    }
+
+    /**
+     * Determine if value isset.
+     *
+     * @param  string  $key
+     * @return bool
+     */
+    public function __isset(string $key): bool
+    {
+        return isset($this->values[$key]);
+    }
+
+    /**
+     * Unset value.
+     *
+     * @param  string  $key
+     * @return void
+     */
+    public function __unset(string $key): void
+    {
+        unset($this->values[$key]);
     }
 
     /**

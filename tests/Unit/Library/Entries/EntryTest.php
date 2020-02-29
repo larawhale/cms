@@ -125,6 +125,45 @@ class EntryTest extends TestCase
     }
 
     /** @test */
+    public function get_value_existing(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['fields'][0]['key'],
+        ]);
+
+        $entry = new Entry($this->config, $fieldModel->entry);
+
+        $this->assertEquals(
+            $fieldModel->value,
+            $entry->getValue($fieldModel->key),
+        );
+    }
+
+    /** @test */
+    public function get_value_unknown(): void
+    {
+        $entry = new Entry($this->config);
+
+        $this->assertEquals(
+            null,
+            $entry->getValue('unknown'),
+        );
+    }
+
+    /** @test */
+    public function set_value(): void
+    {
+        $entry = new Entry($this->config);
+
+        $entry->setValue('test_key', 'test_value');
+
+        $this->assertEquals(
+            'test_value',
+            $entry->getValue('test_key'),
+        );
+    }
+
+    /** @test */
     public function fill(): void
     {
         $fieldModel = factory(FieldModel::class)->create([
@@ -178,6 +217,85 @@ class EntryTest extends TestCase
         $entry = new Entry($config);
 
         $this->assertMatchesHtmlSnapshot($entry->renderForm());
+    }
+
+    /** @test */
+    public function magic_get_existing(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['fields'][0]['key'],
+        ]);
+
+        $entry = new Entry($this->config, $fieldModel->entry);
+
+        $this->assertEquals(
+            $fieldModel->value,
+            $entry->{$fieldModel->key},
+        );
+    }
+
+    /** @test */
+    public function magic_get_unknown(): void
+    {
+        $entry = new Entry($this->config);
+
+        $this->assertEquals(
+            null,
+            $entry->unknown,
+        );
+    }
+
+    /** @test */
+    public function magic_set(): void
+    {
+        $entry = new Entry($this->config);
+
+        $entry->test_key = 'test_value';
+
+        $this->assertEquals(
+            'test_value',
+            $entry->test_key,
+        );
+    }
+
+    /** @test */
+    public function magic_isset_existing(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['fields'][0]['key'],
+        ]);
+
+        $entry = new Entry($this->config, $fieldModel->entry);
+
+        $this->assertTrue(
+            isset($entry->{$fieldModel->key}),
+        );
+    }
+
+    /** @test */
+    public function magic_isset_unknown(): void
+    {
+        $entry = new Entry($this->config);
+
+        $this->assertFalse(
+            isset($entry->unknown),
+        );
+    }
+
+    /** @test */
+    public function magic_unset(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['fields'][0]['key'],
+        ]);
+
+        $entry = new Entry($this->config, $fieldModel->entry);
+
+        unset($entry->{$fieldModel->key});
+
+        $this->assertFalse(
+            isset($entry->unknown),
+        );
     }
 
     /** @test */

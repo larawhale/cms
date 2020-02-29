@@ -5,7 +5,7 @@ namespace LaraWhale\Cms\Http\Controllers;
 use Illuminate\Http\Request;
 use LaraWhale\Cms\Models\Entry;
 use Illuminate\Routing\Controller;
-// use LaraWhale\Cms\Http\Requests\Entries\StoreRequest;
+use LaraWhale\Cms\Http\Requests\Entries\StoreRequest;
 
 class EntryController extends Controller
 {
@@ -37,7 +37,7 @@ class EntryController extends Controller
      * @param  \LaraWhale\Cms\Http\Requests\Entries\StoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         //
     }

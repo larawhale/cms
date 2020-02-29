@@ -39,7 +39,7 @@ class StoreTest extends TestCase
      */
     private function makeRequest(array $data): TestResponse
     {
-        return $this->json('POST', 'entries', $data);
+        return $this->json('POST', 'cms/entries', $data);
     }
 
     /**

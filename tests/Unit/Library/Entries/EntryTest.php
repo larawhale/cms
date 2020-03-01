@@ -23,7 +23,7 @@ class EntryTest extends TestCase
             [
                 'key' => 'test_key',
                 'type' => 'test_type',
-                'rules' => 'test_rules',
+                'rules' => 'required',
                 'label' => 'test_label',
             ],
         ],
@@ -99,6 +99,23 @@ class EntryTest extends TestCase
         $this->assertEquals(
             [new DefaultField($this->config['fields'][0], $fieldModel)],
             $entry->fields(),
+        );
+    }
+
+    /** @test */
+    public function rules(): void
+    {
+        $fieldModel = factory(FieldModel::class)->create([
+            'key' => $this->config['fields'][0]['key'],
+        ]);
+
+        $entry = new Entry($this->config, $fieldModel->entry);
+
+        $fieldModel = $fieldModel->fresh();
+
+        $this->assertEquals(
+            [$fieldModel->key => $this->config['fields'][0]['rules']],
+            $entry->rules(),
         );
     }
 

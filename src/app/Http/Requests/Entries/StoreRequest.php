@@ -20,7 +20,7 @@ class StoreRequest extends FormRequest
                 'string',
                 function (string $attribute, $value, callable $fail) {
                     if (! Factory::exists($value)) {
-                        $fail(__('cms::validation.entry_type_exists'));
+                        $fail(__('validation.exists', ['attribute' => 'type']));
                     }
                 },
             ],

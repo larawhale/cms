@@ -30,7 +30,6 @@ class StoreTest extends TestCase
 
         $this->markTestIncomplete('No authentication nor response assertion');
         // $this->assertResponse($response, 403);
-
     }
 
     /**

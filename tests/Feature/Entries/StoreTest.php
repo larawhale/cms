@@ -1,7 +1,9 @@
 <?php
 
+use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Tests\TestCase;
 use Illuminate\Foundation\Testing\TestResponse;
+use LaraWhale\Cms\Library\Fields\Contracts\Field;
 
 class StoreTest extends TestCase
 {
@@ -49,7 +51,22 @@ class StoreTest extends TestCase
      */
     private function requestData(): array
     {
-        return [];
+        $entry = factory(Entry::class)->make();
+
+        $entryClass = $entry->toEntryClass();
+
+        $data = array_merge(
+            $entry->toArray(),
+            collect($entryClass->fields())
+                ->mapWithKeys(function (Field $field) {
+                    $key = $field->key();
+
+                    return [$key => $key . '_value'];
+                })
+                ->all(),
+        );
+
+        return $data;
     }
 
     /**

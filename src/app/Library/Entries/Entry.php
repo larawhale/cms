@@ -89,6 +89,20 @@ class Entry implements EntryInterface
     }
 
     /**
+     * Returns the rules of the fields.
+     * 
+     * @return array
+     */
+    public function rules(): array
+    {
+        return collect($this->fields())
+            ->mapWithKeys(function (FieldInterface $field) {
+                return [$field->key() => $field->rules()];
+            })
+            ->all();
+    }
+
+    /**
      * Returns the entry model instance.
      * 
      * @return \LaraWhale\Cms\Models\Entry|null

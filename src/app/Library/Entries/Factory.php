@@ -49,6 +49,17 @@ class Factory
     }
 
     /**
+     * Determines if an entry configuration exists for the specified type.
+     * 
+     * @param  string  $type
+     * @return bool
+     */
+    public static function exists(string $type): bool
+    {
+        return ! is_null(data_get(static::$entries, $type));
+    }
+
+    /**
      * Retreives all the entry configurations.
      * 
      * @return void

@@ -56,15 +56,19 @@ class StoreRequestTest extends TestCase
     /** @test */
     public function fails_field(): void
     {
-        $validator = $this->makeValidator([
+        $data = [
             'type' => 'test_entry',
-        ]);
+        ];
+
+        $this->mockRequest($data['type']);
+
+        $validator = $this->makeValidator($data);
 
         $this->assertFalse($validator->passes());
 
         $this->assertEquals(
-            'The test_key field is required.',
-            $validator->errors()->first('test_key'),
+            'The fields.test key field is required.',
+            $validator->errors()->first('fields.test_key'),
         );
     }
 

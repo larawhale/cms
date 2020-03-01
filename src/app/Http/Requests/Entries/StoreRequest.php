@@ -15,12 +15,12 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'type' => [
+            'entry_type' => [
                 'required',
                 'string',
                 function (string $attribute, $value, callable $fail) {
                     if (! Factory::exists($value)) {
-                        $fail(__('validation.exists', ['attribute' => 'type']));
+                        $fail(__('validation.exists', ['attribute' => 'entry_type']));
                     }
                 },
             ],
@@ -30,13 +30,10 @@ class StoreRequest extends FormRequest
         // Add rules of the fields for the specified entry type. These only
         // have to be added when type is present. The required rule on type
         // should fail if not.
-        if ($type = request()->get('type')) {
+        if ($type = request()->get('entry_type')) {
             $entry = Factory::make($type);
 
-            $rules = array_merge(
-                $rules,
-                array_keys_prefix($entry->rules(), 'fields.'),
-            );
+            $rules = array_merge($rules, $entry->rules());
         }
 
         return $rules;

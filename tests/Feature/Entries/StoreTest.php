@@ -50,21 +50,10 @@ class StoreTest extends TestCase
      */
     private function requestData(): array
     {
-        $entry = factory(Entry::class)->make();
-
-        $entryClass = $entry->toEntryClass();
-
-        $data = $entry->toArray();
-
-        $data ['fields'] = collect($entryClass->fields())
-            ->mapWithKeys(function (Field $field) {
-                $key = $field->key();
-
-                return [$key => $key . '_value'];
-            })
-            ->all();
-
-        return $data;
+        return [
+            'entry_type' => 'test_entry',
+            'test_key' => 'test_key_value',
+        ];
     }
 
     /**
@@ -91,9 +80,11 @@ class StoreTest extends TestCase
      */
     private function assertDatabase(array $data): void
     {
-        $entry = Entry::where(Arr::except($data, ['fields']))->firstOrFail();
+        $entry = Entry::where('type', $data['entry_type'])->firstOrFail();
 
-        foreach ($data['fields'] as $key => $value) {
+        $fields = Arr::except($data, ['entry_type']);
+
+        foreach ($fields as $key => $value) {
             $this->assertDatabaseHas('fields', [
                 'entry_id' => $entry->id,
                 'key' => $key,

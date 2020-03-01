@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use LaraWhale\Cms\Models\Entry;
 use Illuminate\Routing\Controller;
@@ -40,7 +41,12 @@ class EntryController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        EntryClass::save(new Entry, $request->validated());
+        $data = [
+            'type' => $request->get('entry_type'),
+            'fields' => Arr::except($request->validated(), ['entry_type']),
+        ];
+
+        EntryClass::save(new Entry, $data);
 
         return redirect()->route('cms.entries.index');
     }

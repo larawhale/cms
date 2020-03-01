@@ -24,6 +24,7 @@ class StoreRequest extends FormRequest
                     }
                 },
             ],
+            'fields' => 'array',
         ];
 
         // Add rules of the fields for the specified entry type. These only
@@ -32,7 +33,10 @@ class StoreRequest extends FormRequest
         if ($type = request()->get('type')) {
             $entry = Factory::make($type);
 
-            $rules = array_merge($rules, $entry->rules());
+            $rules = array_merge(
+                $rules,
+                array_keys_prefix($entry->rules(), 'fields.'),
+            );
         }
 
         return $rules;

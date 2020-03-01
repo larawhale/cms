@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use LaraWhale\Cms\Models\Entry;
 use Illuminate\Routing\Controller;
 use LaraWhale\Cms\Http\Requests\Entries\StoreRequest;
+use LaraWhale\Cms\Library\Entries\Entry as EntryClass;
 
 class EntryController extends Controller
 {
@@ -39,7 +40,9 @@ class EntryController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        dd($request->validated());
+        EntryClass::save(new Entry, $request->validated());
+
+        return redirect()->route('cms.entries.index');
     }
 
     /**

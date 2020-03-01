@@ -55,16 +55,15 @@ class StoreTest extends TestCase
 
         $entryClass = $entry->toEntryClass();
 
-        $data = array_merge(
-            $entry->toArray(),
-            collect($entryClass->fields())
-                ->mapWithKeys(function (Field $field) {
-                    $key = $field->key();
+        $data = $entry->toArray();
 
-                    return [$key => $key . '_value'];
-                })
-                ->all(),
-        );
+        $data ['fields'] = collect($entryClass->fields())
+            ->mapWithKeys(function (Field $field) {
+                $key = $field->key();
+
+                return [$key => $key . '_value'];
+            })
+            ->all();
 
         return $data;
     }
@@ -76,9 +75,13 @@ class StoreTest extends TestCase
      * @param  int  $status
      * @return void
      */
-    private function assertResponse(TestResponse $response, int $status = 201): void
+    private function assertResponse(TestResponse $response, int $status = 302): void
     {
         $response->assertStatus($status);
+
+        if ($status === 302) {
+            $response->assertRedirect(route('cms.entries.index'));
+        }
     }
 
     /**
@@ -89,8 +92,14 @@ class StoreTest extends TestCase
      */
     private function assertDatabase(array $data): void
     {
-        $this->assertDatabaseHas('enries', $data);
+        $entry = Entry::where(Arr::except($data, ['fields']))->firstOrFail();
 
-        $this->assertDatabaseHas('fields', $data);
+        foreach ($data['fields'] as $key => $value) {
+            $this->assertDatabaseHas('fields', [
+                'entry_id' => $entry->id,
+                'key' => $key,
+                'value' => $value,
+            ]);
+        }
     }
 }

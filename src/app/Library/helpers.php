@@ -1,5 +1,25 @@
 <?php
 
+if (! function_exists('array_keys_prefix')) {
+    /**
+     * Add a prefix to array keys.
+     *
+     * @param  array  $array
+     * @param  string  $prefix
+     * @return array
+     */
+    function array_keys_prefix(array $array, string $prefix): array
+    {
+        $prefixedArray = [];
+
+        foreach ($array as $key => $value) {
+            $prefixedArray[$prefix . $key] = $value;
+        }
+
+        return $prefixedArray;
+    }
+}
+
 if (! function_exists('cms_table_name')) {
     /**
      * Returns string with the cms table prefix.

@@ -7,7 +7,7 @@ return [
         [
             'key' => 'test_key',
             'type' => 'test_type',
-            'rules' => 'test_rules',
+            'rules' => 'required',
             'label' => 'test_label',
         ],
     ],

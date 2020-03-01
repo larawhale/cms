@@ -5,6 +5,7 @@ namespace LaraWhale\Cms\Tests;
 use Spatie\Snapshots\MatchesSnapshots;
 use Collective\Html\HtmlServiceProvider;
 use LaraWhale\Cms\Providers\CmsServiceProvider;
+use OwowAgency\LaravelTestResponse\TestResponse;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
@@ -49,6 +50,17 @@ class TestCase extends BaseTestCase
             CmsServiceProvider::class,
             HtmlServiceProvider::class,
         ];
+    }
+
+    /**
+     * Create the test response instance from the given response.
+     *
+     * @param  \Illuminate\Http\Response  $response
+     * @return \Illuminate\Foundation\Testing\TestResponse
+     */
+    protected function createTestResponse($response)
+    {
+        return TestResponse::fromBaseResponse($response);
     }
 
     /**

@@ -29,7 +29,11 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->loadFactoriesFrom(__DIR__ . '/../../database/factories');
 
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/cms.php');
+
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'cms');
+
+        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'cms');
 
         FieldFactory::$fields = config('cms.fields');
 

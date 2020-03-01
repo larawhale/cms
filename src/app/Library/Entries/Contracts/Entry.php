@@ -47,6 +47,13 @@ interface Entry
     public function fields(): array;
 
     /**
+     * Returns the rules of the fields.
+     * 
+     * @return array
+     */
+    public function rules(): array;
+
+    /**
      * Returns the entry model instance.
      * 
      * @return \LaraWhale\Cms\Models\Entry|null

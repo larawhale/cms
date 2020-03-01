@@ -33,4 +33,16 @@ class FactoryTest extends TestCase
 
         $this->assertTrue(false, 'Exception was not thrown.');
     }
+
+    /** @test */
+    public function exists_true(): void
+    {
+        $this->assertTrue(Factory::exists('test_entry'));
+    }
+
+    /** @test */
+    public function exists_false(): void
+    {
+        $this->assertFalse(Factory::exists('non_existing'));
+    }
 }

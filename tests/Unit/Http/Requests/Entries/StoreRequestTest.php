@@ -12,13 +12,11 @@ class StoreRequestTest extends TestCase
     public function succeeds(): void
     {
         $data = [
-            'type' => 'test_entry',
-            'fields' => [
-                'test_key' => 'test_key_value',
-            ],
+            'entry_type' => 'test_entry',
+            'test_key' => 'test_key_value',
         ];
 
-        $this->mockRequest($data['type']);
+        $this->mockRequest($data['entry_type']);
 
         $validator = $this->makeValidator($data);
 
@@ -33,8 +31,8 @@ class StoreRequestTest extends TestCase
         $this->assertFalse($validator->passes());
 
         $this->assertEquals(
-            'The type field is required.',
-            $validator->errors()->first('type'),
+            'The entry type field is required.',
+            $validator->errors()->first('entry_type'),
         );
     }
 
@@ -42,14 +40,14 @@ class StoreRequestTest extends TestCase
     public function fails_required_type_exists(): void
     {
         $validator = $this->makeValidator([
-            'type' => 'non_existing',
+            'entry_type' => 'non_existing',
         ]);
 
         $this->assertFalse($validator->passes());
 
         $this->assertEquals(
-            'The selected type is invalid.',
-            $validator->errors()->first('type'),
+            'The selected entry type is invalid.',
+            $validator->errors()->first('entry_type'),
         );
     }
 
@@ -57,18 +55,18 @@ class StoreRequestTest extends TestCase
     public function fails_field(): void
     {
         $data = [
-            'type' => 'test_entry',
+            'entry_type' => 'test_entry',
         ];
 
-        $this->mockRequest($data['type']);
+        $this->mockRequest($data['entry_type']);
 
         $validator = $this->makeValidator($data);
 
         $this->assertFalse($validator->passes());
 
         $this->assertEquals(
-            'The fields.test key field is required.',
-            $validator->errors()->first('fields.test_key'),
+            'The test key field is required.',
+            $validator->errors()->first('test_key'),
         );
     }
 
@@ -98,7 +96,7 @@ class StoreRequestTest extends TestCase
         $request = Mockery::mock(Request::class)
             ->makePartial()
             ->shouldReceive('get')
-            ->with('type')
+            ->with('entry_type')
             ->andReturn($type);
 
         app()->instance('request', $request->getMock());

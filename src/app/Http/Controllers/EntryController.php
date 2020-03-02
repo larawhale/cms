@@ -30,7 +30,11 @@ class EntryController extends Controller
      */
     public function create(Request $request)
     {
-        //
+        $type = $request->get('type');
+
+        return view('cms::entries.create', [
+            'entry' => new Entry(compact('type')),
+        ]);
     }
 
     /**

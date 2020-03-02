@@ -17,7 +17,7 @@ class CreateTest extends BrowserTestCase
 
         $this->visitRoute('cms.entries.create', ['type' => $data['type']])
             ->type($data['test_key'], 'test_key')
-            ->press();
+            ->press('Submit');
 
         $this->assertDatabase($data);
 
@@ -58,11 +58,10 @@ class CreateTest extends BrowserTestCase
     /**
      * Asserts the database.
      *
-     * @param  string  $type
-     * @param  string  $fieldValue
+     * @param  string  $data
      * @return void
      */
-    private function assertDatabase(array $type): void
+    private function assertDatabase(array $data): void
     {
         $entry = Entry::where('type', $data['type'])->firstOrFail();
 

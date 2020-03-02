@@ -10,6 +10,17 @@ class CreateTest extends BrowserTestCase
     /** @test */
     public function admin_can_create(): void
     {
+        $data = [
+            'type' => 'test_entry',
+            'test_key' => 'test_key_value',
+        ];
+
+        $this->visitRoute('cms.entries.create', ['type' => $data['type']])
+            ->type($data['test_key'], 'test_key')
+            ->press();
+
+        $this->assertDatabase($data);
+
         $this->markTestIncomplete('No authentication nor response assertion');
     }
 
@@ -47,14 +58,15 @@ class CreateTest extends BrowserTestCase
     /**
      * Asserts the database.
      *
-     * @param  array  $data
+     * @param  string  $type
+     * @param  string  $fieldValue
      * @return void
      */
-    private function assertDatabase(array $data): void
+    private function assertDatabase(array $type): void
     {
-        $entry = Entry::where('type', $data['entry_type'])->firstOrFail();
+        $entry = Entry::where('type', $data['type'])->firstOrFail();
 
-        $fields = Arr::except($data, ['entry_type']);
+        $fields = Arr::except($data, ['type']);
 
         foreach ($fields as $key => $value) {
             $this->assertDatabaseHas('fields', [

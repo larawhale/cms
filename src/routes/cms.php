@@ -7,6 +7,6 @@ Route::group([
     'as' => 'cms.',
 ], function () {
     Route::resource('entries', EntryController::class, [
-        'only' => ['index', 'store'],
+        'only' => ['index', 'create', 'store'],
     ]);
 });

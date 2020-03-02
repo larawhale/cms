@@ -18,7 +18,7 @@ class StoreTest extends TestCase
 
         $this->assertDatabase($data);
 
-        $this->markTestIncomplete('No authentication nor response assertion');
+        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
@@ -28,7 +28,7 @@ class StoreTest extends TestCase
 
         $response = $this->makeRequest($data);
 
-        $this->markTestIncomplete('No authentication nor response assertion');
+        $this->markTestIncomplete('No authentication assertion');
         // $this->assertResponse($response, 403);
     }
 
@@ -53,6 +53,7 @@ class StoreTest extends TestCase
         return [
             'entry_type' => 'test_entry',
             'test_key' => 'test_key_value',
+            'another_test_key' => 'another_test_value',
         ];
     }
 

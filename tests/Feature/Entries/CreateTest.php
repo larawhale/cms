@@ -10,27 +10,25 @@ class CreateTest extends BrowserTestCase
     /** @test */
     public function admin_can_create(): void
     {
-        $data = [
-            'type' => 'test_entry',
-            'test_key' => 'test_key_value',
-        ];
+        $data = $this->requestData();
 
         $response = $this->visitRoute('cms.entries.create', ['type' => $data['type']]);
 
         $this->assertMatchesHtmlSnapshot($this->response->getContent());
 
         $response->type($data['test_key'], 'test_key')
+            ->type($data['another_test_key'], 'another_test_key')
             ->press('Submit');
 
         $this->assertDatabase($data);
 
-        $this->markTestIncomplete('No authentication nor response assertion');
+        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
     public function guest_cannot_create(): void
     {
-        $this->markTestIncomplete('No authentication nor response assertion');
+        $this->markTestIncomplete('No authentication assertion');
     }
 
     /**
@@ -41,8 +39,9 @@ class CreateTest extends BrowserTestCase
     private function requestData(): array
     {
         return [
-            'entry_type' => 'test_entry',
+            'type' => 'test_entry',
             'test_key' => 'test_key_value',
+            'another_test_key' => 'another_stest_key_value',
         ];
     }
 

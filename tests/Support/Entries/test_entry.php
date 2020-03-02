@@ -10,5 +10,11 @@ return [
             'rules' => 'required',
             'label' => 'test_label',
         ],
+        [
+            'key' => 'another_test_key',
+            'type' => 'another_test_type',
+            'rules' => 'required',
+            'label' => 'another_test_label',
+        ],
     ],
 ];

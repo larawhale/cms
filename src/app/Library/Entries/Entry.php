@@ -193,7 +193,9 @@ class Entry implements EntryInterface
     public function renderForm(): string
     {
         return view('cms::entries.form', [
-            'entry' => $this,
+            'entry' => $this->entryModel ?? new EntryModel([
+                'type' => $this->type(),
+            ]),
         ])->render();
     }
 

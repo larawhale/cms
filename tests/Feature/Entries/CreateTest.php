@@ -15,8 +15,11 @@ class CreateTest extends BrowserTestCase
             'test_key' => 'test_key_value',
         ];
 
-        $this->visitRoute('cms.entries.create', ['type' => $data['type']])
-            ->type($data['test_key'], 'test_key')
+        $response = $this->visitRoute('cms.entries.create', ['type' => $data['type']]);
+
+        $this->assertMatchesHtmlSnapshot($this->response->getContent());
+
+        $response->type($data['test_key'], 'test_key')
             ->press('Submit');
 
         $this->assertDatabase($data);

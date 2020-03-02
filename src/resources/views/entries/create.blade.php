@@ -2,4 +2,4 @@
     Create entry
 </h1>
 
-@include('cms::entries.form', compact('entry'));
+@include('cms::entries.form', compact('entry'))

@@ -1,46 +1,22 @@
 <?php
 
 use LaraWhale\Cms\Models\Entry;
-use LaraWhale\Cms\Tests\TestCase;
+use LaraWhale\Cms\Tests\BrowserTestCase;
 use Illuminate\Foundation\Testing\TestResponse;
 use LaraWhale\Cms\Library\Fields\Contracts\Field;
 
-class StoreTest extends TestCase
+class CreateTest extends BrowserTestCase
 {
     /** @test */
-    public function admin_can_store(): void
+    public function admin_can_create(): void
     {
-        $data = $this->requestData();
-
-        $response = $this->makeRequest($data);
-
-        $this->assertResponse($response);
-
-        $this->assertDatabase($data);
-
         $this->markTestIncomplete('No authentication nor response assertion');
     }
 
     /** @test */
-    public function guest_cannot_store(): void
+    public function guest_cannot_create(): void
     {
-        $data = $this->requestData();
-
-        $response = $this->makeRequest($data);
-
         $this->markTestIncomplete('No authentication nor response assertion');
-        // $this->assertResponse($response, 403);
-    }
-
-    /**
-     * Makes a request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Foundation\Testing\TestResponse
-     */
-    private function makeRequest(array $data): TestResponse
-    {
-        return $this->post('cms/entries', $data);
     }
 
     /**
@@ -63,13 +39,9 @@ class StoreTest extends TestCase
      * @param  int  $status
      * @return void
      */
-    private function assertResponse(TestResponse $response, int $status = 302): void
+    private function assertResponse(TestResponse $response, int $status = 200): void
     {
         $response->assertStatus($status);
-
-        if ($status === 302) {
-            $response->assertRedirect(route('cms.entries.index'));
-        }
     }
 
     /**

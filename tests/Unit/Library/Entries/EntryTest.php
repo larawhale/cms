@@ -17,8 +17,8 @@ class EntryTest extends TestCase
      * An entry config.
      */
     private array $config = [
-        'type' => 'test_type',
-        'name' => 'test_name',
+        'type' => 'test_entry',
+        'name' => 'Test entry',
         'fields' => [
             [
                 'key' => 'test_key',
@@ -223,13 +223,6 @@ class EntryTest extends TestCase
     public function render_form(): void
     {
         $config = $this->config;
-
-        $config['fields'][] = [
-            'key' => 'another_test_key',
-            'type' => 'another_test_type',
-            'rules' => 'another_test_rules',
-            'label' => 'another_test_label',
-        ];
 
         $entry = new Entry($config);
 

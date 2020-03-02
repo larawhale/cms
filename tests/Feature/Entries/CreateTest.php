@@ -1,20 +1,24 @@
 <?php
 
 use LaraWhale\Cms\Models\Entry;
-use LaraWhale\Cms\Tests\TestCase;
+use LaraWhale\Cms\Tests\BrowserTestCase;
 use Illuminate\Foundation\Testing\TestResponse;
 use LaraWhale\Cms\Library\Fields\Contracts\Field;
 
-class StoreTest extends TestCase
+class CreateTest extends BrowserTestCase
 {
     /** @test */
-    public function admin_can_store(): void
+    public function admin_can_create(): void
     {
         $data = $this->requestData();
 
-        $response = $this->makeRequest($data);
+        $response = $this->visitRoute('cms.entries.create', ['type' => $data['type']]);
 
-        $this->assertResponse($response);
+        $this->assertMatchesHtmlSnapshot($this->response->getContent());
+
+        $response->type($data['test_key'], 'test_key')
+            ->type($data['another_test_key'], 'another_test_key')
+            ->press('Submit');
 
         $this->assertDatabase($data);
 
@@ -22,25 +26,9 @@ class StoreTest extends TestCase
     }
 
     /** @test */
-    public function guest_cannot_store(): void
+    public function guest_cannot_create(): void
     {
-        $data = $this->requestData();
-
-        $response = $this->makeRequest($data);
-
         $this->markTestIncomplete('No authentication assertion');
-        // $this->assertResponse($response, 403);
-    }
-
-    /**
-     * Makes a request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Foundation\Testing\TestResponse
-     */
-    private function makeRequest(array $data): TestResponse
-    {
-        return $this->post('cms/entries', $data);
     }
 
     /**
@@ -51,9 +39,9 @@ class StoreTest extends TestCase
     private function requestData(): array
     {
         return [
-            'entry_type' => 'test_entry',
+            'type' => 'test_entry',
             'test_key' => 'test_key_value',
-            'another_test_key' => 'another_test_value',
+            'another_test_key' => 'another_stest_key_value',
         ];
     }
 
@@ -64,26 +52,22 @@ class StoreTest extends TestCase
      * @param  int  $status
      * @return void
      */
-    private function assertResponse(TestResponse $response, int $status = 302): void
+    private function assertResponse(TestResponse $response, int $status = 200): void
     {
         $response->assertStatus($status);
-
-        if ($status === 302) {
-            $response->assertRedirect(route('cms.entries.index'));
-        }
     }
 
     /**
      * Asserts the database.
      *
-     * @param  array  $data
+     * @param  string  $data
      * @return void
      */
     private function assertDatabase(array $data): void
     {
-        $entry = Entry::where('type', $data['entry_type'])->firstOrFail();
+        $entry = Entry::where('type', $data['type'])->firstOrFail();
 
-        $fields = Arr::except($data, ['entry_type']);
+        $fields = Arr::except($data, ['type']);
 
         foreach ($fields as $key => $value) {
             $this->assertDatabaseHas('fields', [

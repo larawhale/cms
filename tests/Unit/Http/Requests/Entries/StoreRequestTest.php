@@ -14,6 +14,7 @@ class StoreRequestTest extends TestCase
         $data = [
             'entry_type' => 'test_entry',
             'test_key' => 'test_key_value',
+            'another_test_key' => 'another_test_key_value',
         ];
 
         $this->mockRequest($data['entry_type']);
@@ -67,6 +68,11 @@ class StoreRequestTest extends TestCase
         $this->assertEquals(
             'The test key field is required.',
             $validator->errors()->first('test_key'),
+        );
+
+        $this->assertEquals(
+            'The another test key field is required.',
+            $validator->errors()->first('another_test_key'),
         );
     }
 

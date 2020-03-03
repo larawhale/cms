@@ -1,31 +1,36 @@
 <?php
 
 use LaraWhale\Cms\Models\Entry;
+use LaraWhale\Cms\Models\Field;
 use LaraWhale\Cms\Tests\TestCase;
 use Illuminate\Foundation\Testing\TestResponse;
 
-class StoreTest extends TestCase
+class UpdateTest extends TestCase
 {
     /** @test */
-    public function admin_can_store(): void
+    public function admin_can_update(): void
     {
+        [$entry] = $this->prepare();
+
         $data = $this->requestData();
 
-        $response = $this->makeRequest($data);
+        $response = $this->makeRequest($entry, $data);
 
         $this->assertResponse($response);
 
-        $this->assertDatabase($data);
+        $this->assertDatabase($entry, $data);
 
         $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
-    public function guest_cannot_store(): void
+    public function guest_cannot_update(): void
     {
+        [$entry] = $this->prepare();
+
         $data = $this->requestData();
 
-        $response = $this->makeRequest($data);
+        $response = $this->makeRequest($entry, $data);
 
         $this->markTestIncomplete('No authentication assertion');
 
@@ -33,14 +38,27 @@ class StoreTest extends TestCase
     }
 
     /**
+     * Prepares for tests.
+     * 
+     * @return array
+     */
+    private function prepare(): array
+    {
+        $field = factory(Field::class)->create();
+
+        return [$field->entry];
+    }
+
+    /**
      * Makes a request.
      *
+     * @param \LaraWhale\Cms\Models\Entry  $entry
      * @param  array  $data
      * @return \Illuminate\Foundation\Testing\TestResponse
      */
-    private function makeRequest(array $data): TestResponse
+    private function makeRequest(Entry $entry, array $data): TestResponse
     {
-        return $this->post('cms/entries', $data);
+        return $this->patch("cms/entries/$entry->id", $data);
     }
 
     /**
@@ -51,9 +69,8 @@ class StoreTest extends TestCase
     private function requestData(): array
     {
         return [
-            'entry_type' => 'test_entry',
-            'test_key' => 'test_key_value',
-            'another_test_key' => 'another_test_value',
+            'test_key' => 'diff_test_key_value',
+            'another_test_key' => 'diff_another_test_value',
         ];
     }
 
@@ -76,15 +93,12 @@ class StoreTest extends TestCase
     /**
      * Asserts the database.
      *
-     * @param  array  $data
+     * @param \LaraWhale\Cms\Models\Entry  $entry
+     * @param  array  $fields
      * @return void
      */
-    private function assertDatabase(array $data): void
+    private function assertDatabase(Entry $entry, array $fields): void
     {
-        $entry = Entry::where('type', $data['entry_type'])->firstOrFail();
-
-        $fields = Arr::except($data, ['entry_type']);
-
         foreach ($fields as $key => $value) {
             $this->assertDatabaseHas('fields', [
                 'entry_id' => $entry->id,
@@ -92,5 +106,10 @@ class StoreTest extends TestCase
                 'value' => $value,
             ]);
         }
+
+        $this->assertEquals(
+            count($fields),
+            $entry->fields()->count(),
+        );
     }
 }

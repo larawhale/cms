@@ -2,6 +2,8 @@
 
 namespace LaraWhale\Cms\Providers;
 
+use LaraWhale\Cms\Models\Entry;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use LaraWhale\Cms\Library\Fields\Factory as FieldFactory;
 use LaraWhale\Cms\Library\Entries\Factory as EntryFactory;
@@ -38,5 +40,7 @@ class CmsServiceProvider extends ServiceProvider
         FieldFactory::$fields = config('cms.fields');
 
         EntryFactory::loadEntries();
+
+        Route::model('entry', Entry::class);
     }
 }

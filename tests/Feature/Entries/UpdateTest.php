@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\TestResponse;
 class UpdateTest extends TestCase
 {
     /** @test */
-    public function admin_can_store(): void
+    public function admin_can_update(): void
     {
         [$entry] = $this->prepare();
 
@@ -24,7 +24,7 @@ class UpdateTest extends TestCase
     }
 
     /** @test */
-    public function guest_cannot_store(): void
+    public function guest_cannot_update(): void
     {
         [$entry] = $this->prepare();
 

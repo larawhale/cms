@@ -27,7 +27,6 @@ class StoreRequest extends FormRequest
                     }
                 },
             ],
-            'fields' => 'array',
         ];
 
         // Add rules of the fields for the specified entry type. These only

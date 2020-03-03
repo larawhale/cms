@@ -58,7 +58,7 @@ class UpdateTest extends TestCase
      */
     private function makeRequest(Entry $entry, array $data): TestResponse
     {
-        return $this->patch('cms/entries/$entry->id', $data);
+        return $this->patch("cms/entries/$entry->id", $data);
     }
 
     /**

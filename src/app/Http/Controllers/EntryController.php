@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use LaraWhale\Cms\Models\Entry;
 use Illuminate\Routing\Controller;
 use LaraWhale\Cms\Http\Requests\Entries\StoreRequest;
+use LaraWhale\Cms\Http\Requests\Entries\UpdateRequest;
 use LaraWhale\Cms\Library\Entries\Entry as EntryClass;
 
 class EntryController extends Controller
@@ -69,13 +70,19 @@ class EntryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \LaraWhale\Cms\Http\Requests\Entries\UpdateRequest  $request
      * @param  \LaraWhale\Cms\Models\Entry  $entry
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $entry)
+    public function update(UpdateRequest $request, Entry $entry)
     {
-        //
+        $data = [
+            'fields' => $request->validated(),
+        ];
+
+        EntryClass::save($entry, $data);
+
+        return redirect()->route('cms.entries.index');
     }
 
     /**

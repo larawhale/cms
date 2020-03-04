@@ -10,7 +10,7 @@ use Facebook\WebDriver\Remote\DesiredCapabilities;
 
 class DuskTestCase extends TestCase
 {
-    // use TestSetup;
+    use TestSetup;
 
     /**
      * The base serve host URL to use while testing the application.
@@ -46,35 +46,26 @@ class DuskTestCase extends TestCase
      */
     protected function driver(): RemoteWebDriver
     {
-    $options = (new ChromeOptions)->addArguments([
+        $options = (new ChromeOptions)->addArguments([
             '--disable-gpu',
             '--headless',
-            '--no-sandbox'
+            '--no-sandbox',
         ]);
+
         return RemoteWebDriver::create(
             'http://localhost:9515',
             DesiredCapabilities::chrome()->setCapability(
                 ChromeOptions::CAPABILITY,
                 $options,
-            )
+            ),
         );
     }
-
-    public static function setUpBeforeClass(): void
-{
-    static::serve();
-}
-
-public static function tearDownAfterClass(): void
-{
-    static::stopServing();
-}
 
     /** @test */
     public function browser_test(): void
     {
         $this->browse(function ($browser) {
-            $browser->visit('/cms/entries/create')
+            $browser->visit('/cms/entries')
                 ->screenshot('test');
         });
     }

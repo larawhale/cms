@@ -3,8 +3,13 @@
 use LaraWhale\Cms\Http\Controllers\EntryController;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 
+use LaraWhale\Cms\Models\Entry;
 Route::get('/', function () {
-    return 'test';
+    $type = request()->get('type');
+
+    return view('cms::entries.create', [
+        'entry' => new Entry(compact('type')),
+    ]);
 });
 
 Route::group([

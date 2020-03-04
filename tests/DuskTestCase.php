@@ -40,6 +40,19 @@ class DuskTestCase extends TestCase
     }
 
     /**
+ * Define environment setup.
+ *
+ * @param  Illuminate\Foundation\Application  $app
+ *
+ * @return void
+ */
+protected function getEnvironmentSetUp($app)
+{
+    parent::getEnvironmentSetUp($app);
+    $app['config']->set('app.debug', true);
+}
+
+    /**
      * Create the RemoteWebDriver instance.
      *
      * @return \Facebook\WebDriver\Remote\RemoteWebDriver
@@ -65,7 +78,7 @@ class DuskTestCase extends TestCase
     public function browser_test(): void
     {
         $this->browse(function ($browser) {
-            $browser->visit('/cms/entries')
+            $browser->visit('/', ['type' => 'test_entry'])
                 ->screenshot('test');
         });
     }

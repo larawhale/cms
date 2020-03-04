@@ -16,6 +16,7 @@
     "require-dev": {
         "phpunit/phpunit": "^8.4",
         "orchestra/testbench": "^4.6",
+        "orchestra/testbench-dusk": "^4.7",
         "orchestra/testbench-browser-kit": "^4.6",
         "spatie/phpunit-snapshot-assertions": "^4.0",
         "owowagency/laravel-test-response": "^0.0.2"

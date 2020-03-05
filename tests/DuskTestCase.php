@@ -40,17 +40,18 @@ class DuskTestCase extends TestCase
     }
 
     /**
- * Define environment setup.
- *
- * @param  Illuminate\Foundation\Application  $app
- *
- * @return void
- */
-protected function getEnvironmentSetUp($app)
-{
-    parent::getEnvironmentSetUp($app);
-    $app['config']->set('app.debug', true);
-}
+     * Define environment setup.
+     *
+     * @param  Illuminate\Foundation\Application  $app
+     *
+     * @return void
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        parent::getEnvironmentSetUp($app);
+
+        $app['config']->set('app.debug', true);
+    }
 
     /**
      * Create the RemoteWebDriver instance.

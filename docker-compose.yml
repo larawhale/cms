@@ -13,9 +13,3 @@ services:
       - .:/var/www/html
     networks:
       - cms
-
-  chrome:
-    image: selenium/standalone-chrome
-    container_name: chrome
-    networks:
-      - cms

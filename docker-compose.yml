@@ -13,3 +13,19 @@ services:
       - .:/var/www/html
     networks:
       - cms
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    tmpfs: /var/lib/mysql
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: forge
+      MYSQL_USER: forge
+      MYSQL_PASSWORD: forge
+      MYSQL_ROOT_PASSWORD: forge
+    networks:
+      - cms

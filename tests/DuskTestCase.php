@@ -2,7 +2,6 @@
 
 namespace LaraWhale\Cms\Tests;
 
-use Orchestra\Testbench\Dusk\Options;
 use Orchestra\Testbench\Dusk\TestCase;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -13,20 +12,6 @@ class DuskTestCase extends TestCase
     use TestSetup;
 
     /**
-     * The base serve host URL to use while testing the application.
-     *
-     * @var string
-     */
-    // protected static $baseServeHost = 'chrome';
-
-    /**
-     * The base serve port to use while testing the application.
-     *
-     * @var int
-     */
-    // protected static $baseServePort = 4444;
-
-    /**
      * Setup the test environment.
      * 
      * @return void
@@ -35,31 +20,27 @@ class DuskTestCase extends TestCase
     {
         parent::setUp();
 
-        // dd(\Illuminate\Support\Facades\DB::connection()->getConfig());
-
         $this->withoutMockingConsoleOutput()
             ->artisan('migrate:fresh');
-    }
 
-    /**
-     * Define environment setup.
-     *
-     * @param  Illuminate\Foundation\Application  $app
-     *
-     * @return void
-     */
-    protected function getEnvironmentSetUp($app)
-    {
-        $app['config']->set('app.debug', true);
-
-        $app['config']->set('app.url', 'http://127.0.0.1:8000');
-
-        $app['config']->set('database.default', 'sqlite');
-
-        $app['config']->set(
-            'cms.entries_path',
-            __DIR__ . '/Support/Entries/',
-        );
+        $this->tweakApplication(function ($app) {
+            $app['config']->set('database.connections.testing', [
+                'driver' => 'mysql',
+                'url' => null,
+                'host' => 'mysql',
+                'port' => '3306',
+                'database' => 'forge',
+                'username' => 'forge',
+                'password' => 'forge',
+                'unix_socket' => '',
+                'charset' => 'utf8mb4',
+                'collation' => 'utf8mb4_unicode_ci',
+                'prefix' => '',
+                'prefix_indexes' => true,
+                'strict' => true,
+                'engine' => null,
+            ]);
+        });
     }
 
     /**

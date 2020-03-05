@@ -31,6 +31,7 @@ class EntryController extends Controller
      */
     public function create(Request $request)
     {
+        dump(\Illuminate\Support\Facades\DB::connection()->getConfig());
         $type = $request->get('type');
 
         return view('cms::entries.create', [

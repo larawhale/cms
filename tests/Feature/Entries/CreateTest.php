@@ -14,7 +14,7 @@ class CreateTest extends DuskTestCase
     {
         $this->browse(function ($browser) {
             $browser->visit('/cms/entries/create?type=test_entry')
-                ->screenshot('test');
+                ->screenshot('admin_can_create');
         });
     }
 

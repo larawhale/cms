@@ -48,9 +48,10 @@ class DuskTestCase extends TestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        parent::getEnvironmentSetUp($app);
-
         $app['config']->set('app.debug', true);
+
+        $app['config']->set('app.url', 'http://127.0.0.1:8000');
+
         $app['config']->set(
             'cms.entries_path',
             __DIR__ . '/Support/Entries/',

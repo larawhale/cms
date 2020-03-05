@@ -22,5 +22,6 @@
 
     {!! $Form::submit(__('cms::actions.submit_form'), [
         'class' => 'btn btn-primary',
+        'dusk' => 'submit-entry',
     ]) !!}
 {!! $Form::close() !!}

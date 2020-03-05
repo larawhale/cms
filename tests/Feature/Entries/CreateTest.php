@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Tests\Feature\Entries;
 
+use Illuminate\Support\Arr;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Tests\DuskTestCase;
 use Illuminate\Foundation\Testing\TestResponse;
@@ -12,10 +13,19 @@ class CreateTest extends DuskTestCase
     /** @test */
     public function admin_can_create(): void
     {
-        $this->browse(function ($browser) {
-            $browser->visit('/cms/entries/create?type=test_entry')
-                ->screenshot('admin_can_create');
+        $data = $this->requestData();
+
+        $this->browse(function ($browser) use ($data) {
+            $url = '/cms/entries/create?type=' . $data['type'];
+
+            $browser->visit($url)
+                ->screenshot('admin_can_create')
+                ->type('input[name=test_key]', $data['test_key'])
+                ->type('input[name=another_test_key]', $data['another_test_key'])
+                ->click('@submit-entry');
         });
+
+        $this->assertDatabase($data);
     }
 
     /** @test */
@@ -36,18 +46,6 @@ class CreateTest extends DuskTestCase
             'test_key' => 'test_key_value',
             'another_test_key' => 'another_stest_key_value',
         ];
-    }
-
-    /**
-     * Asserts a response.
-     *
-     * @param  \Illuminate\Foundation\Testing\TestResponse  $response
-     * @param  int  $status
-     * @return void
-     */
-    private function assertResponse(TestResponse $response, int $status = 200): void
-    {
-        $response->assertStatus($status);
     }
 
     /**

@@ -35,8 +35,10 @@ class DuskTestCase extends TestCase
     {
         parent::setUp();
 
-        // $this->withoutMockingConsoleOutput()
-        //     ->artisan('migrate:fresh');
+        // dd(\Illuminate\Support\Facades\DB::connection()->getConfig());
+
+        $this->withoutMockingConsoleOutput()
+            ->artisan('migrate:fresh');
     }
 
     /**
@@ -51,6 +53,8 @@ class DuskTestCase extends TestCase
         $app['config']->set('app.debug', true);
 
         $app['config']->set('app.url', 'http://127.0.0.1:8000');
+
+        $app['config']->set('database.default', 'sqlite');
 
         $app['config']->set(
             'cms.entries_path',

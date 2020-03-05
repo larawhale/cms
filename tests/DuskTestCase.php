@@ -22,25 +22,6 @@ class DuskTestCase extends TestCase
 
         $this->withoutMockingConsoleOutput()
             ->artisan('migrate:fresh');
-
-        $this->tweakApplication(function ($app) {
-            $app['config']->set('database.connections.testing', [
-                'driver' => 'mysql',
-                'url' => null,
-                'host' => 'mysql',
-                'port' => '3306',
-                'database' => 'forge',
-                'username' => 'forge',
-                'password' => 'forge',
-                'unix_socket' => '',
-                'charset' => 'utf8mb4',
-                'collation' => 'utf8mb4_unicode_ci',
-                'prefix' => '',
-                'prefix_indexes' => true,
-                'strict' => true,
-                'engine' => null,
-            ]);
-        });
     }
 
     /**

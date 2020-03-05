@@ -1,28 +1,21 @@
 <?php
 
+namespace LaraWhale\Cms\Tests\Feature\Entries;
+
 use LaraWhale\Cms\Models\Entry;
-use LaraWhale\Cms\Tests\BrowserTestCase;
+use LaraWhale\Cms\Tests\DuskTestCase;
 use Illuminate\Foundation\Testing\TestResponse;
 use LaraWhale\Cms\Library\Fields\Contracts\Field;
 
-class CreateTest extends BrowserTestCase
+class CreateTest extends DuskTestCase
 {
     /** @test */
     public function admin_can_create(): void
     {
-        $data = $this->requestData();
-
-        $response = $this->visitRoute('cms.entries.create', ['type' => $data['type']]);
-
-        $this->assertMatchesHtmlSnapshot($this->response->getContent());
-
-        $response->type($data['test_key'], 'test_key')
-            ->type($data['another_test_key'], 'another_test_key')
-            ->press('Submit');
-
-        $this->assertDatabase($data);
-
-        $this->markTestIncomplete('No authentication assertion');
+        $this->browse(function ($browser) {
+            $browser->visit('/cms/entries/create?type=test_entry')
+                ->screenshot('test');
+        });
     }
 
     /** @test */

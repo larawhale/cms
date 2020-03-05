@@ -51,6 +51,10 @@ class DuskTestCase extends TestCase
         parent::getEnvironmentSetUp($app);
 
         $app['config']->set('app.debug', true);
+        $app['config']->set(
+            'cms.entries_path',
+            __DIR__ . '/Support/Entries/',
+        );
     }
 
     /**
@@ -73,14 +77,5 @@ class DuskTestCase extends TestCase
                 $options,
             ),
         );
-    }
-
-    /** @test */
-    public function browser_test(): void
-    {
-        $this->browse(function ($browser) {
-            $browser->visit('/', ['type' => 'test_entry'])
-                ->screenshot('test');
-        });
     }
 }

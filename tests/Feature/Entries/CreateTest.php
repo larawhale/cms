@@ -5,8 +5,6 @@ namespace LaraWhale\Cms\Tests\Feature\Entries;
 use Illuminate\Support\Arr;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Tests\DuskTestCase;
-use Illuminate\Foundation\Testing\TestResponse;
-use LaraWhale\Cms\Library\Fields\Contracts\Field;
 
 class CreateTest extends DuskTestCase
 {
@@ -26,12 +24,22 @@ class CreateTest extends DuskTestCase
         });
 
         $this->assertDatabase($data);
+
+        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
     public function guest_cannot_create(): void
     {
+        $data = $this->requestData();
+
+        $url = '/cms/entries/create?type=' . $data['type'];
+
+        $response = $this->get($url);
+
         $this->markTestIncomplete('No authentication assertion');
+
+        $response->assertStatus(403);
     }
 
     /**

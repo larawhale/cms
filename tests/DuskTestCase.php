@@ -12,19 +12,6 @@ class DuskTestCase extends TestCase
     use TestSetup;
 
     /**
-     * Setup the test environment.
-     * 
-     * @return void
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->withoutMockingConsoleOutput()
-            ->artisan('migrate:fresh');
-    }
-
-    /**
      * Create the RemoteWebDriver instance.
      *
      * @return \Facebook\WebDriver\Remote\RemoteWebDriver

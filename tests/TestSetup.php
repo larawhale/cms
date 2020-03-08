@@ -36,7 +36,6 @@ trait TestSetup
 
         $app['config']->set('app.url', 'http://127.0.0.1:8000');
 
-        // TODO: This should be done better.
         $app['config']->set('database.connections.testing', [
             'driver' => 'mysql',
             'url' => null,
@@ -53,6 +52,8 @@ trait TestSetup
             'strict' => true,
             'engine' => null,
         ]);
+
+        $app['config']->set('database.default', 'testing');
 
         $app['config']->set(
             'cms.entries_path',

@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use LaraWhale\Cms\Models\Entry;
 use Illuminate\Routing\Controller;
+use LaraWhale\Cms\Library\Entries\Factory;
 use LaraWhale\Cms\Http\Requests\Entries\StoreRequest;
 use LaraWhale\Cms\Http\Requests\Entries\UpdateRequest;
 use LaraWhale\Cms\Library\Entries\Entry as EntryClass;
@@ -31,7 +32,11 @@ class EntryController extends Controller
      */
     public function create(Request $request)
     {
-        if (! $type = $request->get('type')) {
+        $type = $request->get('type');
+
+        if (is_null($type)
+            || ! Factory::exists($type)
+        ) {
             abort(404);
         }
 

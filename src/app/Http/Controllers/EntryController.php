@@ -31,7 +31,9 @@ class EntryController extends Controller
      */
     public function create(Request $request)
     {
-        $type = $request->get('type');
+        if (! $type = $request->get('type')) {
+            abort(404);
+        }
 
         return view('cms::entries.create', [
             'entry' => new Entry(compact('type')),

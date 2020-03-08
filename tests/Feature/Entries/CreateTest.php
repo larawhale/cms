@@ -42,6 +42,12 @@ class CreateTest extends DuskTestCase
         $response->assertStatus(403);
     }
 
+    /** @test */
+    public function cannot_create_non_type(): void
+    {
+        $this->get('/cms/entries/create')->assertStatus(404);
+    }
+
     /**
      * Returns data used in requests.
      * 

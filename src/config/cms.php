@@ -27,4 +27,29 @@ return [
      */
     'table_prefix' => 'cms_',
 
+    /**
+     * The active authentication guard used to protect cms routes.
+     */
+    'guard' => 'cms',
+
+    /**
+     * The authentication guard configurations.
+     */
+    'guards' => [
+        'cms' => [
+            'driver' => 'session',
+            'provider' => 'cms',
+        ],
+    ],
+
+    /**
+     * The authentication provider configurations.
+     */
+    'providers' => [
+        'cms' => [
+            'driver' => 'eloquent',
+            'provider' => \LaraWhale\Cms\Models\User::class,
+        ],
+    ],
+
 ];

@@ -18,6 +18,8 @@ class CmsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/cms.php', 'cms');
+
+        $this->app->register(AuthServiceProvider::class);
     }
 
     /**

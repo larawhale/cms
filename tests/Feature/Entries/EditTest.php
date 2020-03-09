@@ -2,7 +2,6 @@
 
 namespace LaraWhale\Cms\Tests\Feature\Entries;
 
-use Illuminate\Support\Arr;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Models\Field;
 use LaraWhale\Cms\Tests\DuskTestCase;
@@ -63,6 +62,8 @@ class EditTest extends DuskTestCase
      */
     private function requestData(Entry $entry): array
     {
+        $entry->load('fields');
+
         return $entry->fields
             ->mapWithKeys(function (Field $field) {
                 return [$field->key => $field->key . '_changed'];

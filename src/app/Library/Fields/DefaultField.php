@@ -127,6 +127,17 @@ class DefaultField implements Field
     }
 
     /**
+     * Returns the value of the field in a form usable during the rendering of
+     * the input.
+     * 
+     * @return mixed
+     */
+    public function inputValue()
+    {
+        return $this->value();
+    }
+
+    /**
      * Returns a rendered input.
      * 
      * @return string
@@ -136,7 +147,7 @@ class DefaultField implements Field
         return FormFacade::input(
             $this->type(),
             $this->key(),
-            null,
+            $this->inputValue(),
             ['class' => 'form-control'],
         )->toHtml();
     }

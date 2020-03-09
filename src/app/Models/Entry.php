@@ -34,6 +34,6 @@ class Entry extends Model
      */
     public function toEntryClass(): EntryInterface
     {
-        return Factory::make($this->type);
+        return Factory::make($this->type, $this);
     }
 }

@@ -4,6 +4,7 @@ namespace LaraWhale\Cms\Library\Entries;
 
 use Illuminate\Support\Facades\File;
 use LaraWhale\Cms\Library\Entries\Entry;
+use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Exceptions\EntryConfigNotFoundException;
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
@@ -21,13 +22,14 @@ class Factory
      * Makes an instance of entry according to the given type.
      * 
      * @param  string  $type
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
      * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
      */
-    public static function make(string $type): Entry
+    public static function make(string $type, EntryModel $entryModel = null): Entry
     {
         $config = static::resolve($type);
 
-        return new Entry($config);
+        return new Entry($config, $entryModel);
     }
 
     /**

@@ -20,7 +20,7 @@ class CreateCmsFieldsTable extends Migration
             $table->text('value')->nullable();
             $table->timestamps();
 
-            $table->foreign('entry_id')->references('id')->on('entries')->onDelete('cascade');
+            $table->foreign('entry_id')->references('id')->on(cms_table_name('entries'))->onDelete('cascade');
         });
     }
 

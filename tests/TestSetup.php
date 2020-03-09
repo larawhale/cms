@@ -12,6 +12,19 @@ trait TestSetup
     use MatchesSnapshots;
 
     /**
+     * Setup the test environment.
+     * 
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMockingConsoleOutput()
+            ->artisan('migrate:fresh');
+    }
+
+    /**
      * Define environment setup.
      *
      * @param  \Illuminate\Foundation\Application  $app
@@ -19,6 +32,29 @@ trait TestSetup
      */
     protected function getEnvironmentSetUp($app): void
     {
+        $app['config']->set('app.debug', true);
+
+        $app['config']->set('app.url', 'http://127.0.0.1:8000');
+
+        $app['config']->set('database.connections.testing', [
+            'driver' => 'mysql',
+            'url' => null,
+            'host' => 'mysql',
+            'port' => '3306',
+            'database' => 'forge',
+            'username' => 'forge',
+            'password' => 'forge',
+            'unix_socket' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+        ]);
+
+        $app['config']->set('database.default', 'testing');
+
         $app['config']->set(
             'cms.entries_path',
             __DIR__ . '/Support/Entries/',

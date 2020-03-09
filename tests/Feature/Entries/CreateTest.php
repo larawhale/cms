@@ -1,24 +1,27 @@
 <?php
 
-use LaraWhale\Cms\Models\Entry;
-use LaraWhale\Cms\Tests\BrowserTestCase;
-use Illuminate\Foundation\Testing\TestResponse;
-use LaraWhale\Cms\Library\Fields\Contracts\Field;
+namespace LaraWhale\Cms\Tests\Feature\Entries;
 
-class CreateTest extends BrowserTestCase
+use Illuminate\Support\Arr;
+use LaraWhale\Cms\Models\Entry;
+use LaraWhale\Cms\Tests\DuskTestCase;
+
+class CreateTest extends DuskTestCase
 {
     /** @test */
     public function admin_can_create(): void
     {
         $data = $this->requestData();
 
-        $response = $this->visitRoute('cms.entries.create', ['type' => $data['type']]);
+        $this->browse(function ($browser) use ($data) {
+            $url = '/cms/entries/create?type=' . $data['type'];
 
-        $this->assertMatchesHtmlSnapshot($this->response->getContent());
-
-        $response->type($data['test_key'], 'test_key')
-            ->type($data['another_test_key'], 'another_test_key')
-            ->press('Submit');
+            $browser->visit($url)
+                ->screenshot('admin_can_create')
+                ->type('input[name=test_key]', $data['test_key'])
+                ->type('input[name=another_test_key]', $data['another_test_key'])
+                ->click('@submit-entry');
+        });
 
         $this->assertDatabase($data);
 
@@ -28,7 +31,21 @@ class CreateTest extends BrowserTestCase
     /** @test */
     public function guest_cannot_create(): void
     {
+        $data = $this->requestData();
+
+        $url = '/cms/entries/create?type=' . $data['type'];
+
+        $response = $this->get($url);
+
         $this->markTestIncomplete('No authentication assertion');
+
+        $response->assertStatus(403);
+    }
+
+    /** @test */
+    public function cannot_create_non_type(): void
+    {
+        $this->get('/cms/entries/create')->assertStatus(404);
     }
 
     /**
@@ -43,18 +60,6 @@ class CreateTest extends BrowserTestCase
             'test_key' => 'test_key_value',
             'another_test_key' => 'another_stest_key_value',
         ];
-    }
-
-    /**
-     * Asserts a response.
-     *
-     * @param  \Illuminate\Foundation\Testing\TestResponse  $response
-     * @param  int  $status
-     * @return void
-     */
-    private function assertResponse(TestResponse $response, int $status = 200): void
-    {
-        $response->assertStatus($status);
     }
 
     /**

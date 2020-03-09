@@ -34,7 +34,7 @@ class UpdateTest extends TestCase
 
         $this->markTestIncomplete('No authentication assertion');
 
-        // $this->assertResponse($response, 403);
+        $this->assertResponse($response, 403);
     }
 
     /**

@@ -34,7 +34,13 @@ class EditTest extends DuskTestCase
     /** @test */
     public function guest_cannot_edit(): void
     {
-        //
+        [$entry] = $this->prepareEntry();
+
+        $response = $this->get("/cms/entries/$entry->id/edit");
+
+        $this->markTestIncomplete('No authentication assertion');
+
+        $response->assertStatus(403);
     }
 
     /**

@@ -56,12 +56,22 @@ return [
      * An array of middleware that is added to the cms middleware group.
      */
     'middleware' => [
-        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\VerifyCsrfToken::class,
+        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ],
+
+    /**
+     * The middleware used for the cms_auth alias.
+     */
+    'cms_auth_middleware' => \LaraWhale\Cms\Http\Middleware\Authenticate::class,
+
+    /**
+     * The middleware used for the cms_guest alias.
+     */
+    'cms_guest_middleware' => \LaraWhale\Cms\Http\Middleware\RedirectIfAuthenticated::class,
 
 ];

@@ -107,6 +107,8 @@ class EntryController extends Controller
      */
     public function destroy(Request $request, Entry $entry)
     {
-        //
+        $entry->delete();
+
+        return redirect()->route('cms.entries.index');
     }
 }

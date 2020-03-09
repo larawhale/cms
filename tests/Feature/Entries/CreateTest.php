@@ -3,6 +3,7 @@
 namespace LaraWhale\Cms\Tests\Feature\Entries;
 
 use Illuminate\Support\Arr;
+use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Tests\DuskTestCase;
 
@@ -11,6 +12,8 @@ class CreateTest extends DuskTestCase
     /** @test */
     public function admin_can_create(): void
     {
+        [$user] = $this->prepare();
+
         $data = $this->requestData();
 
         $this->browse(function ($browser) use ($data) {
@@ -46,6 +49,16 @@ class CreateTest extends DuskTestCase
     public function cannot_create_non_type(): void
     {
         $this->get('/cms/entries/create')->assertStatus(404);
+    }
+
+    /**
+     * Prepares for tests.
+     * 
+     * @return \LaraWhale\Cms\Models\User
+     */
+    private function prepareUser(): User
+    {
+        return factory(User::class)->create();
     }
 
     /**

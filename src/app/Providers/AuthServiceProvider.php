@@ -17,8 +17,8 @@ class AuthServiceProvider extends ServiceProvider
         $config = Arr::only(config('cms'), ['guards', 'providers']);
 
         foreach ($config as $subject => $value) {
-            foreach (config("cms.$subject") as $key => $guard) {
-                $this->app->config->set("auth.$subject.$key", $guard);
+            foreach (config("cms.$subject") as $key => $value) {
+                $this->app->config->set("auth.$subject.$key", $value);
             }
         }
     }

@@ -48,7 +48,7 @@ return [
     'providers' => [
         'cms' => [
             'driver' => 'eloquent',
-            'provider' => \LaraWhale\Cms\Models\User::class,
+            'model' => \LaraWhale\Cms\Models\User::class,
         ],
     ],
 

@@ -34,6 +34,8 @@ trait TestSetup
     {
         $app['config']->set('app.debug', true);
 
+        $app['config']->set('app.key', 'AckfSECXIvnK5r28GVIWUAxmbBSjTsmF');
+
         $app['config']->set('app.url', 'http://127.0.0.1:8000');
 
         $app['config']->set('database.connections.testing', [

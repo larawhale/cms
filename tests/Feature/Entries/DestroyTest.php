@@ -64,11 +64,11 @@ class DestroyTest extends TestCase
      * @param  int  $status
      * @return void
      */
-    private function assertResponse(TestResponse $response, int $status = 201): void
+    private function assertResponse(TestResponse $response, int $status = 302): void
     {
         $response->assertStatus($status);
 
-        if ($status === 201) {
+        if ($status === 302) {
             $response->assertRedirect(route('cms.entries.index'));
         }
     }

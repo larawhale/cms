@@ -11,6 +11,6 @@ Route::group([
     ],
 ], function () {
     Route::resource('entries', EntryController::class, [
-        'except' => ['destroy'],
+        'except' => ['show'],
     ]);
 });

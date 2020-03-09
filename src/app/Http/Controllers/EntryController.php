@@ -21,7 +21,13 @@ class EntryController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        $type = $request->get('type');
+
+        $entries = is_null($type)
+            ? Entry::paginate()
+            : Entry::type($type)->paginate();
+
+        return view('cms::entries.index', compact('entries'));
     }
 
     /**

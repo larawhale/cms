@@ -3,21 +3,10 @@
 namespace LaraWhale\Cms\Providers;
 
 use Illuminate\Support\Arr;
-use LaraWhale\Cms\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        //
-    }
-
     /**
      * Bootstrap any application services.
      *

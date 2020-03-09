@@ -6,9 +6,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 Route::group([
     'prefix' => 'cms',
     'as' => 'cms.',
-    'middleware' => [
-        SubstituteBindings::class,
-    ],
+    'middleware' => ['cms'],
 ], function () {
     Route::resource('entries', EntryController::class, [
         'except' => ['show'],

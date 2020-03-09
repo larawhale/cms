@@ -15,8 +15,6 @@ class IndexTest extends DuskTestCase
         $this->browse(function ($browser) use ($entries) {
             $browser->visit('/cms/entries')
                 ->screenshot('admin_can_index');
-
-            // TODO: See assertion.
         });
 
         $this->markTestIncomplete('No authentication assertion');
@@ -32,8 +30,6 @@ class IndexTest extends DuskTestCase
 
             $browser->visit("/cms/entries?type=$type")
                 ->screenshot('admin_can_index_type');
-
-            // TODO: See assertion.
         });
 
         $this->markTestIncomplete('No authentication assertion');

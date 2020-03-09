@@ -3,6 +3,7 @@
 namespace LaraWhale\Cms\Tests\Feature\Entries;
 
 use LaraWhale\Cms\Models\Entry;
+use Illuminate\Support\Facades\DB;
 use LaraWhale\Cms\Tests\DuskTestCase;
 
 class IndexTest extends DuskTestCase
@@ -58,6 +59,13 @@ class IndexTest extends DuskTestCase
 
         $otherEntries = factory(Entry::class, 3)->states('with_fields')->create([
             'type' => 'another_test_entry',
+        ]);
+
+        // Update updated at and created at to be a consistent date to prevent
+        // changes to the screenshots to be made.
+        DB::table(cms_table_name('entries'))->update([
+            'updated_at' => '1970-01-02 03:04:05',
+            'created_at' => '1970-01-02 03:04:05',
         ]);
 
         return [$entries->merge($otherEntries)];

@@ -86,6 +86,14 @@ interface Field
     public function databaseValue($value): string;
 
     /**
+     * Returns the value of the field in a form usable during the rendering of
+     * the input.
+     * 
+     * @return mixed
+     */
+    public function inputValue();
+
+    /**
      * Returns a rendered input.
      * 
      * @return string

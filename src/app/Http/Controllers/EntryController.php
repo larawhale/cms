@@ -71,7 +71,7 @@ class EntryController extends Controller
      */
     public function edit(Entry $entry)
     {
-        //
+        return view('cms::entries.edit', compact('entry'));
     }
 
     /**

@@ -6,7 +6,7 @@
 
     $options = [];
 
-    $options['method'] = $entry->exists ? 'put' : 'POST';
+    $options['method'] = $entry->exists ? 'patch' : 'post';
 
     $options['url'] = $entry->exists
         ? route('cms.entries.update', compact('entry'))

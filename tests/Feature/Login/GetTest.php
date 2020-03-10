@@ -21,16 +21,14 @@ class GetTest extends DuskTestCase
 
         $data = $this->requestData($user);
 
-        $this->browse(function ($browser) use ($data) {
-
+        $this->browse(function ($browser) use ($user, $data) {
             $browser->visit('cms/login')
                 ->screenshot('guest_can_login')
                 ->type('input[name=email]', $data['email'])
                 ->type('input[name=password]', $data['password'])
-                ->click('@submit-login');
+                ->click('@submit-login')
+                ->assertAuthenticatedAs($user);
         });
-
-        $this->assertAuthenticatedAs($user);
     }
 
     /**

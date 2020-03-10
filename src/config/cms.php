@@ -53,7 +53,8 @@ return [
     ],
 
     /**
-     * An array of middleware that is added to the cms middleware group.
+     * An array of middleware that is added to the cms middleware group and
+     * applied to all cms routes.
      */
     'middleware' => [
         'web',

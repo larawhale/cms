@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Tests\Feature\Entries;
 
+use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Models\Field;
 use LaraWhale\Cms\Tests\DuskTestCase;
@@ -9,49 +10,49 @@ use LaraWhale\Cms\Tests\DuskTestCase;
 class EditTest extends DuskTestCase
 {
     /** @test */
-    public function admin_can_edit(): void
+    public function user_can_edit(): void
     {
-        [$entry] = $this->prepareEntry();
+        [$user, $entry] = $this->prepareTest();
 
         $data = $this->requestData($entry);
 
-        $this->browse(function ($browser) use ($entry, $data) {
+        $this->browse(function ($browser) use ($user, $entry, $data) {
             $url = "/cms/entries/$entry->id/edit";
 
-            $browser->visit($url)
-                ->screenshot('admin_can_edit')
+            $browser->loginAs($user)
+                ->visit($url)
+                ->screenshot('user_can_edit')
                 ->type('input[name=test_key]', $data['test_key'])
                 ->type('input[name=another_test_key]', $data['another_test_key'])
                 ->click('@submit-entry');
         });
 
         $this->assertDatabase($entry, $data);
-
-        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
     public function guest_cannot_edit(): void
     {
-        [$entry] = $this->prepareEntry();
+        [$user, $entry] = $this->prepareTest();
 
+        // Request without user.
         $response = $this->get("/cms/entries/$entry->id/edit");
 
-        $this->markTestIncomplete('No authentication assertion');
-
-        $response->assertStatus(403);
+        $response->assertRedirectToLogin();
     }
 
     /**
-     * Prepares entry for tests.
+     * Prepares for tests.
      * 
      * @return array
      */
-    private function prepareEntry(): array
+    private function prepareTest(): array
     {
-        $entry = factory(Entry::class)->states('with_fields')->create();
+        $user = factory(User::class)->create();
 
-        return [$entry];
+        $entry = factory(Entry::class)->state('with_fields')->create();
+
+        return [$user, $entry];
     }
 
     /**

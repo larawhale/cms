@@ -1,5 +1,6 @@
 <?php
 
+use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Models\Field;
 use LaraWhale\Cms\Tests\TestCase;
@@ -10,31 +11,28 @@ class UpdateTest extends TestCase
     /** @test */
     public function admin_can_update(): void
     {
-        [$entry] = $this->prepare();
+        [$user, $entry] = $this->prepareTest();
 
         $data = $this->requestData();
 
-        $response = $this->makeRequest($entry, $data);
+        $response = $this->makeRequest($user, $entry, $data);
 
         $this->assertResponse($response);
 
         $this->assertDatabase($entry, $data);
-
-        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
     public function guest_cannot_update(): void
     {
-        [$entry] = $this->prepare();
+        [$user, $entry] = $this->prepareTest();
 
         $data = $this->requestData();
 
-        $response = $this->makeRequest($entry, $data);
+        // Make request without user.
+        $response = $this->makeRequest(null, $entry, $data);
 
-        $this->markTestIncomplete('No authentication assertion');
-
-        $this->assertResponse($response, 403);
+        $response->assertRedirectToLogin();
     }
 
     /**
@@ -42,11 +40,13 @@ class UpdateTest extends TestCase
      * 
      * @return array
      */
-    private function prepare(): array
+    private function prepareTest(): array
     {
+        $user = factory(User::class)->create();
+
         $field = factory(Field::class)->create();
 
-        return [$field->entry];
+        return [$user, $field->entry];
     }
 
     /**
@@ -56,8 +56,12 @@ class UpdateTest extends TestCase
      * @param  array  $data
      * @return \Illuminate\Foundation\Testing\TestResponse
      */
-    private function makeRequest(Entry $entry, array $data): TestResponse
+    private function makeRequest(User $user = null, Entry $entry, array $data): TestResponse
     {
+        if (! is_null($user)) {
+            $this->actingAs($user);
+        }
+
         return $this->patch("cms/entries/$entry->id", $data);
     }
 

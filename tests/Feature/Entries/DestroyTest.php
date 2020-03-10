@@ -26,11 +26,10 @@ class DestroyTest extends TestCase
     {
         [$user, $entry] = $this->prepareTest();
 
+        // Do not make a request with a user.
         $response = $this->makeRequest(null, $entry);
 
-        $this->markTestIncomplete('No authentication assertion');
-
-        $this->assertResponse($response, 401);
+        $response->assertRedirectToLogin();
     }
 
     /**
@@ -59,10 +58,10 @@ class DestroyTest extends TestCase
         $request = $this;
 
         if (! is_null($user)) {
-            $request = $this->actingAs($user);
+            $this->actingAs($user);
         }
 
-        return $request->delete("cms/entries/$entry->id");
+        return $this->delete("cms/entries/$entry->id");
     }
 
     /**

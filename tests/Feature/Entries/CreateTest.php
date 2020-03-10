@@ -19,7 +19,7 @@ class CreateTest extends DuskTestCase
         $this->browse(function ($browser) use ($user, $data) {
             $url = '/cms/entries/create?type=' . $data['type'];
 
-            $browser->loginAs($user, 'cms')
+            $browser->loginAs($user)
                 ->visit($url)
                 ->screenshot('user_can_create')
                 ->type('input[name=test_key]', $data['test_key'])
@@ -40,7 +40,7 @@ class CreateTest extends DuskTestCase
         // Request without user.
         $response = $this->get($url);
 
-        $response->assertRedirect('/cms/login');
+        $response->assertRedirectToLogin();
     }
 
     /** @test */
@@ -48,7 +48,7 @@ class CreateTest extends DuskTestCase
     {
         [$user] = $this->prepareTest();
 
-        $this->actingAs($user, 'cms')
+        $this->actingAs($user)
             // Use non existing type.
             ->get('/cms/entries/create?type=non_existing')
             ->assertStatus(404);
@@ -59,7 +59,7 @@ class CreateTest extends DuskTestCase
     {
         [$user] = $this->prepareTest();
 
-        $this->actingAs($user, 'cms')
+        $this->actingAs($user)
             // Do not add type to uri.
             ->get('/cms/entries/create')
             ->assertStatus(404);

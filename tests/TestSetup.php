@@ -5,7 +5,6 @@ namespace LaraWhale\Cms\Tests;
 use Spatie\Snapshots\MatchesSnapshots;
 use Collective\Html\HtmlServiceProvider;
 use LaraWhale\Cms\Providers\CmsServiceProvider;
-use OwowAgency\LaravelTestResponse\TestResponse;
 
 trait TestSetup
 {
@@ -34,7 +33,11 @@ trait TestSetup
     {
         $app['config']->set('app.debug', true);
 
+        $app['config']->set('app.key', 'AckfSECXIvnK5r28GVIWUAxmbBSjTsmF');
+
         $app['config']->set('app.url', 'http://127.0.0.1:8000');
+
+        $app['config']->set('auth.defaults.guard', 'cms');
 
         $app['config']->set('database.connections.testing', [
             'driver' => 'mysql',

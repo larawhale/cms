@@ -3,29 +3,31 @@
 namespace LaraWhale\Cms\Tests\Feature\Entries;
 
 use Illuminate\Support\Arr;
+use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Tests\DuskTestCase;
 
 class CreateTest extends DuskTestCase
 {
     /** @test */
-    public function admin_can_create(): void
+    public function user_can_create(): void
     {
+        [$user] = $this->prepareTest();
+
         $data = $this->requestData();
 
-        $this->browse(function ($browser) use ($data) {
+        $this->browse(function ($browser) use ($user, $data) {
             $url = '/cms/entries/create?type=' . $data['type'];
 
-            $browser->visit($url)
-                ->screenshot('admin_can_create')
+            $browser->loginAs($user)
+                ->visit($url)
+                ->screenshot('user_can_create')
                 ->type('input[name=test_key]', $data['test_key'])
                 ->type('input[name=another_test_key]', $data['another_test_key'])
                 ->click('@submit-entry');
         });
 
         $this->assertDatabase($data);
-
-        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
@@ -35,17 +37,44 @@ class CreateTest extends DuskTestCase
 
         $url = '/cms/entries/create?type=' . $data['type'];
 
+        // Request without user.
         $response = $this->get($url);
 
-        $this->markTestIncomplete('No authentication assertion');
-
-        $response->assertStatus(403);
+        $response->assertRedirectToLogin();
     }
 
     /** @test */
-    public function cannot_create_non_type(): void
+    public function cannot_create_non_existing_type(): void
     {
-        $this->get('/cms/entries/create')->assertStatus(404);
+        [$user] = $this->prepareTest();
+
+        $this->actingAs($user)
+            // Use non existing type.
+            ->get('/cms/entries/create?type=non_existing')
+            ->assertStatus(404);
+    }
+
+    /** @test */
+    public function cannot_create_no_type(): void
+    {
+        [$user] = $this->prepareTest();
+
+        $this->actingAs($user)
+            // Do not add type to uri.
+            ->get('/cms/entries/create')
+            ->assertStatus(404);
+    }
+
+    /**
+     * Prepares for tests.
+     * 
+     * @return array
+     */
+    private function prepareTest(): array
+    {
+        $user = factory(User::class)->create();
+
+        return [$user];
     }
 
     /**

@@ -18,6 +18,10 @@ class CmsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/cms.php', 'cms');
+
+        $this->app->register(AuthServiceProvider::class);
+
+        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
@@ -30,8 +34,6 @@ class CmsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
         $this->loadFactoriesFrom(__DIR__ . '/../../database/factories');
-
-        $this->loadRoutesFrom(__DIR__ . '/../../routes/cms.php');
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'cms');
 

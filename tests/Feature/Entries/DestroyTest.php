@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Tests\Feature\Entries;
 
+use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Tests\TestCase;
 use Illuminate\Foundation\Testing\TestResponse;
@@ -9,51 +10,55 @@ use Illuminate\Foundation\Testing\TestResponse;
 class DestroyTest extends TestCase
 {
     /** @test */
-    public function admin_can_destroy(): void
+    public function user_can_destroy(): void
     {
-        [$entry] = $this->prepareEntry();
+        [$user, $entry] = $this->prepareTest();
 
-        $response = $this->makeRequest($entry);
+        $response = $this->makeRequest($user, $entry);
 
         $this->assertResponse($response);
 
         $this->assertDatabase($entry);
-
-        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
     public function guest_cannot_destroy(): void
     {
-        [$entry] = $this->prepareEntry();
+        [$user, $entry] = $this->prepareTest();
 
-        $response = $this->makeRequest($entry);
+        // Do not make a request with a user.
+        $response = $this->makeRequest(null, $entry);
 
-        $this->markTestIncomplete('No authentication assertion');
-
-        $this->assertResponse($response, 403);
+        $response->assertRedirectToLogin();
     }
 
     /**
-     * Prepares entry for tests.
+     * Prepares for tests.
      * 
      * @return array
      */
-    private function prepareEntry(): array
+    private function prepareTest(): array
     {
+        $user = factory(User::class)->create();
+
         $entry = factory(Entry::class)->create();
 
-        return [$entry];
+        return [$user, $entry];
     }
 
     /**
      * Makes a request.
      *
+     * @param  \LaraWhale\Cms\Models\User  $user
      * @param  \LaraWhale\Cms\Models\Entry  $entry
      * @return \Illuminate\Foundation\Testing\TestResponse
      */
-    private function makeRequest(Entry $entry): TestResponse
+    private function makeRequest(User $user = null, Entry $entry): TestResponse
     {
+        if (! is_null($user)) {
+            $this->actingAs($user);
+        }
+
         return $this->delete("cms/entries/$entry->id");
     }
 

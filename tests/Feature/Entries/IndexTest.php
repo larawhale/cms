@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Tests\Feature\Entries;
 
+use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use Illuminate\Support\Facades\DB;
 use LaraWhale\Cms\Tests\DuskTestCase;
@@ -9,50 +10,48 @@ use LaraWhale\Cms\Tests\DuskTestCase;
 class IndexTest extends DuskTestCase
 {
     /** @test */
-    public function admin_can_index(): void
+    public function user_can_index(): void
     {
-        [$entries] = $this->prepareEntries();
+        [$user, $entries] = $this->prepareTest();
 
-        $this->browse(function ($browser) use ($entries) {
-            $browser->visit('/cms/entries')
-                ->screenshot('admin_can_index');
+        $this->browse(function ($browser) use ($user, $entries) {
+            $browser->loginAs($user)
+                ->visit('/cms/entries')
+                ->screenshot('user_can_index');
         });
-
-        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
-    public function admin_can_index_type(): void
+    public function user_can_index_type(): void
     {
-        [$entries] = $this->prepareEntries();
+        [$user, $entries] = $this->prepareTest();
 
-        $this->browse(function ($browser) use ($entries) {
+        $this->browse(function ($browser) use ($user, $entries) {
             $type = $entries->first()->type;
 
-            $browser->visit("/cms/entries?type=$type")
-                ->screenshot('admin_can_index_type');
+            $browser->loginAs($user)
+                // Request with type.
+                ->visit("/cms/entries?type=$type")
+                ->screenshot('user_can_index_type');
         });
-
-        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
     public function guest_cannot_index(): void
     {
-        $response = $this->get('/cms/entries');
-
-        $this->markTestIncomplete('No authentication assertion');
-
-        $response->assertStatus(403);
+        // Request without user.
+        $this->get('/cms/entries')->assertRedirectToLogin();
     }
 
     /**
-     * Prepares entries for tests.
+     * Prepares for tests.
      * 
      * @return array
      */
-    private function prepareEntries(): array
+    private function prepareTest(): array
     {
+        $user = factory(User::class)->create();
+
         $entries = factory(Entry::class, 3)->states('with_fields')->create([
             'type' => 'test_entry',
         ]);
@@ -68,6 +67,6 @@ class IndexTest extends DuskTestCase
             'created_at' => '1970-01-02 03:04:05',
         ]);
 
-        return [$entries->merge($otherEntries)];
+        return [$user, $entries->merge($otherEntries)];
     }
 }

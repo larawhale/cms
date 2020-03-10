@@ -27,4 +27,47 @@ return [
      */
     'table_prefix' => 'cms_',
 
+    /**
+     * The active authentication guard used to protect cms routes.
+     */
+    'guard' => 'cms',
+
+    /**
+     * The authentication guard configurations.
+     */
+    'guards' => [
+        'cms' => [
+            'driver' => 'session',
+            'provider' => 'cms',
+        ],
+    ],
+
+    /**
+     * The authentication provider configurations.
+     */
+    'providers' => [
+        'cms' => [
+            'driver' => 'eloquent',
+            'model' => \LaraWhale\Cms\Models\User::class,
+        ],
+    ],
+
+    /**
+     * An array of middleware that is added to the cms middleware group and
+     * applied to all cms routes.
+     */
+    'middleware' => [
+        'web',
+    ],
+
+    /**
+     * The middleware used for the cms_auth alias.
+     */
+    'cms_auth_middleware' => \LaraWhale\Cms\Http\Middleware\Authenticate::class,
+
+    /**
+     * The middleware used for the cms_guest alias.
+     */
+    'cms_guest_middleware' => \LaraWhale\Cms\Http\Middleware\RedirectIfAuthenticated::class,
+
 ];

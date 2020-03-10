@@ -10,25 +10,24 @@ use LaraWhale\Cms\Tests\DuskTestCase;
 class CreateTest extends DuskTestCase
 {
     /** @test */
-    public function admin_can_create(): void
+    public function user_can_create(): void
     {
-        [$user] = $this->prepare();
+        [$user] = $this->prepareTest();
 
         $data = $this->requestData();
 
-        $this->browse(function ($browser) use ($data) {
+        $this->browse(function ($browser) use ($user, $data) {
             $url = '/cms/entries/create?type=' . $data['type'];
 
-            $browser->visit($url)
-                ->screenshot('admin_can_create')
+            $browser->loginAs($user, 'cms')
+                ->visit($url)
+                ->screenshot('user_can_create')
                 ->type('input[name=test_key]', $data['test_key'])
                 ->type('input[name=another_test_key]', $data['another_test_key'])
                 ->click('@submit-entry');
         });
 
         $this->assertDatabase($data);
-
-        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
@@ -38,27 +37,44 @@ class CreateTest extends DuskTestCase
 
         $url = '/cms/entries/create?type=' . $data['type'];
 
+        // Request without user.
         $response = $this->get($url);
 
-        $this->markTestIncomplete('No authentication assertion');
-
-        $response->assertStatus(403);
+        $response->assertRedirect('/cms/login');
     }
 
     /** @test */
-    public function cannot_create_non_type(): void
+    public function cannot_create_non_existing_type(): void
     {
-        $this->get('/cms/entries/create')->assertStatus(404);
+        [$user] = $this->prepareTest();
+
+        $this->actingAs($user, 'cms')
+            // Use non existing type.
+            ->get('/cms/entries/create?type=non_existing')
+            ->assertStatus(404);
+    }
+
+    /** @test */
+    public function cannot_create_no_type(): void
+    {
+        [$user] = $this->prepareTest();
+
+        $this->actingAs($user, 'cms')
+            // Do not add type to uri.
+            ->get('/cms/entries/create')
+            ->assertStatus(404);
     }
 
     /**
      * Prepares for tests.
      * 
-     * @return \LaraWhale\Cms\Models\User
+     * @return array
      */
-    private function prepareUser(): User
+    private function prepareTest(): array
     {
-        return factory(User::class)->create();
+        $user = factory(User::class)->create();
+
+        return [$user];
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Tests\TestCase;
 use Illuminate\Foundation\Testing\TestResponse;
@@ -7,17 +8,17 @@ use Illuminate\Foundation\Testing\TestResponse;
 class StoreTest extends TestCase
 {
     /** @test */
-    public function admin_can_store(): void
+    public function user_can_store(): void
     {
+        [$user] = $this->prepareTest();
+
         $data = $this->requestData();
 
-        $response = $this->makeRequest($data);
+        $response = $this->makeRequest($user, $data);
 
         $this->assertResponse($response);
 
         $this->assertDatabase($data);
-
-        $this->markTestIncomplete('No authentication assertion');
     }
 
     /** @test */
@@ -25,21 +26,36 @@ class StoreTest extends TestCase
     {
         $data = $this->requestData();
 
-        $response = $this->makeRequest($data);
+        $response = $this->makeRequest(null, $data);
 
-        $this->markTestIncomplete('No authentication assertion');
+        $response->assertRedirectToLogin();
+    }
 
-        $this->assertResponse($response, 403);
+    /**
+     * Prepares for tests.
+     * 
+     * @return array
+     */
+    private function prepareTest(): array
+    {
+        $user = factory(User::class)->create();
+
+        return [$user];
     }
 
     /**
      * Makes a request.
      *
+     * @param  \LaraWhale\Cms\Models\User  $user
      * @param  array  $data
      * @return \Illuminate\Foundation\Testing\TestResponse
      */
-    private function makeRequest(array $data): TestResponse
+    private function makeRequest(User $user = null, array $data): TestResponse
     {
+        if (! is_null($user)) {
+            $this->actingAs($user);
+        }
+
         return $this->post('cms/entries', $data);
     }
 

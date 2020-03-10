@@ -55,8 +55,6 @@ class DestroyTest extends TestCase
      */
     private function makeRequest(User $user = null, Entry $entry): TestResponse
     {
-        $request = $this;
-
         if (! is_null($user)) {
             $this->actingAs($user);
         }

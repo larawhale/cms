@@ -27,6 +27,7 @@ class GetTest extends DuskTestCase
                 ->type('input[name=email]', $data['email'])
                 ->type('input[name=password]', $data['password'])
                 ->click('@submit-login')
+                // TODO: More assertions. Check other tests as well.
                 ->assertAuthenticatedAs($user);
         });
     }

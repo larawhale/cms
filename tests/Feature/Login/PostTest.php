@@ -21,9 +21,10 @@ class PostTest extends TestCase
 
         $data = $this->requestData($user);
 
-        $this->post('cms/login', $data)
-            ->assertRedirectHome()
-            ->assertAuthenticatedAs($user);
+        $response = $this->post('cms/login', $data)
+            ->assertRedirectHome();
+
+        $this->assertAuthenticatedAs($user);
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use LaraWhale\Cms\Http\Controllers\EntryController;
+use LaraWhale\Cms\Http\Controllers\LoginController;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 
 Route::group([
@@ -11,13 +12,12 @@ Route::group([
     Route::group([
         'middleware' => ['cms_guest'],
     ], function () {
-        Route::get('login', function () {
-            return 'GET:cms.login';
-        })->name('login');
+        Route::get('login', [
+            'as' => 'login',
+            'uses' => LoginController::class . '@showLoginForm',
+        ]);
 
-        Route::post('login', function () {
-            return 'POST:cms.login';
-        });
+        Route::post('login', LoginController::class . '@login');
     });
 
     Route::group([

@@ -11,8 +11,18 @@ class TestResponse extends BaseTestResponse
      * 
      * @return void
      */
-    public function assertRedirectToLogin(): void
+    public function assertRedirectLogin(): void
     {
         $this->assertRedirect('/cms/login');
+    }
+
+    /**
+     * Asserts the response was redirected to home.
+     * 
+     * @return void
+     */
+    public function assertRedirectHome(): void
+    {
+        $this->assertRedirect('/cms');
     }
 }

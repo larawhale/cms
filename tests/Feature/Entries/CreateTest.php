@@ -40,7 +40,7 @@ class CreateTest extends DuskTestCase
         // Request without user.
         $response = $this->get($url);
 
-        $response->assertRedirectToLogin();
+        $response->assertRedirectLogin();
     }
 
     /** @test */

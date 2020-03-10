@@ -28,7 +28,7 @@ class StoreTest extends TestCase
 
         $response = $this->makeRequest(null, $data);
 
-        $response->assertRedirectToLogin();
+        $response->assertRedirectLogin();
     }
 
     /**

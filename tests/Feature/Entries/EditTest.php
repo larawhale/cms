@@ -38,7 +38,7 @@ class EditTest extends DuskTestCase
         // Request without user.
         $response = $this->get("/cms/entries/$entry->id/edit");
 
-        $response->assertRedirectToLogin();
+        $response->assertRedirectLogin();
     }
 
     /**

@@ -32,7 +32,7 @@ class UpdateTest extends TestCase
         // Make request without user.
         $response = $this->makeRequest(null, $entry, $data);
 
-        $response->assertRedirectToLogin();
+        $response->assertRedirectLogin();
     }
 
     /**

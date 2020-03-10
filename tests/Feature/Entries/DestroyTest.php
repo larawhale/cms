@@ -29,7 +29,7 @@ class DestroyTest extends TestCase
         // Do not make a request with a user.
         $response = $this->makeRequest(null, $entry);
 
-        $response->assertRedirectToLogin();
+        $response->assertRedirectLogin();
     }
 
     /**

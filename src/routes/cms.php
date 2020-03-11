@@ -23,6 +23,10 @@ Route::group([
     Route::group([
         'middleware' => ['cms_auth'],
     ], function () {
+        Route::get('', function () {
+            return 'cms.home';
+        })->name('home');
+
         Route::resource('entries', EntryController::class, [
             'except' => ['show'],
         ]);

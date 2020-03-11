@@ -22,12 +22,12 @@ class GetTest extends DuskTestCase
         $data = $this->requestData($user);
 
         $this->browse(function ($browser) use ($user, $data) {
-            $browser->visit('cms/login')
+            $browser->visit('/cms/login')
                 ->screenshot('guest_can_login')
                 ->type('input[name=email]', $data['email'])
                 ->type('input[name=password]', $data['password'])
                 ->click('@submit-login')
-                // TODO: More assertions. Check other tests as well.
+                ->assertPathIs('/cms')
                 ->assertAuthenticatedAs($user);
         });
     }

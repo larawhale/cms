@@ -4,6 +4,20 @@ networks:
   cms:
 
 services:
+  nginx:
+    image: nginx:stable
+    container_name: nginx
+    ports:
+      - 8000:80
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - cms
+
   php:
     build:
       context: .

@@ -23,6 +23,11 @@ Route::group([
     Route::group([
         'middleware' => ['cms_auth'],
     ], function () {
+        Route::post('logout', [
+            'as' => 'logout',
+            'uses' => LoginController::class . '@logout',
+        ]);
+
         Route::get('', function () {
             return 'cms.home';
         })->name('home');

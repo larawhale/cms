@@ -16,7 +16,7 @@ class StoreTest extends TestCase
 
         $response = $this->makeRequest($user, $data);
 
-        $this->assertResponse($response);
+        $this->assertResponse($response, $data['entry_type']);
 
         $this->assertDatabase($data);
     }
@@ -77,15 +77,16 @@ class StoreTest extends TestCase
      * Asserts a response.
      *
      * @param  \Illuminate\Foundation\Testing\TestResponse  $response
+     * @param  string  $type
      * @param  int  $status
      * @return void
      */
-    private function assertResponse(TestResponse $response, int $status = 302): void
+    private function assertResponse(TestResponse $response, string $type, int $status = 302): void
     {
         $response->assertStatus($status);
 
         if ($status === 302) {
-            $response->assertRedirect(route('cms.entries.index'));
+            $response->assertRedirect(route('cms.entries.index', compact('type')));
         }
     }
 

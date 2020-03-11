@@ -2,7 +2,6 @@
 
 namespace LaraWhale\Cms\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\StatefulGuard;
@@ -32,10 +31,9 @@ class LoginController extends Controller
     /**
      * The user has logged out of the application.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
-    protected function loggedOut(Request $request)
+    protected function loggedOut()
     {
         return redirect()->route('cms.login');
     }

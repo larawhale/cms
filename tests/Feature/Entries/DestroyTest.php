@@ -16,7 +16,7 @@ class DestroyTest extends TestCase
 
         $response = $this->makeRequest($user, $entry);
 
-        $this->assertResponse($response);
+        $this->assertResponse($response, $entry->type);
 
         $this->assertDatabase($entry);
     }
@@ -66,15 +66,16 @@ class DestroyTest extends TestCase
      * Asserts a response.
      *
      * @param  \Illuminate\Foundation\Testing\TestResponse  $response
+     * @param  string  $type
      * @param  int  $status
      * @return void
      */
-    private function assertResponse(TestResponse $response, int $status = 302): void
+    private function assertResponse(TestResponse $response, string $type, int $status = 302): void
     {
         $response->assertStatus($status);
 
         if ($status === 302) {
-            $response->assertRedirect(route('cms.entries.index'));
+            $response->assertRedirect(route('cms.entries.index', compact('type')));
         }
     }
 

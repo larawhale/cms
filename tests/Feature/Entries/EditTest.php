@@ -24,7 +24,8 @@ class EditTest extends DuskTestCase
                 ->screenshot('user_can_edit')
                 ->type('input[name=test_key]', $data['test_key'])
                 ->type('input[name=another_test_key]', $data['another_test_key'])
-                ->click('@submit-entry');
+                ->click('@submit-entry')
+                ->assertPathIs('/cms/entries');
         });
 
         $this->assertDatabase($entry, $data);
@@ -38,7 +39,7 @@ class EditTest extends DuskTestCase
         // Request without user.
         $response = $this->get("/cms/entries/$entry->id/edit");
 
-        $response->assertRedirectToLogin();
+        $response->assertRedirectLogin();
     }
 
     /**

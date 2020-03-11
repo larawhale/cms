@@ -17,7 +17,7 @@ class UpdateTest extends TestCase
 
         $response = $this->makeRequest($user, $entry, $data);
 
-        $this->assertResponse($response);
+        $this->assertResponse($response, $entry->type);
 
         $this->assertDatabase($entry, $data);
     }
@@ -32,7 +32,7 @@ class UpdateTest extends TestCase
         // Make request without user.
         $response = $this->makeRequest(null, $entry, $data);
 
-        $response->assertRedirectToLogin();
+        $response->assertRedirectLogin();
     }
 
     /**
@@ -82,15 +82,16 @@ class UpdateTest extends TestCase
      * Asserts a response.
      *
      * @param  \Illuminate\Foundation\Testing\TestResponse  $response
+     * @param  string  $type
      * @param  int  $status
      * @return void
      */
-    private function assertResponse(TestResponse $response, int $status = 302): void
+    private function assertResponse(TestResponse $response, string $type, int $status = 302): void
     {
         $response->assertStatus($status);
 
         if ($status === 302) {
-            $response->assertRedirect(route('cms.entries.index'));
+            $response->assertRedirect(route('cms.entries.index', compact('type')));
         }
     }
 

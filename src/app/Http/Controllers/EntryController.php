@@ -59,14 +59,16 @@ class EntryController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $type = $request->get('entry_type');
+
         $data = [
-            'type' => $request->get('entry_type'),
+            'type' => $type,
             'fields' => Arr::except($request->validated(), ['entry_type']),
         ];
 
         EntryClass::save(new Entry, $data);
 
-        return redirect()->route('cms.entries.index');
+        return redirect()->route('cms.entries.index', compact('type'));
     }
 
     /**
@@ -95,7 +97,9 @@ class EntryController extends Controller
 
         EntryClass::save($entry, $data);
 
-        return redirect()->route('cms.entries.index');
+        return redirect()->route('cms.entries.index', [
+            'type' => $entry->type,
+        ]);
     }
 
     /**
@@ -107,8 +111,10 @@ class EntryController extends Controller
      */
     public function destroy(Request $request, Entry $entry)
     {
+        $type = $entry->type;
+
         $entry->delete();
 
-        return redirect()->route('cms.entries.index');
+        return redirect()->route('cms.entries.index', compact('type'));
     }
 }

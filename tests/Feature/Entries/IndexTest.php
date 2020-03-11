@@ -40,7 +40,7 @@ class IndexTest extends DuskTestCase
     public function guest_cannot_index(): void
     {
         // Request without user.
-        $this->get('/cms/entries')->assertRedirectToLogin();
+        $this->get('/cms/entries')->assertRedirectLogin();
     }
 
     /**

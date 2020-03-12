@@ -15,6 +15,8 @@
     @if (isset($input))
         {!! $input !!}
     @else
-        {!! $Form::input($type, $name) !!}
+        {!! $Form::input($type, $name, null, [
+            'class' => 'form-control',
+        ]) !!}
     @endif
 </div>

@@ -21,7 +21,8 @@ Route::group([
     });
 
     Route::group([
-        'middleware' => ['cms_auth'],
+        // TODO: Disabling this is temporary.
+        // 'middleware' => ['cms_auth'],
     ], function () {
         Route::post('logout', [
             'as' => 'logout',
@@ -29,7 +30,8 @@ Route::group([
         ]);
 
         Route::get('', function () {
-            return 'cms.home';
+            // TODO: Should not be styleguide.
+            return view('cms::styleguide.index');
         })->name('home');
 
         Route::resource('entries', EntryController::class, [

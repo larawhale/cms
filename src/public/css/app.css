@@ -10875,3 +10875,59 @@ a.text-dark:focus {
   }
 }
 
+.sidebar {
+  position: fixed;
+  top: 58px;
+  bottom: 0px;
+  left: 0px;
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 1rem;
+  width: 200px;
+}
+
+.sidebar .nav {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.sidebar .nav-link {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  color: #212529;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  position: relative;
+  font-weight: 700;
+}
+
+.sidebar .nav-link:hover:before,
+.sidebar .nav-link.active:before {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  content: "";
+  width: 0.25rem;
+  background: #007bff;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead:first-child th {
+  border-top: 0;
+}
+
+.table-click {
+  cursor: pointer;
+}
+
+.main-container {
+  margin-top: 58px;
+  margin-left: 200px;
+  padding-top: 3rem;
+}
+

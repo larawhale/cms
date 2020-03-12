@@ -18,7 +18,7 @@
                 'type' => 'password',
             ])
 
-            {!! $Form::submit(__('cms::actions.submit_login'), [
+            {!! $Form::submit(__('cms::actions.login'), [
                 'class' => 'btn btn-primary',
                 'dusk' => 'submit-login',
             ]) !!}

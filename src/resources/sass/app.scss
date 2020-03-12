@@ -2,6 +2,7 @@
 // Variables
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
+@import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/mixins';
@@ -39,3 +40,9 @@
 @import '~bootstrap/scss/spinners';
 @import '~bootstrap/scss/utilities';
 @import '~bootstrap/scss/print';
+
+// Components
+@import 'components/sidebar';
+@import 'components/tables';
+@import 'components/main-container';
+@import 'components/nav';

@@ -24,18 +24,29 @@ define('LARAVEL_START', microtime(true));
 require __DIR__ . '/vendor/autoload.php';
 
 /*
-|--------------------------------------------------------------------------
-| Turn On The Lights
-|--------------------------------------------------------------------------
-|
-| We need to illuminate PHP development, so let us turn on the lights.
-| This bootstraps the framework and gets it ready for use, then it
-| will load up this application so that we can run it and send
-| the responses back to the browser and delight our users.
-|
-*/
-
+ | Use our test case, which extends from orchestral core test case, create our
+ | application. Normally this is done in a bootstrap file.
+ */
 $app = (new LaraWhale\Cms\Tests\TestCase())->createApplication();
+
+if (
+    ! Illuminate\Support\Facades\Schema::hasTable('migrations')
+    || ! \Illuminate\Support\Facades\DB::table('migrations')->exists()
+) {
+    \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
+}
+
+\LaraWhale\Cms\Models\User::firstOrCreate([
+    'email' => 'test@test.test',
+], [
+    'name' => 'test',
+    'password' => bcrypt('test'),
+]);
+
+$app->singleton(
+    Illuminate\Contracts\Http\Kernel::class,
+    Orchestra\Testbench\Http\Kernel::class
+);
 
 /*
 |--------------------------------------------------------------------------

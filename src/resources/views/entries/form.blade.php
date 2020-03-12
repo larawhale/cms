@@ -20,7 +20,7 @@
         {!! $field->renderFormGroup() !!}
     @endforeach
 
-    {!! $Form::submit(__('cms::actions.submit_form'), [
+    {!! $Form::submit(__('cms::actions.submit'), [
         'class' => 'btn btn-primary',
         'dusk' => 'submit-entry',
     ]) !!}

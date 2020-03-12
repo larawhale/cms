@@ -1,0 +1,11 @@
+.table {
+    margin-bottom: 0;
+
+    thead:first-child th {
+        border-top: 0;
+    }
+}
+
+.table-click {
+    cursor: pointer;
+}

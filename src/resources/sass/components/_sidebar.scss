@@ -1,0 +1,38 @@
+.sidebar {
+    position: fixed;
+    top: $header-height;
+    bottom: 0px;
+    left: 0px;
+    border-right: $card-border-width solid $card-border-color;
+    padding: $sidebar-padding;
+    width: $sidebar-width;
+
+    .nav {
+        margin-left: -$sidebar-padding;
+        margin-right: -$sidebar-padding;
+    }
+
+    .nav-link {
+        padding-left: $sidebar-padding * 2;
+        padding-right: $sidebar-padding * 2;
+        color: $body-color;
+
+        &:hover,
+        &.active {
+            position: relative;
+            color: $headings-color;
+            font-weight: $font-weight-bold;
+
+            &:before {
+                position: absolute;
+                top: 0px;
+                bottom: 0px;
+                left: 0px;
+                content: '';
+                width: .25rem;
+                background: $primary;
+            }
+        }
+    }
+
+}

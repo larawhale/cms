@@ -33,7 +33,7 @@ trait TestSetup
     {
         $app['config']->set('app.debug', true);
 
-        $app['config']->set('app.key', 'AckfSECXIvnK5r28GVIWUAxmbBSjTsmF');
+        $app['config']->set('app.key', 'base64:jP6O/1z8UfmxYf+PeiNubQRH+WstpxYTa1jGaTuLzgc=');
 
         $app['config']->set('app.url', 'http://127.0.0.1:8000');
 

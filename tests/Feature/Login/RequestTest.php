@@ -5,7 +5,7 @@ namespace LaraWhale\Cms\Tests\Feature\Login;
 use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Tests\TestCase;
 
-class PostTest extends TestCase
+class RequestTest extends TestCase
 {
     /**
      * The password used to create a user and login.

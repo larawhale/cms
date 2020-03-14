@@ -5,7 +5,7 @@ namespace LaraWhale\Cms\Tests\Feature\Logout;
 use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Tests\TestCase;
 
-class LogoutTest extends TestCase
+class RequestTest extends TestCase
 {
     /** @test */
     public function user_can_logout(): void

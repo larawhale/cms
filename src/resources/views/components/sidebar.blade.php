@@ -14,7 +14,7 @@
                         'type' => $entry['type'],
                     ],
                     'class' => 'nav-link',
-                    'slot' => $entry['name'],
+                    'slot' => Str::plural($entry['name']),
                 ])
             </li>
         @endforeach

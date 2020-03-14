@@ -5,7 +5,7 @@ namespace LaraWhale\Cms\Tests\Feature\Login;
 use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Tests\DuskTestCase;
 
-class GetTest extends DuskTestCase
+class UiTest extends DuskTestCase
 {
     /**
      * The password used to create a user and login.

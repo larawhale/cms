@@ -6,6 +6,11 @@ use Spatie\Snapshots\MatchesSnapshots;
 use Collective\Html\HtmlServiceProvider;
 use LaraWhale\Cms\Providers\CmsServiceProvider;
 
+class PublishedVendor
+{
+    public static $published = false;
+}
+
 trait TestSetup
 {
     use MatchesSnapshots;
@@ -21,6 +26,16 @@ trait TestSetup
 
         $this->withoutMockingConsoleOutput()
             ->artisan('migrate:fresh');
+
+        if (! PublishedVendor::$published) {
+            $this->withoutMockingConsoleOutput()
+                ->artisan('vendor:publish', [
+                    '--force' => true,
+                    '--tag' => 'cms',
+                ]);
+
+            PublishedVendor::$published = true;
+        }
     }
 
     /**

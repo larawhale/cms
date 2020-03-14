@@ -22,7 +22,7 @@ Route::group([
 
     Route::group([
         // TODO: Disabling this is temporary.
-        // 'middleware' => ['cms_auth'],
+        'middleware' => ['cms_auth'],
     ], function () {
         Route::post('logout', [
             'as' => 'logout',

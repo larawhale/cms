@@ -1,6 +1,6 @@
 <?php
 
-namespace LaraWhale\Cms\Tests\Feature\Login;
+namespace LaraWhale\Cms\Tests\Feature\Logout;
 
 use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Tests\DuskTestCase;
@@ -12,12 +12,9 @@ class UiTest extends DuskTestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user);
-
-        $this->assertAuthenticatedAs($user);
-
-        $this->browse(function ($browser) {
-            $browser->visit('/cms')
+        $this->browse(function ($browser) use ($user) {
+            $browser->loginAs($user)
+                ->visit('/cms')
                 ->click('@submit-logout')
                 ->assertPathIs('/cms/login')
                 ->assertGuest();

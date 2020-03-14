@@ -1,5 +1,6 @@
 {{-- TODO: Remove this and fix tests when this is not performant. --}}
 @inject('Form', 'Collective\Html\FormFacade')
+
 @php
     // Type
     // -------------------- -->
@@ -26,6 +27,11 @@
     $label = $label ?? $name;
 
     $showLabel = $showLabel ?? true;
+
+    // Errors
+    // TODO: SHOULD BE DONE SOMEHWERE ELSE.
+    // -------------------- -->
+    $errors = $errors ?? new \Illuminate\Support\MessageBag;
 
     // Class option
     // -------------------- -->

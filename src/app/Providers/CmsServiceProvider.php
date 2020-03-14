@@ -2,8 +2,6 @@
 
 namespace LaraWhale\Cms\Providers;
 
-use LaraWhale\Cms\Models\Entry;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use LaraWhale\Cms\Library\Fields\Factory as FieldFactory;
 use LaraWhale\Cms\Library\Entries\Factory as EntryFactory;
@@ -43,6 +41,22 @@ class CmsServiceProvider extends ServiceProvider
 
         EntryFactory::loadEntries();
 
-        Route::model('entry', Entry::class);
+        $this->registerPublishPaths();
+    }
+
+    /**
+     * Register paths to be published by the publish command.
+     * 
+     * @return void
+     */
+    protected function registerPublishPaths(): void
+    {
+        $this->publishes([
+            __DIR__ . '/../../resources/views' => resource_path('views/vendor/cms'),
+        ], ['cms', 'cms.views']);
+
+        $this->publishes([
+            __DIR__ . '/../../public/css' => public_path('vendor/cms/css'),
+        ], ['cms', 'cms.assets', 'cms.css']);
     }
 }

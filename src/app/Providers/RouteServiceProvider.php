@@ -2,6 +2,8 @@
 
 namespace LaraWhale\Cms\Providers;
 
+use LaraWhale\Cms\Models\Entry;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -22,5 +24,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->aliasMiddleware('cms_auth', config('cms.cms_auth_middleware'));
 
         $this->aliasMiddleware('cms_guest', config('cms.cms_guest_middleware'));
+
+        Route::model('entry', Entry::class);
     }
 }

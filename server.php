@@ -29,6 +29,8 @@ require __DIR__ . '/vendor/autoload.php';
  */
 $app = (new LaraWhale\Cms\Tests\TestCase())->createApplication();
 
+
+// Migrate the database when this has not been done yet.
 if (
     ! Illuminate\Support\Facades\Schema::hasTable('migrations')
     || ! \Illuminate\Support\Facades\DB::table('migrations')->exists()
@@ -36,6 +38,7 @@ if (
     \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
 }
 
+// Create a test user.
 \LaraWhale\Cms\Models\User::firstOrCreate([
     'email' => 'test@test.test',
 ], [

@@ -6,8 +6,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Poppins&display=swap" rel="stylesheet">
 
-        {{-- TODO: Should come from vendor folder of application. --}}
-        <link rel="stylesheet" href="/src/public/css/app.css">
+        <link rel="stylesheet" href="{{ asset('vendor/cms/css/app.css') }}">
     </head>
 
     <body class="bg-light">

@@ -21,7 +21,6 @@ Route::group([
     });
 
     Route::group([
-        // TODO: Disabling this is temporary.
         'middleware' => ['cms_auth'],
     ], function () {
         Route::post('logout', [

@@ -1,15 +1,19 @@
 @extends('cms::layouts.default')
 
+@php
+    $entryClass = $entry->toEntryClass();
+@endphp
+
 @section('content')
     <div class="mb-3">
         <h1 class="m-0">
             {{ __('cms::entries.create.title', [
-                'type' => $entry->type,
+                'name' => $entryClass->name(),
             ]) }}
         </h1>
     </div>
 
     @component('cms::components.card')
-        {!! $entry->toEntryClass()->renderForm() !!}
+        {!! $entryClass->renderForm() !!}
     @endcomponent
 @endsection

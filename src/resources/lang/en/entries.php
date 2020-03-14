@@ -2,16 +2,16 @@
 
 return [
     'form' => [
-        'no_fields' => 'The :type entry has no configured fields.',
+        'no_fields' => 'The ":name" entry has no configured fields.',
     ],
     'create' => [
-        'title' => 'Create :type',
+        'title' => 'Create :name',
     ],
     'edit' => [
-        'title' => 'Edit :type',
+        'title' => 'Edit :name',
     ],
     'index' => [
-        'title' => ':Type entries',
-        'empty' => 'No :type entries availabe.',
+        'title' => ':Name entries',
+        'empty' => 'No ":name" entries availabe.',
     ],
 ];

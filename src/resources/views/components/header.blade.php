@@ -12,7 +12,7 @@
         {!! $Form::open([
             'route' => 'cms.logout',
         ]) !!}
-            {!! $Form::submit(__('cms::actions.submit'), [
+            {!! $Form::submit(__('cms::actions.logout'), [
                 'class' => 'btn btn-link',
                 'dusk' => 'submit-logout',
             ]) !!}

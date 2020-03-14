@@ -42,4 +42,8 @@ $app->singleton(
     Orchestra\Testbench\Http\Kernel::class
 );
 
+// Set session drive to cookie so it is persisted. The testbench Laravel
+// installation has it set to array by default.
+$app->config->set('session.driver', 'cookie');
+
 return $app;

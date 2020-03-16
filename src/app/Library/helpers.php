@@ -52,22 +52,6 @@ if (! function_exists('cms_table_name')) {
     }
 }
 
-if (! function_exists('is_cms_route')) {
-    /**
-     * Validates if the current route is a cms route.
-     * TODO: Might break when developers could have the ability to implement a
-     * custom middleware.
-     * 
-     * @return bool
-     */
-    function is_cms_route(): bool
-    {
-        $middleware = optional(request()->route())->middleware() ?? [];
-
-        return array_search('auth:cms', $middleware) !== false;
-    }
-}
-
 if (! function_exists('is_current_route')) {
     /**
      * Validates if the given route is the current route.

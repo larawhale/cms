@@ -367,6 +367,7 @@ class EntryTest extends TestCase
             $this->assertDatabaseHas('fields', [
                 'entry_id' => $entryModel->id,
                 'key' => $key,
+                'type' => 'test_type',
                 'value' => $value,
             ]);
         }
@@ -400,6 +401,7 @@ class EntryTest extends TestCase
             'id' => $fieldModel->id,
             'entry_id' => $entryModel->id,
             'key' => $fieldModel->key,
+            'type' => 'test_type',
             'value' => 'new_value',
         ]);
 

@@ -169,6 +169,7 @@ class DefaultFieldTest extends TestCase
         $this->assertDatabaseHas('fields', [
             'entry_id' => $entryModel->id,
             'key' => $field->key(),
+            'type' => $field->type(),
             'value' => 'test_value',
         ]);
     }
@@ -178,6 +179,7 @@ class DefaultFieldTest extends TestCase
     {
         $fieldModel = factory(FieldModel::class)->create([
             'key' => $this->config['key'],
+            'type' => $this->config['type'],
             'value' => 'old_value',
         ]);
 
@@ -189,6 +191,7 @@ class DefaultFieldTest extends TestCase
             'id' => $fieldModel->id,
             'entry_id' => $fieldModel->entry->id,
             'key' => $field->key(),
+            'type' => $field->type(),
             'value' => 'new_value',
         ]);
     }

@@ -48,7 +48,7 @@ class CmsServiceProvider extends ServiceProvider
         ], ['cms', 'cms.views']);
 
         $this->publishes([
-            __DIR__ . '/../../public/css' => public_path('vendor/cms/css'),
-        ], ['cms', 'cms.assets', 'cms.css']);
+            __DIR__ . '/../../public' => public_path('vendor/cms'),
+        ], ['cms', 'cms.assets']);
     }
 }

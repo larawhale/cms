@@ -15,7 +15,7 @@ class Browser extends BaseBrowser
      */
     public function screenshot($name): self
     {
-        $this->pause(100);
+        $this->pause(500);
 
         return parent::screenshot($name);
     }

@@ -22,6 +22,12 @@ return [
     ],
 
     /**
+     * The type of field that is used to make entries accessable through
+     * requests. The value of this field will be used to create a route.
+     */
+    'route_field_type' => 'route',
+
+    /**
      * A prefix that is used to create table names for tables that are created
      * for this package.
      */

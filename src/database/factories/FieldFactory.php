@@ -9,7 +9,7 @@ use LaraWhale\Cms\Library\Entries\Factory;
 $factory->define(Field::class, function (Generator $faker) {
     $entryConfig = Arr::random(Factory::$entries);
 
-    $fieldKey = Arr::random($entryConfig['fields'])['key'];
+    $field = Arr::random($entryConfig['fields']);
 
     return [
         'entry_id' => function () use ($entryConfig) {
@@ -17,7 +17,8 @@ $factory->define(Field::class, function (Generator $faker) {
                 'type' => $entryConfig['type'],
             ])->id;
         },
-        'key' => $fieldKey,
-        'value' => $fieldKey . '_value',
+        'key' => $field['key'],
+        'type' => $field['type'],
+        'value' => $field['key'] . '_value',
     ];
 });

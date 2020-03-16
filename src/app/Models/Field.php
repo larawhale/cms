@@ -12,7 +12,7 @@ class Field extends Model
      * @var array
      */
     protected $fillable = [
-        'entry_id', 'key', 'value',
+        'entry_id', 'key', 'type', 'value',
     ];
 
     /**

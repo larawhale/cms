@@ -15,6 +15,7 @@ class Browser extends BaseBrowser
      */
     public function screenshot($name): self
     {
+        // TODO: Find something to fix this nasty delay.
         $this->pause(500);
 
         return parent::screenshot($name);

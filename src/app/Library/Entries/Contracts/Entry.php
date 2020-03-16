@@ -40,6 +40,13 @@ interface Entry
     public function name(): string;
 
     /**
+     * Returns the view of the entry.
+     * 
+     * @return string
+     */
+    public function view(): string;
+
+    /**
      * Returns the fields of the entry.
      * 
      * @return array
@@ -106,6 +113,13 @@ interface Entry
      * @return string
      */
     public function renderForm(): string;
+
+    /**
+     * Returns a rendered view.
+     * 
+     * @return string
+     */
+    public function renderView(): string;
 
     /**
      * Saves an entry and its fields to the database.

@@ -20,6 +20,21 @@ if (! function_exists('array_keys_prefix')) {
     }
 }
 
+if (! function_exists('cms_entries_path')) {
+    /**
+     * Returns the path where the entries or the specified entry configuration
+     * is located.
+     * 
+     * @param  string  $type
+     * @return string
+     */
+    function cms_entries_path(string $type = ''): string
+    {
+        return config('cms.entries_path')
+            . ($type ? DIRECTORY_SEPARATOR . "$type.php" : $type);
+    }
+}
+
 if (! function_exists('cms_table_name')) {
     /**
      * Returns string with the cms table prefix.
@@ -37,17 +52,32 @@ if (! function_exists('cms_table_name')) {
     }
 }
 
-if (! function_exists('cms_entries_path')) {
+if (! function_exists('is_cms_route')) {
     /**
-     * Returns the path where the entries or the specified entry configuration
-     * is located.
+     * Validates if the current route is a cms route.
+     * TODO: Might break when developers could have the ability to implement a
+     * custom middleware.
      * 
-     * @param  string  $type
-     * @return string
+     * @return bool
      */
-    function cms_entries_path(string $type = ''): string
+    function is_cms_route(): bool
     {
-        return config('cms.entries_path')
-            . ($type ? DIRECTORY_SEPARATOR . "$type.php" : $type);
+        $middleware = optional(request()->route())->middleware() ?? [];
+
+        return array_search('auth:cms', $middleware) !== false;
+    }
+}
+
+if (! function_exists('is_current_route')) {
+    /**
+     * Validates if the given route is the current route.
+     * 
+     * @param  string  $routeName
+     * @param  array  $parameters
+     * @return bool
+     */
+    function is_current_route(string $routeName, array $parameters = []): bool
+    {
+        return request()->fullUrlIs(route($routeName, $parameters));
     }
 }

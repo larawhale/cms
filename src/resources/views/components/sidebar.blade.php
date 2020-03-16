@@ -1,20 +1,22 @@
+@inject('Factory', 'LaraWhale\Cms\Library\Entries\Factory')
+
 <aside class="sidebar bg-white">
     <h6>
         Entries
     </h6>
 
     <nav class="nav flex-column">
-        {{-- @foreach ($entry_types as $type)
+        @foreach ($Factory::$entries as $entry)
             <li class="nav-item">
                 @include('cms::components.link', [
                     'route' => 'cms.entries.index',
                     'parameters' => [
-                        'type' => $type,
+                        'type' => $entry['type'],
                     ],
                     'class' => 'nav-link',
-                    'slot' => $type,
+                    'slot' => Str::plural($entry['name']),
                 ])
             </li>
-        @endforeach --}}
+        @endforeach
     </nav>
 </aside>

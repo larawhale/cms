@@ -7,13 +7,15 @@
 
     <div class="mb-3 clearfix">
         <h1 class="m-0 float-left">
-            {{ __('cms::entries.index.title', compact('type')) }}
+            {{ __('cms::entries.index.title', [
+                'name' => $entryClass->name(),
+            ]) }}
         </h1>
 
         <a
             class="btn btn-primary float-right"
             href="{{ route('cms.entries.create', [
-                'type' => $type,
+                'type' => $entryClass->type(),
             ]) }}"
         >
             {!! __('cms::actions.create') !!}
@@ -23,7 +25,9 @@
     @component('cms::components.card')
         @if ($entries->isEmpty())
             <div class="p-3">
-                {{ __('cms::entries.index.empty', compact('type')) }}
+                {{ __('cms::entries.index.empty', [
+                    'name' =>  $entryClass->name(),
+                ]) }}
             </div>
         @else
             @include('cms::entries.table', [

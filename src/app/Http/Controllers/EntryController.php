@@ -10,6 +10,7 @@ use LaraWhale\Cms\Library\Entries\Factory;
 use LaraWhale\Cms\Http\Requests\Entries\StoreRequest;
 use LaraWhale\Cms\Http\Requests\Entries\UpdateRequest;
 use LaraWhale\Cms\Library\Entries\Entry as EntryClass;
+use LaraWhale\Cms\Exceptions\EntryConfigNotFoundException;
 
 class EntryController extends Controller
 {
@@ -23,11 +24,17 @@ class EntryController extends Controller
     {
         $type = $request->get('type');
 
+        try {
+            $entryClass = Factory::make($type);
+        } catch (EntryConfigNotFoundException $e) {
+            abort(404);
+        }
+
         $entries = is_null($type)
             ? Entry::paginate()
             : Entry::type($type)->paginate();
 
-        return view('cms::entries.index', compact('entries'));
+        return view('cms::entries.index', compact('entryClass', 'entries'));
     }
 
     /**

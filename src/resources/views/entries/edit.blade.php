@@ -3,11 +3,15 @@
 {{-- TODO: Remove this and fix tests when this is not performant. --}}
 @inject('Form', 'Collective\Html\FormFacade')
 
+@php
+    $entryClass = $entry->toEntryClass();
+@endphp
+
 @section('content')
     <div class="mb-3 clearfix">
         <h1 class="m-0 float-left">
             {{ __('cms::entries.edit.title', [
-                'type' => $entry->type,
+                'name' => $entryClass->name(),
             ]) }}
         </h1>
 
@@ -25,6 +29,6 @@
     </div>
 
     @component('cms::components.card')
-        {!! $entry->toEntryClass()->renderForm() !!}
+        {!! $entryClass->renderForm() !!}
     @endcomponent
 @endsection

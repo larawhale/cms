@@ -77,6 +77,11 @@ trait TestSetup
             'cms.entries_path',
             __DIR__ . '/Support/Entries/',
         );
+
+        $app['config']->prepend(
+            'view.paths',
+            __DIR__ . '/Support/views/',
+        );
     }
 
     /**

@@ -3,6 +3,7 @@
 return [
     'type' => 'another_test_entry',
     'name' => 'Another test entry',
+    'view' => 'test',
     'fields' => [
         [
             'key' => 'test_key',

@@ -1,5 +1,7 @@
 <?php
 
+use LaraWhale\Cms\Models\Field;
+use Illuminate\Support\Facades\Schema;
 use LaraWhale\Cms\Http\Controllers\EntryController;
 use LaraWhale\Cms\Http\Controllers\LoginController;
 use Illuminate\Routing\Middleware\SubstituteBindings;
@@ -38,3 +40,15 @@ Route::group([
         ]);
     });
 });
+
+if (Schema::hasTable(cms_table_name('fields'))) {
+    Field::type(config('cms.route_field_type'))
+        ->with('entry')
+        ->each(function (Field $field) {
+            $entryClass = $field->entry->toEntryClass();
+
+            Route::get($field->value, function () use ($entryClass) {
+                return $entryClass->renderView();
+            });
+        });
+}

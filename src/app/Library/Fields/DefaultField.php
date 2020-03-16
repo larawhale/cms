@@ -179,6 +179,7 @@ class DefaultField implements Field
 
         $fieldModel = $entryModel->fields()->updateOrCreate([
             'key' => $this->key(),
+            'type' => $this->type(),
         ], compact('value'));
 
         $this->setFieldModel($fieldModel);

@@ -19,6 +19,7 @@ class EntryTest extends TestCase
     private array $config = [
         'type' => 'test_entry',
         'name' => 'Test entry',
+        'view' => 'test',
         'fields' => [
             [
                 'key' => 'test_key',
@@ -78,6 +79,30 @@ class EntryTest extends TestCase
             $entry->name();
         } catch (RequiredConfigKeyNotFoundException $e) {
             $this->assertEquals('type', $e->getKey());
+
+            return;
+        }
+
+        $this->assertTrue(false, 'Exception was not thrown.');
+    }
+
+    /** @test */
+    public function view(): void
+    {
+        $entry = new Entry($this->config);
+
+        $this->assertEquals($this->config['view'], $entry->view());
+    }
+
+    /** @test */
+    public function view_throws_required_config_exception(): void
+    {
+        $entry = new Entry([]);
+
+        try {
+            $entry->view();
+        } catch (RequiredConfigKeyNotFoundException $e) {
+            $this->assertEquals('view', $e->getKey());
 
             return;
         }
@@ -230,6 +255,16 @@ class EntryTest extends TestCase
     }
 
     /** @test */
+    public function render_view(): void
+    {
+        $config = $this->config;
+
+        $entry = new Entry($config);
+
+        $this->assertMatchesHtmlSnapshot($entry->renderView());
+    }
+
+    /** @test */
     public function magic_get_existing(): void
     {
         $fieldModel = factory(FieldModel::class)->create([
@@ -332,6 +367,7 @@ class EntryTest extends TestCase
             $this->assertDatabaseHas('fields', [
                 'entry_id' => $entryModel->id,
                 'key' => $key,
+                'type' => 'test_type',
                 'value' => $value,
             ]);
         }
@@ -365,6 +401,7 @@ class EntryTest extends TestCase
             'id' => $fieldModel->id,
             'entry_id' => $entryModel->id,
             'key' => $fieldModel->key,
+            'type' => 'test_type',
             'value' => 'new_value',
         ]);
 

@@ -9,26 +9,18 @@ use LaraWhale\Cms\Library\Entries\Factory as EntryFactory;
 class CmsServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/cms.php', 'cms');
-
-        $this->app->register(AuthServiceProvider::class);
-
-        $this->app->register(RouteServiceProvider::class);
-    }
-
-    /**
      * Bootstrap any application services.
      *
      * @return void
      */
     public function boot(): void
     {
+        $this->mergeConfigFrom(__DIR__ . '/../../config/cms.php', 'cms');
+        
+        $this->app->register(AuthServiceProvider::class);
+
+        $this->app->register(RouteServiceProvider::class);
+
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
         $this->loadFactoriesFrom(__DIR__ . '/../../database/factories');

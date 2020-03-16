@@ -61,6 +61,16 @@ class Entry implements EntryInterface
     }
 
     /**
+     * Returns the view of the entry.
+     * 
+     * @return string
+     */
+    public function view(): string
+    {
+        return $this->config('view', null, true);
+    }
+
+    /**
      * Returns the fields of the entry.
      * 
      * @return array
@@ -196,6 +206,18 @@ class Entry implements EntryInterface
             'entry' => $this->entryModel ?? new EntryModel([
                 'type' => $this->type(),
             ]),
+        ])->render();
+    }
+
+    /**
+     * Returns a rendered view.
+     * 
+     * @return string
+     */
+    public function renderView(): string
+    {
+        return view($this->view(), [
+            'entry' => $this,
         ])->render();
     }
 

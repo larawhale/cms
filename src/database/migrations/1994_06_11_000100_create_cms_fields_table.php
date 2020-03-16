@@ -17,6 +17,7 @@ class CreateCmsFieldsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('entry_id')->unsigned();
             $table->string('key');
+            $table->string('type');
             $table->text('value')->nullable();
             $table->timestamps();
 

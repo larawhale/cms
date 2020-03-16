@@ -15,25 +15,35 @@ class IndexTest extends DuskTestCase
         [$user, $entries] = $this->prepareTest();
 
         $this->browse(function ($browser) use ($user, $entries) {
+            $type = $entries->first()->type;
+
             $browser->loginAs($user)
-                ->visit('/cms/entries')
-                ->screenshot('user_can_index');
+                ->visit("/cms/entries?type=$type")
+                ->screenshot('user_can_index')
+                ->assertSee('Test entry entries');
         });
     }
 
     /** @test */
-    public function user_can_index_type(): void
+    public function user_cannot_index_non_existing_type(): void
     {
-        [$user, $entries] = $this->prepareTest();
+        [$user] = $this->prepareTest();
 
-        $this->browse(function ($browser) use ($user, $entries) {
-            $type = $entries->first()->type;
+        $this->actingAs($user)
+            // Use non existing type.
+            ->get('/cms/entries?type=non_existing')
+            ->assertStatus(404);
+    }
+    
+    /** @test */
+    public function user_cannot_index_no_type(): void
+    {
+        [$user] = $this->prepareTest();
 
-            $browser->loginAs($user)
-                // Request with type.
-                ->visit("/cms/entries?type=$type")
-                ->screenshot('user_can_index_type');
-        });
+        $this->actingAs($user)
+            // Do not add type to uri.
+            ->get('/cms/entries')
+            ->assertStatus(404);
     }
 
     /** @test */

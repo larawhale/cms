@@ -47,4 +47,15 @@ class DuskTestCase extends TestCase
             ),
         );
     }
+
+    /**
+     * Create a new Browser instance.
+     *
+     * @param  \Facebook\WebDriver\Remote\RemoteWebDriver  $driver
+     * @return \Laravel\Dusk\Browser
+     */
+    protected function newBrowser($driver)
+    {
+        return new Browser($driver);
+    }
 }

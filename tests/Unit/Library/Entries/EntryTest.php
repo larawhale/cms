@@ -387,6 +387,7 @@ class EntryTest extends TestCase
         $shouldDelete = factory(FieldModel::class)->create([
             'entry_id' => $entryModel->id,
             'key' => 'remove_me',
+            'type' => 'test_type',
         ]);
 
         $data = [
@@ -401,7 +402,7 @@ class EntryTest extends TestCase
             'id' => $fieldModel->id,
             'entry_id' => $entryModel->id,
             'key' => $fieldModel->key,
-            'type' => 'test_type',
+            'type' => $fieldModel->type,
             'value' => 'new_value',
         ]);
 

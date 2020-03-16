@@ -24,11 +24,13 @@ class EntryController extends Controller
     {
         $type = $request->get('type');
 
-        try {
-            $entryClass = Factory::make($type);
-        } catch (EntryConfigNotFoundException $e) {
+        if (is_null($type)
+            || ! Factory::exists($type)
+        ) {
             abort(404);
         }
+        
+        $entryClass = Factory::make($type);
 
         $entries = is_null($type)
             ? Entry::paginate()

@@ -46,4 +46,9 @@ $app->singleton(
 // installation has it set to array by default.
 $app->config->set('session.driver', 'cookie');
 
+// Register debug bar and enable it.
+$app->register(Barryvdh\Debugbar\ServiceProvider::class);
+
+$app->make(Barryvdh\Debugbar\LaravelDebugbar::class)->enable();
+
 return $app;

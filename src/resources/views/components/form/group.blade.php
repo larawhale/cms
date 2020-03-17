@@ -1,6 +1,3 @@
-{{-- TODO: Remove this and fix tests when this is not performant. --}}
-@inject('Form', 'Collective\Html\FormFacade')
-
 @php
     // Type
     // -------------------- -->
@@ -57,7 +54,7 @@
 
 <div class="form-group">
     @if ($showLabel && $type !== 'checkbox')
-        {!! $Form::label($options['id'] ?? $name, $name) !!}
+        {!! Form::label($options['id'] ?? $name, $name) !!}
     @endif
 
     @if (isset($input))
@@ -65,26 +62,26 @@
     @else
         @switch ($type)
             @case ('textarea')
-                {!! $Form::textarea($name, $value, $options) !!}
+                {!! Form::textarea($name, $value, $options) !!}
                 @break
 
             @case ('select')
-                {!! $Form::select($name, $list, $value, $options) !!}
+                {!! Form::select($name, $list, $value, $options) !!}
                 @break
 
             @case ('checkbox')
             @case ('radio')
                 <div class="custom-control custom-{{ $type }}">
-                    {!! $Form::$type($type, $name, $value, null, $options) !!}
+                    {!! Form::$type($type, $name, $value, null, $options) !!}
 
-                    {!! $Form::label($name, $name, [
+                    {!! Form::label($name, $name, [
                         'class' => 'custom-control-label'
                     ]) !!}
                 </div>
                 @break
 
             @default
-                {!! $Form::input($type, $name, $value, $options) !!}
+                {!! Form::input($type, $name, $value, $options) !!}
         @endswitch
     @endif
 

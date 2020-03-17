@@ -1,8 +1,5 @@
 @extends('cms::layouts.default')
 
-{{-- TODO: Remove this and fix tests when this is not performant. --}}
-@inject('Form', 'Collective\Html\FormFacade')
-
 @php
     $entryClass = $entry->toEntryClass();
 @endphp
@@ -15,7 +12,7 @@
             ]) }}
         </h1>
 
-        {!! $Form::open([
+        {!! Form::open([
             'class' => 'float-right',
             'method' => 'DELETE',
             'url' => route('cms.entries.destroy', compact('entry')),
@@ -25,7 +22,7 @@
                 type="submit"
                 value="{{ __('cms::actions.delete') }}"
             >
-        {!! $Form::close() !!}
+        {!! Form::close() !!}
     </div>
 
     @component('cms::components.card')

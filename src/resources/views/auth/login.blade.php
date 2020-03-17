@@ -1,11 +1,8 @@
 @extends('cms::layouts.auth')
 
-{{-- TODO: Remove this and fix tests when this is not performant. --}}
-@inject('Form', 'Collective\Html\FormFacade')
-
 @section('content')
     @component('cms::components.card')
-        {!! $Form::open([
+        {!! Form::open([
             'route' => 'cms.login',
         ]) !!}
             @include('cms::components.form.group', [
@@ -18,11 +15,11 @@
                 'type' => 'password',
             ])
 
-            {!! $Form::submit(__('cms::actions.login'), [
+            {!! Form::submit(__('cms::actions.login'), [
                 'class' => 'btn btn-primary',
                 'dusk' => 'submit-login',
             ]) !!}
-        {!! $Form::close() !!}
+        {!! Form::close() !!}
     @endcomponent
 @endsection
 

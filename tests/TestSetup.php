@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Tests;
 
+use Collective\Html\FormFacade;
 use Spatie\Snapshots\MatchesSnapshots;
 use Collective\Html\HtmlServiceProvider;
 use LaraWhale\Cms\Providers\CmsServiceProvider;
@@ -94,6 +95,20 @@ trait TestSetup
         return [
             CmsServiceProvider::class,
             HtmlServiceProvider::class,
+        ];
+    }
+
+    /**
+     * Get package aliases.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
+     */
+    protected function getPackageAliases($app): array
+    {
+        return [
+            'Form' => FormFacade::class,
         ];
     }
 

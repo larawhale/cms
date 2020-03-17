@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Tests\Feature\Entries;
 
+use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Models\Field;
 use LaraWhale\Cms\Tests\DuskTestCase;
 
@@ -10,10 +11,13 @@ class RouteTest extends DuskTestCase
     /** @test */
     public function guest_can_show_route(): void
     {
-        $route = 'test-value';
+        $route = 'test-route';
 
         factory(Field::class)->create([
-            'key' => 'test_key',
+            'entry_id' => factory(Entry::class)->create([
+                'type' => 'route_entry',
+            ])->id,
+            'key' => 'route_key',
             'type' => config('cms.route_field_type'),
             'value' => $route,
         ]);

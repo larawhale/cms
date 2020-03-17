@@ -1,1 +1,1 @@
-Route from entry: {{ $entry->test_key }}
+Route from entry: {{ $entry->route_key }}

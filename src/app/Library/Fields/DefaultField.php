@@ -144,18 +144,31 @@ class DefaultField implements Field
      */
     public function renderInput(): string
     {
-        $classes = ['form-control'];
-
-        if (optional(request()->session()->get('errors'))->has($this->key())) {
-            $classes[] = 'is-invalid';
-        }
-
         return FormFacade::input(
             $this->type(),
             $this->key(),
             $this->inputValue(),
-            ['class' => implode(' ', $classes)],
+            ['class' => $this->inputClass()],
         )->toHtml();
+    }
+
+    /**
+     * Returns the css class for the rendered input.
+     * 
+     * @return string
+     */
+    public function inputClass(): string
+    {
+        $classes = ['form-control'];
+
+        if (
+            request()->hasSession()
+            && optional(request()->session()->get('errors'))->has($this->key())
+        ) {
+            $classes[] = 'is-invalid';
+        }
+
+        return implode(' ', $classes);
     }
 
     /**

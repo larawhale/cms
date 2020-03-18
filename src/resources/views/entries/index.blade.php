@@ -36,4 +36,14 @@
             ])
         @endif
     @endcomponent
+
+    @if ($entries->hasPages())
+        <div class="mt-3 text-center">
+            <div class="d-inline-block">
+                {{ $entries->appends([
+                    'type' => request()->query('type'),
+                ])->links() }}
+            </div>
+        </div>
+    @endif
 @endsection

@@ -27,9 +27,7 @@
 
     // Placeholder
     // -------------------- -->
-    if (isset($placeholder)) {
-        $options['placeholder'] = $placeholder;
-    }
+    $options['placeholder'] = $options['placeholder'] ?? $placeholder ?? null;
 
     // Class option
     // -------------------- -->

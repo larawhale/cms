@@ -7,15 +7,15 @@
         ]) !!}
             @include('cms::components.form.group', [
                 'label' => __('cms::inputs.email.label'),
-                'placeholder' => __('cms::inputs.email.placeholder'),
                 'name' => 'email',
+                'placeholder' => __('cms::inputs.email.placeholder'),
                 'type' => 'email',
             ])
 
             @include('cms::components.form.group', [
                 'label' => __('cms::inputs.password.label'),
-                'placeholder' => __('cms::inputs.password.placeholder'),
                 'name' => 'password',
+                'placeholder' => __('cms::inputs.password.placeholder'),
                 'type' => 'password',
             ])
 

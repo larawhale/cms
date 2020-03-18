@@ -76,7 +76,7 @@ class DefaultField implements Field
      */
     public function label(): string
     {
-        return $this->config('label', fn() => $this->key());
+        return __($this->config('label', fn() => $this->key()));
     }
 
     /**
@@ -144,11 +144,17 @@ class DefaultField implements Field
      */
     public function renderInput(): string
     {
+        $classes = ['form-control'];
+
+        if (optional(request()->session()->get('errors'))->has($this->key())) {
+            $classes[] = 'is-invalid';
+        }
+
         return FormFacade::input(
             $this->type(),
             $this->key(),
             $this->inputValue(),
-            ['class' => 'form-control'],
+            ['class' => implode(' ', $classes)],
         )->toHtml();
     }
 

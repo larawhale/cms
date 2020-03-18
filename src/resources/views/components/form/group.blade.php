@@ -25,10 +25,11 @@
 
     $showLabel = $showLabel ?? true;
 
-    // Errors
-    // TODO: SHOULD BE DONE SOMEHWERE ELSE.
+    // Placeholder
     // -------------------- -->
-    $errors = $errors ?? new \Illuminate\Support\MessageBag;
+    if (isset($placeholder)) {
+        $options['placeholder'] = $placeholder;
+    }
 
     // Class option
     // -------------------- -->
@@ -40,7 +41,7 @@
     }
 
     // Is invalid
-    if ($errors->has($name)) {
+    if (isset($errors) && $errors->has($name)) {
         $options['class'] .= ' is-invalid';
     }
 
@@ -54,7 +55,7 @@
 
 <div class="form-group">
     @if ($showLabel && $type !== 'checkbox')
-        {!! Form::label($options['id'] ?? $name, $name) !!}
+        {!! Form::label($options['id'] ?? $name, $label) !!}
     @endif
 
     @if (isset($input))
@@ -82,6 +83,7 @@
 
             @default
                 {!! Form::input($type, $name, $value, $options) !!}
+                @break
         @endswitch
     @endif
 
@@ -91,7 +93,7 @@
         </small>
     @endif
 
-    @if ($errors->has($name))
+    @if (isset($errors) && $errors->has($name))
         <div class="invalid-feedback">
             {{ $errors->first($name) }}
         </div>

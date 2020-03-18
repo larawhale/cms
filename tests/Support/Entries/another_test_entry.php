@@ -9,13 +9,13 @@ return [
             'key' => 'test_key',
             'type' => 'test_type',
             'rules' => 'required',
-            'label' => 'test_label',
+            'label' => 'Test label',
         ],
         [
             'key' => 'another_test_key',
             'type' => 'another_test_type',
             'rules' => 'required',
-            'label' => 'another_test_label',
+            'label' => 'Another test label',
         ],
     ],
 ];

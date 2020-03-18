@@ -1,6 +1,10 @@
 <?php
 
+use Mockery;
+use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 use LaraWhale\Cms\Tests\TestCase;
+use Illuminate\Support\MessageBag;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Models\Field as FieldModel;
 use LaraWhale\Cms\Library\Fields\DefaultField;
@@ -142,6 +146,36 @@ class DefaultFieldTest extends TestCase
         $field = new DefaultField($this->config);
 
         $this->assertMatchesHtmlSnapshot($field->renderInput());
+    }
+
+    /** @test */
+    public function input_class(): void
+    {
+        $field = new DefaultField($this->config);
+
+        $session = Mockery::mock(Store::class)
+            ->makePartial()
+            ->shouldReceive('get')
+            ->with('errors')
+            ->andReturn(new MessageBag([
+                $field->key() => 'Erroreeeee!!1!',
+            ]));
+
+        $request = Mockery::mock(Request::class)
+            ->makePartial();
+
+        $request->shouldReceive('hasSession')
+            ->andReturn(true);
+
+        $request->shouldReceive('session')
+            ->andReturn($session->getMock());
+
+        app()->instance('request', $request);
+
+        $this->assertEquals(
+            'form-control is-invalid',
+            $field->inputClass(),
+        );
     }
 
     /** @test */

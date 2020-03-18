@@ -6,12 +6,16 @@
             'route' => 'cms.login',
         ]) !!}
             @include('cms::components.form.group', [
+                'label' => __('cms::inputs.email.label'),
                 'name' => 'email',
+                'placeholder' => __('cms::inputs.email.placeholder'),
                 'type' => 'email',
             ])
 
             @include('cms::components.form.group', [
+                'label' => __('cms::inputs.password.label'),
                 'name' => 'password',
+                'placeholder' => __('cms::inputs.password.placeholder'),
                 'type' => 'password',
             ])
 

@@ -6,15 +6,23 @@
     </h6>
 
     <nav class="nav flex-column">
-        @foreach ($Factory::$entries as $entry)
+        @foreach ($Factory::entries() as $entry)
+            @php
+                $name = __($entry->name());
+
+                $text = $entry->single()
+                    ? $name
+                    : Str::plural($name);
+            @endphp
+
             <li class="nav-item">
                 @include('cms::components.link', [
                     'route' => 'cms.entries.index',
                     'parameters' => [
-                        'type' => $entry['type'],
+                        'type' => $entry->type(),
                     ],
                     'class' => 'nav-link',
-                    'slot' => Str::plural($entry['name']),
+                    'slot' => $text,
                 ])
             </li>
         @endforeach

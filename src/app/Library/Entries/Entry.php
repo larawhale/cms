@@ -41,6 +41,17 @@ class Entry implements EntryInterface
     }
 
     /**
+     * Returns wether the entry is a single type. Only of a single type may
+     * exist.
+     * 
+     * @return bool
+     */
+    public function single(): bool
+    {
+        return $this->config('single', false);
+    }
+
+    /**
      * Returns the type of the entry.
      * 
      * @return string

@@ -17,13 +17,14 @@ class EntryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
         $type = $request->get('type');
 
+        // The index page is only available for types that exist.
         if (is_null($type)
             || ! Factory::exists($type)
         ) {
@@ -32,9 +33,19 @@ class EntryController extends Controller
         
         $entryClass = Factory::make($type);
 
-        $entries = is_null($type)
-            ? Entry::paginate()
-            : Entry::type($type)->paginate();
+        // The index page should not be available to single type entries.
+        // Redirect to create or edit according to its exsistence.
+        if ($entryClass->single()) {
+            $entry = Entry::type($request->get('type'))->latest()->first();
+
+            $route =  is_null($entry)
+                ? ['cms.entries.create', compact('type')]
+                : ['cms.entries.edit', compact('entry')];
+
+            return redirect()->route(...$route);
+        }
+
+        $entries = Entry::type($type)->paginate();
 
         return view('cms::entries.index', compact('entryClass', 'entries'));
     }
@@ -49,10 +60,24 @@ class EntryController extends Controller
     {
         $type = $request->get('type');
 
+        // The create page is only available for types that exist.
         if (is_null($type)
             || ! Factory::exists($type)
         ) {
             abort(404);
+        }
+        
+        $entryClass = Factory::make($type);
+
+        // The create page should only be available to single type entries that
+        // are not yet stored in the database. Redirect to edit according to
+        // its existence.
+        if ($entryClass->single()) {
+            $entry = Entry::type($request->get('type'))->latest()->first();
+
+            if (! is_null($entry)) {
+                return redirect()->route('cms.entries.edit', compact('entry'));
+            }
         }
 
         return view('cms::entries.create', [
@@ -74,8 +99,17 @@ class EntryController extends Controller
             'type' => $type,
             'fields' => Arr::except($request->validated(), ['entry_type']),
         ];
+        
+        $entryClass = Factory::make($type);
 
-        EntryClass::save(new Entry, $data);
+        // Only one single entry type should exist. Find it and update or
+        // create a new one.
+        if ($entryClass->single()) {
+            $entry = Entry::type($type)->latest()->first()
+                ?? new Entry;
+        }
+
+        EntryClass::save($entry, $data);
 
         return redirect()->route('cms.entries.index', compact('type'));
     }

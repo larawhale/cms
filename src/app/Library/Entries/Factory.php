@@ -62,6 +62,18 @@ class Factory
     }
 
     /**
+     * Returns entry instances of the loaded configurations.
+     * 
+     * @return array
+     */
+    public static function entries(): array
+    {
+        return array_map(function (array $entry) {
+            return static::make(data_get($entry, 'type', ''));
+        }, static::$entries);
+    }
+
+    /**
      * Retreives all the entry configurations.
      * 
      * @return void

@@ -26,6 +26,14 @@ interface Entry
     public function config(string $key = null, $default = null, bool $throw = false);
 
     /**
+     * Returns wether the entry is a single type. Only of a single type may
+     * exist.
+     * 
+     * @return bool
+     */
+    public function single(): bool;
+
+    /**
      * Returns the type of the entry.
      * 
      * @return string

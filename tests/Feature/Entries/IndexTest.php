@@ -53,6 +53,35 @@ class IndexTest extends DuskTestCase
         $this->get('/cms/entries')->assertRedirectLogin();
     }
 
+    /** @test */
+    public function single_redirects_to_create(): void
+    {
+        [$user] = $this->prepareTest();
+
+        $this->actingAs($user)
+            // Use a single entry.
+            ->get('/cms/entries?type=single_entry')
+            ->assertStatus(302)
+            ->assertRedirect('/cms/entries/create?type=single_entry');
+    }
+
+    /** @test */
+    public function single_redirects_to_edit(): void
+    {
+        [$user] = $this->prepareTest();
+
+        // Create a single entry.
+        $entry = factory(Entry::class)->create([
+            'type' => 'single_entry',
+        ]);
+
+        $this->actingAs($user)
+            // Use a single entry that exists.
+            ->get('/cms/entries?type=single_entry')
+            ->assertStatus(302)
+            ->assertRedirect("/cms/entries/$entry->id/edit");
+    }
+
     /**
      * Prepares for tests.
      * 

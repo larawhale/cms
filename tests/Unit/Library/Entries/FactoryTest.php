@@ -45,4 +45,17 @@ class FactoryTest extends TestCase
     {
         $this->assertFalse(Factory::exists('non_existing'));
     }
+
+    /** @test */
+    public function entries(): void
+    {
+        foreach (Factory::entries() as $entry) {
+            $this->assertInstanceOf(Entry::class, $entry);
+        }
+
+        $this->assertCount(
+            count(Factory::$entries),
+            Factory::entries(),
+        );
+    }
 }

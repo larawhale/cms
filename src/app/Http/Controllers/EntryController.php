@@ -99,6 +99,8 @@ class EntryController extends Controller
             'type' => $type,
             'fields' => Arr::except($request->validated(), ['entry_type']),
         ];
+
+        $entry = new Entry;
         
         $entryClass = Factory::make($type);
 

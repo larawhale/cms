@@ -66,6 +66,34 @@ class CreateTest extends DuskTestCase
             ->assertStatus(404);
     }
 
+    /** @test */
+    public function single_create(): void
+    {
+        [$user] = $this->prepareTest();
+
+        $this->actingAs($user)
+            // Use a single entry.
+            ->get('/cms/entries/create?type=single_entry')
+            ->assertStatus(200);
+    }
+
+    /** @test */
+    public function single_redirects_to_edit(): void
+    {
+        [$user] = $this->prepareTest();
+
+        // Create a single entry.
+        $entry = factory(Entry::class)->create([
+            'type' => 'single_entry',
+        ]);
+
+        $this->actingAs($user)
+            // Use a single entry that exists.
+            ->get('/cms/entries/create?type=single_entry')
+            ->assertStatus(302)
+            ->assertRedirect("/cms/entries/$entry->id/edit");
+    }
+
     /**
      * Prepares for tests.
      * 

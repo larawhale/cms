@@ -1,6 +1,5 @@
 <?php
 
-use Mockery;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use LaraWhale\Cms\Tests\TestCase;

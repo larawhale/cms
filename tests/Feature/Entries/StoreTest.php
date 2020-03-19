@@ -2,6 +2,7 @@
 
 use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
+use LaraWhale\Cms\Models\Field;
 use LaraWhale\Cms\Tests\TestCase;
 use Illuminate\Foundation\Testing\TestResponse;
 
@@ -29,6 +30,32 @@ class StoreTest extends TestCase
         $response = $this->makeRequest(null, $data);
 
         $response->assertRedirectLogin();
+    }
+
+    /** @test */
+    public function single_updates(): void
+    {
+        [$user] = $this->prepareTest();
+
+        $data = $this->requestData();
+
+        // Create a single entry and change the type in data.
+        $field = factory(Field::class)->create([
+            'entry_id' => factory(Entry::class)->create([
+                'type' => 'single_entry',
+            ]),
+        ]);
+
+        $data['entry_type'] = 'single_entry';
+
+        $response = $this->makeRequest($user, $data);
+
+        $this->assertResponse($response, $data['entry_type']);
+
+        $this->assertDatabase($data);
+
+        // Assert no extra has been created.
+        $this->assertEquals(1, Entry::count());
     }
 
     /**

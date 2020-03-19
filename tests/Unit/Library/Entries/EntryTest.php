@@ -31,6 +31,24 @@ class EntryTest extends TestCase
     ];
 
     /** @test */
+    public function single(): void
+    {
+        $config = array_merge($this->config, ['single' => true]);
+
+        $entry = new Entry($config);
+
+        $this->assertTrue($entry->single());
+    }
+
+    /** @test */
+    public function single_defaults(): void
+    {
+        $entry = new Entry($this->config);
+
+        $this->assertFalse($entry->single());
+    }
+
+    /** @test */
     public function type(): void
     {
         $entry = new Entry($this->config);

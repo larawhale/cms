@@ -83,6 +83,17 @@ trait TestSetup
             'view.paths',
             __DIR__ . '/Support/views/',
         );
+
+        // Add additional translations. Make locale something different than
+        // the default `cms`, somehow the translator does not want to load the
+        // original translations anymore.
+        $app['translator']->addLines(
+            require __DIR__ . '/Support/lang.php',
+            'testing',
+            'cms',
+        );
+
+        $app['translator']->setFallback('testing');
     }
 
     /**

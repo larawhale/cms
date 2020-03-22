@@ -31,7 +31,7 @@
             </div>
         @else
             @include('cms::entries.table', [
-                'columns' => ['id', 'type', 'updated_at', 'created_at'],
+                'entryClass' => $entryClass,
                 'items' => $entries,
             ])
         @endif

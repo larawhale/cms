@@ -34,6 +34,14 @@ interface Entry
     public function single(): bool;
 
     /**
+     * Returns the table columns used to render the index page. Columns that
+     * are prefixed with `entry_model:` will be retrieved from the entry model.
+     * 
+     * @return array
+     */
+    public function tableColumns(): array;
+
+    /**
      * Returns the type of the entry.
      * 
      * @return string

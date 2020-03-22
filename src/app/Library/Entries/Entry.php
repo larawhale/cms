@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Library\Entries;
 
+use Carbon\Carbon;
 use LaraWhale\Cms\Library\Fields\Factory;
 use LaraWhale\Cms\Library\Concerns\HasConfig;
 use LaraWhale\Cms\Models\Entry as EntryModel;
@@ -49,6 +50,22 @@ class Entry implements EntryInterface
     public function single(): bool
     {
         return $this->config('single', false);
+    }
+
+    /**
+     * Returns the table columns used to render the index page. Columns that
+     * are prefixed with `entry_model:` will be retrieved from the entry model.
+     * 
+     * @return array
+     */
+    public function tableColumns(): array
+    {
+        return $this->config('table_columns', [
+            'entry_model:id',
+            'entry_model:type',
+            'entry_model:updated_at',
+            'entry_model:created_at',
+        ]);
     }
 
     /**

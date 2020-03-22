@@ -4,6 +4,12 @@ return [
     'type' => 'test_entry',
     'name' => 'Test entry',
     'view' => 'test',
+    'table_columns' => [
+        'entry_model:id',
+        'test_key',
+        'another_test_key',
+        'entry_model:updated_at',
+    ],
     'fields' => [
         [
             'key' => 'test_key',

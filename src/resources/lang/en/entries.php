@@ -11,7 +11,13 @@ return [
         'title' => 'Edit :name',
     ],
     'index' => [
-        'title' => ':Name entries',
+        'columns' => [
+            'entry_model:id' => 'Id',
+            'entry_model:type' => 'Type',
+            'entry_model:updated_at' => 'Updated',
+            'entry_model:created_at' => 'Created',
+        ],
         'empty' => 'No ":name" entries availabe.',
+        'title' => ':Name entries',
     ],
 ];

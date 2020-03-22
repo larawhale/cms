@@ -1,22 +1,48 @@
+@php
+    $columns = $entryClass->tableColumns();
+
+    $rows = [];
+
+    foreach ($items as $entry) {
+        $row = [];
+
+        $entryClass = $entry->toEntryClass();
+
+        foreach ($columns as $column) {
+            if (Str::startsWith($column, 'entry_model:')) {
+                $property = Arr::last(explode(':', $column));
+
+                $value = data_get($entry, $property);
+            } else {
+                $value = data_get($entryClass, $column);
+            }
+
+            $row[$column] = $value;
+        }
+
+        $rows[] = $row;
+    }
+@endphp
+
 <table class="table table-hover table-click">
     <thead>
         <tr>
             @foreach ($columns as $column)
                 <th>
-                    {{ $column }}
+                    {{ __('cms::entries.index.columns.' . $column) }}
                 </th>
             @endforeach
         </tr>
     </thead>
 
     <tbody>
-        @foreach($items as $item)
+        @foreach($rows as $key => $row)
             <tr class="action-href" href="{{ route('cms.entries.edit', [
-                'entry' => $item,
+                'entry' => $items[$key],
             ]) }}">
-                @foreach ($columns as $column)
+                @foreach ($row as $value)
                     <td>
-                        {{ data_get($item, $column) }}
+                        {{ $value }}
                     </td>
                 @endforeach
             </tr>

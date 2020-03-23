@@ -2,7 +2,6 @@
 
 namespace LaraWhale\Cms\Http\Controllers;
 
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;

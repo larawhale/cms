@@ -5,7 +5,6 @@ namespace LaraWhale\Cms\Http\Controllers;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use LaraWhale\Cms\Models\Entry;
-use Illuminate\Routing\Controller;
 use LaraWhale\Cms\Library\Entries\Factory;
 use LaraWhale\Cms\Http\Requests\Entries\StoreRequest;
 use LaraWhale\Cms\Http\Requests\Entries\UpdateRequest;

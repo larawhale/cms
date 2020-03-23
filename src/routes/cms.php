@@ -2,6 +2,7 @@
 
 use LaraWhale\Cms\Models\Field;
 use Illuminate\Support\Facades\Schema;
+use LaraWhale\Cms\Http\Controllers\Controller;
 use LaraWhale\Cms\Http\Controllers\EntryController;
 use LaraWhale\Cms\Http\Controllers\LoginController;
 use Illuminate\Routing\Middleware\SubstituteBindings;
@@ -39,6 +40,8 @@ Route::group([
             'except' => ['show'],
         ]);
     });
+
+    Route::fallback(Controller::class . '@fallback');
 });
 
 if (Schema::hasTable(cms_table_name('fields'))) {

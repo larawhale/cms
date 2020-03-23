@@ -51,4 +51,6 @@ $app->register(Barryvdh\Debugbar\ServiceProvider::class);
 
 $app->make(Barryvdh\Debugbar\LaravelDebugbar::class)->enable();
 
+$app->config->set('app.debug', false);
+
 return $app;

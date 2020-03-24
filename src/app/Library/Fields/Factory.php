@@ -9,14 +9,14 @@ class Factory
 {
     /**
      * The type and field map.
-     * 
+     *
      * @var array
      */
     public static array $fields = [];
 
     /**
      * Makes an instance of field according to the given config.
-     * 
+     *
      * @param  array  $config
      * @return \LaraWhale\Cms\Library\Fields\Contracts\Field
      */
@@ -31,7 +31,7 @@ class Factory
 
     /**
      * Resolves the type to a field class.
-     * 
+     *
      * @param  strin  $type
      * @return string
      */
@@ -46,7 +46,7 @@ class Factory
 
     /**
      * Tries to retrieve a type from the given config.
-     * 
+     *
      * @param  array  $config
      * @return string
      * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
@@ -64,7 +64,7 @@ class Factory
 
     /**
      * Returns the default field class.
-     * 
+     *
      * @return string
      */
     public static function defaultFieldClass(): string

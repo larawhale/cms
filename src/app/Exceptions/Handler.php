@@ -32,7 +32,7 @@ class Handler extends ExceptionHandler
             if ($status === 404 && ! Auth::check()) {
                 return redirect()->route('cms.login');
             }
-        } else if (config('app.debug')) {
+        } elseif (config('app.debug')) {
             return $response;
         }
 

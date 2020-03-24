@@ -20,7 +20,7 @@ class Entry extends Model
 
     /**
      * The fields relationship.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function fields(): HasMany

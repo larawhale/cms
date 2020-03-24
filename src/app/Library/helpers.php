@@ -24,7 +24,7 @@ if (! function_exists('cms_entries_path')) {
     /**
      * Returns the path where the entries or the specified entry configuration
      * is located.
-     * 
+     *
      * @param  string  $type
      * @return string
      */
@@ -38,7 +38,7 @@ if (! function_exists('cms_entries_path')) {
 if (! function_exists('cms_table_name')) {
     /**
      * Returns string with the cms table prefix.
-     * 
+     *
      * @param  string  $tableName
      * @return string
      */
@@ -55,7 +55,7 @@ if (! function_exists('cms_table_name')) {
 if (! function_exists('is_current_route')) {
     /**
      * Validates if the given route is the current route.
-     * 
+     *
      * @param  string  $routeName
      * @param  array  $parameters
      * @return bool

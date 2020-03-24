@@ -13,14 +13,14 @@ class Factory
 {
     /**
      * The type and entry map.
-     * 
+     *
      * @var array
      */
     public static array $entries = [];
 
     /**
      * Makes an instance of entry according to the given type.
-     * 
+     *
      * @param  string  $type
      * @param  \LaraWhale\Cms\Models\Entry  $entryModel
      * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
@@ -34,7 +34,7 @@ class Factory
 
     /**
      * Resolves the type to an entry config.
-     * 
+     *
      * @param  strin  $type
      * @return array
      * @throws \LaraWhale\Cms\Exceptions\EntryConfigNotFoundException
@@ -52,7 +52,7 @@ class Factory
 
     /**
      * Determines if an entry configuration exists for the specified type.
-     * 
+     *
      * @param  string  $type
      * @return bool
      */
@@ -63,7 +63,7 @@ class Factory
 
     /**
      * Returns entry instances of the loaded configurations.
-     * 
+     *
      * @return array
      */
     public static function entries(): array
@@ -75,7 +75,7 @@ class Factory
 
     /**
      * Retreives all the entry configurations.
-     * 
+     *
      * @return void
      * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
      */

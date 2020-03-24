@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Feature\Entries;
 
+use Illuminate\Support\Arr;
 use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Models\Field;

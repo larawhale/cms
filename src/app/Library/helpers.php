@@ -30,7 +30,7 @@ if (! function_exists('cms_entries_path')) {
      */
     function cms_entries_path(string $type = ''): string
     {
-        return config('cms.entries_path')
+        return config('cms.entries.path')
             . ($type ? DIRECTORY_SEPARATOR . "$type.php" : $type);
     }
 }
@@ -46,7 +46,7 @@ if (! function_exists('cms_table_name')) {
     {
         return sprintf(
             '%s%s',
-            config('cms.table_prefix'),
+            config('cms.database.table_prefix'),
             $tableName
         );
     }

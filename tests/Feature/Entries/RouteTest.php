@@ -18,7 +18,7 @@ class RouteTest extends DuskTestCase
                 'type' => 'route_entry',
             ])->id,
             'key' => 'route_key',
-            'type' => config('cms.route_field_type'),
+            'type' => config('cms.fields.route_field_type'),
             'value' => $route,
         ]);
 

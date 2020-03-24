@@ -17,7 +17,7 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard(config('cms.guard'))->check()) {
+        if (Auth::guard(config('cms.auth.guard'))->check()) {
             return redirect()->route('cms.home');
         }
 

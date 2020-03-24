@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Tests\Unit\Http\Requests\Entries;
 
+use Mockery;
 use Illuminate\Http\Request;
 use LaraWhale\Cms\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;

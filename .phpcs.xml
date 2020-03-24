@@ -3,8 +3,8 @@
     <file>./src/app/</file>
     <file>./src/config/</file>
     <file>./src/database/</file>
+    <file>./src/routes/</file>
     <!--
-    <file>./routes/</file>
     <file>./tests/</file> -->
 
     <!--

@@ -1,5 +1,7 @@
 <?php
 
+namespace LaraWhale\Cms\Tests\Unit\Http\Requests\Entries;
+
 use Illuminate\Http\Request;
 use LaraWhale\Cms\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;

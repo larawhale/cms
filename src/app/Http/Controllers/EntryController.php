@@ -35,7 +35,7 @@ class EntryController extends Controller
         // The index page should not be available to single type entries.
         // Redirect to create or edit according to its exsistence.
         if ($entryClass->single()) {
-            $entry = Entry::type($request->get('type'))->first();
+            $entry = Entry::type($request->get('type'))->latest()->first();
 
             $route =  is_null($entry)
                 ? ['cms.entries.create', compact('type')]

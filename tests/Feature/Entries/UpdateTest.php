@@ -1,5 +1,7 @@
 <?php
 
+namespace LaraWhale\Cms\Feature\Entries;
+
 use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Models\Field;
@@ -37,7 +39,7 @@ class UpdateTest extends TestCase
 
     /**
      * Prepares for tests.
-     * 
+     *
      * @return array
      */
     private function prepareTest(): array
@@ -67,7 +69,7 @@ class UpdateTest extends TestCase
 
     /**
      * Returns data used in requests.
-     * 
+     *
      * @return array
      */
     private function requestData(): array

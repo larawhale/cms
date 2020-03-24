@@ -1,9 +1,10 @@
 <?php
 
+namespace LaraWhale\Cms\Tests\Unit\Library\Concerns;
+
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Concerns\HasConfig;
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
-
 
 class HasConfigClass
 {
@@ -11,7 +12,7 @@ class HasConfigClass
 
     /**
      * The HasConfigClass constructor.
-     * 
+     *
      * @param  array  $config
      */
     public function __construct(array $config)
@@ -24,7 +25,7 @@ class HasConfigTest extends TestCase
 {
     /**
      * The config of the class.
-     * 
+     *
      * @var array
      */
     private array $config = [

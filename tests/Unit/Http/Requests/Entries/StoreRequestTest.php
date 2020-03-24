@@ -1,5 +1,7 @@
 <?php
 
+namespace LaraWhale\Cms\Tests\Unit\Http\Requests\Entries;
+
 use Illuminate\Http\Request;
 use LaraWhale\Cms\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
@@ -79,7 +81,7 @@ class StoreRequestTest extends TestCase
     /**
      * Makes a validator instance with the store request rules and specified
      * data.
-     * 
+     *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */

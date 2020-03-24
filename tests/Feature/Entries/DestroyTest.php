@@ -34,7 +34,7 @@ class DestroyTest extends TestCase
 
     /**
      * Prepares for tests.
-     * 
+     *
      * @return array
      */
     private function prepareTest(): array

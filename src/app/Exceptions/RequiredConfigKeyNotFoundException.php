@@ -8,21 +8,21 @@ class RequiredConfigKeyNotFoundException extends Exception
 {
     /**
      * The class where the key was not found.
-     * 
+     *
      * @var mixed
      */
     protected $class;
 
     /**
      * The key that was not found.
-     * 
+     *
      * @var string
      */
     protected string $key;
 
     /**
      * The RequiredConfigKeyNotFoundException constructor.
-     * 
+     *
      * @param  mixed  $class
      * @param  string  $key
      */
@@ -43,7 +43,7 @@ class RequiredConfigKeyNotFoundException extends Exception
 
     /**
      * Returns the class.
-     * 
+     *
      * @return mixed
      */
     public function getClass()
@@ -53,7 +53,7 @@ class RequiredConfigKeyNotFoundException extends Exception
 
     /**
      * Returns the key.
-     * 
+     *
      * @return string
      */
     public function getKey(): string

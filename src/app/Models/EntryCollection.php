@@ -18,4 +18,3 @@ class EntryCollection extends Collection
         return $this->map(fn(Entry $entry) => $entry->toEntryClass());
     }
 }
-

@@ -14,21 +14,21 @@ class DefaultField implements Field
 
     /**
      * The Field model instance.
-     * 
+     *
      * @var \LaraWhale\Cms\Models\Field
      */
     protected $fieldModel;
 
     /**
      * The field value.
-     * 
+     *
      * @var array
      */
     protected $value = null;
 
     /**
      * The field constructor.
-     * 
+     *
      * @param  array  $config
      * @param  \LaraWhale\Cms\Models\Field
      */
@@ -41,7 +41,7 @@ class DefaultField implements Field
 
     /**
      * Returns the key of the field.
-     * 
+     *
      * @return string
      */
     public function key(): string
@@ -51,7 +51,7 @@ class DefaultField implements Field
 
     /**
      * Returns the type of the field.
-     * 
+     *
      * @return string
      */
     public function type(): string
@@ -61,7 +61,7 @@ class DefaultField implements Field
 
     /**
      * Returns the rules of the field.
-     * 
+     *
      * @return string|array
      */
     public function rules()
@@ -71,7 +71,7 @@ class DefaultField implements Field
 
     /**
      * Returns the label of the field.
-     * 
+     *
      * @return string
      */
     public function label(): string
@@ -81,7 +81,7 @@ class DefaultField implements Field
 
     /**
      * Returns the field model instance.
-     * 
+     *
      * @return \LaraWhale\Cms\Models\Field|null
      */
     public function fieldModel()
@@ -91,7 +91,7 @@ class DefaultField implements Field
 
     /**
      * Sets the Field model instance.
-     * 
+     *
      * @param  \LaraWhale\Cms\Models\Field  $fieldModel
      * @return \LaraWhale\Cms\Library\Fields\Contracts\Field
      */
@@ -106,7 +106,7 @@ class DefaultField implements Field
 
     /**
      * Returns the value of the field.
-     * 
+     *
      * @return mixed
      */
     public function value()
@@ -117,7 +117,7 @@ class DefaultField implements Field
     /**
      * Returns a representation of how the value should be stored in the
      * database.
-     * 
+     *
      * @param  mixed  $value
      * @return string
      */
@@ -129,7 +129,7 @@ class DefaultField implements Field
     /**
      * Returns the value of the field in a form usable during the rendering of
      * the input.
-     * 
+     *
      * @return mixed
      */
     public function inputValue()
@@ -139,7 +139,7 @@ class DefaultField implements Field
 
     /**
      * Returns a rendered input.
-     * 
+     *
      * @return string
      */
     public function renderInput(): string
@@ -154,15 +154,14 @@ class DefaultField implements Field
 
     /**
      * Returns the css class for the rendered input.
-     * 
+     *
      * @return string
      */
     public function inputClass(): string
     {
         $classes = ['form-control'];
 
-        if (
-            request()->hasSession()
+        if (request()->hasSession()
             && optional(request()->session()->get('errors'))->has($this->key())
         ) {
             $classes[] = 'is-invalid';
@@ -173,7 +172,7 @@ class DefaultField implements Field
 
     /**
      * Returns a rendered form group.
-     * 
+     *
      * @return string
      */
     public function renderFormGroup(): string
@@ -187,7 +186,7 @@ class DefaultField implements Field
 
     /**
      * Saves the field to the database.
-     * 
+     *
      * @param  \LaraWhale\Cms\Models\Entry  $entryModel
      * @param  mixed  $value
      * @return \LaraWhale\Cms\Models\Field

@@ -8,7 +8,7 @@ trait HasConfig
 {
     /**
      * The config of the class.
-     * 
+     *
      * @var array
      */
     protected array $config;
@@ -16,7 +16,7 @@ trait HasConfig
     /**
      * Returns the config of the class or the configured value for the
      * specified key.
-     * 
+     *
      * @param  string  $key
      * @param  mixed  $default
      * @param  bool  $throw

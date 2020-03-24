@@ -9,7 +9,7 @@ return [
 
     /**
      * The type and field map.
-     * 
+     *
      * Types that are in this array can be used in the fields entry
      * configuration. New types can be added to this array.
      */

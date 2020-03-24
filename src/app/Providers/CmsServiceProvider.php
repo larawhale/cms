@@ -38,7 +38,7 @@ class CmsServiceProvider extends ServiceProvider
 
     /**
      * Register paths to be published by the publish command.
-     * 
+     *
      * @return void
      */
     protected function registerPublishPaths(): void

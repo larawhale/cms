@@ -9,7 +9,7 @@ class RequestTest extends TestCase
 {
     /**
      * The password used to create a user and login.
-     * 
+     *
      * @var string
      */
     private string $password = 'password';
@@ -29,7 +29,7 @@ class RequestTest extends TestCase
 
     /**
      * Prepares for tests.
-     * 
+     *
      * @return array
      */
     private function prepareTest(): array
@@ -43,7 +43,7 @@ class RequestTest extends TestCase
 
     /**
      * Returns data used in requests.
-     * 
+     *
      * @param  \LaraWhale\Cms\Models\User  $user
      * @return array
      */

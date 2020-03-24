@@ -18,7 +18,7 @@ class Field extends Model
 
     /**
      * The entry relationship.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function entry(): BelongsTo

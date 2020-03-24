@@ -8,7 +8,7 @@ class TestResponse extends BaseTestResponse
 {
     /**
      * Asserts the response was redirected to login.
-     * 
+     *
      * @return self
      */
     public function assertRedirectLogin(): self
@@ -18,7 +18,7 @@ class TestResponse extends BaseTestResponse
 
     /**
      * Asserts the response was redirected to home.
-     * 
+     *
      * @return self
      */
     public function assertRedirectHome(): self

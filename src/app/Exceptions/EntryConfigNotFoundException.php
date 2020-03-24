@@ -8,14 +8,14 @@ class EntryConfigNotFoundException extends Exception
 {
     /**
      * The type that was not found.
-     * 
+     *
      * @var string
      */
     protected string $type;
 
     /**
      * The EntryConfigNotFoundException constructor.
-     * 
+     *
      * @param  string  $type
      */
     public function __construct(string $type)
@@ -30,7 +30,7 @@ class EntryConfigNotFoundException extends Exception
 
     /**
      * Returns the type.
-     * 
+     *
      * @return string
      */
     public function getType(): string

@@ -18,7 +18,7 @@ trait TestSetup
 
     /**
      * Setup the test environment.
-     * 
+     *
      * @return void
      */
     protected function setUp(): void
@@ -98,7 +98,7 @@ trait TestSetup
 
     /**
      * Returns the package providers.
-     * 
+     *
      * @return array
      */
     protected function getPackageProviders($app): array

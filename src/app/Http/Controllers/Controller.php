@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     /**
      * The Controller constructor.
-     * 
+     *
      * @param  \Illuminate\Foundation\Application  $app
      */
     public function __construct(Application $app)
@@ -35,7 +35,7 @@ class Controller extends BaseController
 
     /**
      * The fallback route method.
-     * 
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function fallback()

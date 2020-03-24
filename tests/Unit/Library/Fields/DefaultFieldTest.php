@@ -1,5 +1,7 @@
 <?php
 
+namespace LaraWhale\Cms\Tests\Unit\Library\Fields;
+
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use LaraWhale\Cms\Tests\TestCase;

@@ -4,8 +4,7 @@
     <file>./src/config/</file>
     <file>./src/database/</file>
     <file>./src/routes/</file>
-    <!--
-    <file>./tests/</file> -->
+    <file>./tests/</file>
 
     <!--
         Available rules can be found at:

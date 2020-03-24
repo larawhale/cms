@@ -44,7 +44,7 @@ class EditTest extends DuskTestCase
 
     /**
      * Prepares for tests.
-     * 
+     *
      * @return array
      */
     private function prepareTest(): array
@@ -60,7 +60,7 @@ class EditTest extends DuskTestCase
 
     /**
      * Returns data used in requests.
-     * 
+     *
      * @param  \LaraWhale\Cms\Models\Entry  $entry
      * @return array
      */

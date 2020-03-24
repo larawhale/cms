@@ -37,7 +37,7 @@ class UpdateTest extends TestCase
 
     /**
      * Prepares for tests.
-     * 
+     *
      * @return array
      */
     private function prepareTest(): array
@@ -67,7 +67,7 @@ class UpdateTest extends TestCase
 
     /**
      * Returns data used in requests.
-     * 
+     *
      * @return array
      */
     private function requestData(): array

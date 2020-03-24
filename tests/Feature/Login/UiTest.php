@@ -9,7 +9,7 @@ class UiTest extends DuskTestCase
 {
     /**
      * The password used to create a user and login.
-     * 
+     *
      * @var string
      */
     private string $password = 'password';
@@ -34,7 +34,7 @@ class UiTest extends DuskTestCase
 
     /**
      * Prepares for tests.
-     * 
+     *
      * @return array
      */
     private function prepareTest(): array
@@ -48,7 +48,7 @@ class UiTest extends DuskTestCase
 
     /**
      * Returns data used in requests.
-     * 
+     *
      * @param  \LaraWhale\Cms\Models\User  $user
      * @return array
      */

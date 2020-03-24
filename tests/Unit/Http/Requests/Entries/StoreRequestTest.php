@@ -79,7 +79,7 @@ class StoreRequestTest extends TestCase
     /**
      * Makes a validator instance with the store request rules and specified
      * data.
-     * 
+     *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */

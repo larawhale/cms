@@ -96,7 +96,7 @@ class CreateTest extends DuskTestCase
 
     /**
      * Prepares for tests.
-     * 
+     *
      * @return array
      */
     private function prepareTest(): array
@@ -108,7 +108,7 @@ class CreateTest extends DuskTestCase
 
     /**
      * Returns data used in requests.
-     * 
+     *
      * @return array
      */
     private function requestData(): array

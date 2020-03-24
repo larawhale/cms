@@ -84,7 +84,7 @@ class IndexTest extends DuskTestCase
 
     /**
      * Prepares for tests.
-     * 
+     *
      * @return array
      */
     private function prepareTest(): array

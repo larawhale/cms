@@ -18,7 +18,7 @@ class Model extends EloquenModel
 
         // Sometimes the prefix has already been added during relationship
         // initialization.
-        if (Str::contains($table, config('cms.table_prefix'))) {
+        if (Str::contains($table, config('cms.database.table_prefix'))) {
             return $table;
         }
 

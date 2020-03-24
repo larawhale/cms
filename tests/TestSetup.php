@@ -75,7 +75,7 @@ trait TestSetup
         $app['config']->set('database.default', 'testing');
 
         $app['config']->set(
-            'cms.entries_path',
+            'cms.entries.path',
             __DIR__ . '/Support/Entries/',
         );
 

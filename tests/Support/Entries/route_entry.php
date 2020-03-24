@@ -7,7 +7,7 @@ return [
     'fields' => [
         [
             'key' => 'route_key',
-            'type' => config('cms.route_field_type'),
+            'type' => config('cms.fields.route_field_type'),
             'rules' => 'required',
             'label' => 'Route label',
         ],

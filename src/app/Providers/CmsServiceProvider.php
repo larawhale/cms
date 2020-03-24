@@ -29,7 +29,7 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'cms');
 
-        FieldFactory::$fields = config('cms.fields');
+        FieldFactory::$fields = config('cms.fields.classes');
 
         EntryFactory::loadEntries();
 

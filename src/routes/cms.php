@@ -45,7 +45,7 @@ Route::group([
 });
 
 if (Schema::hasTable(cms_table_name('fields'))) {
-    Field::type(config('cms.route_field_type'))
+    Field::type(config('cms.fields.route_field_type'))
         ->with('entry')
         ->each(function (Field $field) {
             $entryClass = $field->entry->toEntryClass();

@@ -331,6 +331,10 @@ class Entry implements EntryInterface
             )
             ->delete();
 
+        // Update updated at timestamp of entry with the latest value of the
+        // field models.
+        $entryModel->setUpdatedAt($fieldModels->max('updated_at'))->save();
+
         return $entryModel;
     }
 }

@@ -35,7 +35,7 @@ class EntryController extends Controller
         // The index page should not be available to single type entries.
         // Redirect to create or edit according to its exsistence.
         if ($entryClass->single()) {
-            $entry = Entry::type($request->get('type'))->latest()->first();
+            $entry = Entry::type($request->get('type'))->first();
 
             $route =  is_null($entry)
                 ? ['cms.entries.create', compact('type')]
@@ -44,7 +44,7 @@ class EntryController extends Controller
             return redirect()->route(...$route);
         }
 
-        $entries = Entry::type($type)->paginate();
+        $entries = Entry::type($type)->latest('updated_at')->paginate();
 
         return view('cms::entries.index', compact('entryClass', 'entries'));
     }

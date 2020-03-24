@@ -44,7 +44,7 @@ class EntryController extends Controller
             return redirect()->route(...$route);
         }
 
-        $entries = Entry::type($type)->paginate();
+        $entries = Entry::type($type)->latest('updated_at')->paginate();
 
         return view('cms::entries.index', compact('entryClass', 'entries'));
     }

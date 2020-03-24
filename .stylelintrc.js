@@ -2,6 +2,7 @@ module.exports = {
     extends: 'stylelint-config-twbs-bootstrap/scss',
     rules: {
         'at-rule-no-unknown': null,
+        'block-opening-brace-space-before': 'always',
         'declaration-colon-space-after': 'always-single-line',
         'declaration-colon-space-before': 'never',
         indentation: 4,

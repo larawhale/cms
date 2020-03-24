@@ -1,35 +1,35 @@
 .sidebar {
     position: fixed;
     top: $header-height;
-    bottom: 0px;
-    left: 0px;
-    border-right: $card-border-width solid $card-border-color;
-    padding: $sidebar-padding;
+    bottom: 0;
+    left: 0;
     width: $sidebar-width;
+    padding: $sidebar-padding;
+    border-right: $card-border-width solid $card-border-color;
 
     .nav {
-        margin-left: -$sidebar-padding;
         margin-right: -$sidebar-padding;
+        margin-left: -$sidebar-padding;
     }
 
     .nav-link {
-        padding-left: $sidebar-padding * 2;
         padding-right: $sidebar-padding * 2;
+        padding-left: $sidebar-padding * 2;
         color: $body-color;
 
         &:hover,
         &.active {
             position: relative;
-            color: $headings-color;
             font-weight: $font-weight-bold;
+            color: $headings-color;
 
-            &:before {
+            &::before {
                 position: absolute;
-                top: 0px;
-                bottom: 0px;
-                left: 0px;
-                content: '';
+                top: 0;
+                bottom: 0;
+                left: 0;
                 width: .25rem;
+                content: '';
                 background: $primary;
             }
         }

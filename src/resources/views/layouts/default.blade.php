@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="{{ asset('vendor/cms/css/app.css') }}">
     </head>
 
-    <body class="bg-light">
+    <body>
         <div id="cms-app">
             @include('cms::components.header')
 

@@ -1,4 +1,14 @@
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
+// Color system
+
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-600: #6c757d !default;
+$gray-900: #212529 !default;
 
 // Body
 //
@@ -12,11 +22,13 @@ $body-color: $gray-600;
 //
 // Define common padding and border radius sizes and more.
 
-$border-color: $gray-200;
+$border-color: #edf2f9;
 
 $border-radius-sm: .25rem;
 $border-radius: .5rem;
 $border-radius-lg: 1rem;
+
+$box-shadow-lg: 0 .75rem 1.5rem rgba(18, 38, 63, .03);
 
 
 // Typography
@@ -29,6 +41,13 @@ $font-family-base: $font-family-sans-serif;
 
 $headings-font-family: 'Montserrat', sans-serif;
 $headings-color: $gray-900;
+
+
+// Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+$table-hover-bg: $border-color;
 
 
 // Buttons + Forms
@@ -49,11 +68,12 @@ $card-spacer-y: 1rem;
 $card-spacer-x: 1.5rem;
 $card-border-color: $border-color;
 $card-cap-bg: transparent;
+$card-shadow: $box-shadow-lg;
 
 
 // Custom
 
 $header-height: 58px;
 
-$sidebar-width: 200px;
+$sidebar-width: 15rem;
 $sidebar-padding: 1rem;

@@ -13,27 +13,4 @@
             background-color: rgba($border-color, .5);
         }
     }
-
-    // .nav-link {
-    //     padding-right: $sidebar-padding * 2;
-    //     padding-left: $sidebar-padding * 2;
-    //     color: $body-color;
-
-    //     &:hover,
-    //     &.active {
-    //         position: relative;
-    //         font-weight: $font-weight-bold;
-    //         color: $headings-color;
-
-    //         &::before {
-    //             position: absolute;
-    //             top: 0;
-    //             bottom: 0;
-    //             left: 0;
-    //             width: .25rem;
-    //             content: '';
-    //             background: $primary;
-    //         }
-    //     }
-    // }
 }

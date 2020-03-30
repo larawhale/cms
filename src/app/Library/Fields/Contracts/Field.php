@@ -4,8 +4,9 @@ namespace LaraWhale\Cms\Library\Fields\Contracts;
 
 use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Models\Field as FieldModel;
+use LaraWhale\Cms\Library\Config\Configurable;
 
-interface Field
+interface Field extends Configurable
 {
     /**
      * The field constructor.
@@ -13,18 +14,6 @@ interface Field
      * @param  array  $config
      */
     public function __construct(array $config);
-
-    /**
-     * Returns the config of the field or the configured value for the
-     * specified key.
-     *
-     * @param  string  $key
-     * @param  mixed  $default
-     * @param  bool  $throw
-     * @return mixed
-     * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
-     */
-    public function config(string $key = null, $default = null, bool $throw = false);
 
     /**
      * Returns the key of the field.

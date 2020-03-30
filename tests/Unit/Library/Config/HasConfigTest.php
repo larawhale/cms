@@ -1,9 +1,9 @@
 <?php
 
-namespace LaraWhale\Cms\Tests\Unit\Library\Concerns;
+namespace LaraWhale\Cms\Tests\Unit\Library\Config;
 
 use LaraWhale\Cms\Tests\TestCase;
-use LaraWhale\Cms\Library\Concerns\HasConfig;
+use LaraWhale\Cms\Library\Config\HasConfig;
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
 class HasConfigClass

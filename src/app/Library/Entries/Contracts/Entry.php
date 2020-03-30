@@ -3,8 +3,9 @@
 namespace LaraWhale\Cms\Library\Entries\Contracts;
 
 use LaraWhale\Cms\Models\Entry as EntryModel;
+use LaraWhale\Cms\Library\Config\Configurable;
 
-interface Entry
+interface Entry extends Configurable
 {
     /**
      * The Entry constructor.
@@ -12,18 +13,6 @@ interface Entry
      * @param  array  $config
      */
     public function __construct(array $config);
-
-    /**
-     * Returns the config of the entry or the configured value for the
-     * specified key.
-     *
-     * @param  string  $key
-     * @param  mixed  $default
-     * @param  bool  $throw
-     * @return mixed
-     * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
-     */
-    public function config(string $key = null, $default = null, bool $throw = false);
 
     /**
      * Returns wether the entry is a single type. Only of a single type may

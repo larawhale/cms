@@ -3,9 +3,9 @@
 namespace LaraWhale\Cms\Library\Fields;
 
 use Collective\Html\FormFacade;
+use LaraWhale\Cms\Library\Config\HasConfig;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Models\Field as FieldModel;
-use LaraWhale\Cms\Library\Concerns\HasConfig;
 use LaraWhale\Cms\Library\Fields\Contracts\Field;
 
 class DefaultField implements Field

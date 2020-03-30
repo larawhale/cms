@@ -1,6 +1,6 @@
 <?php
 
-namespace LaraWhale\Cms\Library\Concerns;
+namespace LaraWhale\Cms\Library\Config;
 
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 

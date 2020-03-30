@@ -4,7 +4,7 @@ namespace LaraWhale\Cms\Library\Entries;
 
 use Carbon\Carbon;
 use LaraWhale\Cms\Library\Fields\Factory;
-use LaraWhale\Cms\Library\Concerns\HasConfig;
+use LaraWhale\Cms\Library\Config\HasConfig;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Models\Field as FieldModel;
 use LaraWhale\Cms\Library\Fields\Contracts\Field as FieldInterface;

@@ -2,7 +2,7 @@
     <nav class="nav justify-content-between py-2 border-bottom">
         <li class="nav-item">
             <a class="nav-link" href="{{ route('cms.home') }}">
-                cms
+                <img src="{{ asset('vendor/cms/img/larawhale_logo.svg') }}">
             </a>
         </li>
 

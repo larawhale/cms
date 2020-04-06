@@ -44,11 +44,19 @@ class CmsServiceProvider extends ServiceProvider
     protected function registerPublishPaths(): void
     {
         $this->publishes([
+            __DIR__ . '/../../public' => public_path('vendor/cms'),
+        ], ['cms', 'cms.assets']);
+
+        $this->publishes([
+            __DIR__ . '/../../config' => base_path('config'),
+        ], ['cms', 'cms.config']);
+
+        $this->publishes([
             __DIR__ . '/../../resources/views' => resource_path('views/vendor/cms'),
         ], ['cms', 'cms.views']);
 
         $this->publishes([
-            __DIR__ . '/../../public' => public_path('vendor/cms'),
-        ], ['cms', 'cms.assets']);
+            __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/cms'),
+        ], ['cms', 'cms.lang']);
     }
 }

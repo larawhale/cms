@@ -19,11 +19,16 @@
                 'type' => 'password',
             ])
 
+            @include('cms::components.form.group', [
+                'label' => __('cms::inputs.remember.label'),
+                'name' => 'remember',
+                'type' => 'checkbox',
+            ])
+
             {!! Form::submit(__('cms::actions.login'), [
-                'class' => 'btn btn-primary',
+                'class' => 'btn btn-primary btn-block',
                 'dusk' => 'submit-login',
             ]) !!}
         {!! Form::close() !!}
     @endcomponent
 @endsection
-

@@ -25,6 +25,10 @@
 
     $showLabel = $showLabel ?? true;
 
+    // Id
+    // -------------------- -->
+    $options['id'] = $options['id'] ?? uniqid($name . '_');
+
     // Placeholder
     // -------------------- -->
     $options['placeholder'] = $options['placeholder'] ?? $placeholder ?? null;
@@ -53,7 +57,7 @@
 
 <div class="form-group">
     @if ($showLabel && $type !== 'checkbox')
-        {!! Form::label($options['id'] ?? $name, $label) !!}
+        {!! Form::label($options['id'], $label) !!}
     @endif
 
     @if (isset($input))
@@ -71,9 +75,9 @@
             @case ('checkbox')
             @case ('radio')
                 <div class="custom-control custom-{{ $type }}">
-                    {!! Form::$type($type, $name, $value, null, $options) !!}
+                    {!! Form::$type($name, $value, null, $options) !!}
 
-                    {!! Form::label($name, $name, [
+                    {!! Form::label($options['id'], $label, [
                         'class' => 'custom-control-label'
                     ]) !!}
                 </div>

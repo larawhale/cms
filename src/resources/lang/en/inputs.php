@@ -9,4 +9,7 @@ return [
         'label' => 'Password',
         'placeholder' => 'Your password',
     ],
+    'remember' => [
+        'label' => 'Remember me',
+    ],
 ];

@@ -46,3 +46,61 @@ A CMS user needs to be available in order to gain access to the CMS. A user can 
 php artisan cms:create-user
 ```
 
+## Concepts
+
+This CMS package has been build with a simple concept in mind. There are only two basic entities used: entries and fields. Entries are collectors of fields where fields are entities that contain a single value.
+
+### Entries
+
+An entry is a collector of fields and its values. It will keep track of the values of its fields. The entry has a lot of similarites with the Eloquent model attributes when it comes down to accessing the field values.
+
+### Fields
+
+A field is an entity that contains a single value, think about a simple html input field. It will keep track of the value and other things like validating the value or rendering an input field.
+
+## Authentication
+
+The CMS provides a simple authentication process. Most of it is straight from the `AuthenticatesUsers` trait provided by Laravel.
+
+A user can login by visiting the `GET: /cms/login` endpoint.
+
+Like mentioned before, a user can be created by running the `php artisan cms:create-user` console command where you will be promped with a few questsions.
+
+Publishing the config file, `php artisan vendor:publish --tag=cms.config`, will allow you to configure the guard and/or the provider used to authenticate users.
+
+```php
+// config/cms.php
+[
+    'auth' => [
+        /**
+         * The active authentication guard used to protect cms routes.
+         */
+        'guard' => 'cms',
+
+        /**
+         * The authentication guard configurations.
+         */
+        'guards' => [
+            'cms' => [
+                'driver' => 'session',
+                'provider' => 'cms',
+            ],
+        ],
+
+        /**
+         * The authentication provider configurations.
+         */
+        'providers' => [
+            'cms' => [
+                'driver' => 'eloquent',
+                'model' => \LaraWhale\Cms\Models\User::class,
+            ],
+        ],
+    ],
+]
+
+```
+
+## Entries
+
+## Fields

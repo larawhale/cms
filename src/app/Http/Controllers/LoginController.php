@@ -44,6 +44,6 @@ class LoginController extends Controller
      */
     protected function guard(): StatefulGuard
     {
-        return Auth::guard('cms');
+        return Auth::guard(config('cms.auth.guard'));
     }
 }

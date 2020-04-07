@@ -3,6 +3,7 @@
 namespace LaraWhale\Cms\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use LaraWhale\Cms\Console\Commands\CreateUser;
 use LaraWhale\Cms\Library\Fields\Factory as FieldFactory;
 use LaraWhale\Cms\Library\Entries\Factory as EntryFactory;
 
@@ -24,6 +25,12 @@ class CmsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
         $this->loadFactoriesFrom(__DIR__ . '/../../database/factories');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreateUser::class,
+            ]);
+        }
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'cms');
 

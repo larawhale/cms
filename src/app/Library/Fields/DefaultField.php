@@ -148,7 +148,10 @@ class DefaultField implements Field
             $this->type(),
             $this->key(),
             $this->inputValue(),
-            ['class' => $this->inputClass()],
+            [
+                'class' => $this->inputClass(),
+                'id' => $this->key(),
+            ],
         )->toHtml();
     }
 

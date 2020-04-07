@@ -27,7 +27,7 @@
 
     // Id
     // -------------------- -->
-    $options['id'] = $options['id'] ?? uniqid($name . '_');
+    $options['id'] = $options['id'] ?? $name;
 
     // Placeholder
     // -------------------- -->

@@ -26,19 +26,22 @@ Further more you should publish the resources by using the `cms` tag:
 php artisan vendor:publish --tag=cms
 ```
 
-This package also provides separate publishing tags.
-    - `cms.assets`
-        **Required** All public asset files required for the user interface, this includes fonts, css and javascript.
-    - `cms.config`
-        The configuration file to add custom fields, change the user provider and more.
-    - `cms.views`
-        All the views that are rendered as the user interface.
-    - `cms.lang`
-        The translations used in the user interface.
+This package also provides separate publishing tags:
+
+  - `cms.assets` (required)<br>
+    All public asset files required for the user interface, this includes fonts, css and javascript.
+  - `cms.config`<br>
+    The configuration file to add custom fields, change the user provider and more.
+  - `cms.entries`<br>
+    One or more pre made entry configurations.
+  - `cms.views`<br>
+    All the views that are rendered as the user interface.
+  - `cms.lang`<br>
+    The translations used in the user interface.
 
 ### Creating a user
 
-A user needs to be available in order to gain access to the user interface. A user can be created by running a command:
+A user needs to be present in the databse in order to gain access to the user interface. A user can be created by running a command:
 
 ```
 php artisan cms:create-user
@@ -46,7 +49,7 @@ php artisan cms:create-user
 
 This command will prompt for a few answers before the user will be created.
 
-After you have created the user, you may login at `/cms/login`.
+The user may now login at `/cms/login` after it has been created.
 
 ### Entry configuration
 

@@ -93,7 +93,7 @@ More information about entry and field configuration can be found in the **...**
 
 The package uses a simple concept of two entities, entries and fields.
 
-### Entrie
+### Entries
 
 Entries are just like models. They are objects that contain properties with values. The developer will control which properties are available by configuration. Properties are configured by adding fields to the entry.
 

@@ -129,11 +129,9 @@ The properties of the entries.
 
 ### Configuration
 
-| Property | Description |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `key` | **required** An identifier that helps the package to indentify what type of entry it is handeling. The value can be anything as long as it is unique to other entry types, it does not have to be the same as the filename. |
-| `type` | The name of an entry will be used in the user interface to let the users identify what they are viewing, creating, editing or deleting. By default it will use the `type` value. |
-| `single` | A boolean that indicates if there should only exist one of this entry type. |
-| `table_columns` | An array of field keys that are used to render the table on the overview page. By default it will display the `id`, `type`, `updated_at` and `created_at`. Prefix a field key with `entry_model:` to retrieve the value from the entry model rather than from a field, eg: `enry_model:id`. |
-| `view` | A reference to a blade file that is used to render when a user visits the url on which the entry is made available. This property is only required when the entry has a so called **@@`route_field_type`@@**. |
-| `fields` | An array of **@@field configurations@@** that should be made available to the entry as well as rendered in forms of the user interface. |
+| Property | Type | Description |
+|----------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `key` | string | **required** The value if this property is used as an identifier and should be unique within the same type of entry. This means you can have the same value for `key` in different type of entries. The value of this property will also be used as the accessor on the entry in your blade view. In this case that could be `$entry->title`, but more about this in the **...** section. |
+| `type` | string | **required** The type property is an indicator for the package which type of field it is handeling. According to the value it might render a different input field or store the value in a different way. By default this value will be used as the `type` value attribute of an `input` element. However it is also possible to create your own custom types, more about this in the **...** section. |
+| `rules` | array | The value of the rules will be used to validate the input the user has given during creating or updating an entry. The rules are written exactly the same way as you are used to in a Laravel application. This means you could use custom rules, closures or other [validation features](https://laravel.com/docs/master/validation) Laravel supplies. |
+| `label` | string | This property will be used to display to the user, it is the label of the field. The package will try to translate this value, so a value like `inputs.title.label` might be translated. |

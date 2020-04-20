@@ -151,7 +151,7 @@ The `type` property will allow you to control how a field should behave.
 
 #### Default field
 
-By default all fields will be handled by the `DefaultField`. This field class will render an `input` element with the value of `type` as its `type` attribute. This "default" field can be configured by changing the `cms.fields.classes.default` configuration.
+By default all fields will be handled by the `DefaultField` class. This field class will render an `input` element with the value of `type` as its `type` attribute. This "default" field can be configured by changing the `cms.fields.classes.default` configuration.
 
 #### Custom field
 
@@ -161,8 +161,11 @@ This can be done by creating a class that implements the `Field` interface and a
 
 Example:
 
-`app\Library\Fields\CustomField.php`
+Write a custom field that renders a different view as input and does some additional things during the saving to the database.
+
 ```php
+// app\Library\Fields\CustomField.php
+
 namespace App\Library\Fields;
 
 use LaraWhale\Cms\Library\Fields\DefautlField
@@ -198,8 +201,11 @@ class CustomField extends DefaultField
 }
 ```
 
-`config/cms.php`
+Add the custom field class to the classes array of the fields configuration. In this array the key will be the `type` you use during your field configuration, where the value is a string of your class name.
+
 ```php
+// config/cms.php
+
 return [
     ...,
     'fields' => [
@@ -212,8 +218,11 @@ return [
 
 ```
 
-`resources/enties/my_entry.php`
+Use your newly created field in your entries configuration by using your new type in the `type` property.
+
 ```php
+// resources/enties/my_entry.php
+
 return [
     ...,
     'fields' => [

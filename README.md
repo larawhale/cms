@@ -143,3 +143,84 @@ The properties of the entries.
 | `type` | string | **required** The type property is an indicator for the package which type of field it is handeling. According to the value it might render a different input field or store the value in a different way. By default this value will be used as the `type` value attribute of an `input` element. However it is also possible to create your own custom types, more about this in the **...** section. |
 | `rules` | array | The value of the rules will be used to validate the input the user has given during creating or updating an entry. The rules are written exactly the same way as you are used to in a Laravel application. This means you could use custom rules, closures or other [validation features](https://laravel.com/docs/master/validation) Laravel supplies. |
 | `label` | string | This property will be used to display to the user, it is the label of the field. The package will try to translate this value, so a value like `inputs.title.label` might be translated. |
+
+
+### Field types
+
+The `type` property will allow you to control how a field should behave.
+
+#### Default field
+
+By default all fields will be handled by the `DefaultField`. This field class will render an `input` element with the value of `type` as its `type` attribute. This "default" field can be configured by changing the `cms.fields.classes.default` configuration.
+
+#### Custom field
+
+It is possible to create your own custom field classes. You might for example wish to render a more comlex input field in the user interface or do some additional things during the saving to the database.
+
+This can be done by creating a class that implements the `Field` interface and adding it to the `cms.fields.classes` configuration array. You could also simply extend from the `DefaultField` if you wish the make minor changes to the default behavior.
+
+Example:
+
+`app\Library\Fields\CustomField.php`
+```php
+namespace App\Library\Fields;
+
+use LaraWhale\Cms\Library\Fields\DefautlField
+
+class CustomField extends DefaultField
+{
+    /**
+     * Returns a rendered input.
+     *
+     * @return string
+     */
+    public function renderInput(): string
+    {
+        return render('custom.field', [
+            $this->inputValue(),
+            ...,
+        ]);
+    }
+
+    /**
+     * Saves the field to the database.
+     *
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @param  mixed  $value
+     * @return \LaraWhale\Cms\Models\Field
+     */
+    public function save(EntryModel $entryModel, $value): FieldModel
+    {
+        // ...
+
+        return parent::save($entryModel, $value);
+    }
+}
+```
+
+`config/cms.php`
+```php
+return [
+    ...,
+    'fields' => [
+        'classes' => [
+            'custom_type' => App\Library\Fields\CustomField::class,
+        ],
+    ],
+    ...,
+];
+
+```
+
+`resources/enties/my_entry.php`
+```php
+return [
+    ...,
+    'fields' => [
+        [
+            'key' => 'custom_key',
+            'type' => 'custom_type',
+        ],
+    ],
+];
+```

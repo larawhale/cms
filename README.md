@@ -94,6 +94,14 @@ return [
 
 More information about entry and field configuration can be found in the **...** section.
 
+The fields will now be rendered in the forms of the user interface and you may access the data in your views.
+
+```
+<h1>{{ $entry->title }}</h1>
+
+<p>{{ $entry->body }}</p>
+```
+
 ## The concept
 
 The package uses a simple concept of two entities, entries and fields.

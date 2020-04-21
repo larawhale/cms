@@ -59,6 +59,10 @@ class CmsServiceProvider extends ServiceProvider
         ], ['cms', 'cms.config']);
 
         $this->publishes([
+            __DIR__ . '/../../resources/entries' => config('cms.entries.path'),
+        ], ['cms', 'cms.entries']);
+
+        $this->publishes([
             __DIR__ . '/../../resources/views' => resource_path('views/vendor/cms'),
         ], ['cms', 'cms.views']);
 

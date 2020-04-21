@@ -71,7 +71,7 @@ return [
     'view' => 'entries.first_entry',
     'fields' => [
         [
-            'key' => 'url',
+            'key' => 'route',
             'type' => 'route',
             'rules' => 'required',
             'label' => 'Url',
@@ -128,7 +128,7 @@ The configuration of your entries live in the default `resources/entries` folder
 | `name` | string | The name of an entry will be used in the user interface to let the users identify what they are viewing, creating, editing or deleting. By default it will use the `type` value. |
 | `single` | boolean | A boolean that indicates if there should only exist one of this entry type. |
 | `table_columns` | array | An array of field keys that are used to render the table on the overview page. By default it will display the `id`, `type`, `updated_at` and `created_at`. Prefix a field key with `entry_model:` to retrieve the value from the entry model rather than from a field, eg: `enry_model:id`. |
-| `view` | string | A reference to a blade file that is used to render when a user visits the url on which the entry is made available. This property is only required when the entry has a so called [`route_field_type`](#route-field-type). |
+| `view` | string | A reference to a blade file that is used to render when a user visits the url on which the entry is made available. This property is only required when the entry has a so called [`route_field_type`](#making-entries-url-accessible). |
 | `fields` | array | An array of [fields configurations](#fields-configuration) that should be made available to the entry as well as rendered in forms of the user interface. |
 
 ## Fields
@@ -139,7 +139,7 @@ The properties of the entries.
 
 | Property | Type | Description |
 |----------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `key` | string | **required** The value if this property is used as an identifier and should be unique within the same type of entry. This means you can have the same value for `key` in different type of entries. The value of this property will also be used as the accessor on the entry in your blade view. In this case that could be `$entry->title`, but more about this in the **...** section. |
+| `key` | string | **required** The value if this property is used as an identifier and should be unique within the same type of entry. This means you can have the same value for `key` in different type of entries. The value of this property will also be used as the accessor on the entry in your blade view. In this case that could be `$entry->title`, but more about this in the [rendering an entry](#rendering-an-entry) section. |
 | `type` | string | **required** The type property is an indicator for the package which type of field it is handeling. According to the value it might render a different input field or store the value in a different way. By default this value will be used as the `type` value attribute of an `input` element. However it is also possible to create your own custom types, more about this in the [field types](#field-types) section. |
 | `rules` | array | The value of the rules will be used to validate the input the user has given during creating or updating an entry. The rules are written exactly the same way as you are used to in a Laravel application. This means you could use custom rules, closures or other <a href="https://laravel.com/docs/master/validation" target="_blank">validation features</a> Laravel supplies. |
 | `label` | string | This property will be used to display to the user, it is the label of the field. The package will try to translate this value, so a value like `inputs.title.label` might be translated. |
@@ -236,6 +236,77 @@ return [
 
 Your new field will now be visible in the user interface and will do additional things during the saving to the database.
 
-#### Route field type
+## Making entries url accessible
 
-You may wish to make your entries accessable by url. This can be done by using the type configured in the `cms.fields.route_field_type` configuration, which by default is `route`. This value could be anything in the `cms.fields.classes` configuration or it will fallback to the `DefaultField` class.
+Entries can be made accessible by url.
+
+### Route field type
+
+The entry can be made accessible by adding a field with the type configured in the `cms.fields.route_field_type` configuration, which by default is the `route` type.
+
+```php
+// resources/enties/my_entry.php
+
+return [
+    ...,
+    'fields' => [
+        [
+            'key' => 'route',
+            'type' => 'route',
+        ],
+    ],
+];
+```
+
+ There is no limit on how many of these "route" fields are added to the entry configuration. The user might want to make the same entry available on multiple routes.
+
+### Rendering an entry
+
+Once an entry is made accessible, you might want to render it and serve it to the user that requested it. You can do this by configuring a `view` property in your entry. This `view` property is a reference to a blade file that will be used to render the content.
+
+The entry will be made available with all its fields as properties to the configured blade file. You will be able to access any of the configured fields by its key.
+
+Example:
+
+The following entry could be configured with a view and a field with the "route" type.
+
+```php
+// resources/enties/my_entry.php
+
+return [
+    'type' => 'my_entry',
+    'view' => 'my.entry'
+    'fields' => [
+        [
+            'key' => 'route',
+            'type' => 'route',
+        ],
+        [
+            'key' => 'title',
+            'type' => 'text',
+        ],
+        [
+            'key' => 'subtitle',
+            'type' => 'text',
+        ],
+    ],
+];
+```
+
+The blade file exists and outputs some of the entry field values.
+
+```
+<h1>{{ $entry->title }}</h1>
+
+<h2>{{ $entry->subtitle }}</h2>
+```
+
+This entry might now be accessible through the user provided route.
+
+```
+// http.../my-first-entry
+
+<h1>This is my first entry</h1>
+
+<h2>With a subtitle</h2>
+```

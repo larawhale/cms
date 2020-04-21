@@ -1,6 +1,7 @@
 {
     "name": "larawhale/cms",
     "description": "A Laravel cms package",
+    "license": "MIT",
     "type": "library",
     "authors": [
         {

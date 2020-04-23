@@ -6,9 +6,8 @@ use Collective\Html\FormFacade;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Models\Field as FieldModel;
 use LaraWhale\Cms\Library\Concerns\HasConfig;
-use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
-interface FieldInterface
+interface BasicFieldInterface
 {
     /**
      * Returns the key of the field.
@@ -40,7 +39,7 @@ interface FieldInterface
     public function setValue($value): self;
 }
 
-class Field implements FieldInterface
+class BasicField implements BasicFieldInterface
 {
     /**
      * The key of the field.
@@ -123,7 +122,7 @@ class Field implements FieldInterface
     }
 }
 
-interface CmsFieldInterface extends FieldInterface
+interface AbstractFieldInterface extends BasicFieldInterface
 {
     /**
      * Returns the config of the field or the configured value for the
@@ -207,7 +206,7 @@ interface CmsFieldInterface extends FieldInterface
     public function save(EntryModel $entryModel, $value): self;
 }
 
-abstract class CmsField extends Field implements CmsFieldInterface
+abstract class AbstractField extends BasicField implements AbstractFieldInterface
 {
     use HasConfig;
 
@@ -219,7 +218,7 @@ abstract class CmsField extends Field implements CmsFieldInterface
     protected $fieldModel = null;
 
     /**
-     * The Field constructor.
+     * The AbstractField constructor.
      * 
      * @param  array  $config
      * @param  \LaraWhale\Cms\Models\Field
@@ -279,7 +278,7 @@ abstract class CmsField extends Field implements CmsFieldInterface
     }
 
     /**
-     * Returns the FieldModel instance of the field.
+     * Returns the Field model instance of the field.
      *
      * @return \LaraWhale\Cms\Models\Field|null
      */
@@ -289,7 +288,7 @@ abstract class CmsField extends Field implements CmsFieldInterface
     }
 
     /**
-     * Sets the FieldModel instance of the field.
+     * Sets the Field model instance of the field.
      *
      * @param  \LaraWhale\Cms\Models\Field|null  $fieldModel
      * @return \LaraWhale\Cms\Library\Fields\Contracts\Field
@@ -339,7 +338,7 @@ abstract class CmsField extends Field implements CmsFieldInterface
     }
 }
 
-class InputField extends CmsField
+class InputField extends AbstractField
 {
     /**
      * Returns a rendered input.

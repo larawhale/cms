@@ -2,12 +2,12 @@
 
 namespace LaraWhale\Cms\Library\Entries;
 
-use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
+use LaraWhale\Cms\Library\Entries\Contracts\BasicEntryInterface;
 
-class Entry implements EntryInterface
+class BasicEntry implements BasicEntryInterface
 {
     /**
-     * An array values.
+     * An array of values.
      *
      * @var array
      */
@@ -17,7 +17,6 @@ class Entry implements EntryInterface
      * The Entry constructor.
      *
      * @param  array  $values
-     * @param  \LaraWhale\Cms\Models\Entry
      */
     public function __construct(array $values)
     {
@@ -38,11 +37,13 @@ class Entry implements EntryInterface
      * Sets the values.
      *
      * @param  array  $values
-     * @return void
+     * @return self
      */
-    public function setValues(array $values): void
+    public function setValues(array $values): self
     {
-        return $this->values;
+        $this->values = $values;
+
+        return $this;
     }
 
     /**
@@ -61,11 +62,13 @@ class Entry implements EntryInterface
      *
      * @param  string  $key
      * @param  mixed  $value
-     * @return void
+     * @return self
      */
-    public function setValue(string $key, $value): void
+    public function setValue(string $key, $value): self
     {
         data_set($this->values, $key, $value);
+
+        return $this;
     }
 
     /**

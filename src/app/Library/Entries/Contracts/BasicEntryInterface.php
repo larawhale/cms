@@ -2,16 +2,8 @@
 
 namespace LaraWhale\Cms\Library\Entries\Contracts;
 
-interface Entry
+interface BasicEntryInterface
 {
-    /**
-     * The Entry constructor.
-     *
-     * @param  array  $values
-     * @param  \LaraWhale\Cms\Models\Entry
-     */
-    public function __construct(array $values);
-
     /**
      * Gets the values.
      *
@@ -23,9 +15,9 @@ interface Entry
      * Sets the values.
      *
      * @param  array  $values
-     * @return void
+     * @return self
      */
-    public function setValues(array $values): void;
+    public function setValues(array $values): self;
 
     /**
      * Gets a value specified by a key.
@@ -40,7 +32,7 @@ interface Entry
      *
      * @param  string  $key
      * @param  mixed  $value
-     * @return void
+     * @return self
      */
-    public function setValue(string $key, $value): void;
+    public function setValue(string $key, $value): self;
 }

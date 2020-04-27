@@ -20,4 +20,5 @@ return [
         'empty' => 'No ":name" entries availabe.',
         'title' => ':Name entries',
     ],
+    'non_configured' => 'No entries have been configured yet.',
 ];

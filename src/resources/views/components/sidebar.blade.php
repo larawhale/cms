@@ -3,7 +3,7 @@
 <aside class="sidebar bg-light py-3">
     <div class="h-100 p-3 border-right">
         <nav class="nav flex-column">
-            @foreach ($Factory::entries() as $entry)
+            @forelse ($Factory::entries() as $entry)
                 @php
                     $name = __($entry->getName());
 
@@ -22,7 +22,9 @@
                         'slot' => $text,
                     ])
                 </li>
-            @endforeach
+            @empty
+             {{ __('cms::entries.non_configured') }}
+            @endforelse
         </nav>
     </div>
 </aside>

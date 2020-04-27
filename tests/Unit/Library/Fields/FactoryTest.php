@@ -4,13 +4,9 @@ namespace LaraWhale\Cms\Tests\Unit\Library\Fields;
 
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Fields\Factory;
-use LaraWhale\Cms\Library\Fields\DefaultField;
+use LaraWhale\Cms\Tests\Support\Fields\TestField;
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
-class TestField extends DefaultField
-{
-    //
-}
 
 class FactoryTest extends TestCase
 {

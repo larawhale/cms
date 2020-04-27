@@ -5,21 +5,9 @@ namespace LaraWhale\Cms\Tests\Unit\Library\Fields;
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Models\Field as FieldModel;
-use LaraWhale\Cms\Library\Fields\AbstractField;
+use LaraWhale\Cms\Tests\Support\Fields\TestField;
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 use LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface;
-
-/**
- * A class that extends from the AbstractField and completes it with its
- * missing `renderInput` method. This class should only be used to test.
- */
-class TestField extends AbstractField
-{
-    public function renderInput(): string
-    {
-        return 'rendered_input';
-    }
-}
 
 class AbstractFieldTest extends TestCase
 {
@@ -50,6 +38,9 @@ class AbstractFieldTest extends TestCase
     /** @test */
     public function construct_requires_key_type_in_config(): void
     {
+        // Loop an array of configurations where certain keys are missing. The
+        // key of each array value should be the key that is missing. For each
+        // of the missing keys an exception should be thrown.
         $configs = [
             'key' => ['type' => 'test_type'],
             'type' => ['key' => 'test_key'],
@@ -81,6 +72,7 @@ class AbstractFieldTest extends TestCase
     public function get_input_value(): void
     {
         $this->assertSame(
+            // The input value should by default be the same as the value.
             $this->field->getValue(),
             $this->field->getInputValue(),
         );
@@ -96,6 +88,21 @@ class AbstractFieldTest extends TestCase
     }
 
     /** @test */
+    public function get_rules_default(): void
+    {
+        $field = new TestField([
+            'key' => 'test_key',
+            'type' => 'test_type',
+            // Do not add the `rules` key so the default value is tested.
+        ]);
+
+        $this->assertSame(
+            [],
+            $field->getRules(),
+        );
+    }
+
+    /** @test */
     public function get_label(): void
     {
         $this->assertSame(
@@ -105,15 +112,17 @@ class AbstractFieldTest extends TestCase
     }
 
     /** @test */
-    public function get_label_uses_key(): void
+    public function get_label_default(): void
     {
         $field = new TestField([
             'key' => 'test_key',
             'type' => 'test_type',
-            // No label
+            // Do not add the `label` key so the default value is tested.
         ]);
 
         $this->assertSame(
+            // The default value of `getLabel` should be the `key` of the
+            // field.
             'test_key',
             $field->getLabel(),
         );
@@ -133,6 +142,8 @@ class AbstractFieldTest extends TestCase
             $this->field->getFieldModel(),
         );
 
+        // The value of the field model should be set to the value of the
+        // field.
         $this->assertSame(
             $fieldModel->value,
             $this->field->getValue(),
@@ -149,6 +160,7 @@ class AbstractFieldTest extends TestCase
             $this->field->getFieldModel(),
         );
 
+        // The field model is `null`, thus the value should be `null`.
         $this->assertSame(
             null,
             $this->field->getValue(),

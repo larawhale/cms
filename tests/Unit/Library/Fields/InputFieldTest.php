@@ -42,6 +42,9 @@ class InputFieldTest extends TestCase
     /** @test */
     public function get_input_class(): void
     {
+        // Mock a request to have a validation error on the key of the field.
+        // This should result in an additional `is-invalid` class in the return
+        // value of `getInputClass`.
         $session = Mockery::mock(Store::class)
             ->makePartial()
             ->shouldReceive('get')
@@ -61,6 +64,7 @@ class InputFieldTest extends TestCase
 
         app()->instance('request', $request);
 
+        // Validat if the return value is correct.
         $this->assertEquals(
             'form-control is-invalid',
             $this->field->getInputClass(),

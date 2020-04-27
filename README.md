@@ -151,13 +151,13 @@ The `type` property will allow you to control how a field should behave.
 
 #### Default field
 
-By default all fields will be handled by the `DefaultField` class. This field class will render an `input` element with the value of `type` as its `type` attribute. This "default" field can be configured by changing the `cms.fields.classes.default` configuration.
+By default all fields will be handled by the `InputField` class. This field class will render an `input` element with the value of `type` as its `type` attribute. This "default" field can be configured by changing the `cms.fields.classes.default` configuration.
 
 #### Custom field
 
 It is possible to create your own custom field classes. You might for example wish to render a more comlex input field in the user interface or do some additional things during the saving to the database.
 
-This can be done by creating a class that implements the `Field` interface and adding it to the `cms.fields.classes` configuration array. You could also simply extend from the `DefaultField` if you wish the make minor changes to the default behavior.
+This can be done by creating a class that implements the `AbstractFieldInterface` and adding it to the `cms.fields.classes` configuration array. There is an `AbstractField` class available that implements all the interface methods except `renderInput`. Another option would be to extend from other existing field classes, `InputField` for example.
 
 Example:
 
@@ -168,9 +168,9 @@ Write a custom field that renders a different view as input and does some additi
 
 namespace App\Library\Fields;
 
-use LaraWhale\Cms\Library\Fields\DefautlField
+use LaraWhale\Cms\Library\Fields\AbstractField
 
-class CustomField extends DefaultField
+class CustomField extends AbstractField
 {
     /**
      * Returns a rendered input.
@@ -179,8 +179,10 @@ class CustomField extends DefaultField
      */
     public function renderInput(): string
     {
+        // Implement the method missing in `AbstractField`.
+
         return render('custom.field', [
-            $this->inputValue(),
+            'value' => $this->inputValue(),
             ...,
         ]);
     }
@@ -190,11 +192,11 @@ class CustomField extends DefaultField
      *
      * @param  \LaraWhale\Cms\Models\Entry  $entryModel
      * @param  mixed  $value
-     * @return \LaraWhale\Cms\Models\Field
+     * @return self
      */
-    public function save(EntryModel $entryModel, $value): FieldModel
+    public function save(EntryModel $entryModel, $value): self
     {
-        // ...
+        // Do some additional things before saving.
 
         return parent::save($entryModel, $value);
     }

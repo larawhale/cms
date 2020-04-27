@@ -8,7 +8,7 @@
     <div class="mb-3 clearfix">
         <h1 class="m-0 float-left">
             {{ __('cms::entries.edit.title', [
-                'name' => $entryClass->name(),
+                'name' => $entryClass->getName(),
             ]) }}
         </h1>
 

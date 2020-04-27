@@ -5,9 +5,9 @@
         <nav class="nav flex-column">
             @forelse ($Factory::entries() as $entry)
                 @php
-                    $name = __($entry->name());
+                    $name = __($entry->getName());
 
-                    $text = $entry->single()
+                    $text = $entry->isSingle()
                         ? $name
                         : Str::plural($name);
                 @endphp
@@ -16,7 +16,7 @@
                     @include('cms::components.link', [
                         'route' => 'cms.entries.index',
                         'parameters' => [
-                            'type' => $entry->type(),
+                            'type' => $entry->getType(),
                         ],
                         'class' => 'nav-link',
                         'slot' => $text,

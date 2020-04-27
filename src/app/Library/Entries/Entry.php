@@ -2,34 +2,32 @@
 
 namespace LaraWhale\Cms\Library\Entries;
 
-use Carbon\Carbon;
-use LaraWhale\Cms\Library\Fields\Factory;
 use LaraWhale\Cms\Library\Concerns\HasConfig;
 use LaraWhale\Cms\Models\Entry as EntryModel;
-use LaraWhale\Cms\Models\Field as FieldModel;
-use LaraWhale\Cms\Library\Fields\Contracts\Field as FieldInterface;
-use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
+use LaraWhale\Cms\Library\Fields\Factory as FieldFactory;
+use LaraWhale\Cms\Library\Entries\Contracts\EntryInterface;
+use LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface;
 
-class Entry implements EntryInterface
+class Entry extends BasicEntry implements EntryInterface
 {
     use HasConfig;
 
     /**
+     * The type of the entry.
+     * 
+     * @var string
+     */
+    protected string $type;
+
+    /**
      * The Entry model instance.
      *
-     * @var \LaraWhale\Cms\Models\Entry
+     * @var \LaraWhale\Cms\Models\Entry|null
      */
-    protected $entryModel;
+    protected $entryModel = null;
 
     /**
-     * An array of field values.
-     *
-     * @var array
-     */
-    protected $values = [];
-
-    /**
-     * The Entry constructor.
+     * The CmsEntry constructor.
      *
      * @param  array  $config
      * @param  \LaraWhale\Cms\Models\Entry
@@ -37,6 +35,8 @@ class Entry implements EntryInterface
     public function __construct(array $config, EntryModel $entryModel = null)
     {
         $this->config = $config;
+
+        $this->type = $this->config('type', null, true);
 
         $this->setEntryModel($entryModel);
     }
@@ -47,7 +47,7 @@ class Entry implements EntryInterface
      *
      * @return bool
      */
-    public function single(): bool
+    public function isSingle(): bool
     {
         return $this->config('single', false);
     }
@@ -58,7 +58,7 @@ class Entry implements EntryInterface
      *
      * @return array
      */
-    public function tableColumns(): array
+    public function getTableColumns(): array
     {
         return $this->config('table_columns', [
             'entry_model:id',
@@ -73,9 +73,9 @@ class Entry implements EntryInterface
      *
      * @return string
      */
-    public function type(): string
+    public function getType(): string
     {
-        return $this->config('type', null, true);
+        return $this->type;
     }
 
     /**
@@ -83,9 +83,9 @@ class Entry implements EntryInterface
      *
      * @return string
      */
-    public function name(): string
+    public function getName(): string
     {
-        return $this->config('name', fn() => $this->type());
+        return $this->config('name', fn() => $this->getType());
     }
 
     /**
@@ -93,7 +93,7 @@ class Entry implements EntryInterface
      *
      * @return string
      */
-    public function view(): string
+    public function getView(): string
     {
         return $this->config('view', null, true);
     }
@@ -103,20 +103,20 @@ class Entry implements EntryInterface
      *
      * @return array
      */
-    public function fields(): array
+    public function getFields(): array
     {
         $fieldModels = data_get(
-            $this->entryModel,
+            $this->getEntryModel(),
             'fields',
             fn() => collect(),
         );
 
         return array_map(
             function (array $config) use ($fieldModels) {
-                $field = Factory::make($config);
+                $field = FieldFactory::make($config);
 
                 $fieldModel = $fieldModels
-                    ->firstWhere('key', $field->key());
+                    ->firstWhere('key', $field->getKey());
 
                 $field->setFieldModel($fieldModel);
 
@@ -131,11 +131,11 @@ class Entry implements EntryInterface
      *
      * @return array
      */
-    public function rules(): array
+    public function getRules(): array
     {
-        return collect($this->fields())
-            ->mapWithKeys(function (FieldInterface $field) {
-                return [$field->key() => $field->rules()];
+        return collect($this->getFields())
+            ->mapWithKeys(function (AbstractFieldInterface $field) {
+                return [$field->getKey() => $field->getRules()];
             })
             ->all();
     }
@@ -145,7 +145,7 @@ class Entry implements EntryInterface
      *
      * @return \LaraWhale\Cms\Models\Entry|null
      */
-    public function entryModel()
+    public function getEntryModel(): ?EntryModel
     {
         return $this->entryModel;
     }
@@ -153,10 +153,10 @@ class Entry implements EntryInterface
     /**
      * Set the Entry model instance.
      *
-     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
-     * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
+     * @param  \LaraWhale\Cms\Models\Entry|null  $entryModel
+     * @return self
      */
-    public function setEntryModel(EntryModel $entryModel = null): EntryInterface
+    public function setEntryModel(?EntryModel $entryModel): self
     {
         $this->entryModel = $entryModel;
 
@@ -166,45 +166,12 @@ class Entry implements EntryInterface
     }
 
     /**
-     * Returns field the values.
-     *
-     * @return array
-     */
-    public function values(): array
-    {
-        return $this->values;
-    }
-
-    /**
-     * Returns a value.
-     *
-     * @param  string  $key
-     * @return mixed
-     */
-    public function getValue(string $key)
-    {
-        return data_get($this->values, $key);
-    }
-
-    /**
-     * Sets a value.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return void
-     */
-    public function setValue(string $key, $value): void
-    {
-        data_set($this->values, $key, $value);
-    }
-
-    /**
      * Fills the values array according to the specified Entry model.
      *
-     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
-     * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
+     * @param  \LaraWhale\Cms\Models\Entry|null  $entryModel
+     * @return self
      */
-    public function fill(EntryModel $entryModel = null): EntryInterface
+    public function fill(?EntryModel $entryModel): self
     {
         $this->values = [];
 
@@ -214,10 +181,10 @@ class Entry implements EntryInterface
             fn() => collect(),
         );
 
-        foreach ($this->fields() as $field) {
-            $fieldModel = $fieldModels->firstWhere('key', $field->key());
+        foreach ($this->getFields() as $field) {
+            $fieldModel = $fieldModels->firstWhere('key', $field->getKey());
 
-            $this->values[$field->key()] = data_get($fieldModel, 'value');
+            $this->values[$field->getKey()] = data_get($fieldModel, 'value');
         }
 
         return $this;
@@ -232,7 +199,7 @@ class Entry implements EntryInterface
     {
         return view('cms::entries.form', [
             'entry' => $this->entryModel ?? new EntryModel([
-                'type' => $this->type(),
+                'type' => $this->getType(),
             ]),
         ])->render();
     }
@@ -244,54 +211,9 @@ class Entry implements EntryInterface
      */
     public function renderView(): string
     {
-        return view($this->view(), [
+        return view($this->getView(), [
             'entry' => $this,
         ])->render();
-    }
-
-    /**
-     * Dynamically retrieve values of the entry.
-     *
-     * @param  string  $key
-     * @return mixed
-     */
-    public function __get(string $key)
-    {
-        return $this->getValue($key);
-    }
-
-    /**
-     * Dynamically set values of the entry.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return void
-     */
-    public function __set(string $key, $value): void
-    {
-        $this->setValue($key, $value);
-    }
-
-    /**
-     * Determine if value isset.
-     *
-     * @param  string  $key
-     * @return bool
-     */
-    public function __isset(string $key): bool
-    {
-        return isset($this->values[$key]);
-    }
-
-    /**
-     * Unset value.
-     *
-     * @param  string  $key
-     * @return void
-     */
-    public function __unset(string $key): void
-    {
-        unset($this->values[$key]);
     }
 
     /**
@@ -299,9 +221,9 @@ class Entry implements EntryInterface
      *
      * @param  \LaraWhale\Cms\Models\Entry  $entryModel
      * @param  array  $data
-     * @return \LaraWhale\Cms\Models\Entry
+     * @return self
      */
-    public static function save(EntryModel $entryModel, array $data): EntryModel
+    public static function save(EntryModel $entryModel, array $data): self
     {
         $entryModel->fill($data)->save();
 
@@ -311,15 +233,16 @@ class Entry implements EntryInterface
 
         $fieldModels = collect();
 
-        foreach ($entry->fields() as $field) {
+        foreach ($entry->getFields() as $field) {
             // Only save the value of the field when it is given in the field
             // values array.
-            if (! array_key_exists($field->key(), $fieldValues)) {
+            if (! array_key_exists($field->getKey(), $fieldValues)) {
                 continue;
             }
 
             $fieldModels->push(
-                $field->save($entryModel, $fieldValues[$field->key()]),
+                $field->save($entryModel, $fieldValues[$field->getKey()])
+                    ->getFieldModel(),
             );
         }
 
@@ -335,6 +258,8 @@ class Entry implements EntryInterface
         // field models.
         $entryModel->setUpdatedAt($fieldModels->max('updated_at'))->save();
 
-        return $entryModel;
+        $entry->setEntryModel($entryModel);
+
+        return $entry;
     }
 }

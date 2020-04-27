@@ -15,6 +15,6 @@ class UpdateRequest extends FormRequest
     {
         $entry = request()->route()->entry;
 
-        return $entry->toEntryClass()->rules();
+        return $entry->toEntryClass()->getRules();
     }
 }

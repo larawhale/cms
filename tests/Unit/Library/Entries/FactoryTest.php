@@ -5,8 +5,8 @@ namespace LaraWhale\Cms\Tests\Unit\Library\Entries;
 use Mockery\Mock;
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Entries\Factory;
-use LaraWhale\Cms\Library\Entries\Contracts\Entry;
 use LaraWhale\Cms\Exceptions\EntryConfigNotFoundException;
+use LaraWhale\Cms\Library\Entries\Contracts\EntryInterface;
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
 class FactoryTest extends TestCase
@@ -15,7 +15,7 @@ class FactoryTest extends TestCase
     public function make(): void
     {
         $this->assertInstanceOf(
-            Entry::class,
+            EntryInterface::class,
             Factory::make('test_entry'),
         );
     }
@@ -50,7 +50,7 @@ class FactoryTest extends TestCase
     public function entries(): void
     {
         foreach (Factory::entries() as $entry) {
-            $this->assertInstanceOf(Entry::class, $entry);
+            $this->assertInstanceOf(EntryInterFace::class, $entry);
         }
 
         $this->assertCount(

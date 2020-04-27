@@ -35,7 +35,7 @@ class StoreRequest extends FormRequest
         if ($type = request()->get('entry_type')) {
             $entry = Factory::make($type);
 
-            $rules = array_merge($rules, $entry->rules());
+            $rules = array_merge($rules, $entry->getRules());
         }
 
         return $rules;

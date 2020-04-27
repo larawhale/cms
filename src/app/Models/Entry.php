@@ -5,7 +5,7 @@ namespace LaraWhale\Cms\Models;
 use Illuminate\Database\Eloquent\Builder;
 use LaraWhale\Cms\Library\Entries\Factory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
+use LaraWhale\Cms\Library\Entries\Contracts\EntryInterface;
 
 class Entry extends Model
 {

@@ -11,9 +11,9 @@
 @endphp
 
 {!! Form::open($options) !!}
-    {!! Form::input('hidden', 'entry_type', $entryClass->type()) !!}
+    {!! Form::input('hidden', 'entry_type', $entryClass->getType()) !!}
 
-    @foreach ($entryClass->fields() as $field)
+    @foreach ($entryClass->getFields() as $field)
         {!! $field->renderFormGroup() !!}
     @endforeach
 

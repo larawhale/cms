@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\File;
 use LaraWhale\Cms\Library\Entries\Entry;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Exceptions\EntryConfigNotFoundException;
+use LaraWhale\Cms\Library\Entries\Contracts\EntryInterface;
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
-use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
 
 class Factory
 {
@@ -23,9 +23,9 @@ class Factory
      *
      * @param  string  $type
      * @param  \LaraWhale\Cms\Models\Entry  $entryModel
-     * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
+     * @return \LaraWhale\Cms\Library\Entries\Contracts\EntryInterface
      */
-    public static function make(string $type, EntryModel $entryModel = null): Entry
+    public static function make(string $type, EntryModel $entryModel = null): EntryInterface
     {
         $config = static::resolve($type);
 

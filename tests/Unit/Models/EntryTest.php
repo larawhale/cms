@@ -4,7 +4,7 @@ namespace LaraWhale\Cms\Tests\Unit\Models;
 
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Tests\TestCase;
-use LaraWhale\Cms\Library\Entries\Contracts\Entry as EntryInterface;
+use LaraWhale\Cms\Library\Entries\Contracts\EntryInterface;
 
 class EntryTest extends TestCase
 {

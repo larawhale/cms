@@ -14,7 +14,7 @@ abstract class AbstractField extends BasicField implements AbstractFieldInterfac
     /**
      * The Field model instance.
      *
-     * @var \LaraWhale\Cms\Models\Field
+     * @var \LaraWhale\Cms\Models\Field|null
      */
     protected $fieldModel = null;
 

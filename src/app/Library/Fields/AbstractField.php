@@ -5,6 +5,7 @@ namespace LaraWhale\Cms\Library\Fields;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Models\Field as FieldModel;
 use LaraWhale\Cms\Library\Concerns\HasConfig;
+use LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface;
 
 abstract class AbstractField extends BasicField implements AbstractFieldInterface
 {

@@ -16,13 +16,13 @@ $factory->afterCreatingState(
     Entry::class,
     'with_fields',
     function (Entry $entry) {
-        $fields = $entry->toEntryClass()->fields();
+        $fields = $entry->toEntryClass()->getFields();
 
         foreach ($fields as $field) {
             factory(Field::class)->create([
                 'entry_id' => $entry->id,
-                'key' => $field->key(),
-                'value' => $field->key() . '_value',
+                'key' => $field->getKey(),
+                'value' => $field->getKey() . '_value',
             ]);
         }
     },

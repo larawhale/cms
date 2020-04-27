@@ -1,5 +1,5 @@
 @php
-    $columns = $entryClass->tableColumns();
+    $columns = $entryClass->getTableColumns();
 
     $rows = [];
 

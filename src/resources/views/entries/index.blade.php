@@ -8,14 +8,14 @@
     <div class="mb-3 clearfix">
         <h1 class="m-0 float-left">
             {{ __('cms::entries.index.title', [
-                'name' => $entryClass->name(),
+                'name' => $entryClass->getName(),
             ]) }}
         </h1>
 
         <a
             class="btn btn-primary float-right"
             href="{{ route('cms.entries.create', [
-                'type' => $entryClass->type(),
+                'type' => $entryClass->getType(),
             ]) }}"
         >
             {!! __('cms::actions.create') !!}
@@ -26,7 +26,7 @@
         @if ($entries->isEmpty())
             <div class="p-3">
                 {{ __('cms::entries.index.empty', [
-                    'name' =>  $entryClass->name(),
+                    'name' =>  $entryClass->getName(),
                 ]) }}
             </div>
         @else

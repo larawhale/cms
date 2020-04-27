@@ -34,7 +34,7 @@ class EntryController extends Controller
 
         // The index page should not be available to single type entries.
         // Redirect to create or edit according to its exsistence.
-        if ($entryClass->single()) {
+        if ($entryClass->isSingle()) {
             $entry = Entry::type($request->get('type'))->latest()->first();
 
             $route =  is_null($entry)
@@ -71,7 +71,7 @@ class EntryController extends Controller
         // The create page should only be available to single type entries that
         // are not yet stored in the database. Redirect to edit according to
         // its existence.
-        if ($entryClass->single()) {
+        if ($entryClass->isSingle()) {
             $entry = Entry::type($request->get('type'))->latest()->first();
 
             if (! is_null($entry)) {
@@ -105,7 +105,7 @@ class EntryController extends Controller
 
         // Only one single entry type should exist. Find it and update or
         // create a new one.
-        if ($entryClass->single()) {
+        if ($entryClass->isSingle()) {
             $entry = Entry::type($type)->latest()->first()
                 ?? new Entry;
         }

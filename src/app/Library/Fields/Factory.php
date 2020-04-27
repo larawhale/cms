@@ -69,6 +69,6 @@ class Factory
      */
     public static function defaultFieldClass(): string
     {
-        return data_get(static::$fields, 'default', DefaultField::class);
+        return data_get(static::$fields, 'default', InputField::class);
     }
 }

@@ -4,6 +4,7 @@ namespace LaraWhale\Cms\Tests\Unit\Library\Fields;
 
 use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Fields\Factory;
+use LaraWhale\Cms\Library\Fields\InputField;
 use LaraWhale\Cms\Tests\Support\Fields\TestField;
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
@@ -17,7 +18,10 @@ class FactoryTest extends TestCase
             'test' => TestField::class,
         ];
 
-        $field = Factory::make(['type' => 'test']);
+        $field = Factory::make([
+            'key' => 'test_key',
+            'type' => 'test',
+        ]);
 
         $this->assertInstanceOf(TestField::class, $field);
     }
@@ -25,23 +29,32 @@ class FactoryTest extends TestCase
     /** @test */
     public function make_default(): void
     {
-        $field = Factory::make(['type' => 'default']);
+        $field = Factory::make([
+            'key' => 'test_key',
+            'type' => 'default',
+        ]);
 
-        $this->assertInstanceOf(DefaultField::class, $field);
+        $this->assertInstanceOf(InputField::class, $field);
     }
 
     /** @test */
     public function make_default_unknown(): void
     {
-        $field = Factory::make(['type' => 'test']);
+        $field = Factory::make([
+            'key' => 'test_key',
+            'type' => 'test',
+        ]);
 
-        $this->assertInstanceOf(DefaultField::class, $field);
+        $this->assertInstanceOf(InputField::class, $field);
     }
 
     /** @test */
     public function get_type(): void
     {
-        $type = Factory::getType(['type' => 'test']);
+        $type = Factory::getType([
+            'key' => 'test_key',
+            'type' => 'test',
+        ]);
 
         $this->assertEquals('test', $type);
     }

@@ -221,9 +221,9 @@ class Entry extends BasicEntry implements EntryInterface
      *
      * @param  \LaraWhale\Cms\Models\Entry  $entryModel
      * @param  array  $data
-     * @return \LaraWhale\Cms\Models\Entry
+     * @return self
      */
-    public static function save(EntryModel $entryModel, array $data): EntryModel
+    public static function save(EntryModel $entryModel, array $data): self
     {
         $entryModel->fill($data)->save();
 
@@ -258,6 +258,8 @@ class Entry extends BasicEntry implements EntryInterface
         // field models.
         $entryModel->setUpdatedAt($fieldModels->max('updated_at'))->save();
 
-        return $entryModel;
+        $entry->setEntryModel($entryModel);
+
+        return $entry;
     }
 }

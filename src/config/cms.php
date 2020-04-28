@@ -22,6 +22,9 @@ return [
              * this array. This value can of course be overwritten or removed.
              */
             'default' => \LaraWhale\Cms\Library\Fields\InputField::class,
+
+            'input' => \LaraWhale\Cms\Library\Fields\InputField::class,
+            'textarea' => \LaraWhale\Cms\Library\Fields\TextAreaField::class,
         ],
 
         /**

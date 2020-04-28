@@ -48,15 +48,15 @@
     }
 
     // Custom control
-    if (in_array($type, [
-        'checkbox', 'radio',
-    ])) {
+    $checkables = ['checkbox', 'radio'];
+
+    if (in_array($type, $checkables)) {
         $options['class'] .= ' custom-control-input';
     }
 @endphp
 
 <div class="form-group">
-    @if ($showLabel && $type !== 'checkbox')
+    @if ($showLabel && ! in_array($type, $checkables))
         {!! Form::label($options['id'], $label) !!}
     @endif
 

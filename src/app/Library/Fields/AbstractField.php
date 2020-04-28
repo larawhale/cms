@@ -114,6 +114,7 @@ abstract class AbstractField extends BasicField implements AbstractFieldInterfac
             'input' => $this->renderInput(),
             'label' => $this->getLabel(),
             'name' => $this->getKey(),
+            'type' => $this->getType(),
         ])->render();
     }
 

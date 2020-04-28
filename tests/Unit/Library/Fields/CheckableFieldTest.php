@@ -35,7 +35,7 @@ class CheckableFieldTest extends TestCase
     /** @test */
     public function get_input_class(): void
     {
-        $this->assertStringContainsString(
+        $this->assertContains(
             'custom-control-input',
             $this->field->getInputClass(),
         );

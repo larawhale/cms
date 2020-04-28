@@ -16,10 +16,7 @@ class CheckableField extends InputField
         return view('cms::components.form.checkable', [
             'label' => $this->getLabel(),
             'name' => $this->getKey(),
-            'options' => [
-                'class' => $this->getInputClass(),
-                'id' => $this->getKey(),
-            ],
+            'options' => $this->getInputAttributes(),
             'type' => $this->getType(),
             'value' => $this->getInputValue(),
         ])->render();
@@ -30,10 +27,12 @@ class CheckableField extends InputField
      *
      * @return string
      */
-    public function getInputClass(): string
+    public function getInputClass(): array
     {
-        $class = parent::getInputClass();
+        $classes = parent::getInputClass();
 
-        return $class . ' custom-control-input';
+        $classes[] = 'custom-control-input';
+
+        return array_unique($classes);
     }
 }

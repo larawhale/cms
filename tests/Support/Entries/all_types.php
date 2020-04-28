@@ -29,10 +29,12 @@ return [
         [
             'key' => 'select',
             'type' => 'select',
-            'list' => [
-                'item 1',
-                'item 2',
-                'item 3',
+            'config' => [
+                'list' => [
+                    'item 1',
+                    'item 2',
+                    'item 3',
+                ],
             ],
         ],
     ],

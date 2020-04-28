@@ -26,5 +26,16 @@ return [
             'key' => 'radio',
             'type' => 'radio',
         ],
+        [
+            'key' => 'select',
+            'type' => 'select',
+            'config' => [
+                'list' => [
+                    'item 1',
+                    'item 2',
+                    'item 3',
+                ],
+            ],
+        ],
     ],
 ];

@@ -23,7 +23,9 @@ return [
              */
             'default' => \LaraWhale\Cms\Library\Fields\InputField::class,
 
+            'checkbox' => \LaraWhale\Cms\Library\Fields\CheckableField::class,
             'input' => \LaraWhale\Cms\Library\Fields\InputField::class,
+            'radio' => \LaraWhale\Cms\Library\Fields\CheckableField::class,
             'textarea' => \LaraWhale\Cms\Library\Fields\TextAreaField::class,
         ],
 

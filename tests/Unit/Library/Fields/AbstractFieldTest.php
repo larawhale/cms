@@ -27,36 +27,14 @@ class AbstractFieldTest extends TestCase
     {
         parent::setUp();
 
-        $this->field = new TestField([
-            'key' => 'test_key',
-            'type' => 'test_type',
-            'rules' => ['required'],
-            'label' => 'Test label',
-        ]);
-    }
-
-    /** @test */
-    public function construct_requires_key_type_in_config(): void
-    {
-        // Loop an array of configurations where certain keys are missing. The
-        // key of each array value should be the key that is missing. For each
-        // of the missing keys an exception should be thrown.
-        $configs = [
-            'key' => ['type' => 'test_type'],
-            'type' => ['key' => 'test_key'],
-        ];
-
-        foreach ($configs as $missing => $config) {
-            try {
-                new TestField($config);
-            } catch (RequiredConfigKeyNotFoundException $e) {
-                $this->assertEquals($missing, $e->getKey());
-
-                continue;
-            }
-
-            $this->assertTrue(false, 'Exception was not thrown.');   
-        }
+        $this->field = new TestField(
+            'test_key',
+            'test_type',
+            [
+                'rules' => ['required'],
+                'label' => 'Test label',
+            ],
+        );
     }
 
     /** @test */
@@ -90,11 +68,12 @@ class AbstractFieldTest extends TestCase
     /** @test */
     public function get_rules_default(): void
     {
-        $field = new TestField([
-            'key' => 'test_key',
-            'type' => 'test_type',
-            // Do not add the `rules` key so the default value is tested.
-        ]);
+        $field = new TestField(
+            'test_key',
+            'test_type',
+            // Do not add a config with a `rules` key so we can test the
+            // default value.
+        );
 
         $this->assertSame(
             [],
@@ -114,11 +93,12 @@ class AbstractFieldTest extends TestCase
     /** @test */
     public function get_label_default(): void
     {
-        $field = new TestField([
-            'key' => 'test_key',
-            'type' => 'test_type',
-            // Do not add the `label` key so the default value is tested.
-        ]);
+        $field = new TestField(
+            'test_key',
+            'test_type',
+            // Do not add a config with a `label` key so we can test the
+            // default value.
+        );
 
         $this->assertSame(
             // The default value of `getLabel` should be the `key` of the

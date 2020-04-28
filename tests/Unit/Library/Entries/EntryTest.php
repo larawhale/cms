@@ -24,8 +24,10 @@ class EntryTest extends TestCase
             [
                 'key' => 'test_key',
                 'type' => 'test_type',
-                'rules' => 'required',
-                'label' => 'test_label',
+                'config' => [
+                    'rules' => 'required',
+                    'label' => 'test_label',
+                ],
             ],
         ],
     ];
@@ -139,8 +141,17 @@ class EntryTest extends TestCase
 
         $fieldModel = $fieldModel->fresh();
 
+        $fieldConfig = $this->config['fields'][0];
+
+        $fieldClass = new InputField(
+            $fieldConfig['key'],
+            $fieldConfig['type'],
+            $fieldConfig['config'],
+            $fieldModel,
+        );
+
         $this->assertEquals(
-            [new InputField($this->config['fields'][0], $fieldModel)],
+            [$fieldClass],
             $entry->getFields(),
         );
     }
@@ -157,7 +168,7 @@ class EntryTest extends TestCase
         $fieldModel = $fieldModel->fresh();
 
         $this->assertEquals(
-            [$fieldModel->key => $this->config['fields'][0]['rules']],
+            [$fieldModel->key => $this->config['fields'][0]['config']['rules']],
             $entry->getRules(),
         );
     }

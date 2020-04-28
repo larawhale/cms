@@ -21,16 +21,16 @@ abstract class AbstractField extends BasicField implements AbstractFieldInterfac
     /**
      * The AbstractField constructor.
      * 
+     * @param  string  $key
+     * @param  string  $type
      * @param  array  $config
      * @param  \LaraWhale\Cms\Models\Field
      */
-    public function __construct(array $config, FieldModel $fieldModel = null)
+    public function __construct(string $key, string $type, array $config = [], FieldModel $fieldModel = null)
     {
+        parent::__construct($key, $type);
+
         $this->config = $config;
-
-        $this->key = $this->config('key', null, true);
-
-        $this->type = $this->config('type', null, true);
 
         $this->setFieldModel($fieldModel);
     }

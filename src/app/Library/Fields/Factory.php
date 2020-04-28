@@ -22,11 +22,17 @@ class Factory
      */
     public static function make(array $config): AbstractFieldInterface
     {
-        $type = static::getType($config);
+        $key = static::getFromConfig('key', $config);
+
+        $type = static::getFromConfig('type', $config);
 
         $class = static::resolve($type);
 
-        return new $class($config);
+        return new $class(
+            $key,
+            $type,
+            data_get($config, 'config', []),
+        );
     }
 
     /**
@@ -47,19 +53,20 @@ class Factory
     /**
      * Tries to retrieve a type from the given config.
      *
+     * @param  string  $key
      * @param  array  $config
      * @return string
      * @throws \LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException
      */
-    public static function getType(array $config): string
+    public static function getFromConfig(string $key, array $config): string
     {
-        $type = data_get($config, 'type');
+        $value = data_get($config, $key);
 
-        if (! is_null($type)) {
-            return $type;
+        if (! is_null($value)) {
+            return $value;
         }
 
-        throw new RequiredConfigKeyNotFoundException($config, 'type');
+        throw new RequiredConfigKeyNotFoundException($config, $key);
     }
 
     /**

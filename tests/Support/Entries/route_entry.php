@@ -8,8 +8,10 @@ return [
         [
             'key' => 'route_key',
             'type' => config('cms.fields.route_field_type'),
-            'rules' => 'required',
-            'label' => 'Route label',
+            'config' => [
+                'rules' => 'required',
+                'label' => 'Route label',
+            ],
         ],
     ],
 ];

@@ -73,20 +73,26 @@ return [
         [
             'key' => 'route',
             'type' => 'route',
-            'rules' => 'required',
-            'label' => 'Url',
+            'config' => [
+                'rules' => 'required',
+                'label' => 'Url',
+            ],
         ],
         [
             'key' => 'title',
             'type' => 'text',
-            'rules' => 'required',
-            'label' => 'Title',
+            'config' => [
+                'rules' => 'required',
+                'label' => 'Title',
+            ],
         ],
         [
             'key' => 'body',
             'type' => 'textarea',
-            'rules' => 'required',
-            'label' => 'Body',
+            'config' => [
+                'rules' => 'required',
+                'label' => 'Body',
+            ],
         ],
     ],
 ];
@@ -141,8 +147,9 @@ The properties of the entries.
 |----------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `key` | string | **required** The value if this property is used as an identifier and should be unique within the same type of entry. This means you can have the same value for `key` in different type of entries. The value of this property will also be used as the accessor on the entry in your blade view. In this case that could be `$entry->title`, but more about this in the [rendering an entry](#rendering-an-entry) section. |
 | `type` | string | **required** The type property is an indicator for the package which type of field it is handeling. According to the value it might render a different input field or store the value in a different way. By default this value will be used as the `type` value attribute of an `input` element. However it is also possible to create your own custom types, more about this in the [field types](#field-types) section. |
-| `rules` | array | The value of the rules will be used to validate the input the user has given during creating or updating an entry. The rules are written exactly the same way as you are used to in a Laravel application. This means you could use custom rules, closures or other <a href="https://laravel.com/docs/master/validation" target="_blank">validation features</a> Laravel supplies. |
-| `label` | string | This property will be used to display to the user, it is the label of the field. The package will try to translate this value, so a value like `inputs.title.label` might be translated. |
+| `config` | array | A configuration array that can contain multiple other properties that should help the application to handle the field. |
+| `config.rules` | array | The value of the rules will be used to validate the input the user has given during creating or updating an entry. The rules are written exactly the same way as you are used to in a Laravel application. This means you could use custom rules, closures or other <a href="https://laravel.com/docs/master/validation" target="_blank">validation features</a> Laravel supplies. |
+| `config.label` | string | This property will be used to display to the user, it is the label of the field. The package will try to translate this value, so a value like `inputs.title.label` might be translated. |
 
 
 ### Field types

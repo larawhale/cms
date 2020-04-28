@@ -27,10 +27,7 @@ class InputFieldTest extends TestCase
     {
         parent::setUp();
 
-        $this->field = new InputField([
-            'key' => 'test_key',
-            'type' => 'text',
-        ]);
+        $this->field = new InputField('test_key', 'text');
     }
 
     /** @test */

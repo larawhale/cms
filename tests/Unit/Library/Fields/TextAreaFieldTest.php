@@ -23,10 +23,7 @@ class TextAreaFieldTest extends TestCase
     {
         parent::setUp();
 
-        $this->field = new TextAreaField([
-            'key' => 'test_key',
-            'type' => 'textarea',
-        ]);
+        $this->field = new TextAreaField('test_key', 'textarea');
     }
 
     /** @test */

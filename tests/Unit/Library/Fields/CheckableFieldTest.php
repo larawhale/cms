@@ -23,10 +23,7 @@ class CheckableFieldTest extends TestCase
     {
         parent::setUp();
 
-        $this->field = new CheckableField([
-            'key' => 'test_key',
-            'type' => 'checkbox',
-        ]);
+        $this->field = new CheckableField('test_key', 'checkbox');
     }
 
     /** @test */

@@ -49,23 +49,23 @@ class FactoryTest extends TestCase
     }
 
     /** @test */
-    public function get_type(): void
+    public function get_from_config(): void
     {
-        $type = Factory::getType([
+        $key = Factory::getFromConfig('key', [
             'key' => 'test_key',
-            'type' => 'test',
+            'type' => 'test_type',
         ]);
 
-        $this->assertEquals('test', $type);
+        $this->assertEquals('test_key', $key);
     }
 
     /** @test */
-    public function get_type_throws_required_config_exception(): void
+    public function get_from_config_throws_required_config_exception(): void
     {
         try {
-            Factory::getType([]);
+            Factory::getFromConfig('key', []);
         } catch (RequiredConfigKeyNotFoundException $e) {
-            $this->assertEquals('type', $e->getKey());
+            $this->assertEquals('key', $e->getKey());
 
             return;
         }

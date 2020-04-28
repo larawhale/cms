@@ -63,7 +63,7 @@ class InputFieldTest extends TestCase
 
         // Validat if the return value is correct.
         $this->assertEquals(
-            'form-control is-invalid',
+            ['form-control', 'is-invalid'],
             $this->field->getInputClass(),
         );
     }

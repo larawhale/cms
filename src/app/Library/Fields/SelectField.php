@@ -17,10 +17,7 @@ class SelectField extends InputField
             $this->getKey(),
             $this->getList(),
             $this->getInputValue(),
-            [
-                'class' => $this->getInputClass(),
-                'id' => $this->getKey(),
-            ],
+            $this->getInputAttributes(),
         )->toHtml();
     }
 

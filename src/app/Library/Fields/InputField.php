@@ -17,28 +17,67 @@ class InputField extends AbstractField
             $this->getType(),
             $this->getKey(),
             $this->getInputValue(),
-            [
-                'class' => $this->getInputClass(),
-                'id' => $this->getKey(),
-            ],
+            $this->getInputAttributes(),
         )->toHtml();
+    }
+
+    /**
+     * Returns the attributes for the rendered input.
+     * 
+     * @return array
+     */
+    public function getInputAttributes(): array
+    {
+        $default = [
+            'class' => $this->getInputClass(),
+            'id' => $this->getInputId(),
+        ];
+
+        return array_merge($default, $this->config('input_attributes', []));
     }
 
     /**
      * Returns the css class for the rendered input.
      *
-     * @return string
+     * @return array
      */
-    public function getInputClass(): string
+    public function getInputClass(): array
     {
-        $classes = ['form-control'];
+        $classes = $this->config('input_attributes.class', []);
 
-        if (request()->hasSession()
-            && optional(request()->session()->get('errors'))->has($this->getKey())
-        ) {
+        if (is_string($classes)) {
+            $classes = explode(' ', $classes);
+        }
+
+        $classes[] = 'form-control';
+
+        if ($this->inputIsInvalid()) {
             $classes[] = 'is-invalid';
         }
 
-        return implode(' ', $classes);
+        return array_unique($classes);
+    }
+
+    /**
+     * Returns the css id for the rendered input.
+     *
+     * @return string
+     */
+    public function getInputId(): string
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Returns whether the input has been submitted in a request with an
+     * invalid value.
+     * 
+     * @return bool
+     */
+    public function inputIsInvalid(): bool
+    {
+        return request()->hasSession()
+            && optional(request()->session()->get('errors'))
+                ->has($this->getKey());
     }
 }

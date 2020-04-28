@@ -16,10 +16,7 @@ class TextAreaField extends InputField
         return FormFacade::textarea(
             $this->getKey(),
             $this->getInputValue(),
-            [
-                'class' => $this->getInputClass(),
-                'id' => $this->getKey(),
-            ],
+            $this->getInputAttributes(),
         )->toHtml();
     }
 }

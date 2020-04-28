@@ -65,7 +65,7 @@ class InputField extends AbstractField
      */
     public function getInputId(): string
     {
-        return $this->getKey();
+        return $this->config('input_attributes.id', fn() => $this->getKey());
     }
 
     /**

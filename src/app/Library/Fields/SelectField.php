@@ -13,11 +13,6 @@ class SelectField extends InputField
      */
     public function renderInput(): string
     {
-        // TODO: Write test!!!!
-        // @@@@@@@@@@@@@@@@@@@@
-        // @@@@@@@@@@@@@@@@@@@@
-        // @@@@@@@@@@@@@@@@@@@@
-        // @@@@@@@@@@@@@@@@@@@@
         return FormFacade::select(
             $this->getKey(),
             $this->getList(),
@@ -36,11 +31,6 @@ class SelectField extends InputField
      */
     public function getList(): array
     {
-        // TODO: Write test!!!!
-        // @@@@@@@@@@@@@@@@@@@@
-        // @@@@@@@@@@@@@@@@@@@@
-        // @@@@@@@@@@@@@@@@@@@@
-        // @@@@@@@@@@@@@@@@@@@@
         return $this->config('list', []);
     }
 }

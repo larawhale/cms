@@ -30,6 +30,9 @@ return [
             'key' => 'select',
             'type' => 'select',
             'config' => [
+                'input_attributes' => [
+                    'placeholder' => 'Select an item',
+                ],
                 'list' => [
                     'item 1',
                     'item 2',

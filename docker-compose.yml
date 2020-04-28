@@ -34,7 +34,7 @@ services:
     tmpfs: /var/lib/mysql
     restart: unless-stopped
     ports:
-      - 3306:3306
+      - 33061:3306
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_DATABASE: forge

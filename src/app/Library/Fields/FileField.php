@@ -2,6 +2,9 @@
 
 namespace LaraWhale\Cms\Library\Fields;
 
+use Illuminate\Http\UploadedFile;
+use LaraWhale\Cms\Models\Entry as EntryModel;
+
 class FileField extends InputField
 {
     /**
@@ -30,5 +33,46 @@ class FileField extends InputField
         $classes[] = 'custom-file-input';
 
         return array_unique($classes);
+    }
+
+    /**
+     * Saves the field to the database.
+     *
+     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
+     * @param  mixed  $value
+     * @return self
+     */
+    public function save(EntryModel $entryModel, $value): self
+    {
+        $path = $this->saveFile($value);
+
+        return parent::save($entryModel, $path);
+    }
+
+    /**
+     * Saves the file to storage.
+     * 
+     * @param  \Illuminate\Http\UploadedFile  $file
+     * @return string
+     */
+    public function saveFile(UploadedFile $file): string
+    {
+        $filename = sprintf(
+            '%s_%s',
+            uniqid(),
+            $file->getClientOriginalName(),
+        );
+
+        return $file->storeAs($this->getFilePath(), $filename);
+    }
+
+    /**
+     * Returns the file path of the file.
+     * 
+     * @return string
+     */
+    public function getFilePath(): string
+    {
+        return $this->config('file_path', 'files');
     }
 }

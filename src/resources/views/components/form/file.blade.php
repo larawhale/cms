@@ -1,5 +1,6 @@
 @php
-    $attributes['placeholder'] = $attributes['placeholder']
+    $attributes['placeholder'] = $value
+        ?: $attributes['placeholder']
         ?? __('cms::inputs.file.placeholder');
 @endphp
 

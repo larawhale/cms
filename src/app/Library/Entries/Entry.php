@@ -201,6 +201,10 @@ class Entry extends BasicEntry implements EntryInterface
             'entry' => $this->entryModel ?? new EntryModel([
                 'type' => $this->getType(),
             ]),
+            // TODO: implement get form attributes
+            'attributes' => [
+                'files' => true,
+            ],
         ])->render();
     }
 

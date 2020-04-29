@@ -1,16 +1,16 @@
 @php
     $entryClass = $entry->toEntryClass();
 
-    $options = [];
+    $attributes = $attributes ?? [];
 
-    $options['method'] = $entry->exists ? 'patch' : 'post';
+    $attributes['method'] = $entry->exists ? 'patch' : 'post';
 
-    $options['url'] = $entry->exists
+    $attributes['url'] = $entry->exists
         ? route('cms.entries.update', compact('entry'))
         : route('cms.entries.store');
 @endphp
 
-{!! Form::open($options) !!}
+{!! Form::open($attributes) !!}
     {!! Form::input('hidden', 'entry_type', $entryClass->getType()) !!}
 
     @foreach ($entryClass->getFields() as $field)

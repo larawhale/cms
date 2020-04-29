@@ -2,9 +2,7 @@
 
 namespace LaraWhale\Cms\Library\Fields;
 
-use Collective\Html\FormFacade;
-
-class CheckableField extends InputField
+class FileField extends InputField
 {
     /**
      * Returns a rendered input.
@@ -13,11 +11,9 @@ class CheckableField extends InputField
      */
     public function renderInput(): string
     {
-        return view('cms::components.form.checkable', [
-            'label' => $this->getLabel(),
+        return view('cms::components.form.file', [
             'name' => $this->getKey(),
             'attributes' => $this->getInputAttributes(),
-            'type' => $this->getType(),
             'value' => $this->getInputValue(),
         ])->render();
     }
@@ -31,7 +27,7 @@ class CheckableField extends InputField
     {
         $classes = parent::getInputClass();
 
-        $classes[] = 'custom-control-input';
+        $classes[] = 'custom-file-input';
 
         return array_unique($classes);
     }

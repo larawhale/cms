@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
             window.location = href;
 
             return false;
-        })
+        });
     });
 
     /**
@@ -26,6 +26,25 @@ window.addEventListener('load', () => {
             }
         };
 
-        element.addEventListener('click', confirmAction)
+        element.addEventListener('click', confirmAction);
+    });
+
+    /**
+     * Displays file name on file change.
+     */
+    document.querySelectorAll('.custom-file-input').forEach((element) => {
+        element.addEventListener('change', e => {
+            const target = e.target;
+
+            let name = target.getAttribute('placeholder');
+
+            if (target.files && target.files.length > 0) {
+                name = target.files[0].name;
+            }
+
+            // The next element subling should always be the
+            // label.custom-file-label.
+            target.nextElementSibling.innerHTML = name;
+        });
     });
 });

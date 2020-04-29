@@ -42,8 +42,8 @@ window.addEventListener('load', () => {
                 name = target.files[0].name;
             }
 
-            // The next element subling should always be the
-            // label.custom-file-label.
+            // The next element sibling should always be the
+            // `label.custom-file-label`.
             target.nextElementSibling.innerHTML = name;
         });
     });

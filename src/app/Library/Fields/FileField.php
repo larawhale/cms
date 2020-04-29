@@ -46,6 +46,8 @@ class FileField extends InputField
     {
         $path = $this->saveFile($value);
 
+        // TODO: Cleanup old file?
+
         return parent::save($entryModel, $path);
     }
 
@@ -57,6 +59,8 @@ class FileField extends InputField
      */
     public function saveFile(UploadedFile $file): string
     {
+        // TODO: Come up with better way to get uniqueness.
+        // Maybe make the folder unique.
         $filename = sprintf(
             '%s_%s',
             uniqid(),

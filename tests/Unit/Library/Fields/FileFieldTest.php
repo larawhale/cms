@@ -52,6 +52,7 @@ class FileFieldTest extends TestCase
     {
         Storage::fake();
 
+        // Set a value so we can check that deleteFile is being called.
         $this->field->setValue('delete_me.jpg');
 
         $mock = Mockery::mock($this->field)->makePartial();

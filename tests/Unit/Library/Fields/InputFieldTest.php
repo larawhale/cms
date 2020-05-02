@@ -43,9 +43,9 @@ class InputFieldTest extends TestCase
     {
         $this->assertSame(
             [
-                'class' => ['form-control'],
                 'id' => 'test_key',
                 'placeholder' => 'test_placeholder',
+                'class' => ['form-control'],
             ],
             $this->field->getInputAttributes(),
         );
@@ -61,9 +61,9 @@ class InputFieldTest extends TestCase
 
         $this->assertSame(
             [
-                'class' => ['form-control'],
                 // Id is overwritten.
                 'id' => 'test_id',
+                'class' => ['form-control'],
             ],
             $field->getInputAttributes(),
         );

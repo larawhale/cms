@@ -29,6 +29,8 @@ class InputField extends AbstractField
     public function getInputAttributes(): array
     {
         $default = [
+            // TODO: getInputClass already merges input attributes from config,
+            // add class after merge.
             'class' => $this->getInputClass(),
             'id' => $this->getInputId(),
         ];

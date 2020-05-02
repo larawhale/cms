@@ -27,7 +27,9 @@ class FileFieldTest extends TestCase
     {
         parent::setUp();
 
-        $this->field = new FileField('test_key', 'file');
+        $this->field = new FileField('test_key', 'file', [
+            'file_path' => 'test_folder',
+        ]);
     }
 
     /** @test */
@@ -63,5 +65,27 @@ class FileFieldTest extends TestCase
         $mock->save($entryModel, $file);
 
         Storage::assertExists($mock->getValue());
+    }
+
+    /** @test */
+    public function get_file_path(): void
+    {
+        $this->assertEquals(
+            'test_folder',
+            $this->field->getFilePath(),
+        );
+    }
+
+    /** @test */
+    public function get_file_path_default(): void
+    {
+        // Create a field instance without a config that contains a `file_paht`
+        // key.
+        $field = new FileField('test_key', 'file');
+
+        $this->assertEquals(
+            '',
+            $field->getFilePath(),
+        );
     }
 }

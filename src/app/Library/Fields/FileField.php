@@ -93,6 +93,6 @@ class FileField extends InputField
      */
     public function getFilePath(): string
     {
-        return $this->config('file_path', 'files');
+        return $this->config('file_path', '');
     }
 }

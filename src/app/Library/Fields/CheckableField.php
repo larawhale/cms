@@ -16,7 +16,7 @@ class CheckableField extends InputField
         return view('cms::components.form.checkable', [
             'label' => $this->getLabel(),
             'name' => $this->getKey(),
-            'options' => $this->getInputAttributes(),
+            'attributes' => $this->getInputAttributes(),
             'type' => $this->getType(),
             'value' => $this->getInputValue(),
         ])->render();

@@ -40,5 +40,9 @@ return [
                 ],
             ],
         ],
+        [
+            'key' => 'file',
+            'type' => 'file',
+        ],
     ],
 ];

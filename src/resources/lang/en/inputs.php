@@ -5,6 +5,9 @@ return [
         'label' => 'Email',
         'placeholder' => 'Your email address',
     ],
+    'file' => [
+        'placeholder' => 'Choose file',
+    ],
     'password' => [
         'label' => 'Password',
         'placeholder' => 'Your password',

@@ -1,0 +1,3 @@
+files: true
+method: post
+url: 'http://localhost/cms/entries'

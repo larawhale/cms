@@ -1,7 +1,7 @@
 <div class="custom-control custom-{{ $type }}">
-    {!! Form::$type($name, $value, null, $options) !!}
+    {!! Form::$type($name, $value, null, $attributes) !!}
 
-    {!! Form::label($options['id'], $label, [
+    {!! Form::label($attributes['id'], $label, [
         'class' => 'custom-control-label'
     ]) !!}
 </div>

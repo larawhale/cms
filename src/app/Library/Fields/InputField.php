@@ -28,12 +28,18 @@ class InputField extends AbstractField
      */
     public function getInputAttributes(): array
     {
+        $configured = $this->config('input_attributes', []);
+
+        // Alter class directly instead of merging because `getInputClass`
+        // retrieves the configured class and appends to it. Altering directly
+        // will prevent is to be overwritten during merge.
+        $configured['class'] = $this->getInputClass();
+
         $default = [
-            'class' => $this->getInputClass(),
             'id' => $this->getInputId(),
         ];
 
-        return array_merge($default, $this->config('input_attributes', []));
+        return array_merge($default, $configured);
     }
 
     /**

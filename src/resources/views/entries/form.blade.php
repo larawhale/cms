@@ -1,13 +1,5 @@
 @php
     $entryClass = $entry->toEntryClass();
-
-    $attributes = $attributes ?? [];
-
-    $attributes['method'] = $entry->exists ? 'patch' : 'post';
-
-    $attributes['url'] = $entry->exists
-        ? route('cms.entries.update', compact('entry'))
-        : route('cms.entries.store');
 @endphp
 
 {!! Form::open($attributes) !!}

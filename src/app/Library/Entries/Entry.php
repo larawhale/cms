@@ -198,14 +198,29 @@ class Entry extends BasicEntry implements EntryInterface
     public function renderForm(): string
     {
         return view('cms::entries.form', [
+            'attributes' => $this->getFormAttributes(),
             'entry' => $this->entryModel ?? new EntryModel([
                 'type' => $this->getType(),
             ]),
-            // TODO: implement get form attributes
-            'attributes' => [
-                'files' => true,
-            ],
         ])->render();
+    }
+
+    /**
+     * Returns the attributes for the form that is being rendered.
+     * 
+     * @return array
+     */
+    public function getFormAttributes(): array
+    {
+        $exists = (bool) optional($this->entryModel)->exists();
+
+        return [
+            'files' => true,
+            'method' => $exists ? 'patch' : 'post',
+            'url' => $exists
+                ? route('cms.entries.update', ['entry' => $this->entryModel])
+                : route('cms.entries.store'),
+        ];
     }
 
     /**

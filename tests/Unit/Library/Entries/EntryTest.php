@@ -246,6 +246,22 @@ class EntryTest extends TestCase
     }
 
     /** @test */
+    public function get_form_attributes(): void
+    {
+        $entry = new Entry($this->config);
+
+        $this->assertMatchesSnapshot($entry->getFormAttributes());
+    }
+
+    /** @test */
+    public function get_form_attributes_existing(): void
+    {
+        $entry = new Entry($this->config, factory(EntryModel::class)->create());
+
+        $this->assertMatchesSnapshot($entry->getFormAttributes());
+    }
+
+    /** @test */
     public function render_view(): void
     {
         $entry = new Entry($this->config);

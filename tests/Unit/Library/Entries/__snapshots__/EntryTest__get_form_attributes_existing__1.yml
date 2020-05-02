@@ -1,0 +1,3 @@
+files: true
+method: patch
+url: 'http://localhost/cms/entries/1'

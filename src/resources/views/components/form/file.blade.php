@@ -1,3 +1,5 @@
+{{-- This component is controlled by javascript in listeners.js --}}
+
 @php
     $attributes['placeholder'] = $value
         ?: $attributes['placeholder']

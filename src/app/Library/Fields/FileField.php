@@ -3,6 +3,7 @@
 namespace LaraWhale\Cms\Library\Fields;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 
 class FileField extends InputField
@@ -46,7 +47,7 @@ class FileField extends InputField
     {
         $path = $this->saveFile($value);
 
-        // TODO: Cleanup old file?
+        $this->deleteFile();
 
         return parent::save($entryModel, $path);
     }
@@ -68,6 +69,23 @@ class FileField extends InputField
         );
 
         return $file->storeAs($this->getFilePath(), $filename);
+    }
+
+    /**
+     * Deletes the value of the field.
+     * 
+     * @return void
+     */
+    public function deleteFile(): void
+    {
+        // There is no file when value is `null`. This happens when this field
+        // has not been stored in the database before, or the value stored in
+        // the database is `null`.
+        if (is_null($this->value)) {
+            return;
+        }
+
+        Storage::delete($this->value);
     }
 
     /**

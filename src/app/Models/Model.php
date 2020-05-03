@@ -3,9 +3,9 @@
 namespace LaraWhale\Cms\Models;
 
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model as EloquenModel;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
-class Model extends EloquenModel
+class Model extends EloquentModel
 {
     /**
      * Get the table associated with the model.

@@ -16,9 +16,9 @@ class ModelSelectField extends SelectField
         $labelKey = $this->getListItemLabelkey();
 
         return $this->getModelList()
-            ->mapWithKeys(function ($model, $i) use ($labelKey) {
+            ->mapWithKeys(function ($model) use ($labelKey) {
                 return [
-                    $model->getKey() => $i . '-' . data_get($model, $labelKey),
+                    $model->getKey() => data_get($model, $labelKey),
                 ];
             })
             ->all();

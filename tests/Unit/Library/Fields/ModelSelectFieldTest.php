@@ -38,6 +38,10 @@ class ModelSelectFieldTest extends TestCase
     /** @test */
     public function render_input(): void
     {
+        factory(User::class, 3)->create([
+            'name' => 'test_name',
+        ]);
+
         $this->assertMatchesHtmlSnapshot($this->field->renderInput());
     }
 

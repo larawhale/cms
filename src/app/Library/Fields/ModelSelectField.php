@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 class ModelSelectField extends SelectField
 {
     /**
-     * Returns the configured list used to display in the select.
+     * Returns a list of models used to display in the select.
      * 
      * @return array
      */

@@ -1,5 +1,7 @@
 <?php
 
+use LaraWhale\Cms\Models\User;
+
 return [
     'type' => 'all_types',
     'name' => 'All types',
@@ -43,6 +45,20 @@ return [
         [
             'key' => 'file',
             'type' => 'file',
+        ],
+        [
+            'key' => 'model_select',
+            'type' => 'model_select',
+            'config' => [
+                'query_constraint' => function ($query) {
+                    $query->limit(15);
+                },
+                'input_attributes' => [
+                    'placeholder' => 'Select a user',
+                ],
+                'list_item_label_key' => 'name',
+                'model_class' => User::class,
+            ],
         ],
     ],
 ];

@@ -55,7 +55,7 @@ abstract class AbstractField extends BasicField implements AbstractFieldInterfac
      */
     public function getInputValue()
     {
-        return $this->getValue();
+        return $this->value;
     }
 
     /**

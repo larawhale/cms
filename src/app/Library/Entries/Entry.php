@@ -212,7 +212,7 @@ class Entry extends BasicEntry implements EntryInterface
      */
     public function getFormAttributes(): array
     {
-        $exists = (bool) optional($this->entryModel)->exists();
+        $exists = (bool) optional($this->entryModel)->exists;
 
         return [
             'files' => true,

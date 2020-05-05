@@ -81,4 +81,20 @@ class ModelSelectField extends SelectField
     {
         return $this->config('query_constraint', fn() => function () {});
     }
+
+    /**
+     * Returns the value of the field.
+     * 
+     * @return mixed
+     */
+    public function getValue()
+    {
+        if (is_null($this->value)) {
+            return $this->value;
+        }
+
+        $modelClass = $this->getModelClass();
+
+        return $modelClass::find($this->value);
+    }
 }

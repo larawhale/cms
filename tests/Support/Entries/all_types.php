@@ -68,7 +68,7 @@ return [
                 'input_attributes' => [
                     'placeholder' => 'Select a test entry',
                 ],
-                'list_item_label_key' => 'test_label',
+                'list_item_label_key' => 'test_key',
                 'query_constraint' => function ($query) {
                     $query->limit(15);
                 },

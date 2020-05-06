@@ -64,7 +64,7 @@ return [
             'key' => 'entry_select',
             'type' => 'entry_select',
             'config' => [
-                'type' => 'test_entry',
+                'entry_type' => 'test_entry',
                 'input_attributes' => [
                     'placeholder' => 'Select a test entry',
                 ],

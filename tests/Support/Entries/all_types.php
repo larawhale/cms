@@ -5,7 +5,7 @@ use LaraWhale\Cms\Models\User;
 return [
     'type' => 'all_types',
     'name' => 'All types',
-    'view' => 'entries.all_types',
+    'view' => 'all_types',
     'single' => true,
     'fields' => [
         [

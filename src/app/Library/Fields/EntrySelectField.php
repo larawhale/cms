@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Library\Fields;
 
+use Exception;
 use Illuminate\Support\Collection;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 
@@ -45,7 +46,24 @@ class EntrySelectField extends ModelSelectField
      */
     public function getModelClass(): string
     {
-        return $this->config('model_class', EntryModel::class);
+        $modelClass = $this->config('model_class', EntryModel::class);
+
+        // The model class should be the Entry model class or extend from it.
+        // This field expects some functionality to be present when it queries
+        // or creates instances with the class.
+        if ($modelClass !== EntryModel::class
+            && ! is_subclass_of($modelClass, EntryModel::class)
+        ) {
+            $message = sprintf(
+                'The model class should be equal or extend from %s. %s given instead.',
+                EntryModel::class,
+                $modelClass,
+            );
+
+            throw new Exception($message);
+        }
+
+        return $modelClass;
     }
 
     /**
@@ -62,5 +80,21 @@ class EntrySelectField extends ModelSelectField
         }
 
         return $query;
+    }
+
+    /**
+     * Returns the value of the field.
+     * 
+     * @return mixed
+     */
+    public function getValue()
+    {
+        if (is_null($this->value)) {
+            return $this->value;
+        }
+
+        $modelClass = $this->getModelClass();
+
+        return optional($modelClass::find($this->value))->toEntryClass();
     }
 }

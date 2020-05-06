@@ -50,14 +50,28 @@ return [
             'key' => 'model_select',
             'type' => 'model_select',
             'config' => [
-                'query_constraint' => function ($query) {
-                    $query->limit(15);
-                },
                 'input_attributes' => [
                     'placeholder' => 'Select a user',
                 ],
                 'list_item_label_key' => 'name',
                 'model_class' => User::class,
+                'query_constraint' => function ($query) {
+                    $query->limit(15);
+                },
+            ],
+        ],
+        [
+            'key' => 'entry_select',
+            'type' => 'entry_select',
+            'config' => [
+                'type' => 'test_entry',
+                'input_attributes' => [
+                    'placeholder' => 'Select an entry',
+                ],
+                'list_item_label_key' => 'name',
+                'query_constraint' => function ($query) {
+                    $query->limit(15);
+                },
             ],
         ],
     ],

@@ -66,9 +66,9 @@ return [
             'config' => [
                 'type' => 'test_entry',
                 'input_attributes' => [
-                    'placeholder' => 'Select an entry',
+                    'placeholder' => 'Select a test entry',
                 ],
-                'list_item_label_key' => 'name',
+                'list_item_label_key' => 'test_label',
                 'query_constraint' => function ($query) {
                     $query->limit(15);
                 },

@@ -6,6 +6,7 @@ use LaraWhale\Cms\Tests\TestCase;
 use LaraWhale\Cms\Library\Entries\Entry;
 use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Library\Fields\EntrySelectField;
+use LaraWhale\Cms\Tests\Support\Models\CustomEntryModel;
 use LaraWhale\Cms\Exceptions\ClassNotEntryModelException;
 
 class EntrySelectFieldTest extends TestCase
@@ -86,12 +87,13 @@ class EntrySelectFieldTest extends TestCase
     /** @test */
     public function get_model_class(): void
     {
-        // TODO: Create custom entry model and add it to config.
-        $field = new EntrySelectField('test_key', 'entry_select');
+        $field = new EntrySelectField('test_key', 'entry_select', [
+            'model_class' => CustomEntryModel::class,
+        ]);
 
         $this->assertSame(
-            EntryModel::class,
-            $this->field->getModelClass(),
+            CustomEntryModel::class,
+            $field->getModelClass(),
         );
     }
 

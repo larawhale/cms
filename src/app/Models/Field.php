@@ -45,8 +45,14 @@ class Field extends Model
      *
      * @return \LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface
      */
-    public function toEntryClass(): AbstractFieldInterface
+    public function toFieldClass(): AbstractFieldInterface
     {
-        return Factory::make($this->key, $this->type, $this);
+        return Factory::make(
+            [
+                'key' => $this->key,
+                'type' => $this->type,
+            ],
+            $this,
+        );
     }
 }

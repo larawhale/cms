@@ -2,6 +2,7 @@
 
 namespace LaraWhale\Cms\Library\Fields;
 
+use LaraWhale\Cms\Models\Field as FieldModel;
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 use LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface;
 
@@ -18,9 +19,10 @@ class Factory
      * Makes an instance of field according to the given config.
      *
      * @param  array  $config
+     * @param  \LaraWhale\Cms\Models\Field  $fieldModel
      * @return \LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface
      */
-    public static function make(array $config): AbstractFieldInterface
+    public static function make(array $config, FieldModel $fieldModel = null): AbstractFieldInterface
     {
         $key = static::getFromConfig('key', $config);
 
@@ -32,6 +34,7 @@ class Factory
             $key,
             $type,
             data_get($config, 'config', []),
+            $fieldModel,
         );
     }
 

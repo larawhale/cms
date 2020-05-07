@@ -3,7 +3,9 @@
 namespace LaraWhale\Cms\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use LaraWhale\Cms\Library\Fields\Factory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface;
 
 class Field extends Model
 {
@@ -36,5 +38,21 @@ class Field extends Model
     public function scopeType(Builder $query, string $type): Builder
     {
         return $query->where('type', $type);
+    }
+
+    /**
+     * Get the instance as an Field class.
+     *
+     * @return \LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface
+     */
+    public function toFieldClass(): AbstractFieldInterface
+    {
+        return Factory::make(
+            [
+                'key' => $this->key,
+                'type' => $this->type,
+            ],
+            $this,
+        );
     }
 }

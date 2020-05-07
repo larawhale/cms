@@ -54,7 +54,7 @@ class Entry extends Model
     /**
      * Get the instance as an Entry class.
      *
-     * @return \LaraWhale\Cms\Library\Entries\Contracts\Entry
+     * @return \LaraWhale\Cms\Library\Entries\Contracts\EntryInterface
      */
     public function toEntryClass(): EntryInterface
     {

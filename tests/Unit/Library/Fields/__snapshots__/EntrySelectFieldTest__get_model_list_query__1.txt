@@ -1,0 +1,1 @@
+select * from `cms_entries` where `type` = ? limit 15

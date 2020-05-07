@@ -184,7 +184,9 @@ class Entry extends BasicEntry implements EntryInterface
         foreach ($this->getFields() as $field) {
             $fieldModel = $fieldModels->firstWhere('key', $field->getKey());
 
-            $this->values[$field->getKey()] = data_get($fieldModel, 'value');
+            $field->setFieldModel($fieldModel);
+
+            $this->values[$field->getKey()] = $field->getValue();
         }
 
         return $this;

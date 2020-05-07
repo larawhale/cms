@@ -5,7 +5,7 @@ use LaraWhale\Cms\Models\User;
 return [
     'type' => 'all_types',
     'name' => 'All types',
-    'view' => 'entries.all_types',
+    'view' => 'all_types',
     'single' => true,
     'fields' => [
         [
@@ -50,14 +50,28 @@ return [
             'key' => 'model_select',
             'type' => 'model_select',
             'config' => [
-                'query_constraint' => function ($query) {
-                    $query->limit(15);
-                },
                 'input_attributes' => [
                     'placeholder' => 'Select a user',
                 ],
                 'list_item_label_key' => 'name',
                 'model_class' => User::class,
+                'query_constraint' => function ($query) {
+                    $query->limit(15);
+                },
+            ],
+        ],
+        [
+            'key' => 'entry_select',
+            'type' => 'entry_select',
+            'config' => [
+                'entry_type' => 'test_entry',
+                'input_attributes' => [
+                    'placeholder' => 'Select a test entry',
+                ],
+                'list_item_label_key' => 'test_key',
+                'query_constraint' => function ($query) {
+                    $query->limit(15);
+                },
             ],
         ],
     ],

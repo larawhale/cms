@@ -2,9 +2,9 @@
 
 namespace LaraWhale\Cms\Library\Fields;
 
-use Exception;
 use Illuminate\Support\Collection;
 use LaraWhale\Cms\Models\Entry as EntryModel;
+use LaraWhale\Cms\Exceptions\ClassNotEntryModelException;
 
 class EntrySelectField extends ModelSelectField
 {
@@ -12,9 +12,9 @@ class EntrySelectField extends ModelSelectField
      * Returns the configured entry type that is used to contraint the query to
      * only return entries of a certain type.
      * 
-     * @return string
+     * @return string|null
      */
-    public function getEntryType(): string
+    public function getEntryType(): ?string
     {
         return $this->config('entry_type', null);
     }
@@ -54,13 +54,7 @@ class EntrySelectField extends ModelSelectField
         if ($modelClass !== EntryModel::class
             && ! is_subclass_of($modelClass, EntryModel::class)
         ) {
-            $message = sprintf(
-                'The model class should be equal or extend from %s. %s given instead.',
-                EntryModel::class,
-                $modelClass,
-            );
-
-            throw new Exception($message);
+            throw new ClassNotEntryModelException($modelClass);
         }
 
         return $modelClass;

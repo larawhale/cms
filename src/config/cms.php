@@ -28,6 +28,7 @@ return [
             'file' => \LaraWhale\Cms\Library\Fields\FileField::class,
             'input' => \LaraWhale\Cms\Library\Fields\InputField::class,
             'model_select' => \LaraWhale\Cms\Library\Fields\ModelSelectField::class,
+            'multi_select' => \LaraWhale\Cms\Library\Fields\MultiSelectField::class,
             'radio' => \LaraWhale\Cms\Library\Fields\CheckableField::class,
             'select' => \LaraWhale\Cms\Library\Fields\SelectField::class,
             'textarea' => \LaraWhale\Cms\Library\Fields\TextAreaField::class,

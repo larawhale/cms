@@ -43,6 +43,20 @@ return [
             ],
         ],
         [
+            'key' => 'multi_select',
+            'type' => 'multi_select',
+            'config' => [
+                'input_attributes' => [
+                    'placeholder' => 'Select items',
+                ],
+                'list' => [
+                    'item 1',
+                    'item 2',
+                    'item 3',
+                ],
+            ],
+        ],
+        [
             'key' => 'file',
             'type' => 'file',
         ],

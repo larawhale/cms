@@ -1,6 +1,5 @@
 <cms-multi-select
-    :list="{{ json_encode($list) }}"
+    :list='@json($list)'
     name="{{ $name }}"
-    :value="{{ json_encode($value) }}"
-    {{-- TODO: attributes --}}
+    :value='@json($value)'
 />

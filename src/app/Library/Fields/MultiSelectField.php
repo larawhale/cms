@@ -2,8 +2,12 @@
 
 namespace LaraWhale\Cms\Library\Fields;
 
+use LaraWhale\Cms\Library\Fields\Concerns\HasArrayValue;
+
 class MultiSelectField extends SelectField
 {
+    use HasArrayValue;
+
     /**
      * Returns a rendered input.
      *

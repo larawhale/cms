@@ -22,4 +22,16 @@ class MultiSelectField extends SelectField
             'attributes' => $this->getInputAttributes(),
         ])->render();
     }
+
+    /**
+     * Returns the css class for the rendered input.
+     *
+     * @return array
+     */
+    public function getInputClass(): array
+    {
+        $classes = parent::getInputClass();
+
+        return array_filter($classes, fn($c) => $c != 'form-control');
+    }
 }

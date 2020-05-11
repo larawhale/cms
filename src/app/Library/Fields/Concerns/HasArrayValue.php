@@ -4,7 +4,6 @@ namespace LaraWhale\Cms\Library\Fields\Concerns;
 
 trait HasArrayValue
 {
-
     /**
      * Returns the value of the field.
      * 
@@ -14,7 +13,7 @@ trait HasArrayValue
     {
         return is_array($this->value)
             ? $this->value
-            : json_decode($this->value);
+            : json_decode($this->value) ?? [];
     }
 
     /**
@@ -39,6 +38,6 @@ trait HasArrayValue
     {
         return is_array($this->value)
             ? $this->value
-            : (json_decode($this->value) ?? []);
+            : json_decode($this->value) ?? [];
     }
 }

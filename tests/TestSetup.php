@@ -3,6 +3,7 @@
 namespace LaraWhale\Cms\Tests;
 
 use Collective\Html\FormFacade;
+use Collective\Html\HtmlFacade;
 use Spatie\Snapshots\MatchesSnapshots;
 use Collective\Html\HtmlServiceProvider;
 use LaraWhale\Cms\Providers\CmsServiceProvider;
@@ -120,6 +121,7 @@ trait TestSetup
     {
         return [
             'Form' => FormFacade::class,
+            'Html' => HtmlFacade::class,
         ];
     }
 

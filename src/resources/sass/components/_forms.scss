@@ -1,0 +1,17 @@
+.cms-multi-select.is-invalid {
+    .dropdown .dropdown-toggle {
+        border-color: $form-feedback-invalid-color;
+
+        @if $enable-validation-icons {
+            padding-right: $input-height-inner;
+            background-image: escape-svg($form-feedback-icon-invalid);
+            background-repeat: no-repeat;
+            background-position: right $input-height-inner-quarter center;
+            background-size: $input-height-inner-half $input-height-inner-half;
+        }
+
+        &:focus {
+            border-color: $form-feedback-invalid-color;
+        }
+    }
+}

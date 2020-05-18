@@ -1,5 +1,7 @@
 # Larawhale CMS
 
+![image size test](https://user-images.githubusercontent.com/8861831/82252871-20814e80-9950-11ea-8272-9e2fdb276c43.png)
+
 A Laravel package that provides the features of a content management system to any new or existing Laravel application.
 
 The package uses a simple concept of two entities, entries and fields. Entries can be seen as models, where fields are the properties of these models. This concept allows for simple and quick adjustments to the data that is shown to the users.

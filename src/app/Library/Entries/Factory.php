@@ -81,7 +81,13 @@ class Factory
      */
     public static function loadEntries(): void
     {
-        $files = File::allFiles(cms_entries_path());
+        $entriesPath = cms_entries_path();
+
+        if (! file_exists($entriesPath)) {
+            return;
+        }
+
+        $files = File::allFiles($entriesPath);
 
         foreach ($files as $file) {
             $config = require $file->getPathname();

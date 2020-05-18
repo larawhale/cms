@@ -46,7 +46,6 @@ return [
             'key' => 'multi_select',
             'type' => 'multi_select',
             'config' => [
-                'rules' => 'email',
                 'input_attributes' => [
                     'placeholder' => 'Select items',
                 ],

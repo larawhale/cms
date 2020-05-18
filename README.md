@@ -8,7 +8,7 @@ The goal of this package is to take the management of content out of the hands o
 
 ## Example
 
-The following example displays how a conigured entry is displayed in the user interface.
+The following example displays how a conifured entry is displayed in the user interface.
 
 ![example](https://user-images.githubusercontent.com/8861831/82252871-20814e80-9950-11ea-8272-9e2fdb276c43.png)
 

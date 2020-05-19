@@ -6,7 +6,7 @@ use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Models\Field;
 use LaraWhale\Cms\Tests\TestCase;
-use Illuminate\Foundation\Testing\TestResponse;
+use LaraWhale\Cms\Tests\TestResponse;
 
 class UpdateTest extends TestCase
 {
@@ -56,7 +56,7 @@ class UpdateTest extends TestCase
      *
      * @param \LaraWhale\Cms\Models\Entry  $entry
      * @param  array  $data
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return \LaraWhale\Cms\Tests\TestResponse
      */
     private function makeRequest(User $user = null, Entry $entry, array $data): TestResponse
     {
@@ -83,7 +83,7 @@ class UpdateTest extends TestCase
     /**
      * Asserts a response.
      *
-     * @param  \Illuminate\Foundation\Testing\TestResponse  $response
+     * @param  \LaraWhale\Cms\Tests\TestResponse  $response
      * @param  string  $type
      * @param  int  $status
      * @return void

@@ -15,7 +15,7 @@ The following example displays how a conifured entry is displayed in the user in
 ## Requirements
 
 - `"php": "^7.4"`
-- `"laravel/framework": "^6.15"`
+- `"laravel/framework": "^7.12"`
 
 ## Getting started
 

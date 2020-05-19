@@ -5,7 +5,7 @@ namespace LaraWhale\Cms\Tests\Feature\Entries;
 use LaraWhale\Cms\Models\User;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Tests\TestCase;
-use Illuminate\Foundation\Testing\TestResponse;
+use LaraWhale\Cms\Tests\TestResponse;
 
 class DestroyTest extends TestCase
 {
@@ -51,7 +51,7 @@ class DestroyTest extends TestCase
      *
      * @param  \LaraWhale\Cms\Models\User  $user
      * @param  \LaraWhale\Cms\Models\Entry  $entry
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return \LaraWhale\Cms\Tests\TestResponse
      */
     private function makeRequest(User $user = null, Entry $entry): TestResponse
     {
@@ -65,7 +65,7 @@ class DestroyTest extends TestCase
     /**
      * Asserts a response.
      *
-     * @param  \Illuminate\Foundation\Testing\TestResponse  $response
+     * @param  \LaraWhale\Cms\Tests\TestResponse  $response
      * @param  string  $type
      * @param  int  $status
      * @return void

@@ -6,6 +6,12 @@ The package uses a simple concept of two entities, entries and fields. Entries c
 
 The goal of this package is to take the management of content out of the hands of the developer while maintaining as much customizability as possible. Additionally it is important to impact the developers process as little as possible.
 
+## Example
+
+The following example displays how a conifured entry is displayed in the user interface.
+
+![example](https://user-images.githubusercontent.com/8861831/82252871-20814e80-9950-11ea-8272-9e2fdb276c43.png)
+
 ## Requirements
 
 - `"php": "^7.4"`

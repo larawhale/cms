@@ -129,7 +129,7 @@ trait TestSetup
      * Create the test response instance from the given response.
      *
      * @param  \Illuminate\Http\Response  $response
-     * @return \Illuminate\Foundation\Testing\TestResponse
+     * @return \LaraWhale\Cms\Tests\TestResponse
      */
     protected function createTestResponse($response)
     {

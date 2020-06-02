@@ -6,6 +6,19 @@ This package uses a simple concept of two entities, entries and fields. Entries 
 
 The goal of this package is to take the implementation of managing content out of the hands of the developer while maintaining as much customizability as possible. It is important to keep the development process the same as how developers are used to while using the Laravel framework.
 
+## Installation
+
+This package can be installed using composer:
+
+```
+composer require larawhale/cms
+```
+
+**NOTE!** <br />
+At the moment the `larawhale` namespace is already in use on Packagist, the owner has been contacted to add this package. For now the package can be added as repository to the `composer.json`. More information can be found in the [composer documentation](https://getcomposer.org/doc/05-repositories.md#vcs).
+
+Read more about the installation of this package in the [documentation](https://github.com/larawhale/cms/wiki/Installation).
+
 ## Example
 
 Here is a quick example how an entry can be configured. The entry will be made available in the user interface when it is saved in the default `resources/entries` folder.

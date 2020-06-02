@@ -8,9 +8,59 @@ The goal of this package is to take the implementation of managing content out o
 
 ## Example
 
-The following example displays how a confgured entry is displayed in the user interface.
+Here is a quick example how an entry can be configured. The entry will be made available in the user interface when it is saved in the default `resources/entries` folder.
 
-![example](https://user-images.githubusercontent.com/8861831/82252871-20814e80-9950-11ea-8272-9e2fdb276c43.png)
+```php
+// resources/entries/post.php
+return [
+    'type' => 'post',
+    'name' => 'Post',
+    'view' => 'entries.post',
+    'fields' => [
+        [
+            'key' => 'route',
+            'type' => 'route',
+            'config' => [
+                'rules' => 'required',
+                'label' => 'Url',
+            ],
+        ],
+        [
+            'key' => 'title',
+            'type' => 'text',
+            'config' => [
+                'rules' => 'required|string|max:191',
+                'label' => 'Title',
+            ],
+        ],
+        [
+            'key' => 'body',
+            'type' => 'textarea',
+            'config' => [
+                'rules' => 'required|string|max:1000',
+                'label' => 'Body',
+            ],
+        ],
+    ],
+];
+```
+More information can be found at the [entries configuration](https://github.com/larawhale/cms/wiki/Entry-configuration) and [fields configutation](https://github.com/larawhale/cms/wiki/Field-configuration) documentation.
+
+This configuration will result in the following form to be rendered in the user interface.
+
+![Rendered post entry form](https://user-images.githubusercontent.com/8861831/83181950-e2411780-a125-11ea-8660-27a7b7fe8930.png)
+
+The configured fields of this entry have now been made available in the configured `resources/views/entries/post.blade.php` file.
+
+```html
+// resources/views/entries/post.blade.php
+<h1>
+    {{ $entry->title }}
+</h1>
+
+{!! $entry->body !!}
+```
+
 
 
 ## Documentation

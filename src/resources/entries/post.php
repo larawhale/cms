@@ -1,10 +1,14 @@
 <?php
 
+use LaraWhale\Cms\Models\User;
+
 return [
-    'type' => 'home',
-    'name' => 'Home',
-    'view' => 'cms::entries.examples.home',
-    'single' => true,
+    'type' => 'post',
+    'name' => 'Post',
+    'table_columns' => [
+        'title', 'entry_model:created_at',
+    ],
+    'view' => 'cms::entries.examples.post',
     'fields' => [
         [
             'key' => 'route',
@@ -12,6 +16,19 @@ return [
             'config' => [
                 'label' => 'Route',
                 'rules' => 'required|string|max:191',
+            ],
+        ],
+        [
+            'key' => 'author',
+            'type' => 'model_select',
+            'config' => [
+                'input_attributes' => [
+                    'placeholder' => 'Select a user',
+                ],
+                'label' => 'Author',
+                'list_item_label_key' => 'name',
+                'model_class' => User::class,
+                'rules' => 'required|numeric|exists:' . cms_table_name('users') . ',id',
             ],
         ],
         [

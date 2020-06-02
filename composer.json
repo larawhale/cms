@@ -37,5 +37,12 @@
         "psr-4": {
             "LaraWhale\\Cms\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaraWhale\\Cms\\Providers\\CmsServiceProvider"
+            ]
+        }
     }
 }

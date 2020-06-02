@@ -1,7 +1,9 @@
 <?php
 
 use LaraWhale\Cms\Models\Field;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\QueryException;
 use LaraWhale\Cms\Http\Controllers\Controller;
 use LaraWhale\Cms\Http\Controllers\EntryController;
 use LaraWhale\Cms\Http\Controllers\LoginController;
@@ -44,7 +46,23 @@ Route::group([
     Route::fallback(Controller::class . '@fallback');
 });
 
-if (Schema::hasTable(cms_table_name('fields'))) {
+
+// The database might not be present on installation. This check is necessary
+// to prevent console commands from not working anymore, even
+// "post-autoload-dump" depends on this.
+$hasFieldsTable = false;
+
+try {
+    $hasFieldsTable = Schema::hasTable(cms_table_name('fields'));
+} catch (QueryException $e) {
+    if (! app()->runningInConsole()) {
+        throw $e;
+    } else {
+        Log::error($e->getMessage());
+    }
+}
+
+if ($hasFieldsTable) {
     Field::type(config('cms.fields.route_field_type'))
         ->with('entry')
         ->each(function (Field $field) {

@@ -9,6 +9,28 @@ return [
     'single' => true,
     'fields' => [
         [
+            'key' => 'fields',
+            'type' => 'fields',
+            'config' => [
+                'fields' => [
+                    [
+                        'key' => 'field_1',
+                        'type' => 'text',
+                        'config' => [
+                            'rules' => 'required|in:a,b',
+                        ],
+                    ],
+                    [
+                        'key' => 'field_2',
+                        'type' => 'text',
+                        'config' => [
+                            'rules' => 'required',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
             'key' => 'route',
             'type' => config('cms.fields.route_field_type'),
         ],

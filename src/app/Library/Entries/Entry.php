@@ -135,7 +135,7 @@ class Entry extends BasicEntry implements EntryInterface
     {
         return collect($this->getFields())
             ->mapWithKeys(function (AbstractFieldInterface $field) {
-                return [$field->getKey() => $field->getRules()];
+                return $field->getRulesWithKey();
             })
             ->all();
     }
@@ -246,6 +246,7 @@ class Entry extends BasicEntry implements EntryInterface
      */
     public static function save(EntryModel $entryModel, array $data): self
     {
+        dd($data);
         $entryModel->fill($data)->save();
 
         $entry = $entryModel->toEntryClass();

@@ -69,6 +69,16 @@ abstract class AbstractField extends BasicField implements AbstractFieldInterfac
     }
 
     /**
+     * Returns the configured rules of the field with the key of the field.
+     *
+     * @return array
+     */
+    public function getRulesWithKey(): array
+    {
+        return [$this->getKey() => $this->getRules()];
+    }
+
+    /**
      * Returns the configured label of the field.
      *
      * @return string

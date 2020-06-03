@@ -8,6 +8,19 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreRequest extends FormRequest
 {
     /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        // $validator->after(function ($validator) {
+        //     dd($validator);
+        // });
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array

@@ -40,16 +40,22 @@ class FieldsField extends InputField
      */
     public function getFieldInstances(): array
     {
-        return array_map(function ($config) {
+        $values = $this->getValue();
+
+        return array_map(function ($config) use ($values) {
+            $originalKey = data_get($config, 'key');
+
             // The key of the field needs to be altered to a key that belongs
             // to its parent. This should be done to make it easier to retrieve
             // the values and to prevent interference with other fields.
             $config['key'] = sprintf('%s[%s]',
                 $this->getKey(),
-                data_get($config, 'key'),
+                $originalKey,
             );
 
-            return Factory::make($config);
+            $instance = Factory::make($config);
+
+            return $instance->setValue(data_get($values, $originalKey));
         }, $this->getFields());
     }
 
@@ -71,17 +77,5 @@ class FieldsField extends InputField
                 return [implode('.', $explodedKey) => $field->getRules()];
             })
             ->all();
-    }
-
-    /**
-     * Saves the field to the database.
-     *
-     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
-     * @param  mixed  $value
-     * @return self
-     */
-    public function save(EntryModel $entryModel, $value): self
-    {
-        dd($value);
     }
 }

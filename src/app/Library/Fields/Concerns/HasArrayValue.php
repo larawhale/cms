@@ -13,7 +13,7 @@ trait HasArrayValue
     {
         return is_array($this->value)
             ? $this->value
-            : json_decode($this->value) ?? [];
+            : json_decode($this->value, true) ?? [];
     }
 
     /**
@@ -38,6 +38,6 @@ trait HasArrayValue
     {
         return is_array($this->value)
             ? $this->value
-            : json_decode($this->value) ?? [];
+            : json_decode($this->value, true) ?? [];
     }
 }

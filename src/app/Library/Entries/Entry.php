@@ -246,7 +246,6 @@ class Entry extends BasicEntry implements EntryInterface
      */
     public static function save(EntryModel $entryModel, array $data): self
     {
-        dd($data);
         $entryModel->fill($data)->save();
 
         $entry = $entryModel->toEntryClass();

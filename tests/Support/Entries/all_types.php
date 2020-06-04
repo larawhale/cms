@@ -37,6 +37,9 @@ return [
         [
             'key' => 'text',
             'type' => 'text',
+            'config' => [
+                'rules' => 'required',
+            ],
         ],
         [
             'key' => 'textarea',

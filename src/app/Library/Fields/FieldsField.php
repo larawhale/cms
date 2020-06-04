@@ -48,14 +48,14 @@ class FieldsField extends InputField
             // The key of the field needs to be altered to a key that belongs
             // to its parent. This should be done to make it easier to retrieve
             // the values and to prevent interference with other fields.
-            $config['key'] = sprintf('%s[%s]',
+            $config['key'] = sprintf(
+                '%s[%s]',
                 $this->getKey(),
                 $originalKey,
             );
 
-            $instance = Factory::make($config);
-
-            return $instance->setValue(data_get($values, $originalKey));
+            return Factory::make($config)
+                ->setValue(data_get($values, $originalKey));
         }, $this->getFields());
     }
 

@@ -9,37 +9,12 @@ return [
     'single' => true,
     'fields' => [
         [
-            'key' => 'fields',
-            'type' => 'fields',
-            'config' => [
-                'fields' => [
-                    [
-                        'key' => 'field_1',
-                        'type' => 'text',
-                        'config' => [
-                            'rules' => 'required|in:a,b',
-                        ],
-                    ],
-                    [
-                        'key' => 'field_2',
-                        'type' => 'text',
-                        'config' => [
-                            'rules' => 'required',
-                        ],
-                    ],
-                ],
-            ],
-        ],
-        [
             'key' => 'route',
             'type' => config('cms.fields.route_field_type'),
         ],
         [
             'key' => 'text',
             'type' => 'text',
-            'config' => [
-                'rules' => 'required',
-            ],
         ],
         [
             'key' => 'textarea',
@@ -111,6 +86,22 @@ return [
                 'query_constraint' => function ($query) {
                     $query->limit(15);
                 },
+            ],
+        ],
+        [
+            'key' => 'fields',
+            'type' => 'fields',
+            'config' => [
+                'fields' => [
+                    [
+                        'key' => 'field_1',
+                        'type' => 'text',
+                    ],
+                    [
+                        'key' => 'field_2',
+                        'type' => 'text',
+                    ],
+                ],
             ],
         ],
     ],

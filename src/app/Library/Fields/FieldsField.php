@@ -67,6 +67,9 @@ class FieldsField extends InputField
     public function getRulesWithKey(): array
     {
         return collect($this->getFieldInstances())
+            // Validation for keys of objects is done with keys that are dot
+            // notated. "parent[child]" should be transformed to "parent.child"
+            // in order for Laravel to be able to validate.
             ->mapWithKeys(function ($field) {
                 $explodedKey = str_replace(
                     ']',

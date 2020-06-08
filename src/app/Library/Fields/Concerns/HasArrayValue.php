@@ -13,7 +13,7 @@ trait HasArrayValue
     {
         return is_array($this->value)
             ? $this->value
-            : json_decode($this->value) ?? [];
+            : json_decode($this->value, true) ?? [];
     }
 
     /**
@@ -25,7 +25,11 @@ trait HasArrayValue
      */
     public function getDatabaseValue($value): string
     {
-        return json_encode($value);
+        return is_null($value)
+            ? ''
+            : (is_string($value)
+                ? $value
+                : json_encode($value));
     }
 
     /**
@@ -38,6 +42,6 @@ trait HasArrayValue
     {
         return is_array($this->value)
             ? $this->value
-            : json_decode($this->value) ?? [];
+            : json_decode($this->value, true) ?? [];
     }
 }

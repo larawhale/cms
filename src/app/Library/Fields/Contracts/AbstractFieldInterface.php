@@ -44,6 +44,13 @@ interface AbstractFieldInterface extends BasicFieldInterface
     public function getRules();
 
     /**
+     * Returns the configured rules of the field with the key of the field.
+     *
+     * @return array
+     */
+    public function getRulesWithKey(): array;
+
+    /**
      * Returns the configured label of the field.
      *
      * @return string

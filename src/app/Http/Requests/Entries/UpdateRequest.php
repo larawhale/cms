@@ -3,9 +3,12 @@
 namespace LaraWhale\Cms\Http\Requests\Entries;
 
 use Illuminate\Foundation\Http\FormRequest;
+use LaraWhale\Cms\Http\Requests\Concerns\CopiesDotKeys;
 
 class UpdateRequest extends FormRequest
 {
+    use CopiesDotKeys;
+
     /**
      * Get the validation rules that apply to the request.
      *

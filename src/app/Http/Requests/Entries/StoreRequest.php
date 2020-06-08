@@ -4,9 +4,12 @@ namespace LaraWhale\Cms\Http\Requests\Entries;
 
 use LaraWhale\Cms\Library\Entries\Factory;
 use Illuminate\Foundation\Http\FormRequest;
+use LaraWhale\Cms\Http\Requests\Concerns\CopiesDotKeys;
 
 class StoreRequest extends FormRequest
 {
+    use CopiesDotKeys;
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -18,6 +21,8 @@ class StoreRequest extends FormRequest
             'entry_type' => [
                 'required',
                 'string',
+                // It should not be allowed to create an entry with a type that
+                // has not been configured.
                 function (string $attribute, $value, callable $fail) {
                     if (! Factory::exists($value)) {
                         $fail(__(

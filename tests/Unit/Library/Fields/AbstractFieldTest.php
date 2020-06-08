@@ -82,6 +82,15 @@ class AbstractFieldTest extends TestCase
     }
 
     /** @test */
+    public function get_rules_with_key(): void
+    {
+        $this->assertSame(
+            ['test_key' => ['required']],
+            $this->field->getRulesWithKey(),
+        );
+    }
+
+    /** @test */
     public function get_label(): void
     {
         $this->assertSame(

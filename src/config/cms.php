@@ -30,6 +30,7 @@ return [
             'input' => \LaraWhale\Cms\Library\Fields\InputField::class,
             'model_select' => \LaraWhale\Cms\Library\Fields\ModelSelectField::class,
             'multi_entry_select' => \LaraWhale\Cms\Library\Fields\MultiEntrySelectField::class,
+            'multi_fields' => \LaraWhale\Cms\Library\Fields\MultiFieldsField::class,
             'multi_model_select' => \LaraWhale\Cms\Library\Fields\MultiModelSelectField::class,
             'multi_select' => \LaraWhale\Cms\Library\Fields\MultiSelectField::class,
             'radio' => \LaraWhale\Cms\Library\Fields\CheckableField::class,

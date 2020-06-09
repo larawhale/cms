@@ -2,6 +2,7 @@ require('./listeners');
 
 window.Vue = require('vue');
 
+Vue.component('cms-multi-fields', require('./components/form/MultiFields.vue').default);
 Vue.component('cms-multi-select', require('./components/form/MultiSelect.vue').default);
 
 const app = new Vue({

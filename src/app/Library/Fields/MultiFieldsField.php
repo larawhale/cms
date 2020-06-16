@@ -32,4 +32,20 @@ class MultiFieldsField extends FieldsField
             $childKey,
         );
     }
+
+    /**
+     * Returns the configured rules of the field with the key of the field.
+     *
+     * @return array
+     */
+    public function getRulesWithKey(): array
+    {
+        return collect(parent::getRulesWithKey())
+            ->mapWithKeys(function ($rules, $key) {
+                $newKey = preg_replace('/\.\d\./', '.*.', $key);
+
+                return [$newKey => $rules];
+            })
+            ->all();
+    }
 }

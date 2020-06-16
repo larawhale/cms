@@ -95,6 +95,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -130,6 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    name: String,
     value: {
       type: Array,
       "default": function _default() {
@@ -142,21 +145,41 @@ __webpack_require__.r(__webpack_exports__);
 
     return {
       items: this.value.slice(0).map(function (item) {
-        item.id = _this.generateId();
+        item.__id = _this.generateId();
         return item;
       })
     };
   },
   mounted: function mounted() {
     this.setInputNames();
+    this.setInputValues();
   },
   methods: {
+    constructInputValues: function constructInputValues(values, parentKey) {
+      if (_typeof(values) !== 'object') {
+        return [values, parentKey];
+      }
+
+      var constructed = {};
+
+      for (var key in values) {
+        var result = this.constructInputValues(values[key], "".concat(parentKey, "[").concat(key, "]"));
+
+        if (Array.isArray(result)) {
+          constructed[result[1]] = result[0];
+        } else {
+          constructed = Object.assign(constructed, result);
+        }
+      }
+
+      return constructed;
+    },
     generateId: function generateId() {
       return Date.now() + '-' + Math.floor(Math.random() * 100);
     },
     onClickAdd: function onClickAdd() {
       this.items.push({
-        id: this.generateId()
+        __id: this.generateId()
       });
     },
     onClickRemove: function onClickRemove(index) {
@@ -177,6 +200,17 @@ __webpack_require__.r(__webpack_exports__);
           input.setAttribute('name', name);
         });
       });
+    },
+    setInputValues: function setInputValues() {
+      var constructed = this.constructInputValues(this.items, this.name);
+
+      for (var key in constructed) {
+        var input = this.$el.querySelector("input[name=\"".concat(key, "\"]"));
+
+        if (input) {
+          input.setAttribute('value', constructed[key]);
+        }
+      }
     }
   },
   watch: {
@@ -797,7 +831,7 @@ var render = function() {
       "ul",
       { staticClass: "list-unstyled card-stack" },
       _vm._l(_vm.items, function(item, index) {
-        return _c("li", { key: item.id, staticClass: "card shadow-sm" }, [
+        return _c("li", { key: item.__id, staticClass: "card shadow-sm" }, [
           _c(
             "div",
             { ref: "items", refInFor: true, staticClass: "card-body p-3" },

@@ -14,6 +14,7 @@ class MultiFieldsField extends FieldsField
         return view('cms::components.form.multi-fields', [
             'name' => $this->getKey(),
             'fields' => $this->getFieldInstances(),
+            'value' => $this->getInputValue(),
         ])->render();
     }
 

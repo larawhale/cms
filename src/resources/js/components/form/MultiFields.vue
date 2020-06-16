@@ -3,7 +3,7 @@
         <ul class="list-unstyled card-stack">
             <li
                 v-for="(item, index) of items"
-                :key="item.id"
+                :key="item.__id"
                 class="card shadow-sm"
             >
                 <div
@@ -34,6 +34,7 @@
 <script>
 export default {
     props: {
+        name: String,
         value: {
             type: Array,
             default: () => [{}],
@@ -42,7 +43,7 @@ export default {
     data () {
         return {
             items: this.value.slice(0).map((item) => {
-                item.id = this.generateId();
+                item.__id = this.generateId();
 
                 return item;
             }),
@@ -50,14 +51,38 @@ export default {
     },
     mounted () {
         this.setInputNames();
+
+        this.setInputValues();
     },
     methods: {
+        constructInputValues (values, parentKey) {
+            if (typeof(values) !== 'object') {
+                return [values, parentKey];
+            }
+
+            let constructed = {};
+
+            for (let key in values) {
+                let result = this.constructInputValues(
+                    values[key],
+                    `${parentKey}[${key}]`
+                );
+
+                if (Array.isArray(result)) {
+                    constructed[result[1]] = result[0];
+                } else {
+                    constructed = Object.assign(constructed, result);
+                }
+            }
+
+            return constructed;
+        },
         generateId () {
             return Date.now() + '-' + Math.floor(Math.random() * 100);
         },
         onClickAdd () {
             this.items.push({
-                id: this.generateId(),
+                __id: this.generateId(),
             });
         },
         onClickRemove (index) {
@@ -84,6 +109,17 @@ export default {
                     input.setAttribute('name', name);
                 });
             });
+        },
+        setInputValues () {
+            const constructed = this.constructInputValues(this.items, this.name);
+
+            for (let key in constructed) {
+                const input = this.$el.querySelector(`input[name="${key}"]`);
+
+                if (input) {
+                    input.setAttribute('value', constructed[key]);
+                }
+            }
         },
     },
     watch: {

@@ -121,12 +121,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     value: {
       type: Array,
       "default": function _default() {
-        return [];
+        return [{}];
       }
     }
   },
@@ -785,19 +792,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "cms-multi-fields" }, [
     _c(
       "ul",
+      { staticClass: "list-unstyled card-stack" },
       _vm._l(_vm.items, function(item, index) {
-        return _c("li", { key: item.id }, [
+        return _c("li", { key: item.id, staticClass: "card shadow-sm" }, [
           _c(
             "div",
-            { ref: "items", refInFor: true },
+            { ref: "items", refInFor: true, staticClass: "card-body p-3" },
             [
               _c(
-                "a",
+                "div",
                 {
-                  staticClass: "btn btn-sm btn-danger",
+                  staticClass: "btn-remove btn btn-circle-sm btn-danger",
                   on: {
                     click: function($event) {
                       $event.preventDefault()
@@ -805,7 +813,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("\n                    x\n                ")]
+                [_c("i", { staticClass: "fas fa-trash fa-sm" })]
               ),
               _vm._v(" "),
               _vm._t("default")
@@ -818,7 +826,7 @@ var render = function() {
     ),
     _vm._v(" "),
     _c(
-      "a",
+      "div",
       {
         staticClass: "btn btn-sm btn-success",
         on: {

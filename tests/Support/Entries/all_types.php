@@ -17,22 +17,22 @@ return [
                         'key' => 'field_1',
                         'type' => 'text',
                     ],
-                    [
-                        'key' => 'field_2',
-                        'type' => 'multi_fields',
-                        'config' => [
-                            'fields' => [
-                                [
-                                    'key' => 'field_1',
-                                    'type' => 'text',
-                                ],
-                                [
-                                    'key' => 'field_2',
-                                    'type' => 'text',
-                                ],
-                            ],
-                        ],
-                    ],
+                    // [
+                    //     'key' => 'field_2',
+                    //     'type' => 'multi_fields',
+                    //     'config' => [
+                    //         'fields' => [
+                    //             [
+                    //                 'key' => 'field_1',
+                    //                 'type' => 'text',
+                    //             ],
+                    //             [
+                    //                 'key' => 'field_2',
+                    //                 'type' => 'text',
+                    //             ],
+                    //         ],
+                    //     ],
+                    // ],
                 ],
             ],
         ],

@@ -1,26 +1,33 @@
 <template>
-    <div>
-        <ul>
-            <li v-for="(item, index) of items" :key="item.id">
-                <div ref="items">
-                    <a
+    <div class="cms-multi-fields">
+        <ul class="list-unstyled card-stack">
+            <li
+                v-for="(item, index) of items"
+                :key="item.id"
+                class="card shadow-sm"
+            >
+                <div
+                    class="card-body p-3"
+                    ref="items"
+                >
+                    <div
                         @click.prevent="onClickRemove(index)"
-                        class="btn btn-sm btn-danger"
+                        class="btn-remove btn btn-circle-sm btn-danger"
                     >
-                        x
-                    </a>
+                        <i class="fas fa-trash fa-sm"></i>
+                    </div>
 
                     <slot />
                 </div>
             </li>
         </ul>
 
-        <a
+        <div
             @click.prevent="onClickAdd"
             class="btn btn-sm btn-success"
         >
             Add
-        </a>
+        </div>
     </div>
 </template>
 
@@ -29,7 +36,7 @@ export default {
     props: {
         value: {
             type: Array,
-            default: () => [],
+            default: () => [{}],
         },
     },
     data () {

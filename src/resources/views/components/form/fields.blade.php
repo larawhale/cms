@@ -1,4 +1,4 @@
-<div class="pl-3">
+<div class="cms-fields">
     @foreach ($fields as $field)
         {!! $field->renderFormGroup() !!}
     @endforeach

@@ -1,0 +1,15 @@
+.cms-multi-fields {
+    .card-body {
+        position: relative;
+
+        .btn-remove {
+            position: absolute;
+            top: .5rem;
+            right: .5rem;
+        }
+
+        > .cms-fields .form-group:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

@@ -28,6 +28,7 @@ $border-radius-sm: .25rem;
 $border-radius: .5rem;
 $border-radius-lg: 1rem;
 
+$box-shadow-sm: 0 .125rem .25rem rgba(18, 38, 63, .03);
 $box-shadow-lg: 0 .75rem 1.5rem rgba(18, 38, 63, .03);
 
 
@@ -55,6 +56,14 @@ $table-hover-bg: $border-color;
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
 
 $input-btn-focus-width: 0;
+
+
+// Buttons
+//
+// For each of Bootstrap's buttons, define text, background, and border color.
+
+$btn-square-size-sm: 1.875rem;
+$btn-square-size: 2.25rem;
 
 
 // Forms

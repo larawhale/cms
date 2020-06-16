@@ -6,6 +6,7 @@
 
 // Fonts
 @import 'fonts';
+@import '~@fortawesome/fontawesome-free/css/all';
 
 // Bootstrap
 @import '~bootstrap/scss/mixins';
@@ -45,8 +46,10 @@
 // @import '~bootstrap/scss/print';
 
 // Components
+@import 'components/buttons';
 @import 'components/card';
 @import 'components/forms';
 @import 'components/sidebar';
 @import 'components/tables';
 @import 'components/main-container';
+@import 'components/multi-fields';

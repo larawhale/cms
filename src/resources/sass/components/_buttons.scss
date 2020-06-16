@@ -1,0 +1,29 @@
+.btn-square {
+    width: $btn-square-size;
+    height: $btn-square-size;
+    padding: 0;
+    line-height: $btn-square-size;
+    text-align: center;
+}
+
+.btn-square-sm {
+    @extend .btn-sm;
+
+    width: $btn-square-size-sm;
+    height: $btn-square-size-sm;
+    padding: 0;
+    line-height: $btn-square-size-sm;
+    text-align: center;
+}
+
+.btn-circle {
+    @extend .btn-square;
+
+    border-radius: 50%;
+}
+
+.btn-circle-sm {
+    @extend .btn-square-sm;
+
+    border-radius: 50%;
+}

@@ -75,6 +75,15 @@ trait TestSetup
 
         $app['config']->set('database.default', 'testing');
 
+        $app['config']->set('filesystems.default', 'cms');
+
+        $app['config']->set('filesystems.disks.cms', [
+            'driver' => 'local',
+            'root' => __DIR__ . '/storage',
+            'url' => env('APP_URL') . '/tests/storage',
+            'visibility' => 'public',
+        ]);
+
         $app['config']->set(
             'cms.entries.path',
             __DIR__ . '/Support/Entries/',

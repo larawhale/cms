@@ -27,6 +27,7 @@ return [
             'entry_select' => \LaraWhale\Cms\Library\Fields\EntrySelectField::class,
             'fields' => \LaraWhale\Cms\Library\Fields\FieldsField::class,
             'file' => \LaraWhale\Cms\Library\Fields\FileField::class,
+            'image' => \LaraWhale\Cms\Library\Fields\ImageField::class,
             'input' => \LaraWhale\Cms\Library\Fields\InputField::class,
             'model_select' => \LaraWhale\Cms\Library\Fields\ModelSelectField::class,
             'multi_entry_select' => \LaraWhale\Cms\Library\Fields\MultiEntrySelectField::class,

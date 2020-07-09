@@ -132,5 +132,9 @@ return [
                 ],
             ],
         ],
+        [
+            'key' => 'image',
+            'type' => 'image',
+        ],
     ],
 ];

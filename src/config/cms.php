@@ -35,6 +35,7 @@ return [
             'multi_model_select' => \LaraWhale\Cms\Library\Fields\MultiModelSelectField::class,
             'multi_select' => \LaraWhale\Cms\Library\Fields\MultiSelectField::class,
             'radio' => \LaraWhale\Cms\Library\Fields\CheckableField::class,
+            'radios' => \LaraWhale\Cms\Library\Fields\RadiosField::class,
             'select' => \LaraWhale\Cms\Library\Fields\SelectField::class,
             'textarea' => \LaraWhale\Cms\Library\Fields\TextAreaField::class,
         ],

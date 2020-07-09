@@ -17,6 +17,8 @@ class ImageField extends FileField
             'name' => $this->getKey(),
             'attributes' => $this->getInputAttributes(),
             'value' => $this->getInputValue(),
+            'height' => $this->getPreviewHeight(),
+            'width' => $this->getPreviewWidth(),
         ])->render();
     }
 
@@ -45,5 +47,31 @@ class ImageField extends FileField
         return $this->value
             ? Storage::url($this->value)
             : $this->value;
+    }
+
+    /**
+     * Returns the height in which the image should be previewed.
+     * 
+     * @return string|int
+     */
+    public function getPreviewHeight()
+    {
+        return $this->config(
+            'preview_height',
+            config('cms.fields.image_field.default_preview_height', '100px'),
+        );
+    }
+
+    /**
+     * Returns the width in which the image should be previewed.
+     * 
+     * @return string|int
+     */
+    public function getPreviewWidth()
+    {
+        return $this->config(
+            'preview_width',
+            config('cms.fields.image_field.default_preview_width', '100px'),
+        );
     }
 }

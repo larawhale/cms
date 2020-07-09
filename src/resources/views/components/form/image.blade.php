@@ -1,6 +1,6 @@
 <cms-image-input
-    width="100px"
-    height="100px"
+    width="{{ $width }}"
+    height="{{ $height }}"
     value="{{ $value }}"
     name="{{ $name }}"
 >

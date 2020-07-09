@@ -22,6 +22,17 @@ class CheckboxesField extends CheckableField
             'name' => $this->getKey(),
             'attributes' => $this->getInputAttributes(),
             'value' => $this->getInputValue(),
+            'inline' => $this->getInline(),
         ])->render();
+    }
+
+    /**
+     * Returns weither the checboxes should be displayed inline or not.
+     * 
+     * @return bool
+     */
+    public function getInline(): bool
+    {
+        return $this->config('inline', true);
     }
 }

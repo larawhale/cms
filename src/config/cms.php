@@ -24,6 +24,7 @@ return [
             'default' => \LaraWhale\Cms\Library\Fields\InputField::class,
 
             'checkbox' => \LaraWhale\Cms\Library\Fields\CheckableField::class,
+            'checkboxes' => \LaraWhale\Cms\Library\Fields\CheckboxesField::class,
             'entry_select' => \LaraWhale\Cms\Library\Fields\EntrySelectField::class,
             'fields' => \LaraWhale\Cms\Library\Fields\FieldsField::class,
             'file' => \LaraWhale\Cms\Library\Fields\FileField::class,

@@ -796,7 +796,7 @@ var render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _c("i", { staticClass: "fas fa-plus select-image-icon" }),
+      _c("i", { staticClass: "fas fa-folder-open select-image-icon" }),
       _vm._v(" "),
       _c("input", {
         ref: "input",

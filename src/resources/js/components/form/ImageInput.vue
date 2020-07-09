@@ -11,7 +11,7 @@
             :style="{'max-width': width, 'max-height': height}"
         >
 
-        <i class="fas fa-plus select-image-icon" />
+        <i class="fas fa-folder-open select-image-icon" />
 
         <input
             class="d-none"

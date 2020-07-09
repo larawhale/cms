@@ -9,10 +9,6 @@ return [
     'single' => true,
     'fields' => [
         [
-            'key' => 'image',
-            'type' => 'image',
-        ],
-        [
             'key' => 'route',
             'type' => config('cms.fields.route_field_type'),
         ],
@@ -135,6 +131,10 @@ return [
                     ],
                 ],
             ],
+        ],
+        [
+            'key' => 'image',
+            'type' => 'image',
         ],
     ],
 ];

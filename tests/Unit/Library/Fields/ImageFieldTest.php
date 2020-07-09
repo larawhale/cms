@@ -34,6 +34,23 @@ class ImageFieldTest extends TestCase
     }
 
     /** @test */
+    public function get_input_value(): void
+    {
+        $this->field->setValue('test.png');
+
+        $this->assertEquals(
+            Storage::url('test.png'),
+            $this->field->getInputValue(),
+        );
+    }
+
+    /** @test */
+    public function get_input_value_null(): void
+    {
+        $this->assertNull($this->field->getInputValue(),);
+    }
+
+    /** @test */
     public function render_input(): void
     {
         $this->assertMatchesHtmlSnapshot($this->field->renderInput());

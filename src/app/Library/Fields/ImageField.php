@@ -23,20 +23,6 @@ class ImageField extends FileField
     }
 
     /**
-     * Returns the css class for the rendered input.
-     *
-     * @return string
-     */
-    public function getInputClass(): array
-    {
-        $classes = parent::getInputClass();
-
-        $classes[] = 'custom-image-input';
-
-        return array_unique($classes);
-    }
-
-    /**
      * Returns the value of the field in a form usable during the rendering of
      * the input.
      *

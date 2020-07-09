@@ -80,7 +80,7 @@ class FileFieldTest extends TestCase
     /** @test */
     public function get_file_path_default(): void
     {
-        // Create a field instance without a config that contains a `file_paht`
+        // Create a field instance without a config that contains a `file_path`
         // key.
         $field = new FileField('test_key', 'file');
 

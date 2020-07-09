@@ -116,6 +116,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     name: {
@@ -779,15 +783,20 @@ var render = function() {
     "div",
     {
       staticClass:
-        "cms-image-input d-flex align-items-center justify-content-center",
+        "cms-image-input d-flex align-items-center justify-content-center btn btn-light",
+      class: { "image-selected": !!_vm.image },
       style: { width: _vm.width, height: _vm.height },
       on: { click: _vm.onClickImage }
     },
     [
-      _c("img", {
-        style: { "max-width": _vm.width, "max-height": _vm.height },
-        attrs: { src: _vm.image }
-      }),
+      _vm.image
+        ? _c("img", {
+            style: { "max-width": _vm.width, "max-height": _vm.height },
+            attrs: { src: _vm.image }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-plus select-image-icon" }),
       _vm._v(" "),
       _c("input", {
         ref: "input",

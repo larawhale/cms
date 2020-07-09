@@ -7,6 +7,9 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.13.0"
+    },
     "devDependencies": {
         "bootstrap": "^4.4.1",
         "cross-env": "^7.0.2",

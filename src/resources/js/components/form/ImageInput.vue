@@ -1,13 +1,17 @@
 <template>
     <div
-        class="cms-image-input d-flex align-items-center justify-content-center"
-        @click="onClickImage"
+        class="cms-image-input d-flex align-items-center justify-content-center btn btn-light"
+        :class="{'image-selected': !!image}"
         :style="{'width': width, 'height': height}"
+        @click="onClickImage"
     >
         <img
+            v-if="image"
             :src="image"
             :style="{'max-width': width, 'max-height': height}"
         >
+
+        <i class="fas fa-plus select-image-icon" />
 
         <input
             class="d-none"

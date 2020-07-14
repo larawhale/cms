@@ -10,7 +10,7 @@ class MultiModelSelectFieldTest extends TestCase
 {
     /**
      * The MultiModelSelectField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\MultiModelSelectField
      */
     private MultiModelSelectField $field;

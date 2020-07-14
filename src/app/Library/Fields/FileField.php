@@ -54,7 +54,7 @@ class FileField extends InputField
 
     /**
      * Saves the file to storage.
-     * 
+     *
      * @param  \Illuminate\Http\UploadedFile  $file
      * @return string
      */
@@ -71,7 +71,7 @@ class FileField extends InputField
 
     /**
      * Deletes the value of the field.
-     * 
+     *
      * @return void
      */
     public function deleteFile(): void
@@ -88,7 +88,7 @@ class FileField extends InputField
 
     /**
      * Returns the file path of the file.
-     * 
+     *
      * @return string
      */
     public function getFilePath(): string

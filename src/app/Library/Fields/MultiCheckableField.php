@@ -31,7 +31,7 @@ class MultiCheckableField extends CheckableField
      * the `type` to determine what kind of thing can be checked. This is
      * mainly because this field can be extended under a different name,
      * checkboxes for example.
-     * 
+     *
      * @return string
      */
     public function getInputType(): string

@@ -101,7 +101,7 @@ interface EntryInterface extends BasicEntryInterface
 
     /**
      * Returns the attributes for the form that is being rendered.
-     * 
+     *
      * @return array
      */
     public function getFormAttributes(): array;

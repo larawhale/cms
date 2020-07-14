@@ -8,28 +8,28 @@ class BasicField implements BasicFieldInterface
 {
     /**
      * The key of the field.
-     * 
+     *
      * @var string
      */
     protected string $key;
 
     /**
      * The type of the field.
-     * 
+     *
      * @var string
      */
     protected string $type;
 
     /**
      * The value of the field.
-     * 
+     *
      * @var mixed
      */
     protected $value = null;
 
     /**
      * The Field constructor.
-     * 
+     *
      * @param  string  $key
      * @param  string  $type
      * @param  mixed  $value
@@ -45,7 +45,7 @@ class BasicField implements BasicFieldInterface
 
     /**
      * Returns the key of the field.
-     * 
+     *
      * @return string
      */
     public function getKey(): string
@@ -55,7 +55,7 @@ class BasicField implements BasicFieldInterface
 
     /**
      * Returns the type of the field.
-     * 
+     *
      * @return string
      */
     public function getType(): string
@@ -65,7 +65,7 @@ class BasicField implements BasicFieldInterface
 
     /**
      * Returns the value of the field.
-     * 
+     *
      * @return mixed
      */
     public function getValue()
@@ -75,7 +75,7 @@ class BasicField implements BasicFieldInterface
 
     /**
      * Sets the value of the field
-     * 
+     *
      * @param  mixed  $value
      * @return self
      */

@@ -9,7 +9,7 @@ class CheckableFieldTest extends TestCase
 {
     /**
      * The CheckableField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\CheckableField
      */
     private CheckableField $field;

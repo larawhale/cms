@@ -13,7 +13,7 @@ class AbstractFieldTest extends TestCase
 {
     /**
      * The AbstractFieldInterface instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface
      */
     private AbstractFieldInterface $field;

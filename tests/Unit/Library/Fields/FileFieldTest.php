@@ -13,7 +13,7 @@ class FileFieldTest extends TestCase
 {
     /**
      * The FileField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\FileField
      */
     private FileField $field;

@@ -6,7 +6,7 @@ trait HasList
 {
     /**
      * Returns the configured list.
-     * 
+     *
      * @return array
      */
     public function getList(): array

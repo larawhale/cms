@@ -13,7 +13,7 @@ class ImageFieldTest extends TestCase
 {
     /**
      * The ImageField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\ImageField
      */
     private ImageField $field;
@@ -47,7 +47,7 @@ class ImageFieldTest extends TestCase
     /** @test */
     public function get_input_value_null(): void
     {
-        $this->assertNull($this->field->getInputValue(),);
+        $this->assertNull($this->field->getInputValue());
     }
 
     /** @test */

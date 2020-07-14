@@ -37,7 +37,7 @@ class ImageField extends FileField
 
     /**
      * Returns the height in which the image should be previewed.
-     * 
+     *
      * @return string|int
      */
     public function getPreviewHeight()
@@ -50,7 +50,7 @@ class ImageField extends FileField
 
     /**
      * Returns the width in which the image should be previewed.
-     * 
+     *
      * @return string|int
      */
     public function getPreviewWidth()

@@ -8,7 +8,7 @@ class ModelSelectField extends SelectField
 {
     /**
      * Returns a list of models used to display in the select.
-     * 
+     *
      * @return array
      */
     public function getList(): array
@@ -26,7 +26,7 @@ class ModelSelectField extends SelectField
 
     /**
      * Returns the label key of the list item.
-     * 
+     *
      * @return string|array|int
      */
     public function getListItemLabelkey()
@@ -36,7 +36,7 @@ class ModelSelectField extends SelectField
 
     /**
      * Returns the configured model class.
-     * 
+     *
      * @return string
      */
     public function getModelClass(): string
@@ -46,7 +46,7 @@ class ModelSelectField extends SelectField
 
     /**
      * Retrieves the models from the database that should be in the list.
-     * 
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getModelList(): Collection
@@ -56,7 +56,7 @@ class ModelSelectField extends SelectField
 
     /**
      * Prepares a query that should retrieve the models.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function getModelListQuery()
@@ -74,17 +74,18 @@ class ModelSelectField extends SelectField
 
     /**
      * Returns the configured query constraint.
-     * 
+     *
      * @return callable
      */
     public function getQueryConstraint(): callable
     {
-        return $this->config('query_constraint', fn() => function () {});
+        return $this->config('query_constraint', fn() => function () {
+        });
     }
 
     /**
      * Returns the value of the field.
-     * 
+     *
      * @return mixed
      */
     public function getValue()

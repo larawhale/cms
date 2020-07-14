@@ -11,14 +11,14 @@ class HasListClass
 
     /**
      * The list property.
-     * 
+     *
      * @var array
      */
     public array $list;
 
     /**
      * The HasListClass constructor.
-     * 
+     *
      * @param  array  $list
      */
     public function __construct(array $list = [])
@@ -28,7 +28,7 @@ class HasListClass
 
     /**
      * A mock for the `config` method that is being called in `getList`.
-     * 
+     *
      * @return array
      */
     public function config(): array

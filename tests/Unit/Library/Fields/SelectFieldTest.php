@@ -9,7 +9,7 @@ class SelectFieldTest extends TestCase
 {
     /**
      * The SelectField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\SelectField
      */
     private SelectField $field;

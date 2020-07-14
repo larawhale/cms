@@ -14,7 +14,7 @@ class Entry extends BasicEntry implements EntryInterface
 
     /**
      * The type of the entry.
-     * 
+     *
      * @var string
      */
     protected string $type;
@@ -209,7 +209,7 @@ class Entry extends BasicEntry implements EntryInterface
 
     /**
      * Returns the attributes for the form that is being rendered.
-     * 
+     *
      * @return array
      */
     public function getFormAttributes(): array

@@ -20,7 +20,7 @@ abstract class AbstractField extends BasicField implements AbstractFieldInterfac
 
     /**
      * The AbstractField constructor.
-     * 
+     *
      * @param  string  $key
      * @param  string  $type
      * @param  array  $config

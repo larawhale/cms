@@ -10,7 +10,7 @@ class MultiEntrySelectFieldTest extends TestCase
 {
     /**
      * The MultiEntrySelectField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\MultiEntrySelectField
      */
     private MultiEntrySelectField $field;

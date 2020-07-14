@@ -11,14 +11,14 @@ class HasArrayValueClass
 
     /**
      * The value property.
-     * 
+     *
      * @var array|string|null
      */
     public $value;
 
     /**
      * The HasArrayValueClass constructor.
-     * 
+     *
      * @param  array|string|null  $value
      */
     public function __construct($value = null)

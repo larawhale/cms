@@ -14,7 +14,7 @@ class FieldsFieldTest extends TestCase
 {
     /**
      * The FieldsField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\FieldsField
      */
     private FieldsField $field;

@@ -3,7 +3,7 @@
 namespace LaraWhale\Cms\Library\Fields;
 
 use LaraWhale\Cms\Library\Fields\Factory;
-use LaraWhale\Cms\Models\Entry as EntryModel;   
+use LaraWhale\Cms\Models\Entry as EntryModel;
 use LaraWhale\Cms\Library\Fields\Concerns\HasArrayValue;
 
 class FieldsField extends InputField
@@ -25,7 +25,7 @@ class FieldsField extends InputField
 
     /**
      * Returns the fields that should be rendered.
-     * 
+     *
      * @return array
      */
     public function getFields(): array
@@ -35,7 +35,7 @@ class FieldsField extends InputField
 
     /**
      * Returns the fields as field instances.
-     * 
+     *
      * @return array
      */
     public function getFieldInstances(): array

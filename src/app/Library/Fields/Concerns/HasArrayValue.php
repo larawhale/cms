@@ -6,7 +6,7 @@ trait HasArrayValue
 {
     /**
      * Returns the value of the field.
-     * 
+     *
      * @return mixed
      */
     public function getValue()

@@ -10,7 +10,7 @@ class BasicEntryTest extends TestCase
 {
     /**
      * The BasicEntry instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Entries\Contracts\BasicEntryInterface
      */
     private BasicEntry $entry;

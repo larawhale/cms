@@ -9,7 +9,7 @@ class MultiSelectFieldTest extends TestCase
 {
     /**
      * The MultiSelectField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\MultiSelectField
      */
     private MultiSelectField $field;

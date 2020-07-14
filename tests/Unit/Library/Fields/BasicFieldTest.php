@@ -10,7 +10,7 @@ class BasicFieldTest extends TestCase
 {
     /**
      * The BasicField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\Contracts\BasicFieldInterface
      */
     private BasicField $field;

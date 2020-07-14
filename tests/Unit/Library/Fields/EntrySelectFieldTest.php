@@ -13,7 +13,7 @@ class EntrySelectFieldTest extends TestCase
 {
     /**
      * The EntrySelectField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\EntrySelectField
      */
     private EntrySelectField $field;

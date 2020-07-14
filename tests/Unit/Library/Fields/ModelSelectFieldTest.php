@@ -12,7 +12,7 @@ class ModelSelectFieldTest extends TestCase
 {
     /**
      * The ModelSelectField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\ModelSelectField
      */
     private ModelSelectField $field;
@@ -127,7 +127,7 @@ class ModelSelectFieldTest extends TestCase
     /** @test */
     public function get_query_constraint(): void
     {
-        $constraint = function($query)  {
+        $constraint = function ($query) {
             $query->limit(15);
         };
 

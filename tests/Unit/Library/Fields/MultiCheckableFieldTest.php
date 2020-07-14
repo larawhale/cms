@@ -3,16 +3,16 @@
 namespace Tests\Unit\Library\Fields;
 
 use LaraWhale\Cms\Tests\TestCase;
-use LaraWhale\Cms\Library\Fields\SelectField;
+use LaraWhale\Cms\Library\Fields\MultiCheckableField;
 
-class SelectFieldTest extends TestCase
+class MultiCheckableFieldTest extends TestCase
 {
     /**
-     * The SelectField instance used for testing.
+     * The MultiCheckableField instance used for testing.
      * 
-     * @var \LaraWhale\Cms\Library\Fields\SelectField
+     * @var \LaraWhale\Cms\Library\Fields\MultiCheckableField
      */
-    private SelectField $field;
+    private MultiCheckableField $field;
 
     /**
      * Setup the test environment.
@@ -23,12 +23,8 @@ class SelectFieldTest extends TestCase
     {
         parent::setUp();
 
-        $this->field = new SelectField('test_key', 'select', [
-            'list' => [
-                'item 1',
-                'item 2',
-                'item 3',
-            ],
+        $this->field = new MultiCheckableField('test_key', 'multi_checkable', [
+            'list' => ['item 1', 'item 2', 'item 3']
         ]);
     }
 

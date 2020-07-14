@@ -3,16 +3,16 @@
 namespace Tests\Unit\Library\Fields;
 
 use LaraWhale\Cms\Tests\TestCase;
-use LaraWhale\Cms\Library\Fields\SelectField;
+use LaraWhale\Cms\Library\Fields\RadiosField;
 
-class SelectFieldTest extends TestCase
+class RadiosFieldTest extends TestCase
 {
     /**
-     * The SelectField instance used for testing.
+     * The RadiosField instance used for testing.
      * 
-     * @var \LaraWhale\Cms\Library\Fields\SelectField
+     * @var \LaraWhale\Cms\Library\Fields\RadiosField
      */
-    private SelectField $field;
+    private RadiosField $field;
 
     /**
      * Setup the test environment.
@@ -23,12 +23,8 @@ class SelectFieldTest extends TestCase
     {
         parent::setUp();
 
-        $this->field = new SelectField('test_key', 'select', [
-            'list' => [
-                'item 1',
-                'item 2',
-                'item 3',
-            ],
+        $this->field = new RadiosField('test_key', 'radios', [
+            'list' => ['item 1', 'item 2', 'item 3']
         ]);
     }
 

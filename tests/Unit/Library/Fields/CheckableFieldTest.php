@@ -33,11 +33,45 @@ class CheckableFieldTest extends TestCase
     }
 
     /** @test */
+    public function render_input_not_inline(): void
+    {
+        $field = new CheckableField('test_key', 'checkbox', [
+            'inline' => false,
+        ]);
+
+        $this->assertMatchesHtmlSnapshot($field->renderInput());
+    }
+
+    /** @test */
+    public function render_input_other_type(): void
+    {
+        $field = new CheckableField('test_key', 'radio');
+
+        $this->assertMatchesHtmlSnapshot($field->renderInput());
+    }
+
+    /** @test */
     public function get_input_class(): void
     {
         $this->assertContains(
             'custom-control-input',
             $this->field->getInputClass(),
         );
+    }
+
+    /** @test */
+    public function get_inline(): void
+    {
+        $field = new CheckableField('test_key', 'checkbox', [
+            'inline' => false,
+        ]);
+
+        $this->assertFalse($field->getInline());
+    }
+
+    /** @test */
+    public function get_inline_default(): void
+    {
+        $this->assertTrue($this->field->getInline());
     }
 }

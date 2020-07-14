@@ -17,23 +17,13 @@ class MultiCheckableField extends CheckableField
     public function renderInput(): string
     {
         return view('cms::components.form.checkables', [
+            'attributes' => $this->getInputAttributes(),
+            'inline' => $this->getInline(),
             'list' => $this->getList(),
             'name' => $this->getKey(),
-            'attributes' => $this->getInputAttributes(),
             'value' => $this->getInputValue(),
-            'inline' => $this->getInline(),
-            'type' => $this->getInputType(),
+            'type' => $this->getInputType(,)
         ])->render();
-    }
-
-    /**
-     * Returns weither the checkables should be displayed inline or not.
-     * 
-     * @return bool
-     */
-    public function getInline(): bool
-    {
-        return $this->config('inline', true);
     }
 
     /**

@@ -22,9 +22,7 @@ class MultiCheckableField extends CheckableField
             'attributes' => $this->getInputAttributes(),
             'value' => $this->getInputValue(),
             'inline' => $this->getInline(),
-            'type' => $this->getType() === 'checkboxes'
-                ? 'checkbox'
-                : 'radio',
+            'type' => $this->getInputType(),
         ])->render();
     }
 
@@ -36,5 +34,18 @@ class MultiCheckableField extends CheckableField
     public function getInline(): bool
     {
         return $this->config('inline', true);
+    }
+
+    /**
+     * Returns the type of the input. This field uses this value instead of
+     * the `type` to determine what kind of thing can be checked. This is
+     * mainly because this field can be extended under a different name,
+     * checkboxes for example.
+     * 
+     * @return string
+     */
+    public function getInputType(): string
+    {
+        return 'checkbox';
     }
 }

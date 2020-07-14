@@ -9,28 +9,6 @@ return [
     'single' => true,
     'fields' => [
         [
-            'key' => 'checkboxes',
-            'type' => 'checkboxes',
-            'config' => [
-                'list' => [
-                    'item 1',
-                    'item 2',
-                    'item 3',
-                ],
-            ],
-        ],
-        [
-            'key' => 'radios',
-            'type' => 'radios',
-            'config' => [
-                'list' => [
-                    'item 1',
-                    'item 2',
-                    'item 3',
-                ],
-            ],
-        ],
-        [
             'key' => 'route',
             'type' => config('cms.fields.route_field_type'),
         ],
@@ -47,8 +25,30 @@ return [
             'type' => 'checkbox',
         ],
         [
+            'key' => 'checkboxes',
+            'type' => 'checkboxes',
+            'config' => [
+                'list' => [
+                    'item 1',
+                    'item 2',
+                    'item 3',
+                ],
+            ],
+        ],
+        [
             'key' => 'radio',
             'type' => 'radio',
+        ],
+        [
+            'key' => 'radios',
+            'type' => 'radios',
+            'config' => [
+                'list' => [
+                    'item 1',
+                    'item 2',
+                    'item 3',
+                ],
+            ],
         ],
         [
             'key' => 'select',

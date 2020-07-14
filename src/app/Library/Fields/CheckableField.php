@@ -38,7 +38,7 @@ class CheckableField extends InputField
     }
 
     /**
-     * Returns weither the checkables should be displayed inline or not.
+     * Returns weither the checkable should be displayed inline or not.
      * 
      * @return bool
      */

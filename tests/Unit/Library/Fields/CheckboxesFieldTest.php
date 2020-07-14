@@ -23,7 +23,9 @@ class CheckboxesFieldTest extends TestCase
     {
         parent::setUp();
 
-        $this->field = new CheckboxesField('test_key', 'checkboxes');
+        $this->field = new CheckboxesField('test_key', 'checkboxes', [
+            'list' => ['item 1', 'item 2', 'item 3']
+        ]);
     }
 
     /** @test */

@@ -23,7 +23,9 @@ class RadiosFieldTest extends TestCase
     {
         parent::setUp();
 
-        $this->field = new RadiosField('test_key', 'radios');
+        $this->field = new RadiosField('test_key', 'radios', [
+            'list' => ['item 1', 'item 2', 'item 3']
+        ]);
     }
 
     /** @test */

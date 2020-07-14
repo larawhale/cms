@@ -27,7 +27,7 @@ class HasListClass
     }
 
     /**
-     * A mock for the `config` method.
+     * A mock for the `config` method that is being called in `getList`.
      * 
      * @return array
      */

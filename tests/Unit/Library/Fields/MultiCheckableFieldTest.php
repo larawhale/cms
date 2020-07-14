@@ -23,7 +23,9 @@ class MultiCheckableFieldTest extends TestCase
     {
         parent::setUp();
 
-        $this->field = new MultiCheckableField('test_key', 'multi_checkable');
+        $this->field = new MultiCheckableField('test_key', 'multi_checkable', [
+            'list' => ['item 1', 'item 2', 'item 3']
+        ]);
     }
 
     /** @test */

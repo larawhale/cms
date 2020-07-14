@@ -43,6 +43,14 @@ class CheckableFieldTest extends TestCase
     }
 
     /** @test */
+    public function render_input_other_type(): void
+    {
+        $field = new CheckableField('test_key', 'radio');
+
+        $this->assertMatchesHtmlSnapshot($field->renderInput());
+    }
+
+    /** @test */
     public function get_input_class(): void
     {
         $this->assertContains(

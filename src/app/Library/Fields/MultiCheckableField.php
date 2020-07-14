@@ -22,7 +22,7 @@ class MultiCheckableField extends CheckableField
             'list' => $this->getList(),
             'name' => $this->getKey(),
             'value' => $this->getInputValue(),
-            'type' => $this->getInputType(,)
+            'type' => $this->getInputType(),
         ])->render();
     }
 

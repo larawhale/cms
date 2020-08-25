@@ -19,7 +19,9 @@ services:
       - cms
 
   php:
-    image: thomasowow/laravel-php:7.4
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
     container_name: cms-php
     volumes:
       - .:/var/www/html

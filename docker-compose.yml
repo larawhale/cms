@@ -6,9 +6,9 @@ networks:
 services:
   nginx:
     image: nginx:stable
-    container_name: nginx
+    container_name: cms-nginx
     ports:
-      - 8000:80
+      - ${APP_PORT:-8000}:80
     volumes:
       - .:/var/www/html
       - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
@@ -19,10 +19,8 @@ services:
       - cms
 
   php:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
-    container_name: php
+    image: thomasowow/laravel-php:7.4
+    container_name: cms-php
     volumes:
       - .:/var/www/html
     networks:
@@ -30,16 +28,16 @@ services:
 
   mysql:
     image: mysql:5.7
-    container_name: mysql
+    container_name: cms-mysql
     tmpfs: /var/lib/mysql
     restart: unless-stopped
     ports:
-      - 3306:3306
+      - ${DB_PORT_LOCAL:-33060}:3306
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_DATABASE: forge
-      MYSQL_USER: forge
-      MYSQL_PASSWORD: forge
-      MYSQL_ROOT_PASSWORD: forge
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     networks:
       - cms

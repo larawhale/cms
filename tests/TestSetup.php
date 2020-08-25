@@ -61,7 +61,7 @@ trait TestSetup
             'url' => null,
             'host' => 'mysql',
             'port' => '3306',
-            'database' => 'forge',
+            'database' => 'laravel',
             'username' => 'forge',
             'password' => 'forge',
             'unix_socket' => '',

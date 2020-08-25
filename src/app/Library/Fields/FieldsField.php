@@ -8,7 +8,9 @@ use LaraWhale\Cms\Library\Fields\Concerns\HasArrayValue;
 
 class FieldsField extends InputField
 {
-    use HasArrayValue;
+    use HasArrayValue {
+        getDatabaseValue as traitGetDatabaseValue;
+    }
 
     /**
      * Returns a rendered input.
@@ -24,6 +26,30 @@ class FieldsField extends InputField
     }
 
     /**
+     * Returns a representation of how the value should be stored in the
+     * database.
+     *
+     * @param  mixed  $value
+     * @return string
+     */
+    public function getDatabaseValue($value): string
+    {
+        $clone = (clone $this)->setValue($value);
+
+        // Get the database values of each field. Some fields might have
+        // special things done to the value.
+        $value = collect($clone->getFieldInstances(false))
+            ->mapWithKeys(function ($c) {
+                return [
+                    $c->getKey() => $c->getDatabaseValue($c->getValue()),
+                ];
+            })
+            ->all();
+
+        return $this->traitGetDatabaseValue($value);
+    }
+
+    /**
      * Returns the fields that should be rendered.
      *
      * @return array
@@ -36,23 +62,29 @@ class FieldsField extends InputField
     /**
      * Returns the fields as field instances.
      *
+     * @param  bool  $withParentKey
      * @return array
      */
-    public function getFieldInstances(): array
+    public function getFieldInstances(bool $withParentKey = true): array
     {
         $values = $this->getValue();
 
-        return array_map(function ($config) use ($values) {
-            $originalKey = data_get($config, 'key');
+        return array_map(function ($config) use ($values, $withParentKey) {
+            $originalKey = $configKey = data_get($config, 'key');
 
-            // The key of the field needs to be altered to a key that belongs
-            // to its parent. This should be done to make it easier to retrieve
-            // the values and to prevent interference with other fields.
-            $config['key'] = sprintf(
-                '%s[%s]',
-                $this->getKey(),
-                $originalKey,
-            );
+            if ($withParentKey) {
+                // The key of the field needs to be altered to a key that
+                // belongs to its parent. This should be done to make it easier
+                // to retrieve the values and to prevent interference with
+                // other fields.
+                $configKey = sprintf(
+                    '%s[%s]',
+                    $this->getKey(),
+                    $originalKey,
+                );
+            }
+
+            $config['key'] = $configKey;
 
             return Factory::make($config)
                 ->setValue(data_get($values, $originalKey));

@@ -7,7 +7,6 @@ use Illuminate\Http\UploadedFile;
 use LaraWhale\Cms\Tests\TestCase;
 use Illuminate\Support\Facades\Storage;
 use LaraWhale\Cms\Library\Fields\FileField;
-use LaraWhale\Cms\Models\Entry as EntryModel;
 
 class FileFieldTest extends TestCase
 {
@@ -48,7 +47,7 @@ class FileFieldTest extends TestCase
     }
 
     /** @test */
-    public function save(): void
+    public function get_database_value(): void
     {
         Storage::fake();
 
@@ -59,13 +58,11 @@ class FileFieldTest extends TestCase
 
         $mock->shouldReceive('deleteFile');
 
-        $entryModel = factory(EntryModel::class)->create();
-
         $file = UploadedFile::fake()->image('image.jpg');
 
-        $mock->save($entryModel, $file);
+        $path = $mock->getDatabaseValue($file);
 
-        Storage::assertExists($mock->getValue());
+        Storage::assertExists($path);
     }
 
     /** @test */

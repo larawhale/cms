@@ -7,12 +7,13 @@ use Illuminate\Database\QueryException;
 use LaraWhale\Cms\Http\Controllers\Controller;
 use LaraWhale\Cms\Http\Controllers\EntryController;
 use LaraWhale\Cms\Http\Controllers\LoginController;
+use LaraWhale\Cms\Http\Middleware\RemoveNullValues;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 
 Route::group([
     'prefix' => 'cms',
     'as' => 'cms.',
-    'middleware' => ['cms'],
+    'middleware' => ['cms', RemoveNullValues::class],
 ], function () {
     Route::group([
         'middleware' => ['cms_guest'],

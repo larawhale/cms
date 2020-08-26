@@ -1,5 +1,32 @@
 <?php
 
+if (! function_exists('array_filter_recursive')) {
+    /**
+     * Filters null attributes inside an array recursively.
+     *
+     * @param  array  $array
+     * @return array
+     */
+    function array_filter_recursive($array)
+    {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $array[$key] = array_filter_recursive($array[$key]);
+
+                if (empty($array[$key])) {
+                    unset($array[$key]);
+                }
+            }
+
+            if (is_null($value)) {
+                unset($array[$key]);
+            }
+        }
+
+        return $array;
+    }
+}
+
 if (! function_exists('array_keys_prefix')) {
     /**
      * Add a prefix to array keys.

@@ -66,6 +66,15 @@ class FileFieldTest extends TestCase
     }
 
     /** @test */
+    public function get_database_value_non_file(): void
+    {
+        $this->assertSame(
+            '',
+            $this->field->getDatabaseValue(null),
+        );
+    }
+
+    /** @test */
     public function get_file_path(): void
     {
         $this->assertEquals(

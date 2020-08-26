@@ -5,15 +5,15 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\QueryException;
 use LaraWhale\Cms\Http\Controllers\Controller;
+use LaraWhale\Cms\Http\Middleware\TrimNullValues;
 use LaraWhale\Cms\Http\Controllers\EntryController;
 use LaraWhale\Cms\Http\Controllers\LoginController;
-use LaraWhale\Cms\Http\Middleware\RemoveNullValues;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 
 Route::group([
     'prefix' => 'cms',
     'as' => 'cms.',
-    'middleware' => ['cms', RemoveNullValues::class],
+    'middleware' => ['cms', TrimNullValues::class],
 ], function () {
     Route::group([
         'middleware' => ['cms_guest'],

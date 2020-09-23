@@ -310,7 +310,7 @@ class EntryTest extends TestCase
 
         // Create another field that is not in the current config of the entry
         // and thus should be deleted.
-        $shouldDelete = factory(FieldModel::class)->create([
+        factory(FieldModel::class)->create([
             'entry_id' => $entryModel->id,
             'key' => 'remove_me',
             'type' => 'test_type',
@@ -333,7 +333,7 @@ class EntryTest extends TestCase
         ]);
 
         $this->assertDatabaseMissing('fields', [
-            'id' => $shouldDelete->id,
+            'key' => 'remove_me',
         ]);
     }
 }

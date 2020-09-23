@@ -270,8 +270,8 @@ class Entry extends BasicEntry implements EntryInterface
         // Remove the fields that are not in the entry configuration anymore.
         $entryModel->fields()
             ->whereNotIn(
-                cms_table_name('fields') . '.id',
-                $fieldModels->pluck('id'),
+                cms_table_name('fields') . '.key',
+                array_map(fn ($f) => $f->getKey(), $entry->getFields())
             )
             ->delete();
 

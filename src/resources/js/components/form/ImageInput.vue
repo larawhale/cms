@@ -70,7 +70,6 @@ export default {
                 const reader = new FileReader();
 
                 reader.onload = (e) => {
-                    console.log(e);
                     this.image = e.target.result;
                 };
 

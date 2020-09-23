@@ -13,12 +13,27 @@
 
         <i class="fas fa-folder-open select-image-icon" />
 
+        <div
+            class="btn btn-danger btn-sm btn-remove"
+            @click="onClickRemove"
+        >
+            <i class="fas fa-trash" />
+        </div>
+
         <input
             class="d-none"
             :name="name"
             ref="input"
             type="file"
             @change="onChangeInput"
+        >
+
+        <input
+            v-if="remove"
+            class="d-none"
+            :name="name"
+            type="hidden"
+            value="remove"
         >
     </div>
 </template>
@@ -46,6 +61,7 @@ export default {
     data () {
         return {
             image: this.value,
+            remove: false,
         };
     },
     computed: {
@@ -58,13 +74,24 @@ export default {
         },
     },
     methods: {
-        onClickImage() {
+        onClickRemove(e) {
+            e.stopPropagation();
+
+            this.remove = true;
+
+            this.image = undefined;
+
+            this.$refs.input.value = '';
+        },
+        onClickImage(e) {
             this.$refs.input.click();
         },
         onChangeInput() {
             const files = this.$refs.input.files;
 
             if (files && files.length > 0) {
+                this.remove = false;
+
                 const file = files[0];
 
                 const reader = new FileReader();

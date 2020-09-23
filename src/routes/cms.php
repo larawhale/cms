@@ -9,11 +9,19 @@ use LaraWhale\Cms\Http\Middleware\TrimNullValues;
 use LaraWhale\Cms\Http\Controllers\EntryController;
 use LaraWhale\Cms\Http\Controllers\LoginController;
 use Illuminate\Routing\Middleware\SubstituteBindings;
+use LaraWhale\Cms\Http\Middleware\NullifyFilesToRemove;
 
 Route::group([
     'prefix' => 'cms',
     'as' => 'cms.',
-    'middleware' => ['cms', TrimNullValues::class],
+    'middleware' => [
+        'cms',
+        TrimNullValues::class,
+        // It is important that the `NullifyFilesToRemove` is after the
+        // `TrimNullValues` because it will add `null` values back to the
+        // request for files that should be removed.
+        NullifyFilesToRemove::class,
+    ],
 ], function () {
     Route::group([
         'middleware' => ['cms_guest'],

@@ -1,7 +1,3 @@
-
-
-{{-- This component is controlled by javascript in listeners.js --}}
-
 @php
     $attributes['placeholder'] = $attributes['placeholder'] ?? __('cms::inputs.file.placeholder');
 @endphp

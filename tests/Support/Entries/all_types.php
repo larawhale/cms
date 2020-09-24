@@ -78,10 +78,10 @@ return [
         //         ],
         //     ],
         // ],
-        // [
-        //     'key' => 'file',
-        //     'type' => 'file',
-        // ],
+        [
+            'key' => 'file',
+            'type' => 'file',
+        ],
         // [
         //     'key' => 'model_select',
         //     'type' => 'model_select',
@@ -154,9 +154,9 @@ return [
         //         ],
         //     ],
         // ],
-        [
-            'key' => 'image',
-            'type' => 'image',
-        ],
+        // [
+        //     'key' => 'image',
+        //     'type' => 'image',
+        // ],
     ],
 ];

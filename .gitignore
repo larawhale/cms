@@ -3,3 +3,4 @@ node_modules
 storage
 .phpunit.result.cache
 .env
+package-lock.json

@@ -165,7 +165,7 @@ class AbstractFieldTest extends TestCase
     /** @test */
     public function save_create(): void
     {
-        $entryModel = factory(EntryModel::class)->create();
+        $entryModel = EntryModel::factory()->create();
 
         $this->field->save($entryModel, 'test_value');
 
@@ -180,7 +180,7 @@ class AbstractFieldTest extends TestCase
     /** @test */
     public function save_update(): void
     {
-        $fieldModel = factory(FieldModel::class)->create([
+        $fieldModel = FieldModel::factory()->create([
             'key' => $this->field->getKey(),
             'type' => $this->field->getType(),
             'value' => 'old_value',

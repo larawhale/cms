@@ -71,7 +71,7 @@ class IndexTest extends DuskTestCase
         [$user] = $this->prepareTest();
 
         // Create a single entry.
-        $entry = factory(Entry::class)->create([
+        $entry = Entry::factory()->create([
             'type' => 'single_entry',
         ]);
 
@@ -89,13 +89,13 @@ class IndexTest extends DuskTestCase
      */
     private function prepareTest(): array
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $entries = factory(Entry::class, 3)->states('with_fields')->create([
+        $entries = Entry::factory()->count(3)->withFields()->create([
             'type' => 'test_entry',
         ]);
 
-        $otherEntries = factory(Entry::class, 3)->states('with_fields')->create([
+        $otherEntries = Entry::factory()->count(3)->withFields()->create([
             'type' => 'another_test_entry',
         ]);
 

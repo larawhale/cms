@@ -5,10 +5,13 @@ namespace LaraWhale\Cms\Models;
 use Illuminate\Database\Eloquent\Builder;
 use LaraWhale\Cms\Library\Fields\Factory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface;
 
 class Field extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *

@@ -10,7 +10,7 @@ class UiTest extends DuskTestCase
     /** @test */
     public function user_can_logout(): void
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)

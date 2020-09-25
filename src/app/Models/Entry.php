@@ -4,11 +4,16 @@ namespace LaraWhale\Cms\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use LaraWhale\Cms\Library\Entries\Factory;
+use LaraWhale\Cms\Database\Factories\EntryFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use LaraWhale\Cms\Library\Entries\Contracts\EntryInterface;
 
 class Entry extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -59,5 +64,15 @@ class Entry extends Model
     public function toEntryClass(): EntryInterface
     {
         return Factory::make($this->type, $this);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory(): Factory
+    {
+        return EntryFactory::new();
     }
 }

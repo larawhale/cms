@@ -10,7 +10,7 @@ class FallbackTest extends DuskTestCase
     /** @test */
     public function not_found_cms(): void
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->browse(function ($browser) use ($user) {
             $browser->loginAs($user)

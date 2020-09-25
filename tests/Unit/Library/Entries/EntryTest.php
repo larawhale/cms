@@ -133,7 +133,7 @@ class EntryTest extends TestCase
     /** @test */
     public function get_fields(): void
     {
-        $fieldModel = factory(FieldModel::class)->create([
+        $fieldModel = FieldModel::factory()->create([
             'key' => $this->config['fields'][0]['key'],
         ]);
 
@@ -159,7 +159,7 @@ class EntryTest extends TestCase
     /** @test */
     public function get_rules(): void
     {
-        $fieldModel = factory(FieldModel::class)->create([
+        $fieldModel = FieldModel::factory()->create([
             'key' => $this->config['fields'][0]['key'],
         ]);
 
@@ -176,7 +176,7 @@ class EntryTest extends TestCase
     /** @test */
     public function set_entry_model(): void
     {
-        $fieldModel = factory(FieldModel::class)->create([
+        $fieldModel = FieldModel::factory()->create([
             'key' => $this->config['fields'][0]['key'],
         ]);
 
@@ -199,7 +199,7 @@ class EntryTest extends TestCase
     /** @test */
     public function fill(): void
     {
-        $fieldModel = factory(FieldModel::class)->create([
+        $fieldModel = FieldModel::factory()->create([
             'key' => $this->config['fields'][0]['key'],
         ]);
 
@@ -216,7 +216,7 @@ class EntryTest extends TestCase
     /** @test */
     public function fill_null(): void
     {
-        $fieldModel = factory(FieldModel::class)->create([
+        $fieldModel = FieldModel::factory()->create([
             'key' => $this->config['fields'][0]['key'],
         ]);
 
@@ -256,7 +256,7 @@ class EntryTest extends TestCase
     /** @test */
     public function get_form_attributes_existing(): void
     {
-        $entry = new Entry($this->config, factory(EntryModel::class)->create());
+        $entry = new Entry($this->config, EntryModel::factory()->create());
 
         $this->assertMatchesSnapshot($entry->getFormAttributes());
     }
@@ -302,7 +302,7 @@ class EntryTest extends TestCase
     /** @test */
     public function save_update(): void
     {
-        $fieldModel = factory(FieldModel::class)->create([
+        $fieldModel = FieldModel::factory()->create([
             'value' => 'old_value',
         ]);
 
@@ -310,7 +310,7 @@ class EntryTest extends TestCase
 
         // Create another field that is not in the current config of the entry
         // and thus should be deleted.
-        factory(FieldModel::class)->create([
+        FieldModel::factory()->create([
             'entry_id' => $entryModel->id,
             'key' => 'remove_me',
             'type' => 'test_type',

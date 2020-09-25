@@ -46,7 +46,13 @@ class UpdateTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $field = factory(Field::class)->create();
+        $field = factory(Field::class)->create([
+            'key' => 'test_key',
+            'type' => 'test_key',
+            'entry_id' => factory(Entry::class)->create([
+                'type' => 'test_entry',
+            ]),
+        ]);
 
         return [$user, $field->entry];
     }

@@ -5,7 +5,6 @@ namespace LaraWhale\Cms\Database\Factories;
 use Illuminate\Support\Arr;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Models\Field;
-use LaraWhale\Cms\Library\Entries\Factory;
 use LaraWhale\Cms\Database\Factories\FieldFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use LaraWhale\Cms\Library\Entries\Factory as EntryFactoryClass;
@@ -32,7 +31,7 @@ class FieldFactory extends Factory
 
         return [
             'entry_id' => function () use ($entryConfig) {
-                return factory(Entry::class)->create([
+                return Entry::factory()->create([
                     'type' => $entryConfig['type'],
                 ])->id;
             },

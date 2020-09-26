@@ -34,13 +34,13 @@ class EntryFactory extends Factory
      * 
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function withFields(Entry $entry): Factory
+    public function withFields(): Factory
     {
         return $this->afterCreating(function (Entry $entry) {
             $fields = $entry->toEntryClass()->getFields();
 
             foreach ($fields as $field) {
-                factory(Field::class)->create([
+                Field::factory()->create([
                     'entry_id' => $entry->id,
                     'key' => $field->getKey(),
                     'value' => $field->getKey() . '_value',

@@ -4,9 +4,11 @@ namespace LaraWhale\Cms\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use LaraWhale\Cms\Library\Fields\Factory;
+use LaraWhale\Cms\Database\Factories\FieldFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use LaraWhale\Cms\Library\Fields\Contracts\AbstractFieldInterface;
+use Illuminate\Database\Eloquent\Factories\Factory as DatabaseFactory;
 
 class Field extends Model
 {
@@ -57,5 +59,15 @@ class Field extends Model
             ],
             $this,
         );
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory(): DatabaseFactory
+    {
+        return FieldFactory::new();
     }
 }

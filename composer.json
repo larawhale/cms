@@ -30,7 +30,8 @@
             "src/app/Library/helpers.php"
         ],
         "psr-4": {
-            "LaraWhale\\Cms\\": ["src/app/", "src/database/"]
+            "LaraWhale\\Cms\\": "src/app/",
+            "LaraWhale\\Cms\\Database\\Factories\\": "src/database/factories"
         }
     },
     "autoload-dev": {

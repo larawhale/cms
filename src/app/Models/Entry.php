@@ -5,10 +5,10 @@ namespace LaraWhale\Cms\Models;
 use Illuminate\Database\Eloquent\Builder;
 use LaraWhale\Cms\Library\Entries\Factory;
 use LaraWhale\Cms\Database\Factories\EntryFactory;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use LaraWhale\Cms\Library\Entries\Contracts\EntryInterface;
+use Illuminate\Database\Eloquent\Factories\Factory as DatabaseFactory;
 
 class Entry extends Model
 {
@@ -71,7 +71,7 @@ class Entry extends Model
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    protected static function newFactory(): Factory
+    protected static function newFactory(): DatabaseFactory
     {
         return EntryFactory::new();
     }

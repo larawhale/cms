@@ -39,7 +39,7 @@ class UiTest extends DuskTestCase
      */
     private function prepareTest(): array
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'password' => bcrypt($this->password),
         ]);
 

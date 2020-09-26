@@ -33,8 +33,9 @@ class MultiEntrySelectFieldTest extends TestCase
     /** @test */
     public function render_input(): void
     {
-        factory(EntryModel::class, 3)
-            ->state('with_fields')
+        EntryModel::factory()
+            ->count(3)
+            ->withFields()
             ->create(['type' => 'test_entry']);
 
         $this->assertMatchesHtmlSnapshot($this->field->renderInput());

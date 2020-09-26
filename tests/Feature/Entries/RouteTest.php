@@ -13,8 +13,8 @@ class RouteTest extends DuskTestCase
     {
         $route = 'test-route';
 
-        factory(Field::class)->create([
-            'entry_id' => factory(Entry::class)->create([
+        Field::factory()->create([
+            'entry_id' => Entry::factory()->create([
                 'type' => 'route_entry',
             ])->id,
             'key' => 'route_key',

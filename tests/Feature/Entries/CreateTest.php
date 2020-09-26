@@ -83,7 +83,7 @@ class CreateTest extends DuskTestCase
         [$user] = $this->prepareTest();
 
         // Create a single entry.
-        $entry = factory(Entry::class)->create([
+        $entry = Entry::factory()->create([
             'type' => 'single_entry',
         ]);
 
@@ -101,7 +101,7 @@ class CreateTest extends DuskTestCase
      */
     private function prepareTest(): array
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         return [$user];
     }

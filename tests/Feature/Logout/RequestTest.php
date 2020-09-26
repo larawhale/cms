@@ -10,7 +10,7 @@ class RequestTest extends TestCase
     /** @test */
     public function user_can_logout(): void
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user);
 

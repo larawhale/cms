@@ -23,4 +23,17 @@ class SelectField extends InputField
             $this->getInputAttributes(),
         )->toHtml();
     }
+
+    /**
+     * Returns the css class for the rendered input.
+     *
+     * @return array
+     */
+    public function getInputClass(): array
+    {
+        return [
+            ...parent::getInputClass(),
+            'custom-select',
+        ];
+    }
 }

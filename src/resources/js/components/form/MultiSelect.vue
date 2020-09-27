@@ -2,9 +2,9 @@
     <div class="cms-multi-select">
         <div class="dropdown">
             <div
-                @click="onClickToggle"
                 class="dropdown-toggle form-control"
                 ref="dropdownToggle"
+                @click="onClickToggle"
             >
                 {{ selectionText }}
             </div>
@@ -14,22 +14,31 @@
                 :class="{ show }"
                 ref="dropdownMenu"
             >
-                <a
-                    v-for="option of options"
-                    @click.prevent="onClickOption(option)"
-                    class="dropdown-item"
-                    :class="{ active: selection.includes(option) }"
-                    href="#"
-                >
-                    {{ list[option] }}
-
-                    <input
-                        v-if="selection.includes(option)"
-                        type="hidden"
-                        :name="`${name}[]`"
-                        :value="option"
+                <template v-if="options.length">
+                    <a
+                        v-for="option of options"
+                        class="dropdown-item"
+                        :class="{ active: selection.includes(option) }"
+                        href="#"
+                        @click.prevent="onClickOption(option)"
                     >
-                </a>
+                        {{ list[option] }}
+
+                        <input
+                            v-if="selection.includes(option)"
+                            type="hidden"
+                            :name="`${name}[]`"
+                            :value="option"
+                        >
+                    </a>
+                </template>
+
+                <div
+                    v-else
+                    class="dropdown-item disabled"
+                >
+                    No options available
+                </div>
             </div>
         </div>
     </div>

@@ -30,6 +30,9 @@ $border-radius-lg: 1rem;
 
 $box-shadow-lg: 0 .75rem 1.5rem rgba(18, 38, 63, .03);
 
+$caret-width: .3em !default;
+$caret-spacing: $caret-width * .85 !default;
+
 
 // Typography
 //
@@ -60,6 +63,12 @@ $input-btn-focus-width: 0;
 // Forms
 
 $custom-checkbox-indicator-border-radius: $border-radius-sm;
+
+
+// Dropdowns
+//
+// Dropdown menu container and contents.
+$dropdown-toggle-padding-right: $caret-width * 2 + $caret-spacing;
 
 
 // Pagination

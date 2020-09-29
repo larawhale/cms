@@ -92,6 +92,7 @@ class EntryController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        dd($request->validated());
         $type = $request->get('entry_type');
 
         $data = [

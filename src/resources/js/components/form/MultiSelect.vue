@@ -67,7 +67,7 @@ export default {
         };
     },
     created () {
-        this.selection = this.value;
+        this.selection = this.value.slice(0);
 
         document.addEventListener('click', this.onClickDocument);
     },

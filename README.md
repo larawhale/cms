@@ -14,9 +14,6 @@ This package can be installed using composer:
 composer require larawhale/cms
 ```
 
-**NOTE!** <br />
-At the moment the `larawhale` namespace is already in use on Packagist, the owner has been contacted to add this package. For now the package can be added as repository to the `composer.json`. More information can be found in the [composer documentation](https://getcomposer.org/doc/05-repositories.md#vcs).
-
 Read more about the installation of this package in the [documentation](https://github.com/larawhale/cms/wiki/Installation).
 
 ## Example

@@ -20,7 +20,7 @@ trait CopiesDotKeys
         // notated keys "parent.child". The retrieval of errors for these
         // fields is done by using the input name, "parent[child]", and thus
         // results in no error shown. This can be prevented by adding duplicate
-        // messages under keys that are "bracked notated". 
+        // messages under keys that are "bracked notated".
         $validator->after(function ($validator) {
             $messages = $validator->messages()->toArray();
 

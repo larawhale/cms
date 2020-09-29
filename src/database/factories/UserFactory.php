@@ -1,12 +1,30 @@
 <?php
 
-use Faker\Generator;
-use LaraWhale\Cms\Models\User;
+namespace LaraWhale\Cms\Database\Factories;
 
-$factory->define(User::class, function (Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'email' => $faker->safeEmail(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password,
-    ];
-});
+use LaraWhale\Cms\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class UserFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = User::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name,
+            'email' => $this->faker->safeEmail(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password,
+        ];
+    }
+}

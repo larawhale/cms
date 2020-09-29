@@ -2,3 +2,6 @@ vendor
 node_modules
 storage
 .phpunit.result.cache
+.env
+package-lock.json
+src/public/js/app.js.LICENSE.txt

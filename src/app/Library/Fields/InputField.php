@@ -23,7 +23,7 @@ class InputField extends AbstractField
 
     /**
      * Returns the attributes for the rendered input.
-     * 
+     *
      * @return array
      */
     public function getInputAttributes(): array
@@ -77,7 +77,7 @@ class InputField extends AbstractField
     /**
      * Returns whether the input has been submitted in a request with an
      * invalid value.
-     * 
+     *
      * @return bool
      */
     public function inputIsInvalid(): bool

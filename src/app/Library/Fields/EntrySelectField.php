@@ -11,7 +11,7 @@ class EntrySelectField extends ModelSelectField
     /**
      * Returns the configured entry type that is used to contraint the query to
      * only return entries of a certain type.
-     * 
+     *
      * @return string|null
      */
     public function getEntryType(): ?string
@@ -21,7 +21,7 @@ class EntrySelectField extends ModelSelectField
 
     /**
      * Returns a list of models used to display in the select.
-     * 
+     *
      * @return array
      */
     public function getList(): array
@@ -41,7 +41,7 @@ class EntrySelectField extends ModelSelectField
 
     /**
      * Returns the configured model class.
-     * 
+     *
      * @return string
      */
     public function getModelClass(): string
@@ -62,7 +62,7 @@ class EntrySelectField extends ModelSelectField
 
     /**
      * Prepares a query that should retrieve the models.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function getModelListQuery()
@@ -78,7 +78,7 @@ class EntrySelectField extends ModelSelectField
 
     /**
      * Returns the value of the field.
-     * 
+     *
      * @return mixed
      */
     public function getValue()

@@ -4,7 +4,6 @@ namespace LaraWhale\Cms\Library\Fields;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use LaraWhale\Cms\Models\Entry as EntryModel;
 
 class FileField extends InputField
 {
@@ -37,24 +36,28 @@ class FileField extends InputField
     }
 
     /**
-     * Saves the field to the database.
+     * Returns a representation of how the value should be stored in the
+     * database.
      *
-     * @param  \LaraWhale\Cms\Models\Entry  $entryModel
      * @param  mixed  $value
-     * @return self
+     * @return string
      */
-    public function save(EntryModel $entryModel, $value): self
+    public function getDatabaseValue($value): string
     {
+        if (! $value instanceof UploadedFile) {
+            return parent::getDatabaseValue($value);
+        }
+
         $path = $this->saveFile($value);
 
         $this->deleteFile();
 
-        return parent::save($entryModel, $path);
+        return $path;
     }
 
     /**
      * Saves the file to storage.
-     * 
+     *
      * @param  \Illuminate\Http\UploadedFile  $file
      * @return string
      */
@@ -71,7 +74,7 @@ class FileField extends InputField
 
     /**
      * Deletes the value of the field.
-     * 
+     *
      * @return void
      */
     public function deleteFile(): void
@@ -88,7 +91,7 @@ class FileField extends InputField
 
     /**
      * Returns the file path of the file.
-     * 
+     *
      * @return string
      */
     public function getFilePath(): string

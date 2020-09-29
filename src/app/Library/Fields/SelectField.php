@@ -3,9 +3,12 @@
 namespace LaraWhale\Cms\Library\Fields;
 
 use Collective\Html\FormFacade;
+use LaraWhale\Cms\Library\Fields\Concerns\HasList;
 
 class SelectField extends InputField
 {
+    use HasList;
+
     /**
      * Returns a rendered input.
      *
@@ -22,12 +25,15 @@ class SelectField extends InputField
     }
 
     /**
-     * Returns the configured list used to display in the select.
-     * 
+     * Returns the css class for the rendered input.
+     *
      * @return array
      */
-    public function getList(): array
+    public function getInputClass(): array
     {
-        return $this->config('list', []);
+        return [
+            ...parent::getInputClass(),
+            'custom-select',
+        ];
     }
 }

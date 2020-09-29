@@ -13,7 +13,7 @@ class InputFieldTest extends TestCase
 {
     /**
      * The InputField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\InputField
      */
     private InputField $field;
@@ -163,7 +163,7 @@ class InputFieldTest extends TestCase
 
     /**
      * Mocks a request that has an error on the field key.
-     * 
+     *
      * @return void
      */
     private function mockFailedRequest(): void

@@ -9,7 +9,7 @@ class SelectFieldTest extends TestCase
 {
     /**
      * The SelectField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\SelectField
      */
     private SelectField $field;
@@ -36,26 +36,5 @@ class SelectFieldTest extends TestCase
     public function render_input(): void
     {
         $this->assertMatchesHtmlSnapshot($this->field->renderInput());
-    }
-
-    /** @test */
-    public function get_list(): void
-    {
-        $this->assertSame(
-            ['item 1', 'item 2', 'item 3'],
-            $this->field->getList(),
-        );
-    }
-
-    /** @test */
-    public function get_list_default(): void
-    {
-        // Create a field instance without a config that contains a `list` key.
-        $field = new SelectField('test_key', 'select');
-
-        $this->assertSame(
-            [],
-            $field->getList(),
-        );
     }
 }

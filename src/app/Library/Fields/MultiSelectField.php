@@ -32,6 +32,9 @@ class MultiSelectField extends SelectField
     {
         $classes = parent::getInputClass();
 
-        return array_filter($classes, fn($c) => $c != 'form-control');
+        return array_filter(
+            $classes,
+            fn($c) => ! in_array($c, ['form-control', 'custom-select']),
+        );
     }
 }

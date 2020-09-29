@@ -24,9 +24,11 @@ return [
             'default' => \LaraWhale\Cms\Library\Fields\InputField::class,
 
             'checkbox' => \LaraWhale\Cms\Library\Fields\CheckableField::class,
+            'checkboxes' => \LaraWhale\Cms\Library\Fields\CheckboxesField::class,
             'entry_select' => \LaraWhale\Cms\Library\Fields\EntrySelectField::class,
             'fields' => \LaraWhale\Cms\Library\Fields\FieldsField::class,
             'file' => \LaraWhale\Cms\Library\Fields\FileField::class,
+            'image' => \LaraWhale\Cms\Library\Fields\ImageField::class,
             'input' => \LaraWhale\Cms\Library\Fields\InputField::class,
             'model_select' => \LaraWhale\Cms\Library\Fields\ModelSelectField::class,
             'multi_entry_select' => \LaraWhale\Cms\Library\Fields\MultiEntrySelectField::class,
@@ -34,6 +36,7 @@ return [
             'multi_model_select' => \LaraWhale\Cms\Library\Fields\MultiModelSelectField::class,
             'multi_select' => \LaraWhale\Cms\Library\Fields\MultiSelectField::class,
             'radio' => \LaraWhale\Cms\Library\Fields\CheckableField::class,
+            'radios' => \LaraWhale\Cms\Library\Fields\RadiosField::class,
             'select' => \LaraWhale\Cms\Library\Fields\SelectField::class,
             'textarea' => \LaraWhale\Cms\Library\Fields\TextAreaField::class,
         ],
@@ -43,6 +46,14 @@ return [
          * requests. The value of this field will be used to create a route.
          */
         'route_field_type' => 'route',
+
+        /**
+         * Configuration specifically to the image field.
+         */
+        'image_field' => [
+            'default_preview_height' => '200px',
+            'default_preview_width' => '100%',
+        ],
     ],
 
     'database' => [

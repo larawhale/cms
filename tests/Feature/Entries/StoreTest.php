@@ -43,8 +43,8 @@ class StoreTest extends TestCase
         $data = $this->requestData();
 
         // Create a single entry and change the type in data.
-        $field = factory(Field::class)->create([
-            'entry_id' => factory(Entry::class)->create([
+        $field = Field::factory()->create([
+            'entry_id' => Entry::factory()->create([
                 'type' => 'single_entry',
             ]),
         ]);
@@ -68,7 +68,7 @@ class StoreTest extends TestCase
      */
     private function prepareTest(): array
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         return [$user];
     }

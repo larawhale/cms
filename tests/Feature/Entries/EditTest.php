@@ -49,9 +49,9 @@ class EditTest extends DuskTestCase
      */
     private function prepareTest(): array
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $entry = factory(Entry::class)->state('with_fields')->create([
+        $entry = Entry::factory()->withFields()->create([
             'type' => 'test_entry',
         ]);
 

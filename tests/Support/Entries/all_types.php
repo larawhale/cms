@@ -71,8 +71,30 @@ return [
             'type' => 'checkbox',
         ],
         [
+            'key' => 'checkboxes',
+            'type' => 'checkboxes',
+            'config' => [
+                'list' => [
+                    'item 1',
+                    'item 2',
+                    'item 3',
+                ],
+            ],
+        ],
+        [
             'key' => 'radio',
             'type' => 'radio',
+        ],
+        [
+            'key' => 'radios',
+            'type' => 'radios',
+            'config' => [
+                'list' => [
+                    'item 1',
+                    'item 2',
+                    'item 3',
+                ],
+            ],
         ],
         [
             'key' => 'select',
@@ -177,6 +199,10 @@ return [
                     ],
                 ],
             ],
+        ],
+        [
+            'key' => 'image',
+            'type' => 'image',
         ],
     ],
 ];

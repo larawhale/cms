@@ -9,7 +9,7 @@ class TextAreaFieldTest extends TestCase
 {
     /**
      * The TextAreaField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\TextAreaField
      */
     private TextAreaField $field;

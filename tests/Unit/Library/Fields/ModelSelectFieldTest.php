@@ -12,7 +12,7 @@ class ModelSelectFieldTest extends TestCase
 {
     /**
      * The ModelSelectField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\ModelSelectField
      */
     private ModelSelectField $field;
@@ -38,7 +38,7 @@ class ModelSelectFieldTest extends TestCase
     /** @test */
     public function render_input(): void
     {
-        factory(User::class, 3)->create([
+        User::factory()->count(3)->create([
             'name' => 'test_name',
         ]);
 
@@ -48,7 +48,8 @@ class ModelSelectFieldTest extends TestCase
     /** @test */
     public function get_list(): void
     {
-        $list = factory(User::class, 3)->create()
+        $list = User::factory()->count(3)
+            ->create()
             ->mapWithKeys(function ($user) {
                 return [$user->id => $user->name];
             })
@@ -108,7 +109,7 @@ class ModelSelectFieldTest extends TestCase
     /** @test */
     public function get_model_list(): void
     {
-        $list = factory(User::class, 3)->create()->fresh();
+        $list = User::factory()->count(3)->create()->fresh();
 
         $this->assertEquals(
             $list,
@@ -127,7 +128,7 @@ class ModelSelectFieldTest extends TestCase
     /** @test */
     public function get_query_constraint(): void
     {
-        $constraint = function($query)  {
+        $constraint = function ($query) {
             $query->limit(15);
         };
 
@@ -145,7 +146,7 @@ class ModelSelectFieldTest extends TestCase
     /** @test */
     public function get_value(): void
     {
-        $user = factory(User::class)->create()->fresh();
+        $user = User::factory()->create()->fresh();
 
         $fieldModel = new FieldModel([
             'value' => $user->id,

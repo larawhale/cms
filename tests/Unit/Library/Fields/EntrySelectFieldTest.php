@@ -13,7 +13,7 @@ class EntrySelectFieldTest extends TestCase
 {
     /**
      * The EntrySelectField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\EntrySelectField
      */
     private EntrySelectField $field;
@@ -39,8 +39,9 @@ class EntrySelectFieldTest extends TestCase
     /** @test */
     public function render_input(): void
     {
-        factory(EntryModel::class, 3)
-            ->state('with_fields')
+        EntryModel::factory()
+            ->count(3)
+            ->withFields()
             ->create(['type' => 'test_entry']);
 
         $this->assertMatchesHtmlSnapshot($this->field->renderInput());
@@ -66,8 +67,9 @@ class EntrySelectFieldTest extends TestCase
     /** @test */
     public function get_list(): void
     {
-        $list = factory(EntryModel::class, 3)
-            ->state('with_fields')
+        $list = EntryModel::factory()
+            ->count(3)
+            ->withFields()
             ->create(['type' => 'test_entry'])
             ->mapWithKeys(function ($entry) {
                 $fieldModel = $entry->fields()
@@ -135,8 +137,8 @@ class EntrySelectFieldTest extends TestCase
     /** @test */
     public function get_value(): void
     {
-        $entryModel = factory(EntryModel::class)
-            ->state('with_fields')
+        $entryModel = EntryModel::factory()
+            ->withFields()
             ->create(['type' => 'test_entry']);
 
         $fieldModel = $entryModel->fields()

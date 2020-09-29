@@ -14,7 +14,7 @@ class FieldsFieldTest extends TestCase
 {
     /**
      * The FieldsField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\FieldsField
      */
     private FieldsField $field;
@@ -46,6 +46,32 @@ class FieldsFieldTest extends TestCase
     }
 
     /** @test */
+    public function get_database_value(): void
+    {
+        $field = new FieldsField('test_key', 'fields', [
+            'fields' => [
+                [
+                    'key' => 'test_key',
+                    'type' => 'fields',
+                    'config' => [
+                        'fields' => [
+                            [
+                                'key' => 'test_key',
+                                'type' => 'text',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertSame(
+            json_encode(['test_key' => json_encode(['test_key' => 'test_value'])]),
+            $field->getDatabaseValue(['test_key' => ['test_key' => 'test_value']]),
+        );
+    }
+
+    /** @test */
     public function get_fields(): void
     {
         $this->assertSame(
@@ -70,6 +96,16 @@ class FieldsFieldTest extends TestCase
         $this->assertSame('text', $actual->getType());
 
         $this->assertSame('required', $actual->getRules());
+    }
+
+    /** @test */
+    public function get_field_instances_without_parent_key(): void
+    {
+        $fieldInstances = $this->field->getFieldInstances(false);
+
+        $actual = $fieldInstances[0];
+
+        $this->assertSame('test_key', $actual->getKey());
     }
 
     /** @test */

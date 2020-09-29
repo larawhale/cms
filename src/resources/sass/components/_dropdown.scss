@@ -1,0 +1,19 @@
+.dropdown-toggle {
+    position: relative;
+    padding-right: $dropdown-toggle-padding-right;
+
+    &::after {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+    }
+
+    &.form-control {
+        padding-right: calc(#{$dropdown-toggle-padding-right} + #{$input-padding-x});
+
+        &::after {
+            right: $input-padding-x;
+        }
+    }
+}

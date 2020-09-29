@@ -8,7 +8,6 @@ use LaraWhale\Cms\Library\Fields\InputField;
 use LaraWhale\Cms\Tests\Support\Fields\TestField;
 use LaraWhale\Cms\Exceptions\RequiredConfigKeyNotFoundException;
 
-
 class FactoryTest extends TestCase
 {
     /** @test */

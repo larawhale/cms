@@ -61,7 +61,7 @@ trait TestSetup
             'url' => null,
             'host' => 'mysql',
             'port' => '3306',
-            'database' => 'forge',
+            'database' => 'laravel',
             'username' => 'forge',
             'password' => 'forge',
             'unix_socket' => '',
@@ -74,6 +74,15 @@ trait TestSetup
         ]);
 
         $app['config']->set('database.default', 'testing');
+
+        $app['config']->set('filesystems.default', 'cms');
+
+        $app['config']->set('filesystems.disks.cms', [
+            'driver' => 'local',
+            'root' => __DIR__ . '/storage',
+            'url' => env('APP_URL') . '/tests/storage',
+            'visibility' => 'public',
+        ]);
 
         $app['config']->set(
             'cms.entries.path',

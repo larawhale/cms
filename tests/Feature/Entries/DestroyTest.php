@@ -39,9 +39,9 @@ class DestroyTest extends TestCase
      */
     private function prepareTest(): array
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        $entry = factory(Entry::class)->create();
+        $entry = Entry::factory()->create();
 
         return [$user, $entry];
     }

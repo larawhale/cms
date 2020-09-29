@@ -1,29 +1,51 @@
 <?php
 
-use Faker\Generator;
+namespace LaraWhale\Cms\Database\Factories;
+
 use Illuminate\Support\Arr;
 use LaraWhale\Cms\Models\Entry;
 use LaraWhale\Cms\Models\Field;
-use LaraWhale\Cms\Library\Entries\Factory;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use LaraWhale\Cms\Library\Entries\Factory as EntryFactoryClass;
 
-$factory->define(Entry::class, function (Generator $faker) {
-    return [
-        'type' => Arr::random(array_keys(Factory::$entries)),
-    ];
-});
+class EntryFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Entry::class;
 
-$factory->afterCreatingState(
-    Entry::class,
-    'with_fields',
-    function (Entry $entry) {
-        $fields = $entry->toEntryClass()->getFields();
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'type' => Arr::random(array_keys(EntryFactoryClass::$entries)),
+        ];
+    }
 
-        foreach ($fields as $field) {
-            factory(Field::class)->create([
-                'entry_id' => $entry->id,
-                'key' => $field->getKey(),
-                'value' => $field->getKey() . '_value',
-            ]);
-        }
-    },
-);
+    /**
+     * Create fields for the entry.
+     * 
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function withFields(): Factory
+    {
+        return $this->afterCreating(function (Entry $entry) {
+            $fields = $entry->toEntryClass()->getFields();
+
+            foreach ($fields as $field) {
+                Field::factory()->create([
+                    'entry_id' => $entry->id,
+                    'key' => $field->getKey(),
+                    'value' => $field->getKey() . '_value',
+                ]);
+            }
+        });
+    }
+}

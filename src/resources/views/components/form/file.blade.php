@@ -1,17 +1,11 @@
-{{-- This component is controlled by javascript in listeners.js --}}
-
 @php
-    $attributes['placeholder'] = $value
-        ?: $attributes['placeholder']
-        ?? __('cms::inputs.file.placeholder');
+    $attributes['placeholder'] = $attributes['placeholder'] ?? __('cms::inputs.file.placeholder');
 @endphp
 
-<div class="custom-file">
-    {!! Form::file($name, $attributes) !!}
+<cms-file-input
+    id="{{ $attributes['id'] }}"
+    placeholder="{{ __('cms::inputs.file.placeholder') }}"
+    value="{{ $value }}"
+    name="{{ $name }}"
+></cms-file-input>
 
-    {!! Form::label(
-        $attributes['id'],
-        $attributes['placeholder'],
-        ['class' => 'custom-file-label'],
-    ) !!}
-</div>

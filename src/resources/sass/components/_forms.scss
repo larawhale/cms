@@ -15,3 +15,36 @@
         }
     }
 }
+
+.cms-image-input {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    .select-image-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .btn-remove {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        display: none;
+    }
+
+    &.image-selected {
+        .select-image-icon {
+            display: none;
+        }
+
+        &:hover {
+            .btn-remove,
+            .select-image-icon {
+                display: block;
+            }
+        }
+    }
+}

@@ -10,7 +10,7 @@ class MultiModelSelectFieldTest extends TestCase
 {
     /**
      * The MultiModelSelectField instance used for testing.
-     * 
+     *
      * @var \LaraWhale\Cms\Library\Fields\MultiModelSelectField
      */
     private MultiModelSelectField $field;
@@ -33,7 +33,7 @@ class MultiModelSelectFieldTest extends TestCase
     /** @test */
     public function render_input(): void
     {
-        factory(User::class, 3)->create([
+        User::factory()->count(3)->create([
             'name' => 'test_name',
         ]);
 

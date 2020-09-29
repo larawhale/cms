@@ -34,6 +34,21 @@ class MultiFieldsField extends FieldsField
     }
 
     /**
+     * Returns a representation of how the value should be stored in the
+     * database.
+     *
+     * @param  mixed  $value
+     * @return string
+     */
+    public function getDatabaseValue($value): string
+    {
+        return $this->traitGetDatabaseValue(array_map(
+            fn ($v) => $this->getDatabaseValueChildren($v),
+            $value,
+        ));
+    }
+
+    /**
      * Returns the configured rules of the field with the key of the field.
      *
      * @return array

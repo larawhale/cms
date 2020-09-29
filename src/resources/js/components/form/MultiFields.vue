@@ -94,7 +94,11 @@ export default {
             items.forEach((item, i) => {
                 const inputs = item.querySelectorAll('input');
 
-                console.log(inputs);
+                // TODO: Would be nice to check if there are any vue component
+                // if which the `name` value can be changed instead of having a
+                // `realName` method to retrieve it. Check `FieldInput` for
+                // example. Those components should just be able to live
+                // happily without thinking about this component.
 
                 const indexes = [i];
 

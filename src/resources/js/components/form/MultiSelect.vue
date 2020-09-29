@@ -123,7 +123,9 @@ export default {
         },
         realName() {
             // It is possible that the name of the input was changed.
-            return this.$refs.nameInput.name;
+            if (this.$refs.nameInput) {
+                return this.$refs.nameInput.name;
+            }
         },
     }
 };

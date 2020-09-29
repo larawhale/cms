@@ -49,19 +49,30 @@ class FieldsField extends InputField
      */
     public function getDatabaseValue($value): string
     {
+        return $this->traitGetDatabaseValue(
+            $this->getDatabaseValueChildren($value),
+        );
+    }
+
+    /**
+     * Get the databsae values of the child fields.
+     * 
+     * @param  mixed $value
+     * @return array
+     */
+    public function getDatabaseValueChildren($value): array
+    {
         $clone = (clone $this)->setValue($value);
 
         // Get the database values of each field. Some fields might have
         // special things done to the value.
-        $value = collect($clone->getFieldInstances(false))
+        return collect($clone->getFieldInstances(false))
             ->mapWithKeys(function ($c) {
                 return [
                     $c->getKey() => $c->getDatabaseValue($c->getValue()),
                 ];
             })
             ->all();
-
-        return $this->traitGetDatabaseValue($value);
     }
 
     /**

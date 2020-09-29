@@ -35,22 +35,36 @@ return [
                         'key' => 'file',
                         'type' => 'file',
                     ],
-                    // [
-                    //     'key' => 'field_2',
-                    //     'type' => 'multi_fields',
-                    //     'config' => [
-                    //         'fields' => [
-                    //             [
-                    //                 'key' => 'field_1',
-                    //                 'type' => 'text',
-                    //             ],
-                    //             [
-                    //                 'key' => 'field_2',
-                    //                 'type' => 'text',
-                    //             ],
-                    //         ],
-                    //     ],
-                    // ],
+                ],
+            ],
+        ],
+        [
+            'key' => 'fields',
+            'type' => 'fields',
+            'config' => [
+                'fields' => [
+                    [
+                        'key' => 'field_1',
+                        'type' => 'text',
+                    ],
+                    [
+                        'key' => 'multi_select',
+                        'type' => 'multi_select',
+                        'config' => [
+                            'input_attributes' => [
+                                'placeholder' => 'Select items',
+                            ],
+                            'list' => [
+                                'item 1',
+                                'item 2',
+                                'item 3',
+                            ],
+                        ],
+                    ],
+                    [
+                        'key' => 'file',
+                        'type' => 'file',
+                    ],
                 ],
             ],
         ],

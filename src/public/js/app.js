@@ -412,8 +412,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     setInputNames: function setInputNames() {
       var items = this.$refs.items || [];
       items.forEach(function (item, i) {
-        var inputs = item.querySelectorAll('input');
-        console.log(inputs);
+        var inputs = item.querySelectorAll('input'); // TODO: Would be nice to check if there are any vue component
+        // if which the `name` value can be changed instead of having a
+        // `realName` method to retrieve it. Check `FieldInput` for
+        // example. Those components should just be able to live
+        // happily without thinking about this component.
+
         var indexes = [i];
         inputs.forEach(function (input) {
           var name = input.getAttribute('name');
@@ -586,7 +590,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     realName: function realName() {
       // It is possible that the name of the input was changed.
-      return this.$refs.nameInput.name;
+      if (this.$refs.nameInput) {
+        return this.$refs.nameInput.name;
+      }
     }
   }
 });

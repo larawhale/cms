@@ -167,7 +167,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onClickRemove: function onClickRemove(e) {
-      console.log(123);
       e.stopPropagation();
       this.remove = true;
       this.file = undefined;
@@ -182,6 +181,10 @@ __webpack_require__.r(__webpack_exports__);
       if (files && files.length > 0) {
         this.file = files[0].name;
       }
+    },
+    realName: function realName() {
+      // It is possible that the name of the input was changed.
+      return this.$refs.input.name;
     }
   }
 });
@@ -297,6 +300,10 @@ __webpack_require__.r(__webpack_exports__);
 
         reader.readAsDataURL(file);
       }
+    },
+    realName: function realName() {
+      // It is possible that the name of the input was changed.
+      return this.$refs.input.name;
     }
   }
 });
@@ -406,6 +413,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var items = this.$refs.items || [];
       items.forEach(function (item, i) {
         var inputs = item.querySelectorAll('input');
+        console.log(inputs);
         var indexes = [i];
         inputs.forEach(function (input) {
           var name = input.getAttribute('name');
@@ -452,6 +460,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -563,6 +583,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     onClickToggle: function onClickToggle() {
       this.show = !this.show;
+    },
+    realName: function realName() {
+      // It is possible that the name of the input was changed.
+      return this.$refs.nameInput.name;
     }
   }
 });
@@ -1077,7 +1101,7 @@ var render = function() {
     _vm._v(" "),
     _vm.remove
       ? _c("input", {
-          attrs: { name: _vm.name, type: "hidden", value: "remove" }
+          attrs: { name: _vm.realName(), type: "hidden", value: "remove" }
         })
       : _vm._e(),
     _vm._v(" "),
@@ -1306,7 +1330,10 @@ var render = function() {
                     ),
                     _vm.selection.includes(option)
                       ? _c("input", {
-                          attrs: { type: "hidden", name: _vm.name + "[]" },
+                          attrs: {
+                            type: "hidden",
+                            name: _vm.realName() + "[]"
+                          },
                           domProps: { value: option }
                         })
                       : _vm._e()
@@ -1319,7 +1346,12 @@ var render = function() {
         ],
         2
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c("input", {
+      ref: "nameInput",
+      attrs: { disabled: "", name: _vm.name, type: "hidden" }
+    })
   ])
 }
 var staticRenderFns = []

@@ -27,7 +27,7 @@
                         <input
                             v-if="selection.includes(option)"
                             type="hidden"
-                            :name="`${name}[]`"
+                            :name="`${realName()}[]`"
                             :value="option"
                         >
                     </a>
@@ -41,6 +41,18 @@
                 </div>
             </div>
         </div>
+
+        <!--
+            This component does not work without the following input when
+            included in the `MultiFields` component. The `MutliFields`
+            component changes names according to the item index.
+        -->
+        <input
+            disabled
+            :name="name"
+            ref="nameInput"
+            type="hidden"
+        >
     </div>
 </template>
 
@@ -108,7 +120,11 @@ export default {
         },
         onClickToggle () {
             this.show = !this.show;
-        }
+        },
+        realName() {
+            // It is possible that the name of the input was changed.
+            return this.$refs.nameInput.name;
+        },
     }
 };
 </script>

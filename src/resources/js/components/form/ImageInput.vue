@@ -103,6 +103,10 @@ export default {
                 reader.readAsDataURL(file);
             }
         },
+        realName() {
+            // It is possible that the name of the input was changed.
+            return this.$refs.input.name;
+        },
     },
 };
 </script>

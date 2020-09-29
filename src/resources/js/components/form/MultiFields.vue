@@ -94,6 +94,8 @@ export default {
             items.forEach((item, i) => {
                 const inputs = item.querySelectorAll('input');
 
+                console.log(inputs);
+
                 const indexes = [i];
 
                 inputs.forEach((input) => {

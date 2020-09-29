@@ -27,7 +27,7 @@
 
         <input
             v-if="remove"
-            :name="name"
+            :name="realName()"
             type="hidden"
             value="remove"
         >
@@ -71,7 +71,6 @@ export default {
     },
     methods: {
         onClickRemove(e) {
-            console.log(123);
             e.stopPropagation();
 
             this.remove = true;
@@ -89,6 +88,10 @@ export default {
             if (files && files.length > 0) {
                 this.file = files[0].name;
             }
+        },
+        realName() {
+            // It is possible that the name of the input was changed.
+            return this.$refs.input.name;
         },
     },
 };

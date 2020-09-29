@@ -375,10 +375,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   },
   mounted: function mounted() {
-    this.setInputNames();
-    this.setInputValues();
+    this.setInputNames(); // this.setInputValues();
   },
   methods: {
+    setInputNames: function setInputNames() {
+      if (!this.items.length) {
+        return;
+      }
+
+      for (var i in this.items) {
+        var item = this.items[i];
+        console.log(item);
+      }
+    },
     constructInputValues: function constructInputValues(values, parentKey) {
       if (_typeof(values) !== 'object') {
         return [values, parentKey];
@@ -398,8 +407,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       return constructed;
     },
+    extractParentName: function extractParentName(name) {
+      return name.replace(new RegExp("".concat(this.name, "\\[\\d*\\]")), '').replace(/\[/, '').replace(/\]/, '');
+    },
     generateId: function generateId() {
-      return Date.now() + '-' + Math.floor(Math.random() * 100);
+      return Date.now() + '-' + Math.floor(Math.random() * 10000);
     },
     onClickAdd: function onClickAdd() {
       this.items.push({
@@ -409,7 +421,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     onClickRemove: function onClickRemove(index) {
       this.items.splice(index, 1);
     },
-    setInputNames: function setInputNames() {
+    setInputNamesOld: function setInputNamesOld() {
       var items = this.$refs.items || [];
       items.forEach(function (item, i) {
         var inputs = item.querySelectorAll('input'); // TODO: Would be nice to check if there are any vue component
@@ -431,6 +443,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       });
     },
     setInputValues: function setInputValues() {
+      var _this2 = this;
+
       var constructed = this.constructInputValues(this.items, this.name);
 
       for (var key in constructed) {
@@ -439,15 +453,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if (input) {
           input.setAttribute('value', constructed[key]);
         }
-      }
+      } // WIP: setting vue component values
+
+
+      console.log(this.name, this.items);
+      this.$children.forEach(function (c) {
+        console.log(c.name);
+
+        var name = _this2.extractParentName(c.name);
+      });
     }
   },
   watch: {
     items: function items() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$nextTick(function () {
-        _this2.setInputNames();
+        _this3.setInputNames();
       });
     }
   }
@@ -590,9 +612,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     realName: function realName() {
       // It is possible that the name of the input was changed.
-      if (this.$refs.nameInput) {
-        return this.$refs.nameInput.name;
-      }
+      return this.$refs.nameInput ? this.$refs.nameInput.name : this.name;
     }
   }
 });

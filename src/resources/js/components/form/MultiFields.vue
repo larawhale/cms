@@ -52,9 +52,24 @@ export default {
     mounted () {
         this.setInputNames();
 
-        this.setInputValues();
+        // this.setInputValues();
     },
     methods: {
+        setInputNames() {
+            if (! this.items.length) {
+                return;
+            }
+
+            for (let i in this.items) {
+                const item = this.items[i];
+
+                console.log(item);
+            }
+        },
+
+
+
+
         constructInputValues (values, parentKey) {
             if (typeof(values) !== 'object') {
                 return [values, parentKey];
@@ -77,8 +92,14 @@ export default {
 
             return constructed;
         },
+        extractParentName(name) {
+            return name
+                .replace(new RegExp(`${this.name}\\[\\d*\\]`), '')
+                .replace(/\[/, '')
+                .replace(/\]/, '');
+        },
         generateId () {
-            return Date.now() + '-' + Math.floor(Math.random() * 100);
+            return Date.now() + '-' + Math.floor(Math.random() * 10000);
         },
         onClickAdd () {
             this.items.push({
@@ -88,7 +109,7 @@ export default {
         onClickRemove (index) {
             this.items.splice(index, 1);
         },
-        setInputNames () {
+        setInputNamesOld () {
             const items = this.$refs.items || [];
 
             items.forEach((item, i) => {
@@ -126,6 +147,15 @@ export default {
                     input.setAttribute('value', constructed[key]);
                 }
             }
+
+            // WIP: setting vue component values
+            console.log(this.name, this.items);
+
+            this.$children.forEach((c) => {
+                console.log(c.name);
+
+                const name = this.extractParentName(c.name);
+            });
         },
     },
     watch: {

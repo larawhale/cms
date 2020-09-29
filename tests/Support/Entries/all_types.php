@@ -13,10 +13,10 @@ return [
             'type' => 'multi_fields',
             'config' => [
                 'fields' => [
-                    [
-                        'key' => 'field_1',
-                        'type' => 'text',
-                    ],
+                    // [
+                    //     'key' => 'field_1',
+                    //     'type' => 'text',
+                    // ],
                     [
                         'key' => 'multi_select',
                         'type' => 'multi_select',

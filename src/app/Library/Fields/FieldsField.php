@@ -68,9 +68,15 @@ class FieldsField extends InputField
         // special things done to the value.
         return collect($clone->getFieldInstances(false))
             ->mapWithKeys(function ($c) {
-                return [
-                    $c->getKey() => $c->getDatabaseValue($c->getValue()),
-                ];
+                $value = $c->getValue();
+
+                // Fields that use the `HasArrayValue` should not be encoded
+                // because their parents will do it.
+                if (! in_array(HasArrayValue::class, class_uses($c))) {
+                    $value = $c->getDatabaseValue($value);
+                }
+
+                return [$c->getKey() => $value];
             })
             ->all();
     }

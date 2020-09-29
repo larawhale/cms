@@ -4,6 +4,3 @@
 >
     @include('cms::components.form.fields', compact('name', 'fields'))
 </cms-multi-fields>
-
-
-@json($value)

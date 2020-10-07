@@ -319,41 +319,42 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     name: String,
@@ -375,41 +376,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   },
   mounted: function mounted() {
-    this.setInputNames(); // this.setInputValues();
+    var _this2 = this;
+
+    // TODO: Slots is not being updated with all the new ones that are
+    // created with the for loop. It would be best if we can access so
+    // called VNodes. Maybe take a look a jsx manually rendering by
+    // extracting what PHP is passing to the default slot.
+    this.$slots["default"].forEach(function (s, i) {
+      return _this2.setInputNames(s, i);
+    });
   },
   methods: {
-    setInputNames: function setInputNames() {
-      if (!this.items.length) {
-        return;
-      }
-
-      for (var i in this.items) {
-        var item = this.items[i];
-        console.log(item);
-      }
-    },
-    constructInputValues: function constructInputValues(values, parentKey) {
-      if (_typeof(values) !== 'object') {
-        return [values, parentKey];
-      }
-
-      var constructed = {};
-
-      for (var key in values) {
-        var result = this.constructInputValues(values[key], "".concat(parentKey, "[").concat(key, "]"));
-
-        if (Array.isArray(result)) {
-          constructed[result[1]] = result[0];
-        } else {
-          constructed = Object.assign(constructed, result);
-        }
-      }
-
-      return constructed;
-    },
-    extractParentName: function extractParentName(name) {
-      return name.replace(new RegExp("".concat(this.name, "\\[\\d*\\]")), '').replace(/\[/, '').replace(/\]/, '');
-    },
     generateId: function generateId() {
       return Date.now() + '-' + Math.floor(Math.random() * 10000);
     },
@@ -421,58 +398,129 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     onClickRemove: function onClickRemove(index) {
       this.items.splice(index, 1);
     },
-    setInputNamesOld: function setInputNamesOld() {
-      var items = this.$refs.items || [];
-      items.forEach(function (item, i) {
-        var inputs = item.querySelectorAll('input'); // TODO: Would be nice to check if there are any vue component
-        // if which the `name` value can be changed instead of having a
-        // `realName` method to retrieve it. Check `FieldInput` for
-        // example. Those components should just be able to live
-        // happily without thinking about this component.
+    setInputNames: function setInputNames(target, slotIndex) {
+      var _this3 = this;
 
-        var indexes = [i];
-        inputs.forEach(function (input) {
-          var name = input.getAttribute('name');
-          var matches = name.match(/\[\d*\]/g);
-          indexes.forEach(function (index, j) {
-            // `replace` only replaces first match.
-            name = name.replace(matches[j], "[".concat(index, "]"));
-          });
-          input.setAttribute('name', name);
+      if (Array.isArray(target)) {
+        target.forEach(function (t) {
+          return _this3.setInputNames(t, slotIndex);
         });
-      });
-    },
-    setInputValues: function setInputValues() {
-      var _this2 = this;
+        return;
+      }
 
-      var constructed = this.constructInputValues(this.items, this.name);
+      if (!target instanceof vue__WEBPACK_IMPORTED_MODULE_0___default.a || !target.tag) {
+        return;
+      }
 
-      for (var key in constructed) {
-        var input = this.$el.querySelector("input[name=\"".concat(key, "\"]"));
+      if (target.componentInstance) {
+        // target.componentInstance.name = 123;
+        return;
+      }
 
-        if (input) {
-          input.setAttribute('value', constructed[key]);
+      if (target.elm) {
+        var name = target.elm.getAttribute('name'); // TODO: also alter id.
+
+        if (name) {
+          console.log(name.match(/\[\d*\]/g));
+          target.elm.setAttribute('name', name.replace(/\[\d*\]/, "[".concat(slotIndex, "]")));
         }
-      } // WIP: setting vue component values
+      }
 
-
-      console.log(this.name, this.items);
-      this.$children.forEach(function (c) {
-        console.log(c.name);
-
-        var name = _this2.extractParentName(c.name);
-      });
+      if (target.children) {
+        this.setInputNames(target.children, slotIndex);
+      }
     }
   },
   watch: {
     items: function items() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$nextTick(function () {
-        _this3.setInputNames();
+        _this4.$slots["default"].forEach(function (s, i) {
+          return _this4.setInputNames(s, i);
+        });
       });
     }
-  }
+  } //     constructInputValues (values, parentKey) {
+  //         if (typeof(values) !== 'object') {
+  //             return [values, parentKey];
+  //         }
+  //         let constructed = {};
+  //         for (let key in values) {
+  //             let result = this.constructInputValues(
+  //                 values[key],
+  //                 `${parentKey}[${key}]`
+  //             );
+  //             if (Array.isArray(result)) {
+  //                 constructed[result[1]] = result[0];
+  //             } else {
+  //                 constructed = Object.assign(constructed, result);
+  //             }
+  //         }
+  //         return constructed;
+  //     },
+  //     extractParentName(name) {
+  //         return name
+  //             .replace(new RegExp(`${this.name}\\[\\d*\\]`), '')
+  //             .replace(/\[/, '')
+  //             .replace(/\]/, '');
+  //     },
+  //     generateId () {
+  //         return Date.now() + '-' + Math.floor(Math.random() * 10000);
+  //     },
+  //     onClickAdd () {
+  //         this.items.push({
+  //             __id: this.generateId(),
+  //         });
+  //     },
+  //     onClickRemove (index) {
+  //         this.items.splice(index, 1);
+  //     },
+  //     setInputNamesOld () {
+  //         const items = this.$refs.items || [];
+  //         items.forEach((item, i) => {
+  //             const inputs = item.querySelectorAll('input');
+  //             // TODO: Would be nice to check if there are any vue component
+  //             // if which the `name` value can be changed instead of having a
+  //             // `realName` method to retrieve it. Check `FieldInput` for
+  //             // example. Those components should just be able to live
+  //             // happily without thinking about this component.
+  //             const indexes = [i];
+  //             inputs.forEach((input) => {
+  //                 let name = input.getAttribute('name');
+  //                 const matches = name.match(/\[\d*\]/g);
+  //                 indexes.forEach((index, j) => {
+  //                     // `replace` only replaces first match.
+  //                     name = name.replace(matches[j], `[${index}]`);
+  //                 });
+  //                 input.setAttribute('name', name);
+  //             });
+  //         });
+  //     },
+  //     setInputValues () {
+  //         const constructed = this.constructInputValues(this.items, this.name);
+  //         for (let key in constructed) {
+  //             const input = this.$el.querySelector(`input[name="${key}"]`);
+  //             if (input) {
+  //                 input.setAttribute('value', constructed[key]);
+  //             }
+  //         }
+  //         // WIP: setting vue component values
+  //         console.log(this.name, this.items);
+  //         this.$children.forEach((c) => {
+  //             console.log(c.name);
+  //             const name = this.extractParentName(c.name);
+  //         });
+  //     },
+  // },
+  // watch: {
+  //     items () {
+  //         this.$nextTick(() => {
+  //             this.setInputNames();
+  //         });
+  //     },
+  // },
+
 });
 
 /***/ }),
@@ -13867,8 +13915,8 @@ window.addEventListener('load', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/owow/code/larawhale/package/src/resources/js/app.js */"./src/resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/owow/code/larawhale/package/src/resources/sass/app.scss */"./src/resources/sass/app.scss");
+__webpack_require__(/*! /home/thomas/code/1106/larawhale/package/src/resources/js/app.js */"./src/resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/thomas/code/1106/larawhale/package/src/resources/sass/app.scss */"./src/resources/sass/app.scss");
 
 
 /***/ })

@@ -7,8 +7,8 @@
                 class="card shadow-sm"
             >
                 <div
-                    class="card-body p-3"
                     ref="items"
+                    class="card-body p-3"
                 >
                     <div
                         @click.prevent="onClickRemove(index)"
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import VNode from 'vue';
+
 export default {
     props: {
         name: String,
@@ -50,54 +52,13 @@ export default {
         };
     },
     mounted () {
-        this.setInputNames();
-
-        // this.setInputValues();
+        // TODO: Slots is not being updated with all the new ones that are
+        // created with the for loop. It would be best if we can access so
+        // called VNodes. Maybe take a look a jsx manually rendering by
+        // extracting what PHP is passing to the default slot.
+        this.$slots.default.forEach((s, i) => this.setInputNames(s, i));
     },
     methods: {
-        setInputNames() {
-            if (! this.items.length) {
-                return;
-            }
-
-            for (let i in this.items) {
-                const item = this.items[i];
-
-                console.log(item);
-            }
-        },
-
-
-
-
-        constructInputValues (values, parentKey) {
-            if (typeof(values) !== 'object') {
-                return [values, parentKey];
-            }
-
-            let constructed = {};
-
-            for (let key in values) {
-                let result = this.constructInputValues(
-                    values[key],
-                    `${parentKey}[${key}]`
-                );
-
-                if (Array.isArray(result)) {
-                    constructed[result[1]] = result[0];
-                } else {
-                    constructed = Object.assign(constructed, result);
-                }
-            }
-
-            return constructed;
-        },
-        extractParentName(name) {
-            return name
-                .replace(new RegExp(`${this.name}\\[\\d*\\]`), '')
-                .replace(/\[/, '')
-                .replace(/\]/, '');
-        },
         generateId () {
             return Date.now() + '-' + Math.floor(Math.random() * 10000);
         },
@@ -109,61 +70,147 @@ export default {
         onClickRemove (index) {
             this.items.splice(index, 1);
         },
-        setInputNamesOld () {
-            const items = this.$refs.items || [];
+        setInputNames(target, slotIndex) {
+            if (Array.isArray(target)) {
+                target.forEach((t) => this.setInputNames(t, slotIndex));
 
-            items.forEach((item, i) => {
-                const inputs = item.querySelectorAll('input');
+                return;
+            }
 
-                // TODO: Would be nice to check if there are any vue component
-                // if which the `name` value can be changed instead of having a
-                // `realName` method to retrieve it. Check `FieldInput` for
-                // example. Those components should just be able to live
-                // happily without thinking about this component.
+            if (! target instanceof VNode || ! target.tag) {
+                return;
+            }
 
-                const indexes = [i];
+            if (target.componentInstance) {
+                // target.componentInstance.name = 123;
+                return;
+            }
 
-                inputs.forEach((input) => {
-                    let name = input.getAttribute('name');
+            if (target.elm) {
+                const name = target.elm.getAttribute('name');
+                
+                // TODO: also alter id.
 
-                    const matches = name.match(/\[\d*\]/g);
+                if (name) {
+                    console.log(name.match(/\[\d*\]/g));
 
-                    indexes.forEach((index, j) => {
-                        // `replace` only replaces first match.
-                        name = name.replace(matches[j], `[${index}]`);
-                    });
-
-                    input.setAttribute('name', name);
-                });
-            });
-        },
-        setInputValues () {
-            const constructed = this.constructInputValues(this.items, this.name);
-
-            for (let key in constructed) {
-                const input = this.$el.querySelector(`input[name="${key}"]`);
-
-                if (input) {
-                    input.setAttribute('value', constructed[key]);
+                    target.elm.setAttribute(
+                        'name',
+                        name.replace(/\[\d*\]/, `[${slotIndex}]`),
+                    );
                 }
             }
 
-            // WIP: setting vue component values
-            console.log(this.name, this.items);
-
-            this.$children.forEach((c) => {
-                console.log(c.name);
-
-                const name = this.extractParentName(c.name);
-            });
+            if (target.children) {
+                this.setInputNames(target.children, slotIndex);
+            }
         },
     },
     watch: {
         items () {
             this.$nextTick(() => {
-                this.setInputNames();
+                this.$slots.default.forEach((s, i) => this.setInputNames(s, i));
             });
         },
     },
+
+
+
+
+    //     constructInputValues (values, parentKey) {
+    //         if (typeof(values) !== 'object') {
+    //             return [values, parentKey];
+    //         }
+
+    //         let constructed = {};
+
+    //         for (let key in values) {
+    //             let result = this.constructInputValues(
+    //                 values[key],
+    //                 `${parentKey}[${key}]`
+    //             );
+
+    //             if (Array.isArray(result)) {
+    //                 constructed[result[1]] = result[0];
+    //             } else {
+    //                 constructed = Object.assign(constructed, result);
+    //             }
+    //         }
+
+    //         return constructed;
+    //     },
+    //     extractParentName(name) {
+    //         return name
+    //             .replace(new RegExp(`${this.name}\\[\\d*\\]`), '')
+    //             .replace(/\[/, '')
+    //             .replace(/\]/, '');
+    //     },
+    //     generateId () {
+    //         return Date.now() + '-' + Math.floor(Math.random() * 10000);
+    //     },
+    //     onClickAdd () {
+    //         this.items.push({
+    //             __id: this.generateId(),
+    //         });
+    //     },
+    //     onClickRemove (index) {
+    //         this.items.splice(index, 1);
+    //     },
+    //     setInputNamesOld () {
+    //         const items = this.$refs.items || [];
+
+    //         items.forEach((item, i) => {
+    //             const inputs = item.querySelectorAll('input');
+
+    //             // TODO: Would be nice to check if there are any vue component
+    //             // if which the `name` value can be changed instead of having a
+    //             // `realName` method to retrieve it. Check `FieldInput` for
+    //             // example. Those components should just be able to live
+    //             // happily without thinking about this component.
+
+    //             const indexes = [i];
+
+    //             inputs.forEach((input) => {
+    //                 let name = input.getAttribute('name');
+
+    //                 const matches = name.match(/\[\d*\]/g);
+
+    //                 indexes.forEach((index, j) => {
+    //                     // `replace` only replaces first match.
+    //                     name = name.replace(matches[j], `[${index}]`);
+    //                 });
+
+    //                 input.setAttribute('name', name);
+    //             });
+    //         });
+    //     },
+    //     setInputValues () {
+    //         const constructed = this.constructInputValues(this.items, this.name);
+
+    //         for (let key in constructed) {
+    //             const input = this.$el.querySelector(`input[name="${key}"]`);
+
+    //             if (input) {
+    //                 input.setAttribute('value', constructed[key]);
+    //             }
+    //         }
+
+    //         // WIP: setting vue component values
+    //         console.log(this.name, this.items);
+
+    //         this.$children.forEach((c) => {
+    //             console.log(c.name);
+
+    //             const name = this.extractParentName(c.name);
+    //         });
+    //     },
+    // },
+    // watch: {
+    //     items () {
+    //         this.$nextTick(() => {
+    //             this.setInputNames();
+    //         });
+    //     },
+    // },
 };
 </script>

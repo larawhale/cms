@@ -56,6 +56,10 @@ export default {
         // called VNodes. Maybe take a look a jsx manually rendering by
         // extracting what PHP is passing to the default slot.
         // this.$refs.items.forEach((r, i) => this.setInputNames(r, i));
+
+        // TODO: Another option would be to render the html with vue bindings
+        // and let vue bind the values instead. PHP for example will render
+        // <input v-model="some_key"> and vue will bind it with slot bindings.
     },
     methods: {
         generateId () {

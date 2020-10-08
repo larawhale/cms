@@ -6,10 +6,7 @@
                 :key="item.__id"
                 class="card shadow-sm"
             >
-                <div
-                    ref="items"
-                    class="card-body p-3"
-                >
+                <div class="card-body p-3">
                     <div
                         @click.prevent="onClickRemove(index)"
                         class="btn-remove btn btn-circle-sm btn-danger"
@@ -17,7 +14,9 @@
                         <i class="fas fa-trash fa-sm"></i>
                     </div>
 
-                    <slot />
+                    <div ref="items">
+                        <slot />
+                    </div>
                 </div>
             </li>
         </ul>
@@ -51,12 +50,12 @@ export default {
             }),
         };
     },
-    mounted () {
+    created () {
         // TODO: Slots is not being updated with all the new ones that are
         // created with the for loop. It would be best if we can access so
         // called VNodes. Maybe take a look a jsx manually rendering by
         // extracting what PHP is passing to the default slot.
-        this.$slots.default.forEach((s, i) => this.setInputNames(s, i));
+        // this.$refs.items.forEach((r, i) => this.setInputNames(r, i));
     },
     methods: {
         generateId () {
@@ -70,46 +69,44 @@ export default {
         onClickRemove (index) {
             this.items.splice(index, 1);
         },
-        setInputNames(target, slotIndex) {
-            if (Array.isArray(target)) {
-                target.forEach((t) => this.setInputNames(t, slotIndex));
-
-                return;
-            }
-
-            if (! target instanceof VNode || ! target.tag) {
-                return;
-            }
-
-            if (target.componentInstance) {
-                // target.componentInstance.name = 123;
-                return;
-            }
-
-            if (target.elm) {
-                const name = target.elm.getAttribute('name');
-                
-                // TODO: also alter id.
-
-                if (name) {
-                    console.log(name.match(/\[\d*\]/g));
-
-                    target.elm.setAttribute(
-                        'name',
-                        name.replace(/\[\d*\]/, `[${slotIndex}]`),
-                    );
+        setInputNames(target, itemIndex) {
+            if (target instanceof HTMLCollection) {
+                for (let t of target) {
+                    this.setInputNames(t, itemIndex);
                 }
+
+                return;
+            }
+
+            if (target.__vue__) {
+                target.__vue__.name = target
+                    .__vue__
+                    .name
+                    .replace(/\[\d*\]/, `[${itemIndex}]`);
+
+                return;
+            }
+
+            const name = target.getAttribute('name');
+            
+            // TODO: also alter id.
+
+            if (name) {
+                target.setAttribute(
+                    'name',
+                    name.replace(/\[\d*\]/, `[${itemIndex}]`),
+                );
             }
 
             if (target.children) {
-                this.setInputNames(target.children, slotIndex);
+                this.setInputNames(target.children, itemIndex);
             }
         },
     },
     watch: {
         items () {
             this.$nextTick(() => {
-                this.$slots.default.forEach((s, i) => this.setInputNames(s, i));
+                this.$refs.items.forEach((s, i) => this.setInputNames(s, i));
             });
         },
     },

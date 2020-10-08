@@ -321,7 +321,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-//
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -375,16 +380,11 @@ __webpack_require__.r(__webpack_exports__);
       })
     };
   },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    // TODO: Slots is not being updated with all the new ones that are
+  created: function created() {// TODO: Slots is not being updated with all the new ones that are
     // created with the for loop. It would be best if we can access so
     // called VNodes. Maybe take a look a jsx manually rendering by
     // extracting what PHP is passing to the default slot.
-    this.$slots["default"].forEach(function (s, i) {
-      return _this2.setInputNames(s, i);
-    });
+    // this.$refs.items.forEach((r, i) => this.setInputNames(r, i));
   },
   methods: {
     generateId: function generateId() {
@@ -398,46 +398,48 @@ __webpack_require__.r(__webpack_exports__);
     onClickRemove: function onClickRemove(index) {
       this.items.splice(index, 1);
     },
-    setInputNames: function setInputNames(target, slotIndex) {
-      var _this3 = this;
+    setInputNames: function setInputNames(target, itemIndex) {
+      if (target instanceof HTMLCollection) {
+        var _iterator = _createForOfIteratorHelper(target),
+            _step;
 
-      if (Array.isArray(target)) {
-        target.forEach(function (t) {
-          return _this3.setInputNames(t, slotIndex);
-        });
-        return;
-      }
-
-      if (!target instanceof vue__WEBPACK_IMPORTED_MODULE_0___default.a || !target.tag) {
-        return;
-      }
-
-      if (target.componentInstance) {
-        // target.componentInstance.name = 123;
-        return;
-      }
-
-      if (target.elm) {
-        var name = target.elm.getAttribute('name'); // TODO: also alter id.
-
-        if (name) {
-          console.log(name.match(/\[\d*\]/g));
-          target.elm.setAttribute('name', name.replace(/\[\d*\]/, "[".concat(slotIndex, "]")));
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var t = _step.value;
+            this.setInputNames(t, itemIndex);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
         }
+
+        return;
+      }
+
+      if (target.__vue__) {
+        target.__vue__.name = target.__vue__.name.replace(/\[\d*\]/, "[".concat(itemIndex, "]"));
+        return;
+      }
+
+      var name = target.getAttribute('name'); // TODO: also alter id.
+
+      if (name) {
+        target.setAttribute('name', name.replace(/\[\d*\]/, "[".concat(itemIndex, "]")));
       }
 
       if (target.children) {
-        this.setInputNames(target.children, slotIndex);
+        this.setInputNames(target.children, itemIndex);
       }
     }
   },
   watch: {
     items: function items() {
-      var _this4 = this;
+      var _this2 = this;
 
       this.$nextTick(function () {
-        _this4.$slots["default"].forEach(function (s, i) {
-          return _this4.setInputNames(s, i);
+        _this2.$refs.items.forEach(function (s, i) {
+          return _this2.setInputNames(s, i);
         });
       });
     }
@@ -1297,28 +1299,23 @@ var render = function() {
       { staticClass: "list-unstyled card-stack" },
       _vm._l(_vm.items, function(item, index) {
         return _c("li", { key: item.__id, staticClass: "card shadow-sm" }, [
-          _c(
-            "div",
-            { ref: "items", refInFor: true, staticClass: "card-body p-3" },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "btn-remove btn btn-circle-sm btn-danger",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.onClickRemove(index)
-                    }
+          _c("div", { staticClass: "card-body p-3" }, [
+            _c(
+              "div",
+              {
+                staticClass: "btn-remove btn btn-circle-sm btn-danger",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.onClickRemove(index)
                   }
-                },
-                [_c("i", { staticClass: "fas fa-trash fa-sm" })]
-              ),
-              _vm._v(" "),
-              _vm._t("default")
-            ],
-            2
-          )
+                }
+              },
+              [_c("i", { staticClass: "fas fa-trash fa-sm" })]
+            ),
+            _vm._v(" "),
+            _c("div", { ref: "items", refInFor: true }, [_vm._t("default")], 2)
+          ])
         ])
       }),
       0

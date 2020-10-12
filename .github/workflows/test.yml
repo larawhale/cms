@@ -40,9 +40,9 @@ jobs:
       run: |
         yarn
 
-    - name: Build
-      run: |
-        yarn prod
+    # - name: Build
+    #   run: |
+    #     yarn prod
 
     - name: Prepare
       run: |

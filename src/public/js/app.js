@@ -421,6 +421,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       if (target.__vue__) {
+        // TODO: Throws warning.
         target.__vue__.name = target.__vue__.name.replace(/\[\d*\]/, "[".concat(itemIndex, "]"));
         return;
       }

@@ -49,6 +49,20 @@ class MultiFieldsField extends FieldsField
     }
 
     /**
+     * Returns the fields as field instances.
+     *
+     * @param  bool  $withParentKey
+     * @param  mixed  $value
+     * @return array
+     */
+    public function getFieldInstances(bool $withParentKey = true, $value = null): array
+    {
+        return array_map(function ($v) use ($withParentKey) {
+            return parent::getFieldInstances($withParentKey, $v);
+        }, $this->getValue());
+    }
+
+    /**
      * Returns the configured rules of the field with the key of the field.
      *
      * @return array

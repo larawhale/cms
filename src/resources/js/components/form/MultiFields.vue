@@ -83,6 +83,7 @@ export default {
             }
 
             if (target.__vue__) {
+                // TODO: Throws warning.
                 target.__vue__.name = target
                     .__vue__
                     .name

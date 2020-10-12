@@ -95,11 +95,12 @@ class FieldsField extends InputField
      * Returns the fields as field instances.
      *
      * @param  bool  $withParentKey
+     * @param  mixed  $value
      * @return array
      */
-    public function getFieldInstances(bool $withParentKey = true): array
+    public function getFieldInstances(bool $withParentKey = true, $value = null): array
     {
-        $values = $this->getValue();
+        $values = $value ?? $this->getValue();
 
         return array_map(function ($config) use ($values, $withParentKey) {
             $originalKey = $configKey = data_get($config, 'key');

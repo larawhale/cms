@@ -54,15 +54,13 @@ jobs:
     #   run: |
     #     yarn prod
 
-    # - name: Prepare
-    #   run: |
-    #     cp .env.example .env
+    - name: Prepare
+      run: |
+        cp .env.example .env
 
-    # - name: Phpunit
-    #   env:
-    #     DB_HOST: mysql
-    #   run: |
-    #     vendor/bin/phpunit
+    - name: List
+      run: |
+        ls -al
 
     # - name: Code sniffer
     #   run: |

@@ -3,7 +3,7 @@ name: Test
 on: pull_request
 
 jobs:
-  laravel-checks:
+  test:
     runs-on: ubuntu-latest
     container: thomasowow/laravel-php:7.4
 
@@ -58,9 +58,11 @@ jobs:
       run: |
         cp .env.example .env
 
-    - name: List
+    - name: Phpunit
+      env:
+        DB_HOST: mysql
       run: |
-        ls -al
+        vendor/bin/phpunit
 
     # - name: Code sniffer
     #   run: |

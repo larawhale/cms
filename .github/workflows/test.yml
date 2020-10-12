@@ -1,0 +1,44 @@
+name: Test
+
+on: pull_request
+
+jobs:
+  laravel-checks:
+    runs-on: ubuntu-latest
+    container: thomasowow/laravel-php:7.4
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+          MYSQL_DATABASE: laravel_testing
+        ports:
+          - 33060:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3 --tmpfs="/var/lib/mysql"
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Composer
+      run: |
+        composer install
+
+    - name: Yarn
+      run: |
+        yarn
+        yarn production
+
+    - name: Prepare
+      run: |
+        cp .env.example .env
+
+    - name: Phpunit
+      env:
+        DB_HOST: mysql
+      run: |
+        vendor/bin/phpunit
+
+    - name: Code sniffer
+      run: |
+        vendor/bin/phpcs -s

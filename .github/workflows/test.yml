@@ -20,40 +20,50 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Get Composer cache directory
-      id: composer-cache
-      run: |
-        echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-    - uses: actions/cache@v2
+    - name: Cache Composer
+      id: composer
+      uses: actions/cache@v2
       with:
-        path: ${{ steps.composer-cache.outputs.dir }}
+        path: ./vendor
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-composer-
 
     - name: Composer
+      if: steps.composer.outputs.cache-hit != 'true'
       run: |
         composer install
 
+    - name: Cache Yarn
+      id: yarn
+      uses: actions/cache@v2
+      with:
+        path: ./node_modules
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
     - name: Yarn
+      if: steps.yarn.outputs.cache-hit != 'true'
       run: |
         yarn
-
+    
+    # Is resulting in:
+    # Error: Cannot find module '/__w/cms/cms/webpack.mix'
     # - name: Build
     #   run: |
     #     yarn prod
 
-    - name: Prepare
-      run: |
-        cp .env.example .env
+    # - name: Prepare
+    #   run: |
+    #     cp .env.example .env
 
-    - name: Phpunit
-      env:
-        DB_HOST: mysql
-      run: |
-        vendor/bin/phpunit
+    # - name: Phpunit
+    #   env:
+    #     DB_HOST: mysql
+    #   run: |
+    #     vendor/bin/phpunit
 
-    - name: Code sniffer
-      run: |
-        vendor/bin/phpcs -s
+    # - name: Code sniffer
+    #   run: |
+    #     vendor/bin/phpcs -s

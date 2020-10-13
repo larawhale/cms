@@ -69,6 +69,6 @@ jobs:
       run: |
         vendor/bin/phpunit
 
-    # - name: Code sniffer
-    #   run: |
-    #     vendor/bin/phpcs -s
+    - name: Code sniffer
+      run: |
+        vendor/bin/phpcs -s

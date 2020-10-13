@@ -31,7 +31,7 @@ class EntryFactory extends Factory
 
     /**
      * Create fields for the entry.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
     public function withFields(): Factory

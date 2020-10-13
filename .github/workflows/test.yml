@@ -52,8 +52,6 @@ jobs:
       run: |
         yarn
 
-    # TODO: Add stylelint.
-
     # Is resulting in:
     # Error: Cannot find module '/__w/cms/cms/webpack.mix'
     # Reason: export ignore in gitattributes

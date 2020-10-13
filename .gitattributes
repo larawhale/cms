@@ -7,7 +7,8 @@
 /.gitignore export-ignore
 # Disable to include in Github Actions.
 # /.phpcs.xml export-ignore
-/.stylelintrc.js export-ignore
+# Disable to include in Github Actions.
+# /.stylelintrc.js export-ignore
 /bootstrap.php export-ignore
 /composer.lock export-ignore
 /docker-compose.yml export-ignore

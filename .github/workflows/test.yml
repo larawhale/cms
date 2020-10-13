@@ -21,7 +21,8 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3 --tmpfs="/var/lib/mysql"
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
 
     - name: Cache Composer
       id: composer
@@ -53,15 +54,15 @@ jobs:
     
     # Is resulting in:
     # Error: Cannot find module '/__w/cms/cms/webpack.mix'
-    # - name: Build
-    #   run: |
-    #     yarn prod
+    # Reason: export ignore in gitattributes
+    - name: Build
+      run: |
+        yarn prod
 
     - name: Prepare
       run: |
         cp .env.example .env
         vendor/bin/dusk-updater update
-
 
     - name: Phpunit
       env:
@@ -69,6 +70,9 @@ jobs:
       run: |
         vendor/bin/phpunit
 
-    - name: Code sniffer
-      run: |
-        vendor/bin/phpcs -s
+    # Is resulting in:
+    # Error: You must supply at least one file or directory to process.
+    # Reason: export ignore in gitattributes
+    # - name: Code sniffer
+    #   run: |
+    #     vendor/bin/phpcs -s

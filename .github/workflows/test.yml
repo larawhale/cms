@@ -60,6 +60,8 @@ jobs:
     - name: Prepare
       run: |
         cp .env.example .env
+        vendor/bin/dusk-updater update
+
 
     - name: Phpunit
       env:

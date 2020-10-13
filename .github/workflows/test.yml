@@ -5,7 +5,7 @@ on: pull_request
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: thomasowow/laravel-php:7.4
+    container: thomasveen/larawhale-package:7.4
 
     services:
       mysql:

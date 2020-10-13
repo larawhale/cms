@@ -51,7 +51,9 @@ jobs:
       if: steps.yarn.outputs.cache-hit != 'true'
       run: |
         yarn
-    
+
+    # TODO: Add stylelint.
+
     # Is resulting in:
     # Error: Cannot find module '/__w/cms/cms/webpack.mix'
     # Reason: export ignore in gitattributes
@@ -73,6 +75,6 @@ jobs:
     # Is resulting in:
     # Error: You must supply at least one file or directory to process.
     # Reason: export ignore in gitattributes
-    # - name: Code sniffer
-    #   run: |
-    #     vendor/bin/phpcs -s
+    - name: Code sniffer
+      run: |
+        vendor/bin/phpcs -s

@@ -1,0 +1,72 @@
+name: Test
+
+on: pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: thomasveen/larawhale-package:7.4
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+          MYSQL_DATABASE: laravel
+          MYSQL_USER: forge
+          MYSQL_PASSWORD: forge
+          MYSQL_ROOT_PASSWORD: forge
+        ports:
+          - 33060:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3 --tmpfs="/var/lib/mysql"
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Cache Composer
+      id: composer
+      uses: actions/cache@v2
+      with:
+        path: ./vendor
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+
+    - name: Composer
+      if: steps.composer.outputs.cache-hit != 'true'
+      run: |
+        composer install
+
+    - name: Cache Yarn
+      id: yarn
+      uses: actions/cache@v2
+      with:
+        path: ./node_modules
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
+    - name: Yarn
+      if: steps.yarn.outputs.cache-hit != 'true'
+      run: |
+        yarn
+
+    - name: Build
+      run: |
+        yarn prod
+
+    - name: Prepare
+      run: |
+        cp .env.example .env
+        vendor/bin/dusk-updater update
+
+    - name: Phpunit
+      env:
+        DB_HOST: mysql
+      run: |
+        vendor/bin/phpunit
+
+    - name: Code sniffer
+      run: |
+        vendor/bin/phpcs -s

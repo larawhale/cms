@@ -19,7 +19,7 @@ services:
       - cms
 
   php:
-    image: thomasowow/laravel-php:7.4
+    image: thomasveen/larawhale-package:7.4
     container_name: cms-php
     volumes:
       - .:/var/www/html

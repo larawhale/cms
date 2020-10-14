@@ -1,13 +1,16 @@
-/tests export-ignore
+/.github export-ignore
 /docker export-ignore
+/tests export-ignore
 
 /.gitattributes export-ignore
 /.gitignore export-ignore
 /.phpcs.xml export-ignore
 /.stylelintrc.js export-ignore
 /bootstrap.php export-ignore
+/composer.lock export-ignore
 /docker-compose.yml export-ignore
 /mix-manifest.json export-ignore
 /phpunit.xml export-ignore
 /server.php export-ignore
 /webpack.mix.js export-ignore
+/yarn.lock export-ignore

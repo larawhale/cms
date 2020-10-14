@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v1
 
     - name: Cache Composer
       id: composer
@@ -52,9 +52,6 @@ jobs:
       run: |
         yarn
 
-    # Is resulting in:
-    # Error: Cannot find module '/__w/cms/cms/webpack.mix'
-    # Reason: export ignore in gitattributes
     - name: Build
       run: |
         yarn prod
@@ -70,9 +67,6 @@ jobs:
       run: |
         vendor/bin/phpunit
 
-    # Is resulting in:
-    # Error: You must supply at least one file or directory to process.
-    # Reason: export ignore in gitattributes
     - name: Code sniffer
       run: |
         vendor/bin/phpcs -s

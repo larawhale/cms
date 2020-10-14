@@ -1,21 +1,16 @@
 /.github export-ignore
 /docker export-ignore
-# Disable to include in Github Actions.
 /tests export-ignore
 
 /.gitattributes export-ignore
 /.gitignore export-ignore
-# Disable to include in Github Actions.
 /.phpcs.xml export-ignore
-# Disable to include in Github Actions.
 /.stylelintrc.js export-ignore
 /bootstrap.php export-ignore
 /composer.lock export-ignore
 /docker-compose.yml export-ignore
 /mix-manifest.json export-ignore
-# Disable to include in Github Actions.
 /phpunit.xml export-ignore
 /server.php export-ignore
-# Disable to include in Github Actions.
 /webpack.mix.js export-ignore
 /yarn.lock export-ignore

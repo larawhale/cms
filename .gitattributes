@@ -17,5 +17,5 @@
 # /phpunit.xml export-ignore
 /server.php export-ignore
 # Disable to include in Github Actions.
-# /webpack.mix.js export-ignore
+/webpack.mix.js export-ignore
 /yarn.lock export-ignore

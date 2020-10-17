@@ -12,5 +12,9 @@ return [
             'key' => 'multi_file',
             'type' => 'multi_file',
         ],
+        [
+            'key' => 'file',
+            'type' => 'file',
+        ],
     ],
 ];

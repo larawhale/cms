@@ -25,6 +25,15 @@ class NullifyFilesToRemove extends TransformsRequest
         return $data;
     }
 
+    /**
+     * Loops given keys and check if they need to be nullified in the data
+     * array.
+     * 
+     * @param  array  &$data
+     * @param  array  $keys
+     * @param  string  $parentKey
+     * @return void
+     */
     private function nullifyRemove(array &$data, array $keys, string $parentKey = ''): void
     {
         foreach ($keys as $i => $key) {

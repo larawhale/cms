@@ -66,7 +66,7 @@ class MultiFileField extends FileField
                 return $f->getValue();
             }, $this->getFileFieldInstances($value));
 
-            $value = array_filter($value);
+            $value = [...array_filter($value)];
         }
         
         return $this->traitGetDatabaseValue($value);

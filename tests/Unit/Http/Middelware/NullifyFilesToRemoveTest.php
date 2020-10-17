@@ -30,4 +30,30 @@ class NullifyFilesToRemoveTest extends TestCase
             );
         });
     }
+    /** @test */
+    public function nullifies_multi_files_to_remove(): void
+    {
+        $request = new Request([], [
+            'remove' => ['remove'],
+            'no_file' => ['remove'],
+        ]);
+
+        $_FILES['remove'] = [
+            'name' => ['some file'],
+        ];
+
+        $_FILES['dont_remove'] = [
+            'name' => ['some file'],
+        ];
+
+        (new NullifyFilesToRemove)->handle($request, function ($request) {
+            $this->assertSame(
+                [
+                    'remove' => [null],
+                    'no_file' => ['remove'],
+                ],
+                $request->request->all()
+            );
+        });
+    }
 }

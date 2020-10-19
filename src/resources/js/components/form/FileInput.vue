@@ -19,6 +19,7 @@
 
         <input
             class="d-none"
+            :id="id"
             :name="name"
             ref="input"
             type="file"
@@ -71,7 +72,6 @@ export default {
     },
     methods: {
         onClickRemove(e) {
-            console.log(123);
             e.stopPropagation();
 
             this.remove = true;
@@ -79,6 +79,8 @@ export default {
             this.file = undefined;
 
             this.$refs.input.value = '';
+
+            this.$emit('remove', this.file);
         },
         onClickFile(e) {
             this.$refs.input.click();
@@ -88,6 +90,8 @@ export default {
 
             if (files && files.length > 0) {
                 this.file = files[0].name;
+
+                this.$emit('input', this.file);
             }
         },
     },

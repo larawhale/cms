@@ -45,14 +45,14 @@ class FileField extends InputField
     public function getDatabaseValue($value): string
     {
         if (! $value instanceof UploadedFile) {
-            return parent::getDatabaseValue($value);
+            $databaseValue = parent::getDatabaseValue($value);
+        } else {
+            $databaseValue = $this->saveFile($value);
         }
-
-        $path = $this->saveFile($value);
 
         $this->deleteFile();
 
-        return $path;
+        return $databaseValue;
     }
 
     /**
@@ -75,18 +75,21 @@ class FileField extends InputField
     /**
      * Deletes the value of the field.
      *
+     * @param  mixed  $value
      * @return void
      */
-    public function deleteFile(): void
+    public function deleteFile($value = null): void
     {
+        $value = $value ?? $this->value;
+
         // There is no file when value is `null`. This happens when this field
         // has not been stored in the database before, or the value stored in
         // the database is `null`.
-        if (is_null($this->value)) {
+        if (is_null($value)) {
             return;
         }
 
-        Storage::delete($this->value);
+        Storage::delete($value);
     }
 
     /**

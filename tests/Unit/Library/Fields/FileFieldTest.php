@@ -75,6 +75,26 @@ class FileFieldTest extends TestCase
     }
 
     /** @test */
+    public function delete_file(): void
+    {
+        Storage::shouldReceive('delete')
+            ->with('delete_me.jpg');
+
+        $this->field->setValue('delete_me.jpg');
+
+        $this->field->deleteFile();
+    }
+
+    /** @test */
+    public function delete_file_specific(): void
+    {
+        Storage::shouldReceive('delete')
+            ->with('delete_me.jpg');
+
+        $this->field->deleteFile('delete_me.jpg');
+    }
+
+    /** @test */
     public function get_file_path(): void
     {
         $this->assertEquals(

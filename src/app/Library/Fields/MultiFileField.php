@@ -47,12 +47,18 @@ class MultiFileField extends FileField
     public function getDatabaseValue($value): string
     {
         if (is_array($value)) {
-            $value = $value + $this->getValue();
+            $oldValuePadded = $this->getValue();
 
-            $value = array_map(function ($f) use ($value) {
-                $key = $f->getKey();
+            foreach ($value as $key => $v) {
+                if (! array_key_exists($key, $oldValuePadded)) {
+                    $oldValuePadded[$key] = null;
+                }
+            }
 
-                $newValue = $value[$key];
+            $combinedNewValue = $value + $this->getValue();
+
+            $newValue = array_map(function ($f) use ($combinedNewValue) {
+                $newValue = $combinedNewValue[$f->getKey()];
 
                 // Regard the value to be changed when a file was uploaded or
                 // `null` was provided. Other values types are regarded as
@@ -64,12 +70,12 @@ class MultiFileField extends FileField
                 }
 
                 return $f->getValue();
-            }, $this->getFileFieldInstances($value));
+            }, $this->getFileFieldInstances($oldValuePadded));
 
-            $value = [...array_filter($value)];
+            $newValue = [...array_filter($newValue)];
         }
         
-        return $this->traitGetDatabaseValue($value);
+        return $this->traitGetDatabaseValue($newValue);
     }
 
     /**

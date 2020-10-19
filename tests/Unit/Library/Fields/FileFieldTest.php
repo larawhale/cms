@@ -51,18 +51,29 @@ class FileFieldTest extends TestCase
     {
         Storage::fake();
 
+        $file = UploadedFile::fake()->image('image.jpg');
+
+        $path = $this->field->getDatabaseValue($file);
+
+        Storage::assertExists($path);
+    }
+
+    /**
+     * Test deletion in seperate test because faking and mocking storage do not
+     * work together.
+     * 
+     * @test
+     */
+    public function get_database_value_deletes_old_file(): void
+    {
+        Storage::shouldReceive('delete')
+            ->once()
+            ->with('delete_me.jpg');
+
         // Set a value so we can check that deleteFile is being called.
         $this->field->setValue('delete_me.jpg');
 
-        $mock = Mockery::mock($this->field)->makePartial();
-
-        $mock->shouldReceive('deleteFile');
-
-        $file = UploadedFile::fake()->image('image.jpg');
-
-        $path = $mock->getDatabaseValue($file);
-
-        Storage::assertExists($path);
+        $path = $this->field->getDatabaseValue(null);
     }
 
     /** @test */

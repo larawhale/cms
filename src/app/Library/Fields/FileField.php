@@ -45,14 +45,14 @@ class FileField extends InputField
     public function getDatabaseValue($value): string
     {
         if (! $value instanceof UploadedFile) {
-            return parent::getDatabaseValue($value);
+            $databaseValue = parent::getDatabaseValue($value);
+        } else {
+            $databaseValue = $this->saveFile($value);
         }
-
-        $path = $this->saveFile($value);
 
         $this->deleteFile();
 
-        return $path;
+        return $databaseValue;
     }
 
     /**

@@ -28,7 +28,7 @@ class NullifyFilesToRemove extends TransformsRequest
     /**
      * Loops given keys and check if they need to be nullified in the data
      * array.
-     * 
+     *
      * @param  array  &$data
      * @param  array  $keys
      * @param  string  $parentKey
@@ -47,7 +47,7 @@ class NullifyFilesToRemove extends TransformsRequest
                     array_keys($dataValue),
                     $dataKey,
                 );
-            } else if ($dataValue === 'remove') {
+            } elseif ($dataValue === 'remove') {
                 data_set($data, $dataKey, null);
             }
         }

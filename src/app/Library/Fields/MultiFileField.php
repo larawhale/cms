@@ -80,7 +80,7 @@ class MultiFileField extends FileField
 
     /**
      * Returns file field instance for the files in the value.-white
-     * 
+     *
      * @param  array  $value
      * @return array
      */

@@ -61,7 +61,7 @@ class FileFieldTest extends TestCase
     /**
      * Test deletion in seperate test because faking and mocking storage do not
      * work together.
-     * 
+     *
      * @test
      */
     public function get_database_value_deletes_old_file(): void
